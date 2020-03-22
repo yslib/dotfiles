@@ -1,0 +1,97 @@
+#=============================================================================
+# dark_powered.toml --- dark powered configuration example for SpaceVim
+# Copyright (c) 2016-2017 Wang Shidong & Contributors
+# Author: Wang Shidong < wsdjeg at 163.com >
+# License: GPLv3
+#=============================================================================
+
+# All SpaceVim option below [option] section
+[options]
+
+    colorscheme = "gruvbox"
+    colorscheme_bg = "dark"
+
+    enable_guicolors = true
+    statusline_separator = "arrow"
+    buffer_index_type = 4
+    enable_tabline_filetype_icon = true
+    enable_statusline_display_mode = false
+
+    # MY OWN OPTIONS
+#filemanager = "defx"
+    autocomplete_method = "coc"
+    bootstrap_before = "myspacevim#before"
+    bootstrap_after = "myspacevim#after"
+
+# ----------------- SpaceVim 添加的各种 layers ---------------------------------
+#
+
+[[layers]]
+    name = "colorscheme"
+
+[[custom_plugins]]
+  name = "mhartington/oceanic-next"
+  merged = 0
+
+
+[[layers]]
+name="shell"
+default_position = "bottom"
+default_height = "30"
+enable = true
+
+# 禁用 SpaceVim 的 checkers layer
+[[layers]]
+  name = "checkers"
+  enable = false
+
+# 版本控制
+#[[layers]]
+#  name = "VersionControl"
+#  enable-gtm-status = true
+
+#[[layers]]
+#  name = "git"
+#  git-plugin = "fugitive"
+
+[[layers]]
+  name="lang#c"
+
+[[layers]]
+  name = "format"
+
+
+# ----------------- 添加的插件 -------------------------------------------------
+
+[[custom_plugins]]
+   name = 'neoclide/coc.nvim'
+   merge = 0
+   build =  'yarn install --frozen-lockfile'
+
+# 主要用于快速搜索 文件, buffer 和 函数
+[[custom_plugins]]
+    name = "Yggdroot/LeaderF"
+    build = "./install.sh"
+
+
+# vista.vim 的依赖
+[[custom_plugins]]
+    name = 'junegunn/fzf'
+    merged =  0
+
+# vista.vim 的依赖
+[[custom_plugins]]
+    name = "majutsushi/tagbar"
+
+# 更加美观的 tagbar 
+[[custom_plugins]]
+    name = 'liuchengxu/vista.vim'
+
+[[custom_plugins]]
+    name = 'skywind3000/asyncrun.vim'
+[[custom_plugins]]
+    name = 'skywind3000/asynctasks.vim'
+
+[[custom_plugins]]
+    name = 'puremourning/vimspector'
+
