@@ -1,5 +1,4 @@
 # update SpaceVim config file
-cp -r ../.SpaceVim/autoload ~/.SpaceVim.d/
-cp ../.xprofile ~
+cp -r ../.SpaceVim.d/autoload ~/.SpaceVim.d/
 cp ../.zshrc ~
 
