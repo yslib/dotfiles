@@ -37,6 +37,14 @@
 #[[layers]]
 #  name = "VersionControl"
 #  enable-gtm-status = true
+# [[layers]]
+  # name = "lsp"
+  # filetypes = [
+    # "c",
+    # "cpp"
+  # ]
+  # [layers.override_cmd]
+    # c = ["clangd"]
 
 [[layers]]
   name = "git"

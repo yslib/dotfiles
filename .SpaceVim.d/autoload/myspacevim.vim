@@ -19,6 +19,8 @@ set shortmess+=c
 " diagnostics appear/become resolved.
 set signcolumn=yes
 
+
+""""""""""""""""""""""""""""""""""coc.nvim
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -72,9 +74,9 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+" Formatting selected code. (confict with Leaderf)
+"xmap <leader>f  <Plug>(coc-format-selected)
+"nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
@@ -138,24 +140,9 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 "Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+ 
 
-let g:asyncrun_open = 6
-let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg','.vscode' ]
-
-" line number settings
-set nu
-augroup relative_numbser
- autocmd!
- autocmd InsertEnter * :set norelativenumber
- autocmd InsertLeave * :set relativenumber
-augroup END
-"hi Normal guibg=NONE ctermbg=none
-"
-noremap <silent><F5> :AsyncTask project-build<cr>
-noremap <silent><F9> :AsyncTask project-run<cr>
-  
-
-" LeaderF Config
+""""""""""""""""""""""""""""""""""""""" LeaderF Config 
 " don't show the help in normal mode
 let g:Lf_HideHelp = 1
 let g:Lf_UseCache = 0
@@ -187,3 +174,30 @@ noremap <leader>fd :<C-U><C-R>=printf("Leaderf! gtags -d %s --auto-jump", expand
 noremap <leader>fo :<C-U><C-R>=printf("Leaderf! gtags --recall %s", "")<CR><CR>
 noremap <leader>fn :<C-U><C-R>=printf("Leaderf gtags --next %s", "")<CR><CR>
 noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
+
+
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" asyncrun plug 
+let g:asyncrun_open = 6
+let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg','.vscode' ,".env"]
+noremap <silent><F5> :AsyncTask project-build<cr>
+noremap <silent><F9> :AsyncTask project-run<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" line number settings
+set nu
+augroup relative_numbser
+ autocmd!
+ autocmd InsertEnter * :set norelativenumber
+ autocmd InsertLeave * :set relativenumber
+augroup END
+"hi Normal guibg=NONE ctermbg=none
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""'
+" coc-clangd is required
+nnoremap <silent><C-K><C-O> :<C-U>CocCommand clangd.switchSourceHeader<CR> 
+" Newformat is required
+nnoremap <silent><C-K><C-D> :<C-U>Neoformat<CR>
+" override default
+noremap <silent><F3> :<C-U>CocCommand explorer<CR>
+
