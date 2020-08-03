@@ -154,8 +154,7 @@ let g:Lf_PreviewInPopup = 1
 let g:Lf_StlSeparator = { 'left': "\ue0b0", 'right': "\ue0b2", 'font': "DejaVu Sans Mono for Powerline" }
 let g:Lf_PreviewResult = {'Function': 0, 'BufTag': 0 }
 
-let g:Lf_ShortcutF = '<C-P>'
-noremap <leader>ff :<C-U>LeaderfFunction<CR>
+let g:Lf_ShortcutF = "<leader>ff"
 noremap <leader>fb :<C-U><C-R>=printf("Leaderf buffer %s", "")<CR><CR>
 noremap <leader>fm :<C-U><C-R>=printf("Leaderf mru %s", "")<CR><CR>
 noremap <leader>ft :<C-U><C-R>=printf("Leaderf bufTag %s", "")<CR><CR>
@@ -182,8 +181,8 @@ noremap <leader>fp :<C-U><C-R>=printf("Leaderf gtags --previous %s", "")<CR><CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""" asyncrun plug 
 let g:asyncrun_open = 6
 let g:asyncrun_rootmarks = ['.git', '.svn', '.root', '.project', '.hg','.vscode' ,".env"]
-noremap <silent><F1> :AsyncTask project-build<cr>
-noremap <silent><F2> :AsyncTask project-run<cr>
+noremap <silent><F5> :AsyncTask project-build<cr>
+noremap <silent><F9> :AsyncTask project-run<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""" line number settings
 set nu
@@ -195,25 +194,10 @@ augroup END
 "hi Normal guibg=NONE ctermbg=none
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""'
-" coc-clangd is required (like vs)
-nnoremap <silent><C-K><C-O> :<C-U>CocCommand clangd.switchSourceHeader<CR>
-" Neoformat is required (like vs)
+" coc-clangd is required
+nnoremap <silent><C-K><C-O> :<C-U>CocCommand clangd.switchSourceHeader<CR> 
+" Newformat is required
 nnoremap <silent><C-K><C-D> :<C-U>Neoformat<CR>
 " override default
 noremap <silent><F3> :<C-U>CocCommand explorer<CR>
-
-""""""vimspector
-let g:vimspector_enable_mappings="HUMAN"
-nnoremap <silent><leader>dd :call vimspector#Launch()<CR>
-nnoremap <silent><leader>dx :VimspectorReset<CR>
-nnoremap <silent><leader>de :VimspectorEval
-nnoremap <silent><leader>dw :VimspectorWatch
-nnoremap <silent><leader>do :VimspectorShowOutput
-
-" vim-floaterm
-let g:floaterm_keymap_new    = '<leader>nf'
-let g:floaterm_keymap_toggle = '<F7>'
-let g:floaterm_keymap_next = '<C-f><C-n>'
-let g:floaterm_keymap_prev = '<C-f><C-p>'
-
 

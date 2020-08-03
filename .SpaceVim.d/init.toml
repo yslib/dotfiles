@@ -84,6 +84,15 @@
     name = "Yggdroot/LeaderF"
     build = "./install.sh"
 
+# glsl 语法高亮
+[[custom_plugins]]
+    name = "tikhomirov/vim-glsl"
+
+
+# vim-floaterm
+[[custom_plugins]]
+    name = "voldikss/vim-floaterm"
+
 
 # vista.vim 的依赖
 [[custom_plugins]]
