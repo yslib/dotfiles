@@ -11,10 +11,10 @@
     enable_statusline_display_mode = false
 
     # MY OWN OPTIONS
-#filemanager = "defx"
     autocomplete_method = "coc"
     bootstrap_before = "myspacevim#before"
     bootstrap_after = "myspacevim#after"
+    vimcompatible = true 
 
 # ----------------- SpaceVim 添加的各种 layers ---------------------------------
 
