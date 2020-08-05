@@ -2,7 +2,7 @@
 
 echo "This bash shell is used to create template dotfile for asynctask, a vim plugin"
 
-. ./utils.sh
+. $(dirname ${BASH_SOURCE})/utils.sh
 
 file=".tasks"
 checkFileExists $file

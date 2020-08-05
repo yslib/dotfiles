@@ -1,3 +1,4 @@
+
 #!/bin/bash
 file="CMakeLists.txt"
 
@@ -16,9 +17,13 @@ read inc_dir
 
 echo "${inc_dir}"
 
-echo "lib modules:"
+echo "external lib modules:"
 read lib_modules
 echo "${lib_modules}"
+
+echo "qt lib modules:"
+read qt_modules
+
 
 inc_dir_cmake_cmd=""
 libs_cmake_cmd=""
@@ -49,6 +54,7 @@ project(\${PROJ_NAME})
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS ON)
+set(CMAKE_AUTOMOC)
 
 set(\${SRC_DIR} ${src_dir})
 aux_source_directory(\${SRC_DIR} SRC)

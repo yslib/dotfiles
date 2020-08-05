@@ -1,7 +1,7 @@
 
 #!/bin/bash
 
-. ./utils.sh
+. $(dirname ${BASH_SOURCE})/utils.sh
 
 echo "Creates the dotfile template for vimspector, a visualized debug plugin for vim"
 

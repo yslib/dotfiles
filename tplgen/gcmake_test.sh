@@ -1,6 +1,6 @@
 #!/bin/bash
 
-. ./utils.sh
+. $(dirname ${BASH_SOURCE})/utils.sh
 file="CMakeLists.txt"
 checkFileExists $file
 
