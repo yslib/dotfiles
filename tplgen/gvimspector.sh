@@ -9,9 +9,20 @@ file=".vimspector.json"
 checkFileExists $file
 
 echo "Please enter the template parameters:"
-echo "program:"
+echo "language:(python,cpp)"
+read language
+
+if test -z $language
+then 
+  exit 1
+fi
+
+echo "program:(executable)"
 read program
 
+
+if test $language = "c++" 
+then 
 cat << EOF > $file
 {
 "\$schema": "https://puremourning.github.io/vimspector/schema/vimspector.schema.json#",
@@ -31,3 +42,29 @@ cat << EOF > $file
 }
 }
 EOF
+elif test ${language} = "python"
+then
+cat << EOF > $file
+{
+"\$schema": "https://puremourning.github.io/vimspector/schema/vimspector.schema.json#",
+"configurations": {
+
+      "Launch": {
+            "adapter": "debugpy",
+            "configuration": {
+                    "name": "Launch",
+                    "type": "python",
+                    "request": "launch",
+                    "cwd": "${workspaceRoot}",
+                    "python": "python2",
+                    "stopOnEntry": true,
+                    "console": "externalTerminal",
+                    "debugOptions": [],
+                    "program": "${workspaceRoot}/${program}"
+                  }
+          }
+}
+}
+EOF
+fi
+
