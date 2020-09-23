@@ -88,24 +88,12 @@
 [[custom_plugins]]
     name = "tikhomirov/vim-glsl"
 
-
 # vim-floaterm
 [[custom_plugins]]
     name = "voldikss/vim-floaterm"
 
-
-# vista.vim 的依赖
 [[custom_plugins]]
-    name = 'junegunn/fzf'
-    merged =  0
-
-# vista.vim 的依赖
-[[custom_plugins]]
-    name = "majutsushi/tagbar"
-
-# 更加美观的 tagbar 
-[[custom_plugins]]
-    name = 'liuchengxu/vista.vim'
+    name = "voldikss/LeaderF-floaterm"
 
 
 [[custom_plugins]]
