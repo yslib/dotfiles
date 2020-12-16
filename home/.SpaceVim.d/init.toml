@@ -3,6 +3,7 @@
 
     colorscheme = "gruvbox"
     colorscheme_bg = "dark"
+    disabled_plugins=["srcery-vim"]
 
     enable_guicolors = true
     statusline_separator = "arrow"

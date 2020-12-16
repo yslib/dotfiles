@@ -1,4 +1,3 @@
-
 #!/bin/bash
 file="CMakeLists.txt"
 
