@@ -89,6 +89,10 @@
 [[custom_plugins]]
     name = "tikhomirov/vim-glsl"
 
+# 括号补全
+[[custom_plugins]]
+    name = "tpope/vim-surround"
+
 # vim-floaterm
 [[custom_plugins]]
     name = "voldikss/vim-floaterm"
@@ -100,3 +104,5 @@
 [[custom_plugins]]
     name = 'puremourning/vimspector'
 
+[[custom_plugins]]
+    name = "tpope/vim-surround"
