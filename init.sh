@@ -11,3 +11,4 @@ ln -si ${PWD}/home/.tmux.conf ~/.tmux.conf
 rm -rf ~/.SpaceVim.d && ln -sfi ${PWD}/home/.SpaceVim.d ~/.SpaceVim.d
 
 rm -rf ~/.config/alacritty && ln -sfi ${PWD}/home/.config/alacritty ~/.config/alacritty
+rm -rf ~/.config/ranger && ln -sfi ${PWD}/home/.config/ranger ~/.config/ranger
