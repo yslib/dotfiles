@@ -1,3 +1,4 @@
+function! myspacevim#before() abort
 " TextEdit might fail if hidden is not set.
 set hidden
 
@@ -218,4 +219,8 @@ let g:floaterm_keymap_toggle = '<F7>'
 let g:floaterm_keymap_next = '<C-f><C-n>'
 let g:floaterm_keymap_prev = '<C-f><C-p>'
 
+endfunction
 
+
+function! myspacevim#after() abort
+endfunction
