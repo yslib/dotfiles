@@ -12,6 +12,7 @@ Plug 'kyazdani42/nvim-web-devicons' " for file icons
 Plug 'kyazdani42/nvim-tree.lua'  " file explorer
 Plug 'romgrk/barbar.nvim'  " tabline
 Plug 'numToStr/Comment.nvim'     " code comment/uncomment
+Plug 'windwp/nvim-autopairs'
 Plug 'voldikss/vim-floaterm'         " neovim integrated terminal of floating window
 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}     " syntax based hightlighting

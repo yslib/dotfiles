@@ -7,6 +7,7 @@ require('nvim-tree').setup({})
 
 -----------------------
 require('Comment').setup()
+require('nvim-autopairs').setup()      -- https://github.com/windwp/nvim-autopairs
 
 ----------------------- cmp-nvim configuration
 local cmp = require'cmp'
