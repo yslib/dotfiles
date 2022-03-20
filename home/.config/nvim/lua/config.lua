@@ -1,6 +1,6 @@
---
 ----------------------- All language servers
-local servers = { 'pyright', 'tsserver', 'rust_analyzer'}
+local servers = { 'pyright', 'tsserver', 'rust_analyzer', 'clangd'}
+
 
 ----------------------- nvim-tree configuration
 require('nvim-tree').setup({})
@@ -150,7 +150,7 @@ end
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 --
-local servers = { 'pyright', 'tsserver' }
+local servers = { 'pyright', 'tsserver', 'clangd'}
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
 	on_attach = on_attach,

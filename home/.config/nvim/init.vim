@@ -64,6 +64,8 @@ augroup END
 syntax enable
 set updatetime=300
 
+set nowrap
+
 " The configuration options should be placed before `colorscheme sonokai`.
 let g:sonokai_style = 'andromeda'
 let g:sonokai_enable_italic = 1
