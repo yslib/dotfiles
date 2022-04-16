@@ -130,7 +130,7 @@ let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
 """"""""""""""""neovide
 
 let g:neovide_refresh_rate=144
-let g:neovide_transparent=0.8
+let g:neovide_transparency=0.8
 
 """""""""""""""""" configuration written in Lua """""""""""""""""""""
 lua require('config')
