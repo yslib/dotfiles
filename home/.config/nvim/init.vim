@@ -34,6 +34,8 @@ Plug 'simrat39/rust-tools.nvim'      " an easy-to-use rust tools based on rust-a
 
 Plug 'sainnhe/sonokai'                " color themes
 
+Plug 'puremourning/vimspector'
+
 """"""""""""""""""" Completion""""""""""""""""""
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -122,6 +124,13 @@ noremap <silent><F3> :<C-U>NvimTreeToggle<CR>
 """"""""""""""""floaterm
 let g:floaterm_keymap_toggle = '<F7>'
 
+""""""""""""""""vimspector
+let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
+
+""""""""""""""""neovide
+
+let g:neovide_refresh_rate=144
+let g:neovide_transparent=0.8
 
 """""""""""""""""" configuration written in Lua """""""""""""""""""""
 lua require('config')
