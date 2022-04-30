@@ -34,6 +34,8 @@ Plug 'simrat39/rust-tools.nvim'      " an easy-to-use rust tools based on rust-a
 
 Plug 'sainnhe/sonokai'                " color themes
 
+Plug 'sindrets/diffview.nvim'
+
 Plug 'puremourning/vimspector'
 
 """"""""""""""""""" Completion""""""""""""""""""
@@ -51,7 +53,13 @@ call plug#end()
 
 "============================= sonokai theme
 " Important!!
-if has('termguicolors')
+"if has('termguicolors')
+"  set termguicolors
+"endif
+
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
 
@@ -131,6 +139,9 @@ let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
 
 let g:neovide_refresh_rate=144
 let g:neovide_transparency=0.8
+set guifont=Hack\ Nerd\ Font
 
 """""""""""""""""" configuration written in Lua """""""""""""""""""""
 lua require('config')
+lua require('gitdiff')
+lua require('autopairs')

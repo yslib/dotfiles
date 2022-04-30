@@ -1,13 +1,8 @@
 ----------------------- All language servers
 local servers = { 'pyright', 'tsserver', 'rust_analyzer', 'clangd'}
 
-
------------------------ nvim-tree configuration
 require('nvim-tree').setup({})
-
------------------------
-require('Comment').setup()
-require('nvim-autopairs').setup()      -- https://github.com/windwp/nvim-autopairs
+require('Comment').setup({})
 
 ----------------------- cmp-nvim configuration
 local cmp = require'cmp'
@@ -22,22 +17,17 @@ cmp.setup({
 	  -- require'snippy'.expand_snippet(args.body) -- For `snippy` users.
 	end,
   },
-  mapping = {
-	['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-	['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
-	['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
-	['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
-	['<C-e>'] = cmp.mapping({
-	  i = cmp.mapping.abort(),
-	  c = cmp.mapping.close(),
-	}),
-	-- Accept currently selected item. If none selected, `select` first item.
-	-- Set `select` to `false` to only confirm explicitly selected items.
-	['<CR>'] = cmp.mapping.confirm({ select = true }),
-  },
+  mapping = cmp.mapping.preset.insert({
+        ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<C-e>'] = cmp.mapping.abort(),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
   sources = cmp.config.sources({
 	{ name = 'nvim_lsp' },
 	{ name = 'vsnip' }, -- For vsnip users.
+	{ name = 'nvim_lsp_signature_help' },
 	-- { name = 'luasnip' }, -- For luasnip users.
 	-- { name = 'ultisnips' }, -- For ultisnips users.
 	-- { name = 'snippy' }, -- For snippy users.
@@ -48,19 +38,21 @@ cmp.setup({
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
-  sources = {
-	{ name = 'buffer' }
-  }
-})
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+    }
+  })
 
 -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline(':', {
-  sources = cmp.config.sources({
-	{ name = 'path' }
-  }, {
-	{ name = 'cmdline' }
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
   })
-})
 
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -73,7 +65,7 @@ require('lspconfig')[lsp].setup {
 end
 
 
------------------------------------treesitter highlighting ----------------------------------
+
 require'nvim-treesitter.configs'.setup {
   highlight = {
 	enable = true,
@@ -88,9 +80,6 @@ require'nvim-treesitter.configs'.setup {
 	additional_vim_regex_highlighting = false,
   },
 }
-
-
-
 
 require'nvim-web-devicons'.setup {
  -- your personnal icons can go here (to override)
@@ -108,6 +97,7 @@ require'nvim-web-devicons'.setup {
  -- will get overriden by `get_icons` option
  default = true;
 }
+
 
 require'lspconfig'.pyright.setup{}
 
@@ -160,6 +150,7 @@ for _, lsp in ipairs(servers) do
   }
 end
 
+
 local extension_path = 'C:/Users/ysl/.vscode/extensions/vadimcn.vscode-lldb-1.6.10/adapter/'
 local codelldb_path = extension_path .. 'codelldb.exe'
 local liblldb_path = extension_path .. 'liblldb.dll'
@@ -179,5 +170,9 @@ local rust_tools_opts = {
 
 require('rust-tools').setup(rust_tools_opts)
 require'rust-tools.hover_actions'.hover_actions()
+
+
+-- require('rust-tools')
+
 
 vim.ui.select = require"popui.ui-overrider"
