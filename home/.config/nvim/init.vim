@@ -11,31 +11,23 @@ call plug#begin(stdpath('data').'/plugged')
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
 Plug 'kyazdani42/nvim-tree.lua'  " file explorer
 Plug 'romgrk/barbar.nvim'  " tabline
+Plug 'nvim-lualine/lualine.nvim'    "status line
 Plug 'numToStr/Comment.nvim'     " code comment/uncomment
 Plug 'windwp/nvim-autopairs'
 Plug 'voldikss/vim-floaterm'         " neovim integrated terminal of floating window
-
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}     " syntax based hightlighting
-
 Plug 'nvim-lua/plenary.nvim'
-
 Plug 'neovim/nvim-lspconfig'      " builtin lsp for neovim
-
 Plug 'mfussenegger/nvim-dap'
-
+Plug 'nvim-neorg/neorg'
 Plug 'RishabhRD/popfix'
 Plug 'hood/popui.nvim'
 Plug 'nvim-lua/popup.nvim'
-
 Plug 'nvim-telescope/telescope.nvim'         " based on fd binary for advanced features
 Plug 'nvim-telescope/telescope-ui-select.nvim'
-
 Plug 'simrat39/rust-tools.nvim'      " an easy-to-use rust tools based on rust-analyzer, if you use debuggin features, codelldb is required
-
 Plug 'sainnhe/sonokai'                " color themes
-
 Plug 'sindrets/diffview.nvim'
-
 Plug 'puremourning/vimspector'
 
 """"""""""""""""""" Completion""""""""""""""""""
@@ -90,6 +82,7 @@ colorscheme sonokai
 " nnoremap <silent>    <A-<> :BufferMovePrevious<CR>
 " nnoremap <silent>    <A->> :BufferMoveNext<CR>
 " Goto buffer in position...
+"
 nnoremap <silent>    <leader>1 :BufferGoto 1<CR>
 nnoremap <silent>    <leader>2 :BufferGoto 2<CR>
 nnoremap <silent>    <leader>3 :BufferGoto 3<CR>
@@ -119,11 +112,12 @@ nnoremap <silent> <Space>bl :BufferOrderByLanguage<CR>
 nnoremap <silent> <Space>bw :BufferOrderByWindowNumber<CR>
 
 
-""""""""""""""""""""""""""""nvim.telescope:  telescope.nvim must be installed
+""""""""""""""""""""""""""""nvim.telescopl:  telescope.nvim must be installed
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fc <cmd>lua require('telescope.builtin').grep_string()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <leader>fs <cmd>lua require('telescope.builtin').treesitter()<cr>
 
 
 """"""""""""""""nvim-tree
@@ -145,3 +139,4 @@ set guifont=Hack\ Nerd\ Font
 lua require('config')
 lua require('gitdiff')
 lua require('autopairs')
+lua require('neorgcfg')
