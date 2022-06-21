@@ -39,7 +39,7 @@ Plug 'sainnhe/edge'                                            " color themes
 Plug 'sindrets/diffview.nvim'                                  " diff view 
 Plug 'puremourning/vimspector'                                 " a powerful debug tui
 Plug 'mbbill/undotree'
-
+Plug 'stevearc/aerial.nvim'                                    " outline
 Plug 'hrsh7th/cmp-nvim-lsp'                                    " the following plugins are related to completion
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
@@ -137,7 +137,7 @@ nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fc <cmd>lua require('telescope.builtin').grep_string()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fs <cmd>lua require('telescope.builtin').treesitter()<cr>
+nnoremap <leader>fs <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
 
 
 " ------------------------------  nvim-tree
@@ -156,9 +156,11 @@ set guifont=Hack\ Nerd\ Font
 
 
 " LOADING CONFIGURATION WRITTEN IN LUA "
+lua require('aerialcfg')
 lua require('config')
 lua require('diffviewcfg')
 lua require('autopairs')
 lua require('lualinecfg')
 lua require('neorgcfg')
 lua require('treesittercfg')
+lua require('telescopecfg')
