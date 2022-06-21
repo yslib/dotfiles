@@ -1,3 +1,11 @@
+" =================  Lucida's Neovim configuration  ================
+" Minimum Neovim Version: 0.8
+" You need to download vim-plug from https://github.com/junegunn/vim-plug to
+" boostrap for the first time, and then you need to run :PlugInstall in Neovim 
+" to install the following plugins. Some plugins has their own dependencies 
+" which could be install by provided commands, or binarys that should be 
+" install manually.
+"
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
@@ -8,42 +16,42 @@ call plug#begin(stdpath('data').'/plugged')
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 "
 
-Plug 'kyazdani42/nvim-web-devicons' " for file icons
-Plug 'kyazdani42/nvim-tree.lua'  " file explorer
-Plug 'romgrk/barbar.nvim'  " tabline
-Plug 'nvim-lualine/lualine.nvim'    "status line
-Plug 'numToStr/Comment.nvim'     " code comment/uncomment
-Plug 'windwp/nvim-autopairs'
-Plug 'voldikss/vim-floaterm'         " neovim integrated terminal of floating window
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}     " syntax based hightlighting
-Plug 'nvim-lua/plenary.nvim'
-Plug 'neovim/nvim-lspconfig'      " builtin lsp for neovim
+Plug 'nvim-lua/plenary.nvim'                                   " lua utils
+Plug 'kyazdani42/nvim-web-devicons'                            " for file icons
+Plug 'kyazdani42/nvim-tree.lua'                                " file explorer
+Plug 'romgrk/barbar.nvim'                                      " tabline
+Plug 'nvim-lualine/lualine.nvim'                               " status line
+Plug 'numToStr/Comment.nvim'                                   " code comment/uncomment
+Plug 'windwp/nvim-autopairs'                                   " auto pairs
+Plug 'voldikss/vim-floaterm'                                   " neovim integrated terminal of floating window
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}    " syntax based hightlighting
+Plug 'neovim/nvim-lspconfig'                                   " builtin lsp for neovim
 Plug 'mfussenegger/nvim-dap'
 Plug 'nvim-neorg/neorg'
 Plug 'RishabhRD/popfix'
 Plug 'hood/popui.nvim'
 Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-telescope/telescope.nvim'         " based on fd binary for advanced features
+Plug 'nvim-telescope/telescope.nvim'                           " picker framework
 Plug 'nvim-telescope/telescope-ui-select.nvim'
-Plug 'simrat39/rust-tools.nvim'      " an easy-to-use rust tools based on rust-analyzer, if you use debuggin features, codelldb is required
-Plug 'sainnhe/sonokai'                " color themes
-Plug 'sindrets/diffview.nvim'
-Plug 'puremourning/vimspector'
+Plug 'simrat39/rust-tools.nvim'                                " an easy-to-use rust tools based on rust-analyzer, if you use debuggin features, codelldb is required
+Plug 'sainnhe/sonokai'                                         " color themes
+Plug 'sainnhe/edge'                                            " color themes
+Plug 'sindrets/diffview.nvim'                                  " diff view 
+Plug 'puremourning/vimspector'                                 " a powerful debug tui
+Plug 'mbbill/undotree'
 
-""""""""""""""""""" Completion""""""""""""""""""
-Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lsp'                                    " the following plugins are related to completion
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
-
 Plug 'hrsh7th/nvim-cmp'
 " Initialize plugin system
 call plug#end()
 
 
-"============================= sonokai theme
+"sonokai theme
 " Important!!
 "if has('termguicolors')
 "  set termguicolors
@@ -55,7 +63,7 @@ if exists('+termguicolors')
   set termguicolors
 endif
 
-"""""""""""""""""""""""""""line number settings
+"line number settings
 set nu
 augroup relative_numbser
  autocmd!
@@ -68,13 +76,25 @@ set updatetime=300
 
 set nowrap
 
-" The configuration options should be placed before `colorscheme sonokai`.
-let g:sonokai_style = 'andromeda'
-let g:sonokai_enable_italic = 1
-let g:sonokai_disable_italic_comment = 1
-colorscheme sonokai
+" The configuration options should be placed before `colorscheme xxx`.
 
-"""""""""""""""""""""""" barbar.nvim
+" let g:sonokar_style = 'andromeda'
+" let g:sonokai_enable_italic = 1
+" let g:sonokai_disable_italic_comment = 1
+" colorscheme sonokai
+
+let g:edge_style = 'aura'
+let g:edge_better_performance = 1
+let g:edge_enable_italic = 1
+let g:edge_disable_italic_comment = 1
+let g:edge_dim_foreground = 0
+let g:edge_transparent_background = 0
+let g:edge_spell_foreground = 1
+let g:edge_diagnostic_text_highlight = 1
+let g:edge_current_word = 'bold'
+colorscheme edge
+"
+" --------------------------   barbar.nvim
 " Move to previous/next
 " nnoremap <silent>    <A-,> :BufferPrevious<CR>
 " nnoremap <silent>    <A-.> :BufferNext<CR>
@@ -112,7 +132,7 @@ nnoremap <silent> <Space>bl :BufferOrderByLanguage<CR>
 nnoremap <silent> <Space>bw :BufferOrderByWindowNumber<CR>
 
 
-""""""""""""""""""""""""""""nvim.telescopl:  telescope.nvim must be installed
+" ------------------------------  nvim.telescope:  telescope.nvim must be installed and for the advanced features, ripgrep is needed.
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fc <cmd>lua require('telescope.builtin').grep_string()<cr>
@@ -120,23 +140,25 @@ nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fs <cmd>lua require('telescope.builtin').treesitter()<cr>
 
 
-""""""""""""""""nvim-tree
+" ------------------------------  nvim-tree
 noremap <silent><F3> :<C-U>NvimTreeToggle<CR>
 
-""""""""""""""""floaterm
+" ------------------------------  floaterm
 let g:floaterm_keymap_toggle = '<F7>'
 
-""""""""""""""""vimspector
+" ------------------------------  vimspector
 let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
 
-""""""""""""""""neovide
-
+" ------------------------------  neovide
 let g:neovide_refresh_rate=144
 let g:neovide_transparency=0.8
 set guifont=Hack\ Nerd\ Font
 
-"""""""""""""""""" configuration written in Lua """""""""""""""""""""
+
+" LOADING CONFIGURATION WRITTEN IN LUA "
 lua require('config')
-lua require('gitdiff')
+lua require('diffviewcfg')
 lua require('autopairs')
+lua require('lualinecfg')
 lua require('neorgcfg')
+lua require('treesittercfg')
