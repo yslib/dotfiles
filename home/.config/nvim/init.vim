@@ -23,6 +23,7 @@ Plug 'romgrk/barbar.nvim'                                      " tabline
 Plug 'nvim-lualine/lualine.nvim'                               " status line
 Plug 'numToStr/Comment.nvim'                                   " code comment/uncomment
 Plug 'windwp/nvim-autopairs'                                   " auto pairs
+Plug 'tpope/vim-surround'                                      " vim-surround
 Plug 'voldikss/vim-floaterm'                                   " neovim integrated terminal of floating window
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}    " syntax based hightlighting
 Plug 'neovim/nvim-lspconfig'                                   " builtin lsp for neovim
@@ -39,6 +40,7 @@ Plug 'sainnhe/edge'                                            " color themes
 Plug 'sindrets/diffview.nvim'                                  " diff view 
 Plug 'puremourning/vimspector'                                 " a powerful debug tui
 Plug 'mbbill/undotree'
+Plug 'glepnir/dashboard-nvim'
 Plug 'stevearc/aerial.nvim'                                    " outline
 Plug 'hrsh7th/cmp-nvim-lsp'                                    " the following plugins are related to completion
 Plug 'hrsh7th/cmp-buffer'
@@ -49,6 +51,7 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/nvim-cmp'
 " Initialize plugin system
 call plug#end()
+
 
 
 "sonokai theme
@@ -154,6 +157,8 @@ let g:neovide_refresh_rate=144
 let g:neovide_transparency=0.8
 set guifont=Hack\ Nerd\ Font
 
+" ===================== dashboard custome header
+
 
 " LOADING CONFIGURATION WRITTEN IN LUA "
 lua require('aerialcfg')
@@ -164,3 +169,23 @@ lua require('lualinecfg')
 lua require('neorgcfg')
 lua require('treesittercfg')
 lua require('telescopecfg')
+lua require('dashboardcfg')
+
+let g:dashboard_custom_header = [
+    \'',
+    \'   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣭⣿⣶⣿⣦⣼⣆         ',
+    \'    ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ',
+    \'          ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷⠄⠄⠄⠄⠻⠿⢿⣿⣧⣄     ',
+    \'           ⣸⣿⣿⢧ ⢻⠻⣿⣿⣷⣄⣀⠄⠢⣀⡀⠈⠙⠿⠄    ',
+    \'          ⢠⣿⣿⣿⠈  ⠡⠌⣻⣿⣿⣿⣿⣿⣿⣿⣛⣳⣤⣀⣀   ',
+    \'   ⢠⣧⣶⣥⡤⢄ ⣸⣿⣿⠘⠄ ⢀⣴⣿⣿⡿⠛⣿⣿⣧⠈⢿⠿⠟⠛⠻⠿⠄  ',
+    \'  ⣰⣿⣿⠛⠻⣿⣿⡦⢹⣿⣷   ⢊⣿⣿⡏  ⢸⣿⣿⡇ ⢀⣠⣄⣾⠄   ',
+    \' ⣠⣿⠿⠛⠄⢀⣿⣿⣷⠘⢿⣿⣦⡀ ⢸⢿⣿⣿⣄ ⣸⣿⣿⡇⣪⣿⡿⠿⣿⣷⡄  ',
+    \' ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇⠄⠛⠻⢷⣄ ',
+    \'      ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆     ',
+    \'       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     ',
+    \'     ⢰⣶  ⣶ ⢶⣆⢀⣶⠂⣶⡶⠶⣦⡄⢰⣶⠶⢶⣦  ⣴⣶     ',
+    \'     ⢸⣿⠶⠶⣿ ⠈⢻⣿⠁ ⣿⡇ ⢸⣿⢸⣿⢶⣾⠏ ⣸⣟⣹⣧    ',
+    \'     ⠸⠿  ⠿  ⠸⠿  ⠿⠷⠶⠿⠃⠸⠿⠄⠙⠷⠤⠿⠉⠉⠿⠆   ',
+    \'',
+    \]
