@@ -24,7 +24,8 @@ Plug 'nvim-lualine/lualine.nvim'                               " status line
 Plug 'numToStr/Comment.nvim'                                   " code comment/uncomment
 Plug 'windwp/nvim-autopairs'                                   " auto pairs
 Plug 'tpope/vim-surround'                                      " vim-surround
-Plug 'voldikss/vim-floaterm'                                   " neovim integrated terminal of floating window
+" Plug 'voldikss/vim-floaterm'                                   " neovim integrated terminal of floating window
+Plug 'akinsho/toggleterm.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}    " syntax based hightlighting
 Plug 'neovim/nvim-lspconfig'                                   " builtin lsp for neovim
 Plug 'mfussenegger/nvim-dap'
@@ -147,7 +148,10 @@ nnoremap <leader>fs <cmd>lua require('telescope.builtin').lsp_document_symbols()
 noremap <silent><F3> :<C-U>NvimTreeToggle<CR>
 
 " ------------------------------  floaterm
-let g:floaterm_keymap_toggle = '<F7>'
+" let g:floaterm_keymap_toggle = '<F7>'
+
+" ------------------------------ toggleterm
+noremap <F7> <cmd>ToggleTerm direction=float<cr>
 
 " ------------------------------  vimspector
 let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
@@ -160,9 +164,11 @@ set guifont=Hack\ Nerd\ Font
 " ===================== dashboard custome header
 
 
+
 " LOADING CONFIGURATION WRITTEN IN LUA "
 lua require('aerialcfg')
 lua require('config')
+lua require('lualspcfg')
 lua require('diffviewcfg')
 lua require('autopairs')
 lua require('lualinecfg')
@@ -170,6 +176,7 @@ lua require('neorgcfg')
 lua require('treesittercfg')
 lua require('telescopecfg')
 lua require('dashboardcfg')
+lua require('toggletermcfg')
 
 let g:dashboard_custom_header = [
     \'',

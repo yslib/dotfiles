@@ -30,7 +30,7 @@ colors:
     white:   '#ebdbb2'
 
 
-background_blur: 0.8
+background_blur: 0.9
 
 font:
 
@@ -70,7 +70,7 @@ window:
   # Setting this to false will result in window without borders and title bar.
   decorations: Full
 
-  opacity: 0.7
+  opacity: 0.85
 
 # Startup Mode (changes require restart)
 #
