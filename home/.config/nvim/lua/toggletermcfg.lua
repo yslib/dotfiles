@@ -29,5 +29,13 @@ function _G.set_terminal_keymaps()
   -- vim.api.nvim_buf_set_keymap(0, 't', '<C-l>', [[<C-\><C-n><C-W>l]], opts)
 end
 
+local u = require"utils"
+u.map_key('n', "<F7>", ":ToggleTerm direction=float<CR>", {silent = true})
+u.map_key('n', "<Leader>tv", ":ToggleTerm direction=vertical<CR>", {silent = true})
+u.map_key('n', "<Leader>th", ":ToggleTerm direction=horizontal<CR>", {silent = true})
+u.map_key('n', "<Leader>tav", ":ToggleTerm direction=vertical<CR>", {silent = true})
+u.map_key('n', "<Leader>tah", ":ToggleTerm direction=horizontal<CR>", {silent = true})
+
+
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')

@@ -166,6 +166,7 @@ set guifont=Hack\ Nerd\ Font
 
 
 " LOADING CONFIGURATION WRITTEN IN LUA "
+lua require("utils")
 lua require('aerialcfg')
 lua require('config')
 lua require('lualspcfg')
