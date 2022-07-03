@@ -24,7 +24,8 @@ Plug 'nvim-lualine/lualine.nvim'                               " status line
 Plug 'numToStr/Comment.nvim'                                   " code comment/uncomment
 Plug 'windwp/nvim-autopairs'                                   " auto pairs
 Plug 'tpope/vim-surround'                                      " vim-surround
-" Plug 'voldikss/vim-floaterm'                                   " neovim integrated terminal of floating window
+Plug 'mhartington/formatter.nvim'
+Plug 'jacobsimpson/nvim-example-python-plugin'
 Plug 'akinsho/toggleterm.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}    " syntax based hightlighting
 Plug 'neovim/nvim-lspconfig'                                   " builtin lsp for neovim
@@ -38,7 +39,8 @@ Plug 'nvim-telescope/telescope-ui-select.nvim'
 Plug 'simrat39/rust-tools.nvim'                                " an easy-to-use rust tools based on rust-analyzer, if you use debuggin features, codelldb is required
 Plug 'sainnhe/sonokai'                                         " color themes
 Plug 'sainnhe/edge'                                            " color themes
-Plug 'sindrets/diffview.nvim'                                  " diff view 
+Plug 'whatsthatsmell/codesmell_dark.vim'                       " color theme
+Plug 'sindrets/diffview.nvim'                                  " diff view
 Plug 'puremourning/vimspector'                                 " a powerful debug tui
 Plug 'mbbill/undotree'
 Plug 'glepnir/dashboard-nvim'
@@ -53,13 +55,11 @@ Plug 'hrsh7th/nvim-cmp'
 " Initialize plugin system
 call plug#end()
 
-
-
 "sonokai theme
 " Important!!
-"if has('termguicolors')
-"  set termguicolors
-"endif
+if has('termguicolors')
+ set termguicolors
+endif
 
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -80,6 +80,10 @@ set updatetime=300
 
 set nowrap
 
+" display white space, \\u0387 for center dot
+" h listchars for format specification
+set list listchars=tab:\|\ ,trail:\\u0387
+
 " The configuration options should be placed before `colorscheme xxx`.
 
 " let g:sonokar_style = 'andromeda'
@@ -87,16 +91,18 @@ set nowrap
 " let g:sonokai_disable_italic_comment = 1
 " colorscheme sonokai
 
-let g:edge_style = 'aura'
-let g:edge_better_performance = 1
-let g:edge_enable_italic = 1
-let g:edge_disable_italic_comment = 1
-let g:edge_dim_foreground = 0
-let g:edge_transparent_background = 0
-let g:edge_spell_foreground = 1
-let g:edge_diagnostic_text_highlight = 1
-let g:edge_current_word = 'bold'
-colorscheme edge
+" let g:edge_style = 'aura'
+" let g:edge_better_performance = 1
+" let g:edge_enable_italic = 1
+" let g:edge_disable_italic_comment = 1
+" let g:edge_dim_foreground = 0
+" let g:edge_transparent_background = 1
+" let g:edge_spell_foreground = 1
+" let g:edge_diagnostic_text_highlight = 1
+" let g:edge_current_word = 'bold'
+" colorscheme edge
+"
+colorscheme codesmell_dark
 "
 " --------------------------   barbar.nvim
 " Move to previous/next
@@ -140,6 +146,7 @@ nnoremap <silent> <Space>bw :BufferOrderByWindowNumber<CR>
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
 nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
 nnoremap <leader>fc <cmd>lua require('telescope.builtin').grep_string()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fs <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
 
@@ -161,10 +168,6 @@ let g:neovide_refresh_rate=144
 let g:neovide_transparency=0.8
 set guifont=Hack\ Nerd\ Font
 
-" ===================== dashboard custome header
-
-
-
 " LOADING CONFIGURATION WRITTEN IN LUA "
 lua require("utils")
 lua require('aerialcfg')
@@ -178,22 +181,4 @@ lua require('treesittercfg')
 lua require('telescopecfg')
 lua require('dashboardcfg')
 lua require('toggletermcfg')
-
-let g:dashboard_custom_header = [
-    \'',
-    \'   ⣴⣶⣤⡤⠦⣤⣀⣤⠆     ⣈⣭⣭⣿⣶⣿⣦⣼⣆         ',
-    \'    ⠉⠻⢿⣿⠿⣿⣿⣶⣦⠤⠄⡠⢾⣿⣿⡿⠋⠉⠉⠻⣿⣿⡛⣦       ',
-    \'          ⠈⢿⣿⣟⠦ ⣾⣿⣿⣷⠄⠄⠄⠄⠻⠿⢿⣿⣧⣄     ',
-    \'           ⣸⣿⣿⢧ ⢻⠻⣿⣿⣷⣄⣀⠄⠢⣀⡀⠈⠙⠿⠄    ',
-    \'          ⢠⣿⣿⣿⠈  ⠡⠌⣻⣿⣿⣿⣿⣿⣿⣿⣛⣳⣤⣀⣀   ',
-    \'   ⢠⣧⣶⣥⡤⢄ ⣸⣿⣿⠘⠄ ⢀⣴⣿⣿⡿⠛⣿⣿⣧⠈⢿⠿⠟⠛⠻⠿⠄  ',
-    \'  ⣰⣿⣿⠛⠻⣿⣿⡦⢹⣿⣷   ⢊⣿⣿⡏  ⢸⣿⣿⡇ ⢀⣠⣄⣾⠄   ',
-    \' ⣠⣿⠿⠛⠄⢀⣿⣿⣷⠘⢿⣿⣦⡀ ⢸⢿⣿⣿⣄ ⣸⣿⣿⡇⣪⣿⡿⠿⣿⣷⡄  ',
-    \' ⠙⠃   ⣼⣿⡟  ⠈⠻⣿⣿⣦⣌⡇⠻⣿⣿⣷⣿⣿⣿ ⣿⣿⡇⠄⠛⠻⢷⣄ ',
-    \'      ⢻⣿⣿⣄   ⠈⠻⣿⣿⣿⣷⣿⣿⣿⣿⣿⡟ ⠫⢿⣿⡆     ',
-    \'       ⠻⣿⣿⣿⣿⣶⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⡟⢀⣀⣤⣾⡿⠃     ',
-    \'     ⢰⣶  ⣶ ⢶⣆⢀⣶⠂⣶⡶⠶⣦⡄⢰⣶⠶⢶⣦  ⣴⣶     ',
-    \'     ⢸⣿⠶⠶⣿ ⠈⢻⣿⠁ ⣿⡇ ⢸⣿⢸⣿⢶⣾⠏ ⣸⣟⣹⣧    ',
-    \'     ⠸⠿  ⠿  ⠸⠿  ⠿⠷⠶⠿⠃⠸⠿⠄⠙⠷⠤⠿⠉⠉⠿⠆   ',
-    \'',
-    \]
+lua require('formattercfg')
