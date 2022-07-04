@@ -25,7 +25,7 @@ Plug 'numToStr/Comment.nvim'                                   " code comment/un
 Plug 'windwp/nvim-autopairs'                                   " auto pairs
 Plug 'tpope/vim-surround'                                      " vim-surround
 Plug 'mhartington/formatter.nvim'
-Plug 'jacobsimpson/nvim-example-python-plugin'
+" Plug 'jacobsimpson/nvim-example-python-plugin'
 Plug 'akinsho/toggleterm.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}    " syntax based hightlighting
 Plug 'neovim/nvim-lspconfig'                                   " builtin lsp for neovim
@@ -56,16 +56,6 @@ Plug 'hrsh7th/nvim-cmp'
 call plug#end()
 
 "sonokai theme
-" Important!!
-if has('termguicolors')
- set termguicolors
-endif
-
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
 
 "line number settings
 set nu
@@ -84,6 +74,15 @@ set nowrap
 " h listchars for format specification
 set list listchars=tab:\|\ ,trail:\\u0387
 
+" ---------------- default colorscheme ----------------
+" Important!!
+" if exists('+termguicolors')
+"   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+"   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+"   set termguicolors
+" endif
+
+set termguicolors
 " The configuration options should be placed before `colorscheme xxx`.
 
 " let g:sonokar_style = 'andromeda'
@@ -96,13 +95,15 @@ set list listchars=tab:\|\ ,trail:\\u0387
 " let g:edge_enable_italic = 1
 " let g:edge_disable_italic_comment = 1
 " let g:edge_dim_foreground = 0
-" let g:edge_transparent_background = 1
+" let g:edge_transparent_background = 0
 " let g:edge_spell_foreground = 1
 " let g:edge_diagnostic_text_highlight = 1
 " let g:edge_current_word = 'bold'
 " colorscheme edge
 "
 colorscheme codesmell_dark
+
+
 "
 " --------------------------   barbar.nvim
 " Move to previous/next

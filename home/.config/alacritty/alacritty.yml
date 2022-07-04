@@ -86,6 +86,10 @@ window:
 mouse_bindings:
   - { mouse: Middle, action: PasteSelection }
 
+env:
+  TERM: xterm-256color     # for neovim in tmux color issues
+# https://gist.github.com/andersevenrud/015e61af2fd264371032763d4ed965b6
+
 # key-bindings
 
 key_bindings:

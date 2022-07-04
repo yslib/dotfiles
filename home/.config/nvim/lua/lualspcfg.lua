@@ -1,14 +1,14 @@
 require'lspconfig'.sumneko_lua.setup {
   settings = {
     Lua = {
-	    format = {
-				enable = true,
-				-- Put format options here
-				-- NOTE: the value should be STRING!!
-				defaultConfig = {
-				  indent_style = "space",
-				  indent_size = "2", 
-				}
+	format = {
+		enable = true,
+		-- Put format options here
+		-- NOTE: the value should be STRING!!
+		defaultConfig = {
+		  indent_style = "space",
+		  indent_size = "2", 
+		}
 	    },
       runtime = {
         -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
