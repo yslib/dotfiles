@@ -172,6 +172,7 @@ set guifont=Hack\ Nerd\ Font
 lua require("utils")
 lua require('aerialcfg')
 lua require('config')
+lua require('nvimtreecfg')
 lua require('lualspcfg')
 lua require('diffviewcfg')
 lua require('autopairs')

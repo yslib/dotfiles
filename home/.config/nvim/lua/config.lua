@@ -1,13 +1,23 @@
 ----------------------- All language servers
 local servers = { "pyright", "tsserver", "rust_analyzer", "clangd", "sumneko_lua" }
 
-require("nvim-tree").setup({})
 require("Comment").setup({})
 
 ----------------------- cmp-nvim configuration
 local cmp = require("cmp")
 
 cmp.setup({
+    window = {
+		completion = { -- rounded border; thin-style scrollbar
+		    border = 'rounded',
+		    scrollbar = '║',
+		},
+		documentation = { -- no border; native-style scrollbar
+		    border = 'rounded',
+		    scrollbar = '║',
+			  -- other options
+		},
+    },
 	experimental = {
 		ghost_text = true,
 	},
@@ -74,14 +84,14 @@ local nvim_lsp = require("lspconfig")
 vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]]
 vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
 local border = {
-      {"+", "FloatBorder"},
-      {"▔", "FloatBorder"},
-      {"+", "FloatBorder"},
-      {"▕", "FloatBorder"},
-      {"+", "FloatBorder"},
-      {"▁", "FloatBorder"},
-      {"+", "FloatBorder"},
-      {"▏", "FloatBorder"},
+	  {"+", "FloatBorder"},
+	  {"▔", "FloatBorder"},
+	  {"+", "FloatBorder"},
+	  {"▕", "FloatBorder"},
+	  {"+", "FloatBorder"},
+	  {"▁", "FloatBorder"},
+	  {"+", "FloatBorder"},
+	  {"▏", "FloatBorder"},
 }
 
 local function goto_definition(split_cmd)
@@ -91,26 +101,26 @@ local function goto_definition(split_cmd)
 
   -- note, this handler style is for neovim 0.5.1/0.6, if on 0.5, call with function(_, method, result)
   local handler = function(_, result, ctx)
-    if result == nil or vim.tbl_isempty(result) then
-      local _ = log.info() and log.info(ctx.method, "No location found")
-      return nil
-    end
+	if result == nil or vim.tbl_isempty(result) then
+	  local _ = log.info() and log.info(ctx.method, "No location found")
+	  return nil
+	end
 
-    if split_cmd then
-      vim.cmd(split_cmd)
-    end
+	if split_cmd then
+	  vim.cmd(split_cmd)
+	end
 
-    if vim.tbl_islist(result) then
-      util.jump_to_location(result[1])
+	if vim.tbl_islist(result) then
+	  util.jump_to_location(result[1])
 
-      if #result > 1 then
-        util.set_qflist(util.locations_to_items(result))
-        api.nvim_command("copen")
-        api.nvim_command("wincmd p")
-      end
-    else
-      util.jump_to_location(result)
-    end
+	  if #result > 1 then
+		util.set_qflist(util.locations_to_items(result))
+		api.nvim_command("copen")
+		api.nvim_command("wincmd p")
+	  end
+	else
+	  util.jump_to_location(result)
+	end
   end
 
   return handler
@@ -143,8 +153,8 @@ local icons = {
 
 -- LSP settings (for overriding per client)
 local handlers =  {
-  ["textDocument/hover"] =  vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
-  ["textDocument/signatureHelp"] =  vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
+  ["textDocument/hover"] =	vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
+  ["textDocument/signatureHelp"] =	vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
   ["textDocument/definition"] = goto_definition('split'),
 }
 local kinds = vim.lsp.protocol.CompletionItemKind
