@@ -19,24 +19,26 @@ call plug#begin(stdpath('data').'/plugged')
 Plug 'nvim-lua/plenary.nvim'                                   " lua utils
 Plug 'kyazdani42/nvim-web-devicons'                            " for file icons
 Plug 'kyazdani42/nvim-tree.lua'                                " file explorer
+Plug 'stevearc/dressing.nvim'
+Plug 'nvim-telescope/telescope.nvim'                           " picker framework
+Plug 'nvim-telescope/telescope-ui-select.nvim'
+Plug 'neovim/nvim-lspconfig'                                   " builtin lsp for neovim
+Plug 'mfussenegger/nvim-dap'
+
 Plug 'romgrk/barbar.nvim'                                      " tabline
 Plug 'nvim-lualine/lualine.nvim'                               " status line
 Plug 'numToStr/Comment.nvim'                                   " code comment/uncomment
 Plug 'windwp/nvim-autopairs'                                   " auto pairs
 Plug 'tpope/vim-surround'                                      " vim-surround
 Plug 'mhartington/formatter.nvim'
-" Plug 'jacobsimpson/nvim-example-python-plugin'
 Plug 'akinsho/toggleterm.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}    " syntax based hightlighting
-Plug 'neovim/nvim-lspconfig'                                   " builtin lsp for neovim
-Plug 'mfussenegger/nvim-dap'
 Plug 'nvim-neorg/neorg'
 Plug 'RishabhRD/popfix'
 Plug 'hood/popui.nvim'
 Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-telescope/telescope.nvim'                           " picker framework
-Plug 'nvim-telescope/telescope-ui-select.nvim'
 Plug 'simrat39/rust-tools.nvim'                                " an easy-to-use rust tools based on rust-analyzer, if you use debuggin features, codelldb is required
+Plug 'Shatur/neovim-session-manager'
 Plug 'sainnhe/sonokai'                                         " color themes
 Plug 'sainnhe/edge'                                            " color themes
 Plug 'whatsthatsmell/codesmell_dark.vim'                       " color theme
@@ -150,16 +152,11 @@ nnoremap <leader>fc <cmd>lua require('telescope.builtin').grep_string()<cr>
 nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fs <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
+nnoremap <leader>r <cmd>lua require('telescope.builtin').reloader()<cr>
 
 
 " ------------------------------  nvim-tree
 noremap <silent><F3> :<C-U>NvimTreeToggle<CR>
-
-" ------------------------------  floaterm
-" let g:floaterm_keymap_toggle = '<F7>'
-
-" ------------------------------ toggleterm
-noremap <F7> <cmd>ToggleTerm direction=float<cr>
 
 " ------------------------------  vimspector
 let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
@@ -184,3 +181,5 @@ lua require('telescopecfg')
 lua require('dashboardcfg')
 lua require('toggletermcfg')
 lua require('formattercfg')
+lua require('dresscfg')
+lua require('sessioncfg')
