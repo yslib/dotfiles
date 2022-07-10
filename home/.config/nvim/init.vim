@@ -24,8 +24,7 @@ Plug 'nvim-telescope/telescope.nvim'                           " picker framewor
 Plug 'nvim-telescope/telescope-ui-select.nvim'
 Plug 'neovim/nvim-lspconfig'                                   " builtin lsp for neovim
 Plug 'mfussenegger/nvim-dap'
-
-Plug 'romgrk/barbar.nvim'                                      " tabline
+Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
 Plug 'nvim-lualine/lualine.nvim'                               " status line
 Plug 'numToStr/Comment.nvim'                                   " code comment/uncomment
 Plug 'windwp/nvim-autopairs'                                   " auto pairs
@@ -105,44 +104,22 @@ set termguicolors
 "
 colorscheme codesmell_dark
 
+" -------------------------- neovim-session-manager
+nnoremap <silent><leader>sl <Cmd>SessionManager load_session<CR>
+nnoremap <silent><leader>sc <Cmd>SessionManager load_current_dir_session<CR>
 
-"
-" --------------------------   barbar.nvim
-" Move to previous/next
-" nnoremap <silent>    <A-,> :BufferPrevious<CR>
-" nnoremap <silent>    <A-.> :BufferNext<CR>
-" Re-order to previous/next
-" nnoremap <silent>    <A-<> :BufferMovePrevious<CR>
-" nnoremap <silent>    <A->> :BufferMoveNext<CR>
-" Goto buffer in position...
-"
-nnoremap <silent>    <leader>1 :BufferGoto 1<CR>
-nnoremap <silent>    <leader>2 :BufferGoto 2<CR>
-nnoremap <silent>    <leader>3 :BufferGoto 3<CR>
-nnoremap <silent>    <leader>4 :BufferGoto 4<CR>
-nnoremap <silent>    <leader>5 :BufferGoto 5<CR>
-nnoremap <silent>    <leader>6 :BufferGoto 6<CR>
-nnoremap <silent>    <leader>7 :BufferGoto 7<CR>
-nnoremap <silent>    <leader>8 :BufferGoto 8<CR>
-nnoremap <silent>    <leader>9 :BufferLast<CR>
-" Pin/unpin buffer
-nnoremap <silent>    <C-w><C-p> :BufferPin<CR>
-" Close buffer
-nnoremap <silent>    <C-w><C-b> :BufferClose<CR>
-" Wipeout buffer
-"                          :BufferWipeout<CR>
-" Close commands
-"                          :BufferCloseAllButCurrent<CR>
-"                          :BufferCloseAllButPinned<CR>
-"                          :BufferCloseBuffersLeft<CR>
-"                          :BufferCloseBuffersRight<CR>
-" Magic buffer-picking mode
-nnoremap <silent> <C-s>    :BufferPick<CR>
-" Sort automatically by...
-nnoremap <silent> <Space>bb :BufferOrderByBufferNumber<CR>
-nnoremap <silent> <Space>bd :BufferOrderByDirectory<CR>
-nnoremap <silent> <Space>bl :BufferOrderByLanguage<CR>
-nnoremap <silent> <Space>bw :BufferOrderByWindowNumber<CR>
+
+" --------------------------   bufferline.nvim
+
+nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
+nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
+nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
+nnoremap <silent><leader>4 <Cmd>BufferLineGoToBuffer 4<CR>
+nnoremap <silent><leader>5 <Cmd>BufferLineGoToBuffer 5<CR>
+nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
+nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
+nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
+nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
 
 
 " ------------------------------  nvim.telescope:  telescope.nvim must be installed and for the advanced features, ripgrep is needed.
@@ -183,3 +160,4 @@ lua require('toggletermcfg')
 lua require('formattercfg')
 lua require('dresscfg')
 lua require('sessioncfg')
+lua require('bufferlinecfg')
