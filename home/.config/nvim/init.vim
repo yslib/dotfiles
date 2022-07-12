@@ -140,15 +140,16 @@ let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
 
 " ------------------------------  neovide
 let g:neovide_refresh_rate=144
-let g:neovide_transparency=0.8
-set guifont=Hack\ Nerd\ Font
+let g:neovide_transparency=0.9
+set guifont=Hack\ Nerd\ Font:h16
 
 " LOADING CONFIGURATION WRITTEN IN LUA "
 lua require("utils")
 lua require('aerialcfg')
 lua require('config')
 lua require('nvimtreecfg')
-lua require('lualspcfg')
+lua require('commentcfg')
+" lua require('lualspcfg')
 lua require('diffviewcfg')
 lua require('autopairs')
 lua require('lualinecfg')

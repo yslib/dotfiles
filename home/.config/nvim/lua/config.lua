@@ -1,23 +1,27 @@
------------------------ All language servers
-local servers = { "pyright", "tsserver", "rust_analyzer", "clangd", "sumneko_lua" }
+----------------------- lsp specific settings
 
-require("Comment").setup({})
+local servers = { "pyright", "tsserver", "clangd", "sumneko_lua", "rust_analyzer" }
+
+-- local lsp_customized_settings = {}
+--
+-- for _, lsp in ipairs(servers) do
+-- 	lsp_customized_settings[lsp] = require(lsp.."_cfg")
+-- end
 
 ----------------------- cmp-nvim configuration
 local cmp = require("cmp")
-
 cmp.setup({
-    window = {
+	window = {
 		completion = { -- rounded border; thin-style scrollbar
-		    border = 'rounded',
-		    scrollbar = '║',
+			border = 'rounded',
+			scrollbar = '║',
 		},
 		documentation = { -- no border; native-style scrollbar
-		    border = 'rounded',
-		    scrollbar = '║',
-			  -- other options
+			border = 'rounded',
+			scrollbar = '║',
+			-- other options
 		},
-    },
+	},
 	experimental = {
 		ghost_text = true,
 	},
@@ -71,100 +75,92 @@ cmp.setup.cmdline(":", {
 local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
 
-for _, lsp in ipairs(servers) do
-	require("lspconfig")[lsp].setup({
-		capabilities = capabilities,
-	})
-end
-
-
 local nvim_lsp = require("lspconfig")
 
 -- UI Customization
 vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]]
 vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
 local border = {
-	  {"╭", "FloatBorder"},
-	  {"─", "FloatBorder"},
-	  {"╮", "FloatBorder"},
-	  {"│", "FloatBorder"},
-	  {"╯", "FloatBorder"},
-	  {"─", "FloatBorder"},
-	  {"╰", "FloatBorder"},
-	  {"│", "FloatBorder"},
+	{ "╭", "FloatBorder" },
+	{ "─", "FloatBorder" },
+	{ "╮", "FloatBorder" },
+	{ "│", "FloatBorder" },
+	{ "╯", "FloatBorder" },
+	{ "─", "FloatBorder" },
+	{ "╰", "FloatBorder" },
+	{ "│", "FloatBorder" },
 }
 
 -- sharp borderchars['─', '│', '─', '│', '┌', '┐', '┘', '└'],
 -- rounded borderchars `['─', '│', '─', '│', '╭', '╮', '╯', '╰'],`
 
 local function goto_definition(split_cmd)
-  local util = vim.lsp.util
-  local log = require("vim.lsp.log")
-  local api = vim.api
+	local util = vim.lsp.util
+	local log = require("vim.lsp.log")
+	local api = vim.api
 
-  -- note, this handler style is for neovim 0.5.1/0.6, if on 0.5, call with function(_, method, result)
-  local handler = function(_, result, ctx)
-	if result == nil or vim.tbl_isempty(result) then
-	  local _ = log.info() and log.info(ctx.method, "No location found")
-	  return nil
+	-- note, this handler style is for neovim 0.5.1/0.6, if on 0.5, call with function(_, method, result)
+	local handler = function(_, result, ctx)
+		if result == nil or vim.tbl_isempty(result) then
+			local _ = log.info() and log.info(ctx.method, "No location found")
+			return nil
+		end
+
+		if split_cmd then
+			vim.cmd(split_cmd)
+		end
+
+		if vim.tbl_islist(result) then
+			util.jump_to_location(result[1])
+
+			if #result > 1 then
+				util.set_qflist(util.locations_to_items(result))
+				api.nvim_command("copen")
+				api.nvim_command("wincmd p")
+			end
+		else
+			util.jump_to_location(result)
+		end
 	end
 
-	if split_cmd then
-	  vim.cmd(split_cmd)
-	end
-
-	if vim.tbl_islist(result) then
-	  util.jump_to_location(result[1])
-
-	  if #result > 1 then
-		util.set_qflist(util.locations_to_items(result))
-		api.nvim_command("copen")
-		api.nvim_command("wincmd p")
-	  end
-	else
-	  util.jump_to_location(result)
-	end
-  end
-
-  return handler
+	return handler
 end
 
 local icons = {
-  Class = " ",
-  Color = " ",
-  Constant = " ",
-  Constructor = " ",
-  Enum = "了 ",
-  EnumMember = " ",
-  Field = " ",
-  File = " ",
-  Folder = " ",
-  Function = " ",
-  Interface = "ﰮ ",
-  Keyword = " ",
-  Method = "ƒ ",
-  Module = " ",
-  Property = " ",
-  Snippet = "﬌ ",
-  Struct = " ",
-  Text = " ",
-  Unit = " ",
-  Value = " ",
-  Variable = " ",
+	Class = " ",
+	Color = " ",
+	Constant = " ",
+	Constructor = " ",
+	Enum = "了 ",
+	EnumMember = " ",
+	Field = " ",
+	File = " ",
+	Folder = " ",
+	Function = " ",
+	Interface = "ﰮ ",
+	Keyword = " ",
+	Method = "ƒ ",
+	Module = " ",
+	Property = " ",
+	Snippet = "﬌ ",
+	Struct = " ",
+	Text = " ",
+	Unit = " ",
+	Value = " ",
+	Variable = " ",
 }
 
 
 -- LSP settings (for overriding per client)
-local handlers =  {
-  ["textDocument/hover"] =	vim.lsp.with(vim.lsp.handlers.hover, {border = border}),
-  ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {border = border }),
-  ["textDocument/definition"] = goto_definition('split'),
+local handlers = {
+	["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+	["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
+	["textDocument/definition"] = goto_definition('split'),
 }
 local kinds = vim.lsp.protocol.CompletionItemKind
 for i, kind in ipairs(kinds) do
-kinds[i] = icons[kind] or kind
+	kinds[i] = icons[kind] or kind
 end
-
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -198,16 +194,57 @@ end
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 --
-local servers = { "pyright", "tsserver", "clangd", "sumneko_lua" }
 for _, lsp in ipairs(servers) do
-	nvim_lsp[lsp].setup({
-		on_attach = on_attach,
-		handlers = handlers,
-		flags = {
-			debounce_text_changes = 150,
-		},
-	})
+	if (lsp == "sumneko_lua") then
+		nvim_lsp[lsp].setup({
+			on_attach = on_attach,
+			handlers = handlers,
+			capabilities = capabilities,
+			flags = {
+				debounce_text_changes = 150,
+			},
+			settings = {
+				Lua = {
+					format = {
+						enable = true,
+						-- Put format options here
+						-- NOTE: the value should be STRING!!
+						defaultConfig = {
+							indent_style = "space",
+							indent_size = "2",
+						}
+					},
+					runtime = {
+						-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+						version = 'LuaJIT',
+					},
+					diagnostics = {
+						-- Get the language server to recognize the `vim` global
+						globals = { 'vim' },
+					},
+					workspace = {
+						-- Make the server aware of Neovim runtime files
+						library = vim.api.nvim_get_runtime_file("", true),
+					},
+					-- Do not send telemetry data containing a randomized but unique identifier
+					telemetry = {
+						enable = false,
+					},
+				},
+			}
+		})
+	else
+		nvim_lsp[lsp].setup({
+			on_attach = on_attach,
+			handlers = handlers,
+			capabilities = capabilities,
+			flags = {
+				debounce_text_changes = 150,
+			},
+		})
+	end
 end
+
 
 local extension_path = "C:/Users/ysl/.vscode/extensions/vadimcn.vscode-lldb-1.6.10/adapter/"
 local codelldb_path = extension_path .. "codelldb.exe"
@@ -229,5 +266,8 @@ require("rust-tools").setup(rust_tools_opts)
 require("rust-tools.hover_actions").hover_actions()
 
 -- require('rust-tools')
-
 vim.ui.select = require("popui.ui-overrider")
+
+return {
+	lsp_on_attach = on_attach,
+}
