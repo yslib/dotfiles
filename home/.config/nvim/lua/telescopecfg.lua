@@ -8,3 +8,4 @@ require('telescope').setup({
 })
 
 require('telescope').load_extension('aerial')
+require("telescope").load_extension("notify")

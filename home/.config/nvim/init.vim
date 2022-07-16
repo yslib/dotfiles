@@ -36,6 +36,7 @@ Plug 'nvim-neorg/neorg'
 Plug 'RishabhRD/popfix'
 Plug 'hood/popui.nvim'
 Plug 'nvim-lua/popup.nvim'
+Plug 'rcarriga/nvim-notify'
 Plug 'simrat39/rust-tools.nvim'                                " an easy-to-use rust tools based on rust-analyzer, if you use debuggin features, codelldb is required
 Plug 'Shatur/neovim-session-manager'
 Plug 'sainnhe/sonokai'                                         " color themes
@@ -59,6 +60,7 @@ call plug#end()
 "sonokai theme
 
 "line number settings
+set ts=4
 set nu
 augroup relative_numbser
  autocmd!
@@ -149,7 +151,7 @@ lua require('aerialcfg')
 lua require('config')
 lua require('nvimtreecfg')
 lua require('commentcfg')
-" lua require('lualspcfg')
+lua require('notifycfg')
 lua require('diffviewcfg')
 lua require('autopairs')
 lua require('lualinecfg')
