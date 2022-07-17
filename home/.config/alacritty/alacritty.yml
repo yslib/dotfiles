@@ -101,7 +101,7 @@ window:
 
   # Window decorations
   # Setting this to false will result in window without borders and title bar.
-  decorations: Full
+  decorations: buttonless
 
   opacity: 0.90
 
