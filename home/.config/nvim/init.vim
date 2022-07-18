@@ -22,6 +22,7 @@ Plug 'kyazdani42/nvim-tree.lua'                                " file explorer
 Plug 'stevearc/dressing.nvim'
 Plug 'nvim-telescope/telescope.nvim'                           " picker framework
 Plug 'nvim-telescope/telescope-ui-select.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 Plug 'neovim/nvim-lspconfig'                                   " builtin lsp for neovim
 Plug 'mfussenegger/nvim-dap'
 Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' }
