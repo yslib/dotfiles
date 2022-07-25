@@ -43,6 +43,7 @@ Plug 'Shatur/neovim-session-manager'
 Plug 'sainnhe/sonokai'                                         " color themes
 Plug 'sainnhe/edge'                                            " color themes
 Plug 'whatsthatsmell/codesmell_dark.vim'                       " color theme
+Plug 'catppuccin/nvim', {'as': 'catppuccin'}                   " color theme 
 Plug 'sindrets/diffview.nvim'                                  " diff view
 Plug 'puremourning/vimspector'                                 " a powerful debug tui
 Plug 'mbbill/undotree'
@@ -105,7 +106,7 @@ set termguicolors
 " let g:edge_current_word = 'bold'
 " colorscheme edge
 "
-colorscheme codesmell_dark
+" colorscheme codesmell_dark
 
 " -------------------------- neovim-session-manager
 nnoremap <silent><leader>sl <Cmd>SessionManager load_session<CR>
@@ -165,3 +166,4 @@ lua require('formattercfg')
 lua require('dresscfg')
 lua require('sessioncfg')
 lua require('bufferlinecfg')
+lua require("catppuccincfg")
