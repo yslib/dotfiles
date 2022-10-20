@@ -7,6 +7,7 @@ local servers = { "pyright", "tsserver", "clangd", "sumneko_lua", "rust_analyzer
 -- for _, lsp in ipairs(servers) do
 -- 	lsp_customized_settings[lsp] = require(lsp.."_cfg")
 -- end
+require'lspconfig'.cmake.setup{}          -- python -m pip install cmake-language-server
 
 ----------------------- cmp-nvim configuration
 local cmp = require("cmp")
