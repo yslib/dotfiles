@@ -399,10 +399,11 @@ env:
 # key-bindings
 
 key_bindings:
-  - { key: I, mods: Control,      mode: ~Search, action: ToggleViMode}
+  - { key: I,        mods: Control,      mode: ~Search, action: ToggleViMode}
   - { key: V,        mods: Control|Shift,    action: Paste               }
   - { key: C,        mods: Control|Shift,    action: Copy                }
-  - { key: Q,        mods: Command, action: Quit                         }
+  - { key: Q,        mods: Alt,      action: Quit                        }
+  - { key: N,        mods: Alt,     action: SpawnNewInstance             }
   - { key: W,        mods: Command, action: Quit                         }
   - { key: Insert,   mods: Shift,   action: PasteSelection               }
   - { key: Key0,     mods: Control, action: ResetFontSize                }
