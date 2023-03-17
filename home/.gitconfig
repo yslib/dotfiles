@@ -23,4 +23,4 @@
     	colorMoved = default
 
 [alias]
-	graph = log --all --decorate --oneline --graph
+	graph = log --all --decorate --oneline --graph --pretty="format:%h %ai %s%d (%an)"

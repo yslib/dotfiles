@@ -336,7 +336,7 @@ colors: *macchiato
 
 #================ colortheme end
 
-background_blur: 0.9
+background_blur: 1.0
 
 font:
 
@@ -374,9 +374,9 @@ window:
 
   # Window decorations
   # Setting this to false will result in window without borders and title bar.
-  decorations: full
+  decorations: buttonless
 
-  opacity: 0.90
+  opacity: 1.0
 
 # Startup Mode (changes require restart)
 #
