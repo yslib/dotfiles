@@ -376,7 +376,7 @@ window:
   # Setting this to false will result in window without borders and title bar.
   decorations: buttonless
 
-  opacity: 1.0
+  opacity: 0.75
 
 # Startup Mode (changes require restart)
 #
