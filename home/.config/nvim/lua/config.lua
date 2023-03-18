@@ -1,23 +1,25 @@
 ----------------------- lsp specific settings
 
-local servers = { "pyright", "tsserver", "clangd", "sumneko_lua", "rust_analyzer" }
+local servers = { "pyright", "tsserver", "clangd", "lua_ls", "rust_analyzer" }
 
 -- local lsp_customized_settings = {}
 --
 -- for _, lsp in ipairs(servers) do
 -- 	lsp_customized_settings[lsp] = require(lsp.."_cfg")
 -- end
-require'lspconfig'.cmake.setup{}          -- python -m pip install cmake-language-server
+require 'lspconfig'.cmake.setup {} -- python -m pip install cmake-language-server
 
 ----------------------- cmp-nvim configuration
 local cmp = require("cmp")
 cmp.setup({
 	window = {
-		completion = { -- rounded border; thin-style scrollbar
+		completion = {
+			-- rounded border; thin-style scrollbar
 			border = 'rounded',
 			scrollbar = '║',
 		},
-		documentation = { -- no border; native-style scrollbar
+		documentation = {
+			-- no border; native-style scrollbar
 			border = 'rounded',
 			scrollbar = '║',
 			-- other options
@@ -73,7 +75,7 @@ cmp.setup.cmdline(":", {
 })
 
 -- Setup lspconfig.
-local capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
 
 local nvim_lsp = require("lspconfig")
@@ -166,7 +168,7 @@ end
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
-	require("aerial").on_attach(client, bufnr) -- specially for aerial
+	-- require("aerial").on_attach(client, bufnr) -- specially for aerial
 
 	-- default lsp configs
 
@@ -189,14 +191,14 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<space>rn", vim.lsp.buf.rename, bufopts)
 	vim.keymap.set("n", "<space>ca", vim.lsp.buf.code_action, bufopts)
 	vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
-	vim.keymap.set("n", "<space>f", vim.lsp.buf.formatting, bufopts)
+	vim.keymap.set("n", "<space>f", function() vim.lsp.buf.format({ async = true }) end, bufopts)
 end
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
 --
 for _, lsp in ipairs(servers) do
-	if (lsp == "sumneko_lua") then
+	if (lsp == "lua_ls") then
 		nvim_lsp[lsp].setup({
 			on_attach = on_attach,
 			handlers = handlers,
