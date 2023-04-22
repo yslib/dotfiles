@@ -17,6 +17,7 @@ call plug#begin(stdpath('data').'/plugged')
 "
 
 Plug 'nvim-lua/plenary.nvim'                                   " lua utils
+Plug 'folke/neodev.nvim'                                       " type check
 Plug 'kyazdani42/nvim-web-devicons'                            " for file icons
 Plug 'kyazdani42/nvim-tree.lua'                                " file explorer
 Plug 'stevearc/dressing.nvim'
@@ -168,3 +169,4 @@ lua require('dresscfg')
 lua require('sessioncfg')
 lua require('bufferlinecfg')
 lua require("catppuccincfg")
+lua require('nvimdapcfg')
