@@ -1,6 +1,10 @@
-vim.g.catppuccin_flavour = "macchiato" -- latte, frappe, macchiato, mocha
-
 require("catppuccin").setup({
+	flavour = "macchiato", -- latte, frappe, macchiato, mocha
+	background = {
+		-- :h background
+		light = "latte",
+		dark = "mocha",
+	},
 	dim_inactive = {
 		enabled = true,
 		shade = "dark",
@@ -62,10 +66,10 @@ require("catppuccin").setup({
 			transparent_panel = false,
 		},
 		dap = {
-			enabled = false,
-			enable_ui = false,
+			enabled = true,
+			enable_ui = true,
 		},
-		which_key = false,
+		which_key = true,
 		indent_blankline = {
 			enabled = true,
 			colored_indent_levels = false,
@@ -74,7 +78,7 @@ require("catppuccin").setup({
 		neogit = false,
 		vim_sneak = false,
 		fern = false,
-		barbar = false,
+		barbar = true,
 		bufferline = true,
 		markdown = true,
 		lightspeed = false,
