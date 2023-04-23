@@ -21,6 +21,7 @@ Plug 'folke/neodev.nvim'                                       " type check
 Plug 'kyazdani42/nvim-web-devicons'                            " for file icons
 Plug 'kyazdani42/nvim-tree.lua'                                " file explorer
 Plug 'stevearc/dressing.nvim'
+Plug 'folke/which-key.nvim'
 Plug 'nvim-telescope/telescope.nvim'                           " picker framework
 Plug 'nvim-telescope/telescope-ui-select.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
@@ -138,12 +139,16 @@ nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>fs <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
 nnoremap <leader>r <cmd>lua require('telescope.builtin').reloader()<cr>
 
+nnoremap <leader>dh <cmd>lua require('dap.ui.variables').hover()<cr>
+nnoremap <leader>dr <cmd>lua require('nvimdapcfg').reload_dap_config()<cr>
+" nnoremap <leader>dv <cmd>lua require('dap.ui.variables').visual_hover()<cr>
+
 
 " ------------------------------  nvim-tree
 noremap <silent><F3> :<C-U>NvimTreeToggle<CR>
 
 " ------------------------------  vimspector
-let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
+" let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
 
 " ------------------------------  neovide
 let g:neovide_refresh_rate=144
@@ -171,4 +176,4 @@ lua require('sessioncfg')
 lua require('bufferlinecfg')
 lua require("catppuccincfg")
 lua require('nvimdapcfg')
-lua require('keybinding')
+lua require('whichkeycfg')
