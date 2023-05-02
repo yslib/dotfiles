@@ -80,7 +80,7 @@ augroup END
 syntax enable
 set updatetime=300
 
-set shellcmdflag=--noprofile\ --norc\ -c   " to avoid severe performace issue on some platform when using vim command
+" set shellcmdflag=--noprofile\ --norc\ -c   " to avoid severe performace issue on some platform when using vim command
 
 " display white space, \\u0387 for center dot
 " h listchars for format specification
