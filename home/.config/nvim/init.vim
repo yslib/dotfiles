@@ -18,6 +18,7 @@ call plug#begin(stdpath('data').'/plugged')
 
 Plug 'nvim-lua/plenary.nvim'                                   " lua utils
 Plug 'folke/neodev.nvim'                                       " type check
+Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
 Plug 'kyazdani42/nvim-web-devicons'                            " for file icons
 Plug 'kyazdani42/nvim-tree.lua'                                " file explorer
 Plug 'stevearc/dressing.nvim'
@@ -35,6 +36,7 @@ Plug 'numToStr/Comment.nvim'                                   " code comment/un
 Plug 'windwp/nvim-autopairs'                                   " auto pairs
 Plug 'tpope/vim-surround'                                      " vim-surround
 Plug 'mhartington/formatter.nvim'
+Plug 'jose-elias-alvarez/null-ls.nvim'                         " linter 
 Plug 'akinsho/toggleterm.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}    " syntax based hightlighting
 Plug 'nvim-neorg/neorg'
@@ -159,6 +161,8 @@ set guifont=Hack\ Nerd\ Font:h16
 lua require("utils")
 lua require('aerialcfg')
 lua require('config')
+lua require('nvimcmpcfg')
+lua require('masoncfg')
 lua require('nvimtreecfg')
 lua require('commentcfg')
 lua require('notifycfg')
