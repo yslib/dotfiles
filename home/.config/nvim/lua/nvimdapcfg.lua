@@ -54,7 +54,7 @@ dap.adapters.codelldb = {
 	port = "13000",
 	executable = {
 		-- CHANGE THIS to your path!
-		command = '/home/ysl/codelldb/extension/adapter/codelldb',
+		command = 'codelldb',
 		args = { "--port", "13000" },
 		-- On windows you may have to uncomment this:
 		-- detached = false,

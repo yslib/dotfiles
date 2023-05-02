@@ -18,7 +18,9 @@ call plug#begin(stdpath('data').'/plugged')
 
 Plug 'nvim-lua/plenary.nvim'                                   " lua utils
 Plug 'folke/neodev.nvim'                                       " type check
+Plug 'neovim/nvim-lspconfig'                                   " builtin lsp for neovim
 Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
+Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'kyazdani42/nvim-web-devicons'                            " for file icons
 Plug 'kyazdani42/nvim-tree.lua'                                " file explorer
 Plug 'stevearc/dressing.nvim'
@@ -26,7 +28,6 @@ Plug 'folke/which-key.nvim'
 Plug 'nvim-telescope/telescope.nvim'                           " picker framework
 Plug 'nvim-telescope/telescope-ui-select.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
-Plug 'neovim/nvim-lspconfig'                                   " builtin lsp for neovim
 Plug 'mfussenegger/nvim-dap'
 Plug 'rcarriga/nvim-dap-ui'
 Plug 'theHamsta/nvim-dap-virtual-text'
@@ -160,7 +161,7 @@ set guifont=Hack\ Nerd\ Font:h16
 " LOADING CONFIGURATION WRITTEN IN LUA "
 lua require("utils")
 lua require('aerialcfg')
-lua require('config')
+lua require('lspconfigcfg')
 lua require('nvimcmpcfg')
 lua require('masoncfg')
 lua require('nvimtreecfg')
@@ -180,4 +181,5 @@ lua require('sessioncfg')
 lua require('bufferlinecfg')
 lua require("catppuccincfg")
 lua require('nvimdapcfg')
+lua require('masonlspcfg')
 lua require('whichkeycfg')

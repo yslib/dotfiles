@@ -1,19 +1,6 @@
------------------------ lsp specific settings
-
-local servers = { "pyright", "tsserver", "clangd", "lua_ls", "rust_analyzer" }
-
--- local lsp_customized_settings = {}
---
--- for _, lsp in ipairs(servers) do
--- 	lsp_customized_settings[lsp] = require(lsp.."_cfg")
--- end
-require 'lspconfig'.cmake.setup {} -- python -m pip install cmake-language-server
-
 -- Setup lspconfig.
 local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
-
-local nvim_lsp = require("lspconfig")
 
 -- UI Customization
 vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]]
@@ -129,83 +116,45 @@ local on_attach = function(client, bufnr)
 	vim.keymap.set("n", "<space>f", function() vim.lsp.buf.format({ async = true }) end, bufopts)
 end
 
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
---
-for _, lsp in ipairs(servers) do
-	if (lsp == "lua_ls") then
-		nvim_lsp[lsp].setup({
-			on_attach = on_attach,
-			handlers = handlers,
-			capabilities = capabilities,
-			flags = {
-				debounce_text_changes = 150,
-			},
-			settings = {
-				Lua = {
-					format = {
-						enable = true,
-						-- Put format options here
-						-- NOTE: the value should be STRING!!
-						defaultConfig = {
-							indent_style = "space",
-							indent_size = "2",
-						}
-					},
-					runtime = {
-						-- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-						version = 'LuaJIT',
-					},
-					diagnostics = {
-						-- Get the language server to recognize the `vim` global
-						globals = { 'vim' },
-					},
-					workspace = {
-						-- Make the server aware of Neovim runtime files
-						library = vim.api.nvim_get_runtime_file("", true),
-					},
-					-- Do not send telemetry data containing a randomized but unique identifier
-					telemetry = {
-						enable = false,
-					},
-				},
-			}
-		})
+vim.ui.select = require("popui.ui-overrider")
+
+
+local DEFAULT_LSP_SETUP = {
+	on_attach = on_attach,
+	handlers = handlers,
+	capabilities = capabilities,
+	flags = {
+		debounce_text_changes = 150,
+	}
+}
+
+local setup_handler = function(lsp_name, config)
+	local lsp = require 'lspconfig'
+	if config then
+		lsp[lsp_name].setup(config)
 	else
-		nvim_lsp[lsp].setup({
-			on_attach = on_attach,
-			handlers = handlers,
-			capabilities = capabilities,
-			flags = {
-				debounce_text_changes = 150,
-			},
-		})
+		local ok, mod = pcall(require, 'lsp_override' .. lsp_name)
+		if ok then
+			lsp[lsp_name].setup(mod.setup_config())
+		else
+			lsp[lsp_name].setup(DEFAULT_LSP_SETUP)
+		end
 	end
 end
 
+local servers = { "lua_ls", "pyright", "tsserver", "clangd", "rust_analyzer", "cmake" }
 
-local extension_path = "C:/Users/ysl/.vscode/extensions/vadimcn.vscode-lldb-1.6.10/adapter/"
-local codelldb_path = extension_path .. "codelldb.exe"
-local liblldb_path = extension_path .. "liblldb.dll"
-local rust_tools_opts = {
-	-- ... other configs
-	dap = {
-		adapter = require("rust-tools.dap").get_codelldb_adapter(codelldb_path, liblldb_path),
-	},
-	server = {
-		on_attach = on_attach,
-		flags = {
-			debounce_text_changes = 150,
-		},
-	},
-}
-
-require("rust-tools").setup(rust_tools_opts)
-require("rust-tools.hover_actions").hover_actions()
-
--- require('rust-tools')
-vim.ui.select = require("popui.ui-overrider")
+-- Use a loop to conveniently call 'setup' on multiple servers and
+-- map buffer local keybindings when the language server attaches
+-- setup by mason-lspconfig
+-- for _, server in pairs(servers) do
+-- 	setup_handler(server)
+-- end
 
 return {
 	lsp_on_attach = on_attach,
+	lsp_handlers = handlers,
+	lsp_capabilities = capabilities,
+	lsp_servers = servers,
+	setup_handler = setup_handler,
 }
