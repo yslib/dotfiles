@@ -52,7 +52,6 @@ Plug 'sainnhe/edge'                                            " color themes
 Plug 'whatsthatsmell/codesmell_dark.vim'                       " color theme
 Plug 'catppuccin/nvim', {'as': 'catppuccin'}                   " color theme 
 Plug 'sindrets/diffview.nvim'                                  " diff view
-Plug 'puremourning/vimspector'                                 " a powerful debug tui
 Plug 'mbbill/undotree'
 Plug 'glepnir/dashboard-nvim'
 Plug 'stevearc/aerial.nvim'                                    " outline
@@ -149,9 +148,6 @@ nnoremap <leader>dr <cmd>lua require('nvimdapcfg').reload_dap_config()<cr>
 
 " ------------------------------  nvim-tree
 noremap <silent><F3> :<C-U>NvimTreeToggle<CR>
-
-" ------------------------------  vimspector
-" let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
 
 " ------------------------------  neovide
 let g:neovide_refresh_rate=144
