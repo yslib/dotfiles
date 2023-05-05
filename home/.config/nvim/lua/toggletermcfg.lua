@@ -8,7 +8,7 @@ tt.setup {
 		end
 	end,
 	open_mapping = [[<c-\>]],
-	shade_terminals = true,
+	shade_terminals = false,
 	float_opts = {
 		-- The border key is *almost* the same as 'nvim_open_win'
 		-- see :h nvim_open_win for details on borders however
