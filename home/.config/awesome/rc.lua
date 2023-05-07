@@ -10,6 +10,8 @@ require("awful.autofocus")
 local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
+
+beautiful.border_width = 5
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
@@ -67,10 +69,10 @@ modkey = "Mod1"
 awful.layout.layouts = {
 	awful.layout.suit.spiral,
 	awful.layout.suit.floating,
+	awful.layout.suit.tile.bottom,
 	-- awful.layout.suit.spiral.dwindle,
 	-- awful.layout.suit.tile,
 	-- awful.layout.suit.tile.left,
-	-- awful.layout.suit.tile.bottom,
 	-- awful.layout.suit.tile.top,
 	-- awful.layout.suit.fair,
 	-- awful.layout.suit.fair.horizontal,
@@ -176,7 +178,12 @@ awful.screen.connect_for_each_screen(function(s)
 	set_wallpaper(s)
 
 	-- Each screen has its own tag table.
-	awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+	if s.geometry.width > s.geometry.height then
+		awful.tag({ "1", "2", "3", "4" }, s, awful.layout.layouts[1])
+	else
+		-- portrait monitor layouts
+		awful.tag({ "1", "2", "3", "4" }, s, awful.layout.layouts[3])
+	end
 
 	-- Create a promptbox for each screen
 	s.mypromptbox = awful.widget.prompt()
@@ -301,7 +308,7 @@ globalkeys = gears.table.join(
 	-- 	{ description = "increase the number of columns", group = "layout" }),
 	-- awful.key({ modkey, "Control" }, "l", function() awful.tag.incncol(-1, nil, true) end,
 	-- 	{ description = "decrease the number of columns", group = "layout" }),
-	awful.key({ modkey, "Control"}, "l", function() awful.layout.inc(1) end,
+	awful.key({ modkey, "Control" }, "l", function() awful.layout.inc(1) end,
 		{ description = "select next", group = "layout" }),
 	-- awful.key({ modkey, "Shift" }, "space", function() awful.layout.inc(-1) end,
 	-- 	{ description = "select previous", group = "layout" }),
@@ -318,9 +325,9 @@ globalkeys = gears.table.join(
 		end,
 		{ description = "restore minimized", group = "client" }),
 
-	-- Dmenu
-	awful.key({ modkey }, "r", function() awful.util.spawn("dmenu_run") end,
-		{ description = "launch dmenu", group = "launcher" }),
+	-- Rofi
+	awful.key({ modkey }, "r", function() awful.util.spawn("rofi -show combi") end,
+		{ description = "launch rofi drun", group = "launcher" }),
 
 	awful.key({ modkey }, "x",
 		function()
@@ -332,18 +339,19 @@ globalkeys = gears.table.join(
 			}
 		end,
 		{ description = "lua execute prompt", group = "awesome" }),
+
 	-- Menubar
 	awful.key({ modkey }, "p", function() menubar.show() end,
 		{ description = "show the menubar", group = "launcher" })
 )
 
 clientkeys = gears.table.join(
-	-- awful.key({ modkey, }, "",
-	-- 	function(c)
-	-- 		c.fullscreen = not c.fullscreen
-	-- 		c:raise()
-	-- 	end,
-	-- 	{ description = "toggle fullscreen", group = "client" }),
+-- awful.key({ modkey, }, "",
+-- 	function(c)
+-- 		c.fullscreen = not c.fullscreen
+-- 		c:raise()
+-- 	end,
+-- 	{ description = "toggle fullscreen", group = "client" }),
 	awful.key({ modkey }, "q", function(c) c:kill() end,
 		{ description = "close", group = "client" }),
 	awful.key({ modkey }, "f", awful.client.floating.toggle,
@@ -586,7 +594,14 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- padding
 beautiful.useless_gap = 5
 
--- autostart
--- picom, nitrogen
-awful.spawn.with_shell("picom")                              -- compositor
-awful.spawn.with_shell("nitrogen --restore --set-zoom-fill") -- wallpaper
+-- ===========autostart================
+
+-- compositor: picom
+awful.spawn.with_shell("picom")
+
+-- wallpaper: nitrogen
+awful.spawn.with_shell("nitrogen --restore --set-zoom-fill")
+
+-- monitor arrangement settings: xrand
+-- depend on your monitor arrangement
+awful.spawn.with_shell("sh ~/.config/awesome/xrandr/right-tack.sh")
