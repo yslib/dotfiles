@@ -210,28 +210,26 @@ awful.screen.connect_for_each_screen(function(s)
 	}
 
 	-- Create the wibox
-	s.mywibox = awful.wibar({ position = "top", screen = s })
-
-	-- Add widgets to the wibox
-	s.mywibox:setup {
-		layout = wibox.layout.align.horizontal,
-		{
-			-- Left widgets
-			layout = wibox.layout.fixed.horizontal,
-			mylauncher,
-			s.mytaglist,
-			s.mypromptbox,
-		},
-		s.mytasklist, -- Middle widget
-		{
-			-- Right widgets
-			layout = wibox.layout.fixed.horizontal,
-			mykeyboardlayout,
-			wibox.widget.systray(),
-			mytextclock,
-			s.mylayoutbox,
-		},
-	}
+	-- s.mywibox = awful.wibar({ position = "top", screen = s })
+	-- s.mywibox:setup {
+	-- 	layout = wibox.layout.align.horizontal,
+	-- 	{
+	-- 		-- Left widgets
+	-- 		layout = wibox.layout.fixed.horizontal,
+	-- 		mylauncher,
+	-- 		s.mytaglist,
+	-- 		s.mypromptbox,
+	-- 	},
+	-- 	s.mytasklist, -- Middle widget
+	-- 	{
+	-- 		-- Right widgets
+	-- 		layout = wibox.layout.fixed.horizontal,
+	-- 		mykeyboardlayout,
+	-- 		wibox.widget.systray(),
+	-- 		mytextclock,
+	-- 		s.mylayoutbox,
+	-- 	},
+	-- }
 end)
 -- }}}
 
@@ -274,6 +272,15 @@ globalkeys = gears.table.join(
 		{ description = "swap with next client by index", group = "client" }),
 	awful.key({ modkey, "Shift" }, "k", function() awful.client.swap.byidx(-1) end,
 		{ description = "swap with previous client by index", group = "client" }),
+	awful.key({ modkey, "Shift" }, "Right", function() awful.tag.incmwfact(0.01) end,
+		{ description = "Resize to right", group = "client" }),
+	awful.key({ modkey, "Shift" }, "Left", function() awful.tag.incmwfact(0.01) end,
+		{ description = "Resize to right", group = "client" }),
+	awful.key({ modkey, "Shift" }, "Down", function() awful.client.incmwfact(-0.01) end,
+		{ description = "Resize to right", group = "client" }),
+	awful.key({ modkey, "Shift" }, "Up", function() awful.client.incmwfact(0.01) end,
+		{ description = "Resize to right", group = "client" }),
+
 	awful.key({ modkey, "Control" }, "j", function() awful.screen.focus_relative(1) end,
 		{ description = "focus the next screen", group = "screen" }),
 	awful.key({ modkey, "Control" }, "k", function() awful.screen.focus_relative(-1) end,
@@ -605,3 +612,4 @@ awful.spawn.with_shell("nitrogen --restore --set-zoom-fill")
 -- monitor arrangement settings: xrand
 -- depend on your monitor arrangement
 awful.spawn.with_shell("sh ~/.config/awesome/xrandr/right-tack.sh")
+awful.spawn.with_shell("fcitx -r")
