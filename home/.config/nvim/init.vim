@@ -18,12 +18,12 @@ call plug#begin(stdpath('data').'/plugged')
 
 Plug 'nvim-lua/plenary.nvim'                                   " lua utils
 Plug 'folke/neodev.nvim'                                       " type check
+Plug 'stevearc/dressing.nvim'                                  " ui enhencement
 Plug 'neovim/nvim-lspconfig'                                   " builtin lsp for neovim
 Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'kyazdani42/nvim-web-devicons'                            " for file icons
 Plug 'kyazdani42/nvim-tree.lua'                                " file explorer
-Plug 'stevearc/dressing.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'nvim-telescope/telescope.nvim'                           " picker framework
 Plug 'nvim-telescope/telescope-ui-select.nvim'
@@ -47,10 +47,11 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'rcarriga/nvim-notify'
 Plug 'simrat39/rust-tools.nvim'                                " an easy-to-use rust tools based on rust-analyzer, if you use debuggin features, codelldb is required
 Plug 'Shatur/neovim-session-manager'
-Plug 'sainnhe/sonokai'                                         " color themes
-Plug 'sainnhe/edge'                                            " color themes
+Plug 'sainnhe/sonokai'                                         " color theme
+Plug 'sainnhe/edge'                                            " color theme
 Plug 'whatsthatsmell/codesmell_dark.vim'                       " color theme
 Plug 'catppuccin/nvim', {'as': 'catppuccin'}                   " color theme 
+Plug 'stevearc/overseer.nvim'                                  " task runners
 Plug 'sindrets/diffview.nvim'                                  " diff view
 Plug 'mbbill/undotree'
 Plug 'glepnir/dashboard-nvim'
@@ -179,3 +180,4 @@ lua require("catppuccincfg")
 lua require('nvimdapcfg')
 lua require('masonlspcfg')
 lua require('whichkeycfg')
+lua require('overseercfg')
