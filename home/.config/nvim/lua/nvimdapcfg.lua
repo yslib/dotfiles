@@ -116,7 +116,8 @@ vim.keymap.set('n', '<Leader>dd', function()
 end)
 
 -- dap keybinds
-vim.keymap.set('n', '<F5>', function() require('dap').continue() end)
+vim.keymap.set('n', '<F6>', function() require('dap').continue() end)
+vim.keymap.set('n', '<Leader>dx', function() require('dap').close() end)
 vim.keymap.set('n', '<F10>', function() require('dap').step_over() end)
 vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
 vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
