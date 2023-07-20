@@ -35,12 +35,10 @@ Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 Plug 'nvim-lualine/lualine.nvim'                               " status line
 Plug 'numToStr/Comment.nvim'                                   " code comment/uncomment
 Plug 'windwp/nvim-autopairs'                                   " auto pairs
-Plug 'tpope/vim-surround'                                      " vim-surround
 Plug 'mhartington/formatter.nvim'
 Plug 'jose-elias-alvarez/null-ls.nvim'                         " linter 
 Plug 'akinsho/toggleterm.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}    " syntax based hightlighting
-Plug 'nvim-neorg/neorg'
 Plug 'RishabhRD/popfix'
 Plug 'hood/popui.nvim'
 Plug 'nvim-lua/popup.nvim'
@@ -63,6 +61,11 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/nvim-cmp'
+
+" vim plug
+Plug 'tpope/vim-surround'                                      " vim-surround
+Plug 'tpope/vim-fugitive'
+Plug 'junegunn/gv.vim'
 " Initialize plugin system
 call plug#end()
 
@@ -167,7 +170,6 @@ lua require('notifycfg')
 lua require('diffviewcfg')
 lua require('autopairs')
 lua require('lualinecfg')
-lua require('neorgcfg')
 lua require('treesittercfg')
 lua require('telescopecfg')
 lua require('dashboardcfg')
