@@ -32,17 +32,6 @@ dotfile:
 ```
 {HOME}/.config/nvim
 ```
-A development enviroment for Neovim is not an easy stuff. Besides the basic dot file, How much complicated of the enviroment is depend on the used plugin.
-
-### Requirements
-
-1. Python3 with pynvim
-2. Nodejs
-
-Besides, there are many CLI tools are required for various features those plugins provided.
-If one is missing, install it using your package mananger.
-
-Some plugins such as ```treesitter``` need to install their own dependency for a specified language. You should install it by yourself.
 
 ## Tiling Window Manager on macOS
 
@@ -86,3 +75,15 @@ using [delta](https://github.com/dandavison/delta) as the diff tool
 ```
 
 1. [Solve](https://gist.github.com/andersevenrud/015e61af2fd264371032763d4ed965b6) the problem that colortheme is wrong when open vim/neovim in tmux using Alacritty.
+
+## Lazygit
+
+```
+{HOME}/.config/lazygit/
+```
+
+## Awesome
+
+```
+{HOME}/.config/awesome
+```
