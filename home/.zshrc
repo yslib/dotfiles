@@ -21,7 +21,7 @@ export ZSH=$HOME/.oh-my-zsh
 # ZSH_THEME="agnoster"
 ZSH_THEME="powerlevel10k/powerlevel10k" # git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
 
-eval "$(lua ~/Code/z.lua/z.lua --init zsh once enhanced)"
+eval "$(zoxide init zsh)"
 
 plugins=(git
 	zsh-syntax-highlighting
