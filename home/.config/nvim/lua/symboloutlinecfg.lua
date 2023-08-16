@@ -5,10 +5,10 @@ require("symbols-outline").setup(
 		auto_preview = false,
 		position = 'right',
 		relative_width = true,
-		width = 25,
+		width = 20,
 		auto_close = false,
-		show_numbers = false,
-		show_relative_numbers = false,
+		show_numbers = true,
+		show_relative_numbers = true,
 		show_symbol_details = true,
 		preview_bg_highlight = 'Pmenu',
 		autofold_depth = nil,
@@ -17,7 +17,7 @@ require("symbols-outline").setup(
 		wrap = false,
 		keymaps = {
 			-- These keymaps can be a string or a table for multiple keys
-			close = { "<Esc>", "q" },
+			close = { "q" },
 			goto_location = "<Cr>",
 			focus_location = "o",
 			hover_symbol = "<C-space>",
