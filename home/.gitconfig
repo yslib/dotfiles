@@ -7,20 +7,25 @@
 	name = Shuoliu Yang
 	email = visysl@outlook.com
 [core]
-    	pager = delta
+    pager = delta
 
 [interactive]
-    	diffFilter = delta --color-only
+    diffFilter = delta --color-only
 
 [delta]
-    	navigate = true  # use n and N to move between diff sections
-    	side-by-side = true
+    navigate = true  # use n and N to move between diff sections
+    side-by-side = true
+    hyperlinks = true
+    line-numbers = true
 
 [merge]
-    	conflictstyle = diff3
+    conflictstyle = diff3
 
 [diff]
-    	colorMoved = default
+    colorMoved = default
 
 [alias]
-	graph = log --all --decorate --oneline --graph --pretty="format:%h %ai %s%d (%an)"
+    graph = log --all --decorate --oneline --graph --pretty="format:%h %ai %s%d (%an)"
+
+[pager]
+    blame = delta

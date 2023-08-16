@@ -87,7 +87,6 @@ os:
   edit: ''
   editAtLine: ''
   editAtLineAndWait: ''
-  open: ''
   openLink: ''
   open: 'code --goto -- {{filename}}:{{line}}'
 refresher:

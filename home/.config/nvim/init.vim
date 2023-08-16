@@ -24,7 +24,6 @@ Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'kyazdani42/nvim-web-devicons'                            " for file icons
 Plug 'kyazdani42/nvim-tree.lua'                                " file explorer
-Plug 'folke/which-key.nvim'
 Plug 'nvim-telescope/telescope.nvim'                           " picker framework
 Plug 'nvim-telescope/telescope-ui-select.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
@@ -43,7 +42,9 @@ Plug 'RishabhRD/popfix'
 Plug 'hood/popui.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'rcarriga/nvim-notify'
+Plug 'simrat39/symbols-outline.nvim'                            " symbols-outline
 Plug 'simrat39/rust-tools.nvim'                                " an easy-to-use rust tools based on rust-analyzer, if you use debuggin features, codelldb is required
+
 Plug 'Shatur/neovim-session-manager'
 Plug 'sainnhe/sonokai'                                         " color theme
 Plug 'sainnhe/edge'                                            " color theme
@@ -53,7 +54,6 @@ Plug 'stevearc/overseer.nvim'                                  " task runners
 Plug 'sindrets/diffview.nvim'                                  " diff view
 Plug 'mbbill/undotree'
 Plug 'glepnir/dashboard-nvim'
-Plug 'stevearc/aerial.nvim'                                    " outline
 Plug 'hrsh7th/cmp-nvim-lsp'                                    " the following plugins are related to completion
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
@@ -160,7 +160,6 @@ set guifont=Hack\ Nerd\ Font:h16
 
 " LOADING CONFIGURATION WRITTEN IN LUA "
 lua require("utils")
-lua require('aerialcfg')
 lua require('lspconfigcfg')
 lua require('nvimcmpcfg')
 lua require('masoncfg')
@@ -181,5 +180,5 @@ lua require('bufferlinecfg')
 lua require("catppuccincfg")
 lua require('nvimdapcfg')
 lua require('masonlspcfg')
-lua require('whichkeycfg')
 lua require('overseercfg')
+lua require('symboloutlinecfg')
