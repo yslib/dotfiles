@@ -6,11 +6,11 @@ require("catppuccin").setup({
 		dark = "mocha",
 	},
 	dim_inactive = {
-		enabled = true,
+		enabled = false,
 		shade = "dark",
 		percentage = 0.15,
 	},
-	transparent_background = false,
+	transparent_background = true,
 	term_colors = false,
 	compile = {
 		enabled = true,

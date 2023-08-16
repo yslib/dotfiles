@@ -42,7 +42,7 @@ Plug 'RishabhRD/popfix'
 Plug 'hood/popui.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'rcarriga/nvim-notify'
-Plug 'simrat39/symbols-outline.nvim'                            " symbols-outline
+Plug 'simrat39/symbols-outline.nvim'                           " symbols-outline
 Plug 'simrat39/rust-tools.nvim'                                " an easy-to-use rust tools based on rust-analyzer, if you use debuggin features, codelldb is required
 
 Plug 'Shatur/neovim-session-manager'
@@ -50,6 +50,7 @@ Plug 'sainnhe/sonokai'                                         " color theme
 Plug 'sainnhe/edge'                                            " color theme
 Plug 'whatsthatsmell/codesmell_dark.vim'                       " color theme
 Plug 'catppuccin/nvim', {'as': 'catppuccin'}                   " color theme 
+Plug 'xiyaowong/transparent.nvim'                              " transparent background
 Plug 'stevearc/overseer.nvim'                                  " task runners
 Plug 'sindrets/diffview.nvim'                                  " diff view
 Plug 'mbbill/undotree'
@@ -182,3 +183,4 @@ lua require('nvimdapcfg')
 lua require('masonlspcfg')
 lua require('overseercfg')
 lua require('symboloutlinecfg')
+lua require('transparentcfg')
