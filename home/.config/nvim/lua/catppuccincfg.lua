@@ -54,11 +54,16 @@ require("catppuccin").setup({
 		gitgutter = false,
 		gitsigns = true,
 		leap = false,
-		telescope = true,
+		telescope = {
+			enabled = true,
+			transparent_panel = true,
+			transparent_background = true,
+		},
 		nvimtree = {
 			enabled = true,
 			show_root = true,
 			transparent_panel = true,
+			transparent_background = true,
 		},
 		neotree = {
 			enabled = false,
