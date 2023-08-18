@@ -365,6 +365,8 @@ window.dynamic_title: true
 
 live_config_reload: true
 
+shell:
+  program: pwsh
 
 bell:
   animation: EaseOutExpo
@@ -374,7 +376,7 @@ window:
 
   # Window decorations
   # Setting this to false will result in window without borders and title bar.
-  decorations: full
+  decorations: Full
 
   opacity: 0.82
 
