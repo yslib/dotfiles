@@ -142,7 +142,7 @@ local setup_handler = function(lsp_name, config)
 	end
 end
 
-local servers = { "lua_ls", "pyright", "tsserver", "clangd", "rust_analyzer", "cmake" }
+local servers = { "lua_ls", "pyright", "tsserver", "clangd", "cmake" }
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches

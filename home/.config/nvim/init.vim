@@ -67,6 +67,8 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'tpope/vim-surround'                                      " vim-surround
 Plug 'tpope/vim-fugitive'
 Plug 'junegunn/gv.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'easymotion/vim-easymotion'
 " Initialize plugin system
 call plug#end()
 
@@ -149,6 +151,10 @@ nnoremap <leader>r <cmd>lua require('telescope.builtin').reloader()<cr>
 nnoremap <leader>dh <cmd>lua require('dap.ui.variables').hover()<cr>
 nnoremap <leader>dr <cmd>lua require('nvimdapcfg').reload_dap_config()<cr>
 " nnoremap <leader>dv <cmd>lua require('dap.ui.variables').visual_hover()<cr>
+
+" -------------------- vim-easy-align
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 
 " ------------------------------  nvim-tree
