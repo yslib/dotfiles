@@ -25,7 +25,7 @@
     colorMoved = default
 
 [alias]
-    graph = log --all --decorate --oneline --graph --pretty=\"format:%h %ai %s%d (%an)\"
+    graph = log --all --graph --decorate --oneline --pretty=\"format:%C(magenta)%h%Creset %C(dim green)(%cr %ai) %C(red)%d%Creset %C(yellow)%sCreset %C(cyan)<%an>%Creset\" --abbrev-commit
 
 [pager]
     blame = delta
