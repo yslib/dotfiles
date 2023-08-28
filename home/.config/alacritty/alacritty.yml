@@ -365,9 +365,6 @@ window.dynamic_title: true
 
 live_config_reload: true
 
-shell:
-  program: pwsh
-
 bell:
   animation: EaseOutExpo
   duration: 0
