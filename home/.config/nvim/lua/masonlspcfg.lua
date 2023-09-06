@@ -12,12 +12,6 @@ mason_lspconfig.setup_handlers({
 	["rust_analyzer"] = function()
 		--when setup rust-analyzer,  override with rust-tools
 
-		local prefix = require('mason-registry').get_package('codelldb'):get_install_path() ..
-		    "/extension/adapter/"
-
-		-- on windows
-		local codelldb = prefix .. "codelldb.exe"
-		local codelldblib = prefix .. "codelldb.dll"
 		local rt = require("rust-tools")
 		local rust_tools_opts = {
 			server = {
