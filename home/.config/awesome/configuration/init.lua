@@ -1,0 +1,7 @@
+require(... .. ".autostart")
+require(... .. ".desktop")
+require(... .. ".keys")
+--require(... .. ".mykey")
+require(... .. ".layout")
+require(... .. ".ruled")
+require(... .. ".tags")
