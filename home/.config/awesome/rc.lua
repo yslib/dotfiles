@@ -48,3 +48,7 @@ gears.timer({
 		collectgarbage("collect")
 	end,
 })
+
+-- use nitrogen to override wallpaper instead of theme's wallpaper
+local awful = require("awful")
+awful.spawn.with_shell("nitrogen --restore --set-zoom-fill")

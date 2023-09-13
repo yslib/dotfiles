@@ -87,3 +87,6 @@ using [delta](https://github.com/dandavison/delta) as the diff tool
 ```
 {HOME}/.config/awesome
 ```
+I use a modifiction of [Yoru](https://github.com/rxyhn/yoru).
+
+It need the Material Icon font in ```assets/font/MaterialIcon```

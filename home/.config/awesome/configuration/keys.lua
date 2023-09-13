@@ -126,26 +126,26 @@ awful.keyboard.append_global_keybindings({
 	--- Bling
 	--- ~~~~~
 	--- Add client to tabbed layout
-	awful.key({ alt }, "a", function()
-		bling.module.tabbed.pick_with_dmenu()
-	end, { description = "pick client to add to tab group", group = "tabs" }),
+	-- awful.key({ alt }, "a", function()
+	-- 	bling.module.tabbed.pick_with_dmenu()
+	-- end, { description = "pick client to add to tab group", group = "tabs" }),
 
 	--- Remove client from tabbed layout
-	awful.key({ alt }, "d", function()
-		bling.module.tabbed.pop()
-	end, { description = "remove focused client from tabbing group", group = "tabs" }),
+	-- awful.key({ alt }, "d", function()
+	-- 	bling.module.tabbed.pop()
+	-- end, { description = "remove focused client from tabbing group", group = "tabs" }),
 
 	--- Cycle through client in tabbed layout
-	awful.key({ alt }, "s", function()
-		bling.module.tabbed.iter()
-	end, { description = "iterate through tabbing group", group = "tabs" }),
+	-- awful.key({ alt }, "s", function()
+	-- 	bling.module.tabbed.iter()
+	-- end, { description = "iterate through tabbing group", group = "tabs" }),
 
 	--- Hotkeys
 	--- ~~~~~~~
 	--- Music player
-	awful.key({ mod }, "grave", function()
-		awful.spawn.with_shell(apps.default.music_player)
-	end, { description = "open music client", group = "hotkeys" }),
+	-- awful.key({ mod }, "grave", function()
+	-- 	awful.spawn.with_shell(apps.default.music_player)
+	-- end, { description = "open music client", group = "hotkeys" }),
 
 	--- Brightness Control
 	awful.key({}, "XF86MonBrightnessUp", function()
@@ -187,22 +187,25 @@ awful.keyboard.append_global_keybindings({
 
 	--- Color picker
 	awful.key({ mod, shift }, "x", function()
-		awful.spawn.easy_async_with_shell(apps.utils.color_picker, function() end)
+		awful.spawn.easy_async_with_shell(apps.utils.color_picker, function()
+		end)
 	end, { description = "open color picker", group = "hotkeys" }),
 
 	--- Screenshots
 	awful.key({}, "Print", function()
-		awful.spawn.easy_async_with_shell(apps.utils.full_screenshot, function() end)
+		awful.spawn.easy_async_with_shell(apps.utils.full_screenshot, function()
+		end)
 	end, { description = "take a full screenshot", group = "hotkeys" }),
 
 	awful.key({ alt }, "Print", function()
-		awful.spawn.easy_async_with_shell(apps.utils.area_screenshot, function() end)
+		awful.spawn.easy_async_with_shell(apps.utils.area_screenshot, function()
+		end)
 	end, { description = "take a area screenshot", group = "hotkeys" }),
 
 	--- Lockscreen
-	awful.key({ mod, alt }, "l", function()
-		lock_screen_show()
-	end, { description = "lock screen", group = "hotkeys" }),
+	-- awful.key({ mod, alt }, "l", function()
+	-- 	lock_screen_show()
+	-- end, { description = "lock screen", group = "hotkeys" }),
 
 	--- Exit screen
 	awful.key({ mod }, "Escape", function()
@@ -216,11 +219,7 @@ client.connect_signal("request::default_keybindings", function()
 	awful.keyboard.append_client_keybindings({
 		-- Move or swap by direction
 		awful.key({ mod, shift }, "k", function(c)
-			helpers.client.move_client(c, "up")
-		end),
-		awful.key({ mod, shift }, "j", function(c)
-			helpers.client.move_client(c, "down")
-		end),
+			helpers.client.move_client(c, "up") end), awful.key({ mod, shift }, "j", function(c) helpers.client.move_client(c, "down") end),
 		awful.key({ mod, shift }, "h", function(c)
 			helpers.client.move_client(c, "left")
 		end),
@@ -259,19 +258,16 @@ client.connect_signal("request::default_keybindings", function()
 		end),
 
 		--- Toggle titlebars (for focused client only)
-		awful.key({ mod }, "t", function(c)
-			decorations.cycle(c)
-		end, { description = "toggle titlebar", group = "client" }),
+		-- awful.key({ mod }, "t", function(c)
+		-- 	decorations.cycle(c)
+		-- end, { description = "toggle titlebar", group = "client" }),
 		--- Toggle titlebars (for all visible clients in selected tag)
-		awful.key({ mod, shift }, "t", function(c)
-			local clients = awful.screen.focused().clients
-			for _, c in pairs(clients) do
-				decorations.cycle(c)
-			end
-		end, { description = "toggle titlebar", group = "client" }),
-
-		--- Toggle floating
-		awful.key({ mod, ctrl }, "space", awful.client.floating.toggle),
+		-- awful.key({ mod, shift }, "t", function(c)
+		-- 	local clients = awful.screen.focused().clients
+		-- 	for _, c in pairs(clients) do
+		-- 		decorations.cycle(c)
+		-- 	end
+		-- end, { description = "toggle titlebar", group = "client" }),
 
 		--- Toggle fullscreen
 		awful.key({ mod }, "f", function()
@@ -280,14 +276,14 @@ client.connect_signal("request::default_keybindings", function()
 		end),
 
 		--- Maximize windows
-		awful.key({ mod }, "m", function(c)
+		awful.key({ mod }, "space", function(c)
 			c.maximized = not c.maximized
 		end, { description = "toggle maximize", group = "client" }),
-		awful.key({ mod, ctrl }, "m", function(c)
+		awful.key({ mod, ctrl }, "space", function(c)
 			c.maximized_vertical = not c.maximized_vertical
 			c:raise()
 		end, { description = "(un)maximize vertically", group = "client" }),
-		awful.key({ mod, shift }, "m", function(c)
+		awful.key({ mod, shift }, "space", function(c)
 			c.maximized_horizontal = not c.maximized_horizontal
 			c:raise()
 		end, { description = "(un)maximize horizontally", group = "client" }),

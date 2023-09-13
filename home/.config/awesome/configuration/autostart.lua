@@ -9,16 +9,19 @@ local function autostart_apps()
 		awful.spawn("picom --config " .. config_dir .. "configuration/picom.conf", false)
 	end)
 	--- Music Server
-	helpers.run.run_once_pgrep("mpd")
-	helpers.run.run_once_pgrep("mpDris2")
+	-- helpers.run.run_once_pgrep("mpd")
+	-- helpers.run.run_once_pgrep("mpDris2")
 	--- Polkit Agent
-	helpers.run.run_once_ps(
-		"polkit-gnome-authentication-agent-1",
-		"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
-	)
+	-- helpers.run.run_once_ps(
+	-- 	"polkit-gnome-authentication-agent-1",
+	-- 	"/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
+	-- )
 	--- Other stuff
-	helpers.run.run_once_grep("blueman-applet")
-	helpers.run.run_once_grep("nm-applet")
-end
+	-- helpers.run.run_once_grep("blueman-applet")
+	-- helpers.run.run_once_grep("nm-applet")
 
+	awful.spawn.with_shell("fcitx -r")
+	--- remapping ctrl and lock
+	-- awful.spawn("xmodmap " .. config_dir .. "configuration/xmodmap", false)
+end
 autostart_apps()
