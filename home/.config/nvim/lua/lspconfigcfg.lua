@@ -3,8 +3,8 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protoc
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
 
 -- UI Customization
-vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]]
-vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#1f2335]]
+-- vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]]
+-- vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#00000000]]
 local border = {
 	{ "╭", "FloatBorder" },
 	{ "─", "FloatBorder" },

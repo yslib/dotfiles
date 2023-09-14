@@ -44,7 +44,7 @@ Plug 'nvim-lua/popup.nvim'
 Plug 'rcarriga/nvim-notify'
 Plug 'simrat39/symbols-outline.nvim'                           " symbols-outline
 Plug 'simrat39/rust-tools.nvim'                                " an easy-to-use rust tools based on rust-analyzer, if you use debuggin features, codelldb is required
-
+Plug 'kdheepak/lazygit.nvim'
 Plug 'Shatur/neovim-session-manager'
 Plug 'sainnhe/sonokai'                                         " color theme
 Plug 'sainnhe/edge'                                            " color theme
@@ -156,6 +156,8 @@ nnoremap <leader>dr <cmd>lua require('nvimdapcfg').reload_dap_config()<cr>
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
+" -------------------- lazygit.nvim
+nnoremap <silent> <leader>g :LazyGit<CR>
 
 " ------------------------------  nvim-tree
 noremap <silent><F3> :<C-U>NvimTreeToggle<CR>
