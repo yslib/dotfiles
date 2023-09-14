@@ -278,6 +278,7 @@ client.connect_signal("request::default_keybindings", function()
 		--- Maximize windows
 		awful.key({ mod }, "space", function(c)
 			c.maximized = not c.maximized
+			c:raise()
 		end, { description = "toggle maximize", group = "client" }),
 		awful.key({ mod, ctrl }, "space", function(c)
 			c.maximized_vertical = not c.maximized_vertical
