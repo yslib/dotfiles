@@ -16,7 +16,7 @@ return {
 		--- Default web browser
 		web_browser = "google-chrome-stable",
 		--- Default file manager
-		file_manager = "dolphin",
+		file_manager = "alacritty -e ranger",
 		--- Default network manager
 		network_manager = "alacritty -e nmtui",
 		--- Default bluetooth manager
