@@ -219,7 +219,8 @@ client.connect_signal("request::default_keybindings", function()
 	awful.keyboard.append_client_keybindings({
 		-- Move or swap by direction
 		awful.key({ mod, shift }, "k", function(c)
-			helpers.client.move_client(c, "up") end), awful.key({ mod, shift }, "j", function(c) helpers.client.move_client(c, "down") end),
+			helpers.client.move_client(c, "up")
+		end), awful.key({ mod, shift }, "j", function(c) helpers.client.move_client(c, "down") end),
 		awful.key({ mod, shift }, "h", function(c)
 			helpers.client.move_client(c, "left")
 		end),
@@ -324,6 +325,10 @@ client.connect_signal("request::default_keybindings", function()
 		awful.key({ mod }, "c", function()
 			awful.placement.centered(c, { honor_workarea = true, honor_padding = true })
 		end),
+
+		--- Move between screens
+		awful.key({ mod, }, "o", function(c) c:move_to_screen() end,
+			{ description = "move to screen", group = "client" }),
 
 		--- Window switcher
 		awful.key({ alt }, "Tab", function()
@@ -434,13 +439,13 @@ awful.keyboard.append_global_keybindings({
 
 -- Screen
 -----------
---awful.keyboard.append_global_keybindings({
--- No need for these (single screen setup)
---awful.key({ superkey, ctrlkey }, "j", function () awful.screen.focus_relative( 1) end,
---{description = "focus the next screen", group = "screen"}),
---awful.key({ superkey, ctrlkey }, "k", function () awful.screen.focus_relative(-1) end,
---{description = "focus the previous screen", group = "screen"}),
---})
+awful.keyboard.append_global_keybindings({
+	-- No need for these (single screen setup)
+	awful.key({ mod, ctrl }, "j", function() awful.screen.focus_relative(1) end,
+		{ description = "focus the next screen", group = "screen" }),
+	awful.key({ mod, ctrl }, "k", function() awful.screen.focus_relative(-1) end,
+		{ description = "focus the previous screen", group = "screen" }),
+})
 
 --- Mouse bindings on desktop
 --- ~~~~~~~~~~~~~~~~~~~~~~~~~
