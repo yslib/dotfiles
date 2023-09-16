@@ -135,7 +135,7 @@ awful.keyboard.append_global_keybindings({
 	-- 	bling.module.tabbed.pop()
 	-- end, { description = "remove focused client from tabbing group", group = "tabs" }),
 
-	--- Cycle through client in tabbed layout
+	-- Cycle through client in tabbed layout
 	-- awful.key({ alt }, "s", function()
 	-- 	bling.module.tabbed.iter()
 	-- end, { description = "iterate through tabbing group", group = "tabs" }),
@@ -202,10 +202,10 @@ awful.keyboard.append_global_keybindings({
 		end)
 	end, { description = "take a area screenshot", group = "hotkeys" }),
 
-	--- Lockscreen
-	-- awful.key({ mod, alt }, "l", function()
-	-- 	lock_screen_show()
-	-- end, { description = "lock screen", group = "hotkeys" }),
+	-- Lockscreen
+	awful.key({ mod, alt }, "l", function()
+		lock_screen_show()
+	end, { description = "lock screen", group = "hotkeys" }),
 
 	--- Exit screen
 	awful.key({ mod }, "Escape", function()
