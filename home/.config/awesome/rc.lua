@@ -49,6 +49,11 @@ gears.timer({
 	end,
 })
 
+-- nitrogen
 -- use nitrogen to override wallpaper instead of theme's wallpaper
 local awful = require("awful")
 awful.spawn.with_shell("nitrogen --restore --set-zoom-fill")
+
+-- xrand
+-- monitor arrangement settings depend on your monitor arrangement
+awful.spawn.with_shell("sh " .. gears.filesystem.get_configuration_dir() .. "xrandr/right-tack.sh")
