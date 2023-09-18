@@ -12,11 +12,11 @@ lock_screen.init()
 
 --- Icons
 local icon_font = "icomoon bold 45"
-local poweroff_text_icon = ""
-local reboot_text_icon = ""
-local suspend_text_icon = ""
-local exit_text_icon = ""
-local lock_text_icon = ""
+local poweroff_text_icon = ""
+local reboot_text_icon = ""
+local suspend_text_icon = ""
+local exit_text_icon = ""
+local lock_text_icon = ""
 
 local button_bg = beautiful.black
 local button_size = dpi(120)

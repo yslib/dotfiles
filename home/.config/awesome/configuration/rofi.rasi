@@ -11,8 +11,8 @@ configuration {
 }
 
 * {
-    BG:                             #10121399;
-    BGA:                            #101213;
+    BG:                             #30344666;
+    BGA:                            #303446;
     FG:                             #edeff0ff;
     UGT:                            #df5b61ff;
 }
