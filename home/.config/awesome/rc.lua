@@ -13,7 +13,7 @@ local beautiful = require("beautiful")
 --- ░░▀░░▀░▀░▀▀▀░▀░▀░▀▀▀
 
 local theme_dir = gears.filesystem.get_configuration_dir() .. "theme/"
-beautiful.init(theme_dir .. "catppuccin.lua")
+beautiful.init(theme_dir .. "nord.lua")
 
 --- ░█▀▀░█▀█░█▀█░█▀▀░▀█▀░█▀▀░█░█░█▀▄░█▀█░▀█▀░▀█▀░█▀█░█▀█░█▀▀
 --- ░█░░░█░█░█░█░█▀▀░░█░░█░█░█░█░█▀▄░█▀█░░█░░░█░░█░█░█░█░▀▀█

@@ -1,5 +1,5 @@
 require("catppuccin").setup({
-	flavour = "frappe", -- latte, frappe, macchiato, mocha
+	flavour = "mocha", -- latte, frappe, macchiato, mocha
 	background = {
 		-- :h background
 		light = "latte",
@@ -93,11 +93,37 @@ require("catppuccin").setup({
 		telekasten = true,
 		symbols_outline = true,
 		mini = false,
-		aerial = true,
+		aerial = false,
 		vimwiki = true,
 		beacon = true,
 	},
-	color_overrides = {},
+	color_overrides = {
+		mocha = {
+			mauve = "#B48EAD",
+			lavender = "#5E81AC",
+			red = "#BF616A",
+			--maroon = "#f98080",
+			--peach = "#D08770",
+			yellow = "#8FA1C1",
+			green = "#A3BE8C",
+			teal = "#8FBCBB",
+			-- sky = "#88C0D0",
+			sapphire = "#95b9d0",
+			blue = "#88C0D0",
+			text = "#ECEFF4",
+			subtext1 = "#ACBCD3",
+			subtext0 = "#6F7988",
+			--overlay2 = "#B0B9C2",
+			overlay1 = "#9FB0C1",
+			overlay0 = "#8090B1",
+			surface2 = "#6C7C9B",
+			surface1 = "#556178",
+			surface0 = "#4C566A",
+			mantle = "#434C5E",
+			crust = "#3B4252",
+			base = "#2E3440",
+		}
+	},
 	custom_highlights = {},
 })
 

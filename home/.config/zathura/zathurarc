@@ -1,8 +1,8 @@
-set notification-error-bg       "#282828" # bg
+set notification-error-bg       "#3b4252" # bg
 set notification-error-fg       "#fb4934" # bright:red
-set notification-warning-bg     "#282828" # bg
+set notification-warning-bg     "#3b4252" # bg
 set notification-warning-fg     "#fabd2f" # bright:yellow
-set notification-bg             "#282828" # bg
+set notification-bg             "#3b4252" # bg
 set notification-fg             "#b8bb26" # bright:green
 
 set completion-bg               "#504945" # bg2
@@ -27,7 +27,7 @@ set statusbar-fg                "#ebdbb2" # fg
 set highlight-color             "#fabd2f" # bright:yellow
 set highlight-active-color      "#fe8019" # bright:orange
 
-set default-bg                  rgba(48,52,70,0.7) # bg
+set default-bg                  rgba(59,66,82,0.7) # bg
 set default-fg                  "#ffffff" # fg
 set render-loading              true
 set render-loading-bg           "#282828" # bg

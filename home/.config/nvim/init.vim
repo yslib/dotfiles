@@ -1,3 +1,4 @@
+"
 " =================  Lucida's Neovim configuration  ================
 " Minimum Neovim Version: 0.8
 " You need to download vim-plug from https://github.com/junegunn/vim-plug to
@@ -62,6 +63,7 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'norcalli/nvim-colorizer.lua'
 
 " vim plug
 Plug 'tpope/vim-surround'                                      " vim-surround
@@ -121,6 +123,7 @@ set termguicolors
 "
 " colorscheme codesmell_dark
 
+" Example config in Vim-Script
 " -------------------------- neovim-session-manager
 nnoremap <silent><leader>sl <Cmd>SessionManager load_session<CR>
 nnoremap <silent><leader>sc <Cmd>SessionManager load_current_dir_session<CR>
@@ -192,3 +195,5 @@ lua require('masonlspcfg')
 lua require('overseercfg')
 lua require('symboloutlinecfg')
 lua require('transparentcfg')
+
+lua require'colorizer'.setup()
