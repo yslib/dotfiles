@@ -210,7 +210,7 @@ return function(s)
 	--- ~~~~~~~~~
 	local function layoutbox()
 		local layoutbox_buttons = gears.table.join(
-			--- Left click
+		--- Left click
 			awful.button({}, 1, function(c)
 				awful.layout.inc(1)
 			end),
@@ -245,11 +245,15 @@ return function(s)
 	s.top_panel = awful.popup({
 		screen = s,
 		type = "dock",
+		shape = gears.shape.rounded_bar,
 		maximum_height = beautiful.wibar_height,
-		minimum_width = s.geometry.width,
-		maximum_width = s.geometry.width,
+		minimum_width = s.geometry.width - beautiful.useless_gap,
+		maximum_width = s.geometry.width - beautiful.useless_gap,
 		placement = function(c)
-			awful.placement.top(c)
+			awful.placement.top(c,
+				{
+					margins = beautiful.useless_gap,
+				})
 		end,
 		bg = beautiful.transparent,
 		widget = {

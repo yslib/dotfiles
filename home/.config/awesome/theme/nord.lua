@@ -145,7 +145,7 @@ theme.titlebar_maximized_button_focus_inactive_hover = icon_dir .. "maximized_fo
 
 --- Wibar
 theme.wibar_bg = "#2e344088"
-theme.wibar_height = dpi(45)
+theme.wibar_height = dpi(40)
 
 --- Music
 theme.music_bg = theme.black
@@ -240,7 +240,7 @@ theme.layoutlist_shape_selected = helpers.ui.rrect(theme.border_radius)
 theme.layoutlist_bg_selected = theme.widget_bg
 
 --- Gaps
-theme.useless_gap = dpi(2)
+theme.useless_gap = dpi(5)
 
 --- Systray
 theme.systray_icon_size = dpi(20)
