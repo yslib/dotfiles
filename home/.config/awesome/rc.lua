@@ -56,4 +56,4 @@ awful.spawn.with_shell("nitrogen --restore --set-zoom-fill")
 
 -- xrand
 -- monitor arrangement settings depend on your monitor arrangement
-awful.spawn.with_shell("sh " .. gears.filesystem.get_configuration_dir() .. "xrandr/right-tack.sh")
+-- awful.spawn.with_shell("sh " .. gears.filesystem.get_configuration_dir() .. "xrandr/right-tack.sh")
