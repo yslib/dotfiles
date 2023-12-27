@@ -1,7 +1,7 @@
 require("neodev").setup(
 	{
 		library = {
-			plugins = { "nvim-dap-ui" }, types = true
+			plugins = true, types = true
 		},
 	}
 )
