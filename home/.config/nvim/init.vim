@@ -64,6 +64,7 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'norcalli/nvim-colorizer.lua'
+Plug 'zbirenbaum/copilot.lua'
 
 " vim plug
 Plug 'tpope/vim-surround'                                      " vim-surround
@@ -196,5 +197,6 @@ lua require('masonlspcfg')
 lua require('overseercfg')
 lua require('symboloutlinecfg')
 lua require('transparentcfg')
+lua require('copilotcfg')
 
 lua require'colorizer'.setup()
