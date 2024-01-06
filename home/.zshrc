@@ -19,13 +19,13 @@ export ZSH=$HOME/.oh-my-zsh
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="agnoster"
-ZSH_THEME="powerlevel10k/powerlevel10k" # git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k
+ZSH_THEME="powerlevel10k/powerlevel10k" # git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
 eval "$(zoxide init zsh)"
 
 plugins=(git
-	zsh-syntax-highlighting
-	zsh-autosuggestions
+	zsh-syntax-highlighting # git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+	zsh-autosuggestions # git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 	)
 
 source $ZSH/oh-my-zsh.sh
