@@ -14,7 +14,7 @@ offset=$(( ( ${monitor1_width} - ${monitor2_height} ) / 2 ))
 xrandr \
     --output "$monitor1_name" \
         --mode ${monitor1_width}x${monitor1_height} \
-        --pos ${monitor2_width}x-1000 \
+        --pos -${monitor2_width}x-1000 \
         --rotate left \
     --output "$monitor2_name" \
         --mode ${monitor2_width}x${monitor2_height} \
