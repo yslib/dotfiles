@@ -65,6 +65,8 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'zbirenbaum/copilot.lua'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'jackMort/ChatGPT.nvim'
 
 " vim plug
 Plug 'tpope/vim-surround'                                      " vim-surround
@@ -198,5 +200,6 @@ lua require('overseercfg')
 lua require('symboloutlinecfg')
 lua require('transparentcfg')
 lua require('copilotcfg')
+lua require('chatgptcfg')
 
 lua require'colorizer'.setup()
