@@ -30,6 +30,7 @@ Plug 'nvim-telescope/telescope-ui-select.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 Plug 'mfussenegger/nvim-dap'
 Plug 'rcarriga/nvim-dap-ui'
+Plug 'nvim-neotest/nvim-nio'
 Plug 'theHamsta/nvim-dap-virtual-text'
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 Plug 'nvim-lualine/lualine.nvim'                               " status line
