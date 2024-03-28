@@ -1,0 +1,954 @@
+live_config_reload = true
+
+[bell]
+animation = "EaseOutExpo"
+duration = 0
+
+# [[color_schemes.frappe.indexed_colors]]
+# color = "#EF9F76"
+# index = 16
+#
+# [[color_schemes.frappe.indexed_colors]]
+# color = "#F2D5CF"
+# index = 17
+#
+# [color_schemes.frappe.bright]
+# black = "#626880"
+# blue = "#8CAAEE"
+# cyan = "#81C8BE"
+# green = "#A6D189"
+# magenta = "#F4B8E4"
+# red = "#E78284"
+# white = "#A5ADCE"
+# yellow = "#E5C890"
+#
+# [color_schemes.frappe.cursor]
+# cursor = "#F2D5CF"
+# text = "#303446"
+#
+# [color_schemes.frappe.dim]
+# black = "#51576D"
+# blue = "#8CAAEE"
+# cyan = "#81C8BE"
+# green = "#A6D189"
+# magenta = "#F4B8E4"
+# red = "#E78284"
+# white = "#B5BFE2"
+# yellow = "#E5C890"
+#
+# [color_schemes.frappe.hints.end]
+# background = "#A5ADCE"
+# foreground = "#303446"
+#
+# [color_schemes.frappe.hints.start]
+# background = "#E5C890"
+# foreground = "#303446"
+#
+# [color_schemes.frappe.normal]
+# black = "#51576D"
+# blue = "#8CAAEE"
+# cyan = "#81C8BE"
+# green = "#A6D189"
+# magenta = "#F4B8E4"
+# red = "#E78284"
+# white = "#B5BFE2"
+# yellow = "#E5C890"
+#
+# [color_schemes.frappe.primary]
+# background = "#303446"
+# bright_foreground = "#C6D0F5"
+# dim_foreground = "#C6D0F5"
+# foreground = "#C6D0F5"
+#
+# [color_schemes.frappe.search.focused_match]
+# background = "#A6D189"
+# foreground = "#303446"
+#
+# [color_schemes.frappe.search.footer_bar]
+# background = "#A5ADCE"
+# foreground = "#303446"
+#
+# [color_schemes.frappe.search.matches]
+# background = "#A5ADCE"
+# foreground = "#303446"
+#
+# [color_schemes.frappe.selection]
+# background = "#F2D5CF"
+# text = "#303446"
+#
+# [color_schemes.frappe.vi_mode_cursor]
+# cursor = "#BABBF1"
+# text = "#303446"
+#
+# [[color_schemes.latte.indexed_colors]]
+# color = "#FE640B"
+# index = 16
+#
+# [[color_schemes.latte.indexed_colors]]
+# color = "#DC8A78"
+# index = 17
+#
+# [color_schemes.latte.bright]
+# black = "#6C6F85"
+# blue = "#1E66F5"
+# cyan = "#179299"
+# green = "#40A02B"
+# magenta = "#EA76CB"
+# red = "#D20F39"
+# white = "#BCC0CC"
+# yellow = "#DF8E1D"
+#
+# [color_schemes.latte.cursor]
+# cursor = "#DC8A78"
+# text = "#EFF1F5"
+#
+# [color_schemes.latte.dim]
+# black = "#5C5F77"
+# blue = "#1E66F5"
+# cyan = "#179299"
+# green = "#40A02B"
+# magenta = "#EA76CB"
+# red = "#D20F39"
+# white = "#ACB0BE"
+# yellow = "#DF8E1D"
+#
+# [color_schemes.latte.hints.end]
+# background = "#6C6F85"
+# foreground = "#EFF1F5"
+#
+# [color_schemes.latte.hints.start]
+# background = "#DF8E1D"
+# foreground = "#EFF1F5"
+#
+# [color_schemes.latte.normal]
+# black = "#5C5F77"
+# blue = "#1E66F5"
+# cyan = "#179299"
+# green = "#40A02B"
+# magenta = "#EA76CB"
+# red = "#D20F39"
+# white = "#ACB0BE"
+# yellow = "#DF8E1D"
+#
+# [color_schemes.latte.primary]
+# background = "#EFF1F5"
+# bright_foreground = "#4C4F69"
+# dim_foreground = "#4C4F69"
+# foreground = "#4C4F69"
+#
+# [color_schemes.latte.search.focused_match]
+# background = "#40A02B"
+# foreground = "#EFF1F5"
+#
+# [color_schemes.latte.search.footer_bar]
+# background = "#6C6F85"
+# foreground = "#EFF1F5"
+#
+# [color_schemes.latte.search.matches]
+# background = "#6C6F85"
+# foreground = "#EFF1F5"
+#
+# [color_schemes.latte.selection]
+# background = "#DC8A78"
+# text = "#EFF1F5"
+#
+# [color_schemes.latte.vi_mode_cursor]
+# cursor = "#7287FD"
+# text = "#EFF1F5"
+#
+# [[color_schemes.macchiato.indexed_colors]]
+# color = "#F5A97F"
+# index = 16
+#
+# [[color_schemes.macchiato.indexed_colors]]
+# color = "#F4DBD6"
+# index = 17
+#
+# [color_schemes.macchiato.bright]
+# black = "#5B6078"
+# blue = "#8AADF4"
+# cyan = "#8BD5CA"
+# green = "#A6DA95"
+# magenta = "#F5BDE6"
+# red = "#ED8796"
+# white = "#A5ADCB"
+# yellow = "#EED49F"
+#
+# [color_schemes.macchiato.cursor]
+# cursor = "#F4DBD6"
+# text = "#24273A"
+#
+# [color_schemes.macchiato.dim]
+# black = "#494D64"
+# blue = "#8AADF4"
+# cyan = "#8BD5CA"
+# green = "#A6DA95"
+# magenta = "#F5BDE6"
+# red = "#ED8796"
+# white = "#B8C0E0"
+# yellow = "#EED49F"
+#
+# [color_schemes.macchiato.hints.end]
+# background = "#A5ADCB"
+# foreground = "#24273A"
+#
+# [color_schemes.macchiato.hints.start]
+# background = "#EED49F"
+# foreground = "#24273A"
+#
+# [color_schemes.macchiato.normal]
+# black = "#494D64"
+# blue = "#8AADF4"
+# cyan = "#8BD5CA"
+# green = "#A6DA95"
+# magenta = "#F5BDE6"
+# red = "#ED8796"
+# white = "#B8C0E0"
+# yellow = "#EED49F"
+#
+# [color_schemes.macchiato.primary]
+# background = "#24273A"
+# bright_foreground = "#CAD3F5"
+# dim_foreground = "#CAD3F5"
+# foreground = "#CAD3F5"
+#
+# [color_schemes.macchiato.search.focused_match]
+# background = "#A6DA95"
+# foreground = "#24273A"
+#
+# [color_schemes.macchiato.search.footer_bar]
+# background = "#A5ADCB"
+# foreground = "#24273A"
+#
+# [color_schemes.macchiato.search.matches]
+# background = "#A5ADCB"
+# foreground = "#24273A"
+#
+# [color_schemes.macchiato.selection]
+# background = "#F4DBD6"
+# text = "#24273A"
+#
+# [color_schemes.macchiato.vi_mode_cursor]
+# cursor = "#B7BDF8"
+# text = "#24273A"
+#
+# [[color_schemes.mocha.indexed_colors]]
+# color = "#FAB387"
+# index = 16
+#
+# [[color_schemes.mocha.indexed_colors]]
+# color = "#F5E0DC"
+# index = 17
+#
+# [color_schemes.mocha.bright]
+# black = "#585B70"
+# blue = "#89B4FA"
+# cyan = "#94E2D5"
+# green = "#A6E3A1"
+# magenta = "#F5C2E7"
+# red = "#F38BA8"
+# white = "#A6ADC8"
+# yellow = "#F9E2AF"
+#
+# [color_schemes.mocha.cursor]
+# cursor = "#F5E0DC"
+# text = "#1E1E2E"
+#
+# [color_schemes.mocha.dim]
+# black = "#45475A"
+# blue = "#89B4FA"
+# cyan = "#94E2D5"
+# green = "#A6E3A1"
+# magenta = "#F5C2E7"
+# red = "#F38BA8"
+# white = "#BAC2DE"
+# yellow = "#F9E2AF"
+#
+# [color_schemes.mocha.hints.end]
+# background = "#A6ADC8"
+# foreground = "#1E1E2E"
+#
+# [color_schemes.mocha.hints.start]
+# background = "#F9E2AF"
+# foreground = "#1E1E2E"
+#
+# [color_schemes.mocha.normal]
+# black = "#45475A"
+# blue = "#89B4FA"
+# cyan = "#94E2D5"
+# green = "#A6E3A1"
+# magenta = "#F5C2E7"
+# red = "#F38BA8"
+# white = "#BAC2DE"
+# yellow = "#F9E2AF"
+#
+# [color_schemes.mocha.primary]
+# background = "#1E1E2E"
+# bright_foreground = "#CDD6F4"
+# dim_foreground = "#CDD6F4"
+# foreground = "#CDD6F4"
+#
+# [color_schemes.mocha.search.focused_match]
+# background = "#A6E3A1"
+# foreground = "#1E1E2E"
+#
+# [color_schemes.mocha.search.footer_bar]
+# background = "#A6ADC8"
+# foreground = "#1E1E2E"
+#
+# [color_schemes.mocha.search.matches]
+# background = "#A6ADC8"
+# foreground = "#1E1E2E"
+#
+# [color_schemes.mocha.selection]
+# background = "#F5E0DC"
+# text = "#1E1E2E"
+#
+# [color_schemes.mocha.vi_mode_cursor]
+# cursor = "#B4BEFE"
+# text = "#1E1E2E"
+#
+# [color_schemes.nord.bright]
+# black = "#4c566a"
+# blue = "#81a1c1"
+# cyan = "#8fbcbb"
+# green = "#a3be8c"
+# magenta = "#b48ead"
+# red = "#bf616a"
+# white = "#eceff4"
+# yellow = "#ebcb8b"
+#
+# [color_schemes.nord.cursor]
+# cursor = "#d8dee9"
+# text = "#2e3440"
+#
+# [color_schemes.nord.dim]
+# black = "#373e4d"
+# blue = "#68809a"
+# cyan = "#6d96a5"
+# green = "#809575"
+# magenta = "#8c738c"
+# red = "#94545d"
+# white = "#aeb3bb"
+# yellow = "#b29e75"
+#
+# [color_schemes.nord.normal]
+# black = "#3b4252"
+# blue = "#81a1c1"
+# cyan = "#88c0d0"
+# green = "#a3be8c"
+# magenta = "#b48ead"
+# red = "#bf616a"
+# white = "#e5e9f0"
+# yellow = "#ebcb8b"
+#
+# [color_schemes.nord.primary]
+# background = "#2e3440"
+# dim_foreground = "#a5abb6"
+# foreground = "#d8dee9"
+#
+# [color_schemes.nord.search.footer_bar]
+# background = "#434c5e"
+# foreground = "#d8dee9"
+#
+# [color_schemes.nord.search.matches]
+# background = "#88c0d0"
+# foreground = "CellBackground"
+#
+# [color_schemes.nord.selection]
+# background = "#4c566a"
+# text = "CellForeground"
+#
+# [color_schemes.nord.vi_mode_cursor]
+# cursor = "#d8dee9"
+# text = "#2e3440"
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[colors.bright]
+black = "#4c566a"
+blue = "#81a1c1"
+cyan = "#8fbcbb"
+green = "#a3be8c"
+magenta = "#b48ead"
+red = "#bf616a"
+white = "#eceff4"
+yellow = "#ebcb8b"
+
+[colors.cursor]
+cursor = "#d8dee9"
+text = "#2e3440"
+
+[colors.dim]
+black = "#373e4d"
+blue = "#68809a"
+cyan = "#6d96a5"
+green = "#809575"
+magenta = "#8c738c"
+red = "#94545d"
+white = "#aeb3bb"
+yellow = "#b29e75"
+
+[colors.normal]
+black = "#3b4252"
+blue = "#81a1c1"
+cyan = "#88c0d0"
+green = "#a3be8c"
+magenta = "#b48ead"
+red = "#bf616a"
+white = "#e5e9f0"
+yellow = "#ebcb8b"
+
+[colors.primary]
+background = "#2e3440"
+dim_foreground = "#a5abb6"
+foreground = "#d8dee9"
+
+# [colors.search.footer_bar]
+# background = "#434c5e"
+# foreground = "#d8dee9"
+
+[colors.search.matches]
+background = "#88c0d0"
+foreground = "CellBackground"
+
+[colors.selection]
+background = "#4c566a"
+text = "CellForeground"
+
+[colors.vi_mode_cursor]
+cursor = "#d8dee9"
+text = "#2e3440"
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 14
+
+[font.bold]
+family = "Hack Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "Hack Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "Hack Nerd Font"
+style = "Bold"
+
+[[keyboard.bindings]]
+action = "ToggleViMode"
+key = "I"
+mode = "~Search"
+mods = "Control"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "Quit"
+key = "Q"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "N"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "Quit"
+key = "W"
+mods = "Command"
+
+[[keyboard.bindings]]
+action = "PasteSelection"
+key = "Insert"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ResetFontSize"
+key = "Key0"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001BOH"
+key = "Home"
+mode = "AppCursor"
+
+[[keyboard.bindings]]
+chars = "\u001B[H"
+key = "Home"
+mode = "~AppCursor"
+
+[[keyboard.bindings]]
+chars = "\u001BOF"
+key = "End"
+mode = "AppCursor"
+
+[[keyboard.bindings]]
+chars = "\u001B[F"
+key = "End"
+mode = "~AppCursor"
+
+[[keyboard.bindings]]
+chars = "\u001B[5;2~"
+key = "PageUp"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[5;5~"
+key = "PageUp"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[5~"
+key = "PageUp"
+
+[[keyboard.bindings]]
+chars = "\u001B[6;2~"
+key = "PageDown"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[6;5~"
+key = "PageDown"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[6~"
+key = "PageDown"
+
+[[keyboard.bindings]]
+chars = "\u001B[Z"
+key = "Tab"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u007F"
+key = "Back"
+
+[[keyboard.bindings]]
+chars = "\u001B\u007F"
+key = "Back"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001B[2~"
+key = "Insert"
+
+[[keyboard.bindings]]
+chars = "\u001B[3~"
+key = "Delete"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;2D"
+key = "Left"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;5D"
+key = "Left"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;3D"
+key = "Left"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001B[D"
+key = "Left"
+mode = "~AppCursor"
+
+[[keyboard.bindings]]
+chars = "\u001BOD"
+key = "Left"
+mode = "AppCursor"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;2C"
+key = "Right"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;5C"
+key = "Right"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;3C"
+key = "Right"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001B[C"
+key = "Right"
+mode = "~AppCursor"
+
+[[keyboard.bindings]]
+chars = "\u001BOC"
+key = "Right"
+mode = "AppCursor"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;2A"
+key = "Up"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;5A"
+key = "Up"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;3A"
+key = "Up"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001B[A"
+key = "Up"
+mode = "~AppCursor"
+
+[[keyboard.bindings]]
+chars = "\u001BOA"
+key = "Up"
+mode = "AppCursor"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;2B"
+key = "Down"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;5B"
+key = "Down"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;3B"
+key = "Down"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001B[B"
+key = "Down"
+mode = "~AppCursor"
+
+[[keyboard.bindings]]
+chars = "\u001BOB"
+key = "Down"
+mode = "AppCursor"
+
+[[keyboard.bindings]]
+chars = "\u001BOP"
+key = "F1"
+
+[[keyboard.bindings]]
+chars = "\u001BOQ"
+key = "F2"
+
+[[keyboard.bindings]]
+chars = "\u001BOR"
+key = "F3"
+
+[[keyboard.bindings]]
+chars = "\u001BOS"
+key = "F4"
+
+[[keyboard.bindings]]
+chars = "\u001B[15~"
+key = "F5"
+
+[[keyboard.bindings]]
+chars = "\u001B[17~"
+key = "F6"
+
+[[keyboard.bindings]]
+chars = "\u001B[18~"
+key = "F7"
+
+[[keyboard.bindings]]
+chars = "\u001B[19~"
+key = "F8"
+
+[[keyboard.bindings]]
+chars = "\u001B[20~"
+key = "F9"
+
+[[keyboard.bindings]]
+chars = "\u001B[21~"
+key = "F10"
+
+[[keyboard.bindings]]
+chars = "\u001B[23~"
+key = "F11"
+
+[[keyboard.bindings]]
+chars = "\u001B[24~"
+key = "F12"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;2P"
+key = "F1"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;2Q"
+key = "F2"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;2R"
+key = "F3"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;2S"
+key = "F4"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[15;2~"
+key = "F5"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[17;2~"
+key = "F6"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[18;2~"
+key = "F7"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[19;2~"
+key = "F8"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[20;2~"
+key = "F9"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[21;2~"
+key = "F10"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[23;2~"
+key = "F11"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[24;2~"
+key = "F12"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;5P"
+key = "F1"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;5Q"
+key = "F2"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;5R"
+key = "F3"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;5S"
+key = "F4"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[15;5~"
+key = "F5"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[17;5~"
+key = "F6"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[18;5~"
+key = "F7"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[19;5~"
+key = "F8"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[20;5~"
+key = "F9"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[21;5~"
+key = "F10"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[23;5~"
+key = "F11"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[24;5~"
+key = "F12"
+mods = "Control"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;6P"
+key = "F1"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;6Q"
+key = "F2"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;6R"
+key = "F3"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;6S"
+key = "F4"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001B[15;6~"
+key = "F5"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001B[17;6~"
+key = "F6"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001B[18;6~"
+key = "F7"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001B[19;6~"
+key = "F8"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001B[20;6~"
+key = "F9"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001B[21;6~"
+key = "F10"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001B[23;6~"
+key = "F11"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001B[24;6~"
+key = "F12"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;3P"
+key = "F1"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;3Q"
+key = "F2"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;3R"
+key = "F3"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u001B[1;3S"
+key = "F4"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u001B[15;3~"
+key = "F5"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u001B[17;3~"
+key = "F6"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u001B[18;3~"
+key = "F7"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u001B[19;3~"
+key = "F8"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u001B[20;3~"
+key = "F9"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u001B[21;3~"
+key = "F10"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u001B[23;3~"
+key = "F11"
+mods = "Super"
+
+[[keyboard.bindings]]
+chars = "\u001B[24;3~"
+key = "F12"
+mods = "Super"
+
+[[mouse.bindings]]
+action = "PasteSelection"
+mouse = "Middle"
+
+[window]
+padding = {x = 5,y = 5}
+decorations = "Full"
+opacity = 0.2
+startup_mode = "Windowed"
+dynamic_title = true
+blur = true
+
+[cursor]
+style = {shape="Underline", blinking="On"}
