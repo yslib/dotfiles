@@ -7,6 +7,8 @@ fi
 
 export TERM="xterm-256color"
 
+export PATH=$HOME/scripts:$PATH
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -56,3 +58,5 @@ source $ZSH_CUSTOM/themes/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+source ./scripts/fzf-git

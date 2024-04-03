@@ -68,6 +68,7 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'zbirenbaum/copilot.lua'
 Plug 'MunifTanjim/nui.nvim'
 Plug 'jackMort/ChatGPT.nvim'
+Plug 'nvim-pack/nvim-spectre'
 
 " vim plug
 Plug 'tpope/vim-surround'                                      " vim-surround
@@ -202,5 +203,6 @@ lua require('symboloutlinecfg')
 lua require('transparentcfg')
 lua require('copilotcfg')
 lua require('chatgptcfg')
+lua require('spectrecfg')
 
 lua require'colorizer'.setup()
