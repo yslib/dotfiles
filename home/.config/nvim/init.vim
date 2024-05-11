@@ -68,7 +68,6 @@ Plug 'norcalli/nvim-colorizer.lua'
 Plug 'zbirenbaum/copilot.lua'
 Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }
 Plug 'MunifTanjim/nui.nvim'
-Plug 'jackMort/ChatGPT.nvim'
 Plug 'nvim-pack/nvim-spectre'
 
 " vim plug
@@ -204,7 +203,6 @@ lua require('symboloutlinecfg')
 lua require('transparentcfg')
 lua require('copilotcfg')
 lua require('copilotchatcfg')
-lua require('chatgptcfg')
 lua require('spectrecfg')
 
 lua require'colorizer'.setup()
