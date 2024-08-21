@@ -4,7 +4,7 @@ sudo yabai --load-sa
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
 yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
 
-yabai -m config external_bar               all:49:0
+yabai -m config external_bar               all:0:0
 yabai -m config window_border              on
 yabai -m config mouse_follows_focus        off
 yabai -m config focus_follows_mouse        off
@@ -35,7 +35,7 @@ yabai -m config left_padding               8
 yabai -m config right_padding              8
 yabai -m config window_gap                 8
 # Do not manage some apps which are not resizable
-yabai -m rule --add app="^(LuLu|Vimac|Calculator|VLC|System Preferences|zoom.us|Photo Booth|Archive Utility|Python|LibreOffice|WeChat|Clash|Telegram|iPhone 12 Pro)$" manage=off
+yabai -m rule --add app="^(LuLu|Vimac|Calculator|VLC|System Preferences|Photo Booth|Archive Utility|Python|LibreOffice|WeChat|Clash|Telegram)$" manage=off
 
 # ===== Rules ==================================
 
