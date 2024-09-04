@@ -69,6 +69,7 @@ Plug 'zbirenbaum/copilot.lua'
 Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }
 Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-pack/nvim-spectre'
+Plug 'kevinhwang91/nvim-bqf'
 
 " vim plug
 Plug 'tpope/vim-surround'                                      " vim-surround
