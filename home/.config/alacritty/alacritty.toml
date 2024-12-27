@@ -944,11 +944,12 @@ mouse = "Middle"
 
 [window]
 padding = {x = 5,y = 5}
-decorations = "Full"
-opacity = 0.2
+decorations = "Buttonless"
+opacity = 0.6
 startup_mode = "Windowed"
 dynamic_title = true
 blur = true
+option_as_alt="Both"
 
 [cursor]
 style = {shape="Underline", blinking="On"}
