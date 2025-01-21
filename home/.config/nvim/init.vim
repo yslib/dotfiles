@@ -27,6 +27,7 @@ Plug 'kyazdani42/nvim-web-devicons'                            " for file icons
 Plug 'kyazdani42/nvim-tree.lua'                                " file explorer
 Plug 'nvim-telescope/telescope.nvim'                           " picker framework
 Plug 'nvim-telescope/telescope-ui-select.nvim'
+Plug 'nvim-telescope/telescope-live-grep-args.nvim'
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 Plug 'mfussenegger/nvim-dap'
 Plug 'rcarriga/nvim-dap-ui'
@@ -40,6 +41,7 @@ Plug 'mhartington/formatter.nvim'
 Plug 'jose-elias-alvarez/null-ls.nvim'                         " linter 
 Plug 'akinsho/toggleterm.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}    " syntax based hightlighting
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'RishabhRD/popfix'
 Plug 'hood/popui.nvim'
 Plug 'nvim-lua/popup.nvim'
@@ -57,13 +59,15 @@ Plug 'stevearc/overseer.nvim'                                  " task runners
 Plug 'sindrets/diffview.nvim'                                  " diff view
 Plug 'mbbill/undotree'
 Plug 'glepnir/dashboard-nvim'
-Plug 'hrsh7th/cmp-nvim-lsp'                                    " the following plugins are related to completion
+Plug 'hrsh7th/cmp-nvim-lsp'                                    " the following plugins  related to completion
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+Plug 'hrsh7th//cmp-nvim-lsp-document-symbol'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'zbirenbaum/copilot.lua'
 Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'main' }
@@ -194,7 +198,7 @@ lua require('dashboardcfg')
 lua require('toggletermcfg')
 lua require('formattercfg')
 lua require('dresscfg')
-lua require('sessioncfg')
+" lua require('sessioncfg')
 lua require('bufferlinecfg')
 lua require("catppuccincfg")
 lua require('nvimdapcfg')

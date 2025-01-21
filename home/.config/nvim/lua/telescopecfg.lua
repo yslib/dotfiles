@@ -22,3 +22,5 @@ require('telescope').setup({
 -- require('telescope').load_extension('aerial')
 require("telescope").load_extension("notify")
 require('telescope').load_extension('fzf')
+require('telescope').load_extension('live_grep_args')
+vim.keymap.set("n", "<leader>fg", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>")
