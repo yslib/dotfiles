@@ -66,7 +66,7 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'norcalli/nvim-colorizer.lua'
 Plug 'zbirenbaum/copilot.lua'
-Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }
+Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'main' }
 Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-pack/nvim-spectre'
 Plug 'kevinhwang91/nvim-bqf'
