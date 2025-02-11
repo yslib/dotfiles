@@ -1,15 +1,20 @@
 require('bufferline').setup {
 	options = {
-		mode = "tabs",         -- set to "tabs" to only show tabpages instead
+		mode = "tabs", -- set to "tabs" to only show tabpages instead
 		numbers = "ordinal",
+		style_preset = require('bufferline').style_preset.default,
 		close_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
 		right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
 		left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
 		middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
+		indicator = {
+			icon = '▎', -- this should be omitted if indicator style is not 'icon'
+			style = 'icon',
+		},
 		-- NOTE: this plugin is designed with this icon in mind,
 		-- and so changing this is NOT recommended, this is intended
 		-- as an escape hatch for people who cannot bear it for whatever reason
-		buffer_close_icon = '',
+		buffer_close_icon = '',
 		modified_icon = '●',
 		close_icon = '',
 		left_trunc_marker = '',
@@ -27,14 +32,11 @@ require('bufferline').setup {
 		max_name_length = 18,
 		max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
 		tab_size = 18,
-		diagnostics = false, -- "nvim_lsp", "coc",
-		diagnostics_update_in_insert = false,
+		diagnostics = "nvim_lsp", -- "nvim_lsp", "coc",
+		diagnostics_update_on_event = true, -- use nvim's diagnostic handler
 		-- The diagnostics indicator can be set to nil to keep the buffer name highlight but delete the highlighting
 		diagnostics_indicator = function(count, level, diagnostics_dict, context)
-			if context.buffer:current() then
-				return ''
-			end
-			return ''
+			return "(" .. count .. ")"
 		end,
 		-- NOTE: this will be called a lot so don't do any heavy processing here
 		custom_filter = function(buf_number, buf_numbers)
@@ -84,6 +86,6 @@ require('bufferline').setup {
 		separator_style = "slant",
 		enforce_regular_tabs = false,
 		always_show_bufferline = true,
-		sort_by = 'tabs'
+		sort_by = 'tabs',
 	}
 }
