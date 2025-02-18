@@ -7,7 +7,7 @@ fi
 
 export TERM="xterm-256color"
 
-export PATH=$HOME/scripts:$PATH
+export PATH=$HOME/scripts:$HOME/.local/bin:$PATH
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -60,3 +60,10 @@ source $ZSH_CUSTOM/themes/powerlevel10k/powerlevel10k.zsh-theme
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 source ./scripts/fzf-git
+
+# fnm
+FNM_PATH="/home/slyang/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="/home/slyang/.local/share/fnm:$PATH"
+  eval "`fnm env`"
+fi
