@@ -49,15 +49,10 @@ Plug 'rcarriga/nvim-notify'
 Plug 'simrat39/symbols-outline.nvim'                           " symbols-outline
 Plug 'simrat39/rust-tools.nvim'                                " an easy-to-use rust tools based on rust-analyzer, if you use debuggin features, codelldb is required
 Plug 'kdheepak/lazygit.nvim'
-Plug 'Shatur/neovim-session-manager'
-Plug 'sainnhe/sonokai'                                         " color theme
-Plug 'sainnhe/edge'                                            " color theme
-Plug 'whatsthatsmell/codesmell_dark.vim'                       " color theme
 Plug 'catppuccin/nvim', {'as': 'catppuccin'}                   " color theme 
 Plug 'xiyaowong/transparent.nvim'                              " transparent background
 Plug 'stevearc/overseer.nvim'                                  " task runners
 Plug 'sindrets/diffview.nvim'                                  " diff view
-Plug 'mbbill/undotree'
 Plug 'glepnir/dashboard-nvim'
 Plug 'hrsh7th/cmp-nvim-lsp'                                    " the following plugins  related to completion
 Plug 'hrsh7th/cmp-buffer'
@@ -78,6 +73,7 @@ Plug 'kevinhwang91/nvim-bqf'
 " vim plug
 Plug 'tpope/vim-surround'                                      " vim-surround
 Plug 'tpope/vim-fugitive'
+Plug 'mbbill/undotree'
 Plug 'junegunn/gv.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'easymotion/vim-easymotion'
@@ -120,31 +116,8 @@ set list listchars=tab:\|\ ,trail:\\u0387
 " endif
 
 set termguicolors
-" The configuration options should be placed before `colorscheme xxx`.
-
-" let g:sonokar_style = 'andromeda'
-" let g:sonokai_enable_italic = 1
-" let g:sonokai_disable_italic_comment = 1
-" colorscheme sonokai
-
-" let g:edge_style = 'aura'
-" let g:edge_better_performance = 1
-" let g:edge_enable_italic = 1
-" let g:edge_disable_italic_comment = 1
-" let g:edge_dim_foreground = 0
-" let g:edge_transparent_background = 0
-" let g:edge_spell_foreground = 1
-" let g:edge_diagnostic_text_highlight = 1
-" let g:edge_current_word = 'bold'
-" colorscheme edge
-"
-" colorscheme codesmell_dark
 
 " Example config in Vim-Script
-" -------------------------- neovim-session-manager
-nnoremap <silent><leader>sl <Cmd>SessionManager load_session<CR>
-nnoremap <silent><leader>sc <Cmd>SessionManager load_current_dir_session<CR>
-
 
 " --------------------------   bufferline.nvim
 
