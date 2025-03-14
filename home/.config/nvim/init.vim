@@ -53,7 +53,6 @@ Plug 'catppuccin/nvim', {'as': 'catppuccin'}                   " color theme
 Plug 'xiyaowong/transparent.nvim'                              " transparent background
 Plug 'stevearc/overseer.nvim'                                  " task runners
 Plug 'sindrets/diffview.nvim'                                  " diff view
-Plug 'glepnir/dashboard-nvim'
 Plug 'hrsh7th/cmp-nvim-lsp'                                    " the following plugins  related to completion
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
@@ -174,11 +173,9 @@ lua require('neodevcfg')
 lua require('lualinecfg')
 lua require('treesittercfg')
 lua require('telescopecfg')
-lua require('dashboardcfg')
 lua require('toggletermcfg')
 lua require('formattercfg')
 lua require('dresscfg')
-" lua require('sessioncfg')
 lua require('bufferlinecfg')
 lua require("catppuccincfg")
 lua require('nvimdapcfg')
