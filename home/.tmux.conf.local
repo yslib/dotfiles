@@ -86,23 +86,42 @@ tmux_conf_24b_colour=auto
 tmux_conf_theme=enabled
 
 # default theme
-tmux_conf_theme_colour_1="#080808"    # dark gray
-tmux_conf_theme_colour_2="#303030"    # gray
-tmux_conf_theme_colour_3="#8a8a8a"    # light gray
-tmux_conf_theme_colour_4="#00afff"    # light blue
-tmux_conf_theme_colour_5="#ffff00"    # yellow
-tmux_conf_theme_colour_6="#080808"    # dark gray
-tmux_conf_theme_colour_7="#e4e4e4"    # white
-tmux_conf_theme_colour_8="#080808"    # dark gray
-tmux_conf_theme_colour_9="#ffff00"    # yellow
-tmux_conf_theme_colour_10="#ff00af"   # pink
-tmux_conf_theme_colour_11="#5fff00"   # green
-tmux_conf_theme_colour_12="#8a8a8a"   # light gray
-tmux_conf_theme_colour_13="#e4e4e4"   # white
-tmux_conf_theme_colour_14="#080808"   # dark gray
-tmux_conf_theme_colour_15="#080808"   # dark gray
-tmux_conf_theme_colour_16="#d70000"   # red
-tmux_conf_theme_colour_17="#e4e4e4"   # white
+# tmux_conf_theme_colour_1="#080808"    # dark gray
+# tmux_conf_theme_colour_2="#303030"    # gray
+# tmux_conf_theme_colour_3="#8a8a8a"    # light gray
+# tmux_conf_theme_colour_4="#00afff"    # light blue
+# tmux_conf_theme_colour_5="#ffff00"    # yellow
+# tmux_conf_theme_colour_6="#080808"    # dark gray
+# tmux_conf_theme_colour_7="#e4e4e4"    # white
+# tmux_conf_theme_colour_8="#080808"    # dark gray
+# tmux_conf_theme_colour_9="#ffff00"    # yellow
+# tmux_conf_theme_colour_10="#ff00af"   # pink
+# tmux_conf_theme_colour_11="#5fff00"   # green
+# tmux_conf_theme_colour_12="#8a8a8a"   # light gray
+# tmux_conf_theme_colour_13="#e4e4e4"   # white
+# tmux_conf_theme_colour_14="#080808"   # dark gray
+# tmux_conf_theme_colour_15="#080808"   # dark gray
+# tmux_conf_theme_colour_16="#d70000"   # red
+# tmux_conf_theme_colour_17="#e4e4e4"   # white
+
+
+tmux_conf_theme_colour_1="#5E81AC" # Nord 10 - Frost Deep Blue
+tmux_conf_theme_colour_2="#88C0D0"  # Nord 8 - Frost Cyan
+tmux_conf_theme_colour_3="#81A1C1" # Nord 9 - Frost Blue (重复)
+tmux_conf_theme_colour_4="#ECEFF4"  # Nord 6 - Snow Storm Lightest
+tmux_conf_theme_colour_5="#D8DEE9"  # Nord 4 - Snow Storm Light
+tmux_conf_theme_colour_6="#E5E9F0"  # Nord 5 - Snow Storm Lighter
+tmux_conf_theme_colour_7="#81A1C1" # Nord 9 - Frost Blue
+tmux_conf_theme_colour_8="#2E3440"  # Nord 0 - Polar Night Darkest
+tmux_conf_theme_colour_9="#3B4252"  # Nord 1 - Polar Night Darker
+tmux_conf_theme_colour_10="#434C5E"  # Nord 2 - Polar Night Dark
+tmux_conf_theme_colour_11="#4C566A"  # Nord 3 - Polar Night Light
+tmux_conf_theme_colour_12="#BF616A" # Nord 11 - Aurora Red
+tmux_conf_theme_colour_13="#EBCB8B" # Nord 13 - Aurora Yellow
+tmux_conf_theme_colour_14="#D08770" # Nord 12 - Aurora Orange
+tmux_conf_theme_colour_15="#8FBCBB"  # Nord 7 - Frost Turquoise
+tmux_conf_theme_colour_16="#B48EAD" # Nord 15 - Aurora Purple
+tmux_conf_theme_colour_17="#A3BE8C" # Nord 14 - Aurora Green
 
 # default theme (ansi)
 #tmux_conf_theme_colour_1="colour0"
@@ -233,14 +252,14 @@ tmux_conf_theme_window_status_last_bg="$tmux_conf_theme_colour_2"
 tmux_conf_theme_window_status_last_attr="none"
 
 # status left/right sections separators
-tmux_conf_theme_left_separator_main=""
-tmux_conf_theme_left_separator_sub="|"
-tmux_conf_theme_right_separator_main=""
-tmux_conf_theme_right_separator_sub="|"
-#tmux_conf_theme_left_separator_main='\uE0B0'  # /!\ you don't need to install Powerline
-#tmux_conf_theme_left_separator_sub='\uE0B1'   #   you only need fonts patched with
-#tmux_conf_theme_right_separator_main='\uE0B2' #   Powerline symbols or the standalone
-#tmux_conf_theme_right_separator_sub='\uE0B3'  #   PowerlineSymbols.otf font, see README.md
+# tmux_conf_theme_left_separator_main=""
+# tmux_conf_theme_left_separator_sub="|"
+# tmux_conf_theme_right_separator_main=""
+# tmux_conf_theme_right_separator_sub="|"
+tmux_conf_theme_left_separator_main='\uE0B0'  # /!\ you don't need to install Powerline
+tmux_conf_theme_left_separator_sub='\uE0B1'   #   you only need fonts patched with
+tmux_conf_theme_right_separator_main='\uE0B2' #   Powerline symbols or the standalone
+tmux_conf_theme_right_separator_sub='\uE0B3'  #   PowerlineSymbols.otf font, see README.md
 
 # status left/right content:
 #   - separate main sections with "|"
