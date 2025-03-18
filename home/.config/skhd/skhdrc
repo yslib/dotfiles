@@ -1,9 +1,9 @@
 ## Navigation (lalt - ...)
 # Space Navigation (on two displays): lalt - {1, 2, 3, 4}
-# lalt - 1 : if [ "$(yabai -m query --displays --display | jq '.index')" -eq "1" ]; then yabai -m space --focus 1; else yabai -m space --focus 5; fi
-# lalt - 2 : if [ "$(yabai -m query --displays --display | jq '.index')" -eq "1" ]; then yabai -m space --focus 2; else yabai -m space --focus 6; fi
-# lalt - 3 : if [ "$(yabai -m query --displays --display | jq '.index')" -eq "1" ]; then yabai -m space --focus 3; else yabai -m space --focus 7; fi
-# lalt - 4 : if [ "$(yabai -m query --displays --display | jq '.index')" -eq "1" ]; then yabai -m space --focus 4; else yabai -m space --focus 8; fi
+lalt - 1 : if [ "$(yabai -m query --displays --display | jq '.index')" -eq "1" ]; then yabai -m space --focus 1; else yabai -m space --focus 5; fi
+lalt - 2 : if [ "$(yabai -m query --displays --display | jq '.index')" -eq "1" ]; then yabai -m space --focus 2; else yabai -m space --focus 6; fi
+lalt - 3 : if [ "$(yabai -m query --displays --display | jq '.index')" -eq "1" ]; then yabai -m space --focus 3; else yabai -m space --focus 7; fi
+lalt - 4 : if [ "$(yabai -m query --displays --display | jq '.index')" -eq "1" ]; then yabai -m space --focus 4; else yabai -m space --focus 8; fi
 
 # Window Navigation (through display borders): lalt - {j, k, l, ö}
 lalt - h    : yabai -m window --focus west  || yabai -m display --focus west
