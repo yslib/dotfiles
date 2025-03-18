@@ -36,7 +36,7 @@ yabai -m config left_padding               10
 yabai -m config right_padding              10
 yabai -m config window_gap                 10
 # Do not manage some apps which are not resizable
-yabai -m rule --add app="^(LuLu|Vimac|Calculator|VLC|System Preferences|Photo Booth|Archive Utility|Python|LibreOffice|WeChat|Clash|Telegram)$" manage=off
+yabai -m rule --add app="^(LuLu|Vimac|Calculator|VLC|System Preferences|Photo Booth|Archive Utility|Python|LibreOffice|Clash)$" manage=off
 
 # ===== Rules ==================================
 
