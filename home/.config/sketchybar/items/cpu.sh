@@ -40,14 +40,14 @@ cpu_user=(
   background.color=$TRANSPARENT
 )
 
-sketchybar --add item cpu.top right              \
-           --set cpu.top "${cpu_top[@]}"         \
-                                                 \
-           --add item cpu.percent right          \
-           --set cpu.percent "${cpu_percent[@]}" \
-                                                 \
-           --add graph cpu.sys right 75          \
+sketchybar --add graph cpu.sys center 75          \
            --set cpu.sys "${cpu_sys[@]}"         \
                                                  \
-           --add graph cpu.user right 75         \
-           --set cpu.user "${cpu_user[@]}"
+           --add graph cpu.user center 75         \
+           --set cpu.user "${cpu_user[@]}"        \
+           --add item cpu.top center              \
+           --set cpu.top "${cpu_top[@]}"         \
+                                                 \
+           --add item cpu.percent center          \
+           --set cpu.percent "${cpu_percent[@]}" \
+                                                 \

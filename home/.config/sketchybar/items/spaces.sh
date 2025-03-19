@@ -29,14 +29,14 @@ do
     script="$PLUGIN_DIR/space.sh"
   )
 
-  sketchybar --add space space.$sid left    \
+  sketchybar --add space space.$sid center    \
              --set space.$sid "${space[@]}" \
              --subscribe space.$sid mouse.clicked
 done
 
 spaces=(
   background.color=$BACKGROUND_1
-  background.border_color=$BACKGROUND_2
+  background.border_color=$POPUP_BORDER_COLOR
   background.border_width=2
   background.drawing=on
 )
@@ -55,5 +55,5 @@ separator=(
 sketchybar --add bracket spaces '/space\..*/' \
            --set spaces "${spaces[@]}"        \
                                               \
-           --add item separator left          \
+           --add item separator center          \
            --set separator "${separator[@]}"

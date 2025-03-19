@@ -30,7 +30,7 @@ apple_lock=(
   click_script="pmset displaysleepnow; $POPUP_OFF"
 )
 
-sketchybar --add item apple.logo left                  \
+sketchybar --add item apple.logo center                  \
            --set apple.logo "${apple_logo[@]}"         \
                                                        \
            --add item apple.prefs popup.apple.logo     \

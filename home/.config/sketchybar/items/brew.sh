@@ -11,7 +11,15 @@ brew=(
 )
 
 sketchybar --add event brew_update \
-           --add item brew right   \
+           --add item brew center   \
            --set brew "${brew[@]}" \
            --subscribe brew brew_update
 
+
+status_bracket=(
+  background.color=$BACKGROUND_1
+  background.border_color=$POPUP_BORDER_COLOR
+  background.border_width=2
+)
+sketchybar --add bracket status brew github.bell volume_icon \
+           --set status "${status_bracket[@]}"

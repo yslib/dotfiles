@@ -10,6 +10,6 @@ battery=(
   updates=on
 )
 
-sketchybar --add item battery right      \
+sketchybar --add item battery center      \
            --set battery "${battery[@]}" \
            --subscribe battery power_source_change system_woke
