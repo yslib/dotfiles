@@ -82,6 +82,7 @@ shift + ctrl + lalt - s : yabai -m window --insert stack
 ## Misc
 # Open new Alacritty window
 lalt - t : alacritty msg create-window
+lalt - y : open -a Google\ Chrome https://google.com
 
 # Toggle sketchybar
 lalt - b : sketchybar -m --bar hidden=toggle
