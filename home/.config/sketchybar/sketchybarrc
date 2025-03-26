@@ -24,6 +24,7 @@ bar=(
   color=$BAR_COLOR
   border_color=$POPUP_BORDER_COLOR
   border_width=2
+  display=main
   shadow=on
   position=top     # bottom top
   sticky=on
