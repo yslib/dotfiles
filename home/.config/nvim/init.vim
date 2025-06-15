@@ -15,12 +15,9 @@ call plug#begin(stdpath('data').'/plugged')
 " Make sure you use single quotes
 
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
-"
 
 Plug 'nvim-lua/plenary.nvim'                                   " lua utils
-Plug 'folke/neodev.nvim'                                       " type check
 Plug 'stevearc/dressing.nvim'                                  " ui enhencement
-Plug 'neovim/nvim-lspconfig'                                   " builtin lsp for neovim
 Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'kyazdani42/nvim-web-devicons'                            " for file icons
@@ -38,20 +35,16 @@ Plug 'nvim-lualine/lualine.nvim'                               " status line
 Plug 'numToStr/Comment.nvim'                                   " code comment/uncomment
 Plug 'windwp/nvim-autopairs'                                   " auto pairs
 Plug 'mhartington/formatter.nvim'
-Plug 'jose-elias-alvarez/null-ls.nvim'                         " linter 
 Plug 'akinsho/toggleterm.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}    " syntax based hightlighting
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'RishabhRD/popfix'
 Plug 'hood/popui.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'rcarriga/nvim-notify'
 Plug 'simrat39/symbols-outline.nvim'                           " symbols-outline
-Plug 'simrat39/rust-tools.nvim'                                " an easy-to-use rust tools based on rust-analyzer, if you use debuggin features, codelldb is required
 Plug 'kdheepak/lazygit.nvim'
 Plug 'catppuccin/nvim', {'as': 'catppuccin'}                   " color theme 
 Plug 'xiyaowong/transparent.nvim'                              " transparent background
-Plug 'stevearc/overseer.nvim'                                  " task runners
 Plug 'sindrets/diffview.nvim'                                  " diff view
 Plug 'hrsh7th/cmp-nvim-lsp'                                    " the following plugins  related to completion
 Plug 'hrsh7th/cmp-buffer'
@@ -169,7 +162,6 @@ lua require('commentcfg')
 lua require('notifycfg')
 lua require('diffviewcfg')
 lua require('autopairs')
-lua require('neodevcfg')
 lua require('lualinecfg')
 lua require('treesittercfg')
 lua require('telescopecfg')
@@ -180,7 +172,6 @@ lua require('bufferlinecfg')
 lua require("catppuccincfg")
 lua require('nvimdapcfg')
 lua require('masonlspcfg')
-lua require('overseercfg')
 lua require('symboloutlinecfg')
 lua require('transparentcfg')
 lua require('copilotcfg')
