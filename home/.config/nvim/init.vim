@@ -41,7 +41,6 @@ Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 Plug 'hood/popui.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'rcarriga/nvim-notify'
-Plug 'simrat39/symbols-outline.nvim'                           " symbols-outline
 Plug 'kdheepak/lazygit.nvim'
 Plug 'catppuccin/nvim', {'as': 'catppuccin'}                   " color theme 
 Plug 'xiyaowong/transparent.nvim'                              " transparent background
@@ -55,9 +54,12 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 Plug 'hrsh7th//cmp-nvim-lsp-document-symbol'
-Plug 'norcalli/nvim-colorizer.lua'
+
+
+Plug 'norcalli/nvim-colorizer.lua' " copilot
 Plug 'zbirenbaum/copilot.lua'
 Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'main' }
+
 Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-pack/nvim-spectre'
 Plug 'kevinhwang91/nvim-bqf'
@@ -111,32 +113,6 @@ set termguicolors
 
 " Example config in Vim-Script
 
-" --------------------------   bufferline.nvim
-
-nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
-nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
-nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
-nnoremap <silent><leader>4 <Cmd>BufferLineGoToBuffer 4<CR>
-nnoremap <silent><leader>5 <Cmd>BufferLineGoToBuffer 5<CR>
-nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
-nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
-nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
-nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
-
-
-" ------------------------------  nvim.telescope:  telescope.nvim must be installed and for the advanced features, ripgrep is needed.
-nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>fc <cmd>lua require('telescope.builtin').grep_string()<cr>
-nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
-nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
-nnoremap <leader>fs <cmd>lua require('telescope.builtin').lsp_document_symbols()<cr>
-nnoremap <leader>r <cmd>lua require('telescope.builtin').reloader()<cr>
-
-nnoremap <leader>dh <cmd>lua require('dap.ui.variables').hover()<cr>
-nnoremap <leader>dr <cmd>lua require('nvimdapcfg').reload_dap_config()<cr>
-" nnoremap <leader>dv <cmd>lua require('dap.ui.variables').visual_hover()<cr>
-
 " -------------------- vim-easy-align
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
@@ -153,6 +129,7 @@ let g:neovide_transparency=0.9
 set guifont=Hack\ Nerd\ Font:h16
 
 " LOADING CONFIGURATION WRITTEN IN LUA "
+lua require('config')       -- global configuration
 lua require("utils")
 lua require('lspconfigcfg')
 lua require('nvimcmpcfg')
@@ -172,7 +149,6 @@ lua require('bufferlinecfg')
 lua require("catppuccincfg")
 lua require('nvimdapcfg')
 lua require('masonlspcfg')
-lua require('symboloutlinecfg')
 lua require('transparentcfg')
 lua require('copilotcfg')
 lua require('copilotchatcfg')

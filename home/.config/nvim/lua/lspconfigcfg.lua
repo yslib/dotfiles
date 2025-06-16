@@ -5,16 +5,6 @@ local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protoc
 -- UI Customization
 -- vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#1f2335]]
 -- vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#00000000]]
-local border = {
-    { "╭", "FloatBorder" },
-    { "─", "FloatBorder" },
-    { "╮", "FloatBorder" },
-    { "│", "FloatBorder" },
-    { "╯", "FloatBorder" },
-    { "─", "FloatBorder" },
-    { "╰", "FloatBorder" },
-    { "│", "FloatBorder" },
-}
 
 -- sharp borderchars['─', '│', '─', '│', '┌', '┐', '┘', '└'],
 -- rounded borderchars `['─', '│', '─', '│', '╭', '╮', '╯', '╰'],`
@@ -78,8 +68,6 @@ local icons = {
 
 -- LSP settings (for overriding per client)
 local handlers = {
-    ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
-    ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
     ["textDocument/definition"] = goto_definition('split'),
 }
 local kinds = vim.lsp.protocol.CompletionItemKind
@@ -120,6 +108,9 @@ local lsp_keymapping = function(client, bufnr)
     keymap("n", "<space>ca", vim.lsp.buf.code_action, opt("Code action"))
     keymap("n", "gr", vim.lsp.buf.references, opt("Go to references"))
     keymap("n", "<space>f", function() vim.lsp.buf.format({ async = true }) end, opt("Format buffer"))
+
+    -- Diagnostics
+    vim.diagnostic.config({ virtual_text = true })
 end
 
 vim.ui.select = require("popui.ui-overrider")
@@ -149,3 +140,4 @@ local servers = { "clangd", "lua_ls", "cmake", "pyright" }
 for _, server in pairs(servers) do
     init_lsp(server)
 end
+
