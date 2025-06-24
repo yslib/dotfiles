@@ -31,7 +31,7 @@ require('dressing').setup({
     buf_options = {},
     win_options = {
       -- Window transparency (0-100)
-      winblend = 10,
+      winblend = 0,
       -- Disable line wrapping
       wrap = false,
     },
