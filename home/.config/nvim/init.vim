@@ -17,6 +17,7 @@ call plug#begin(stdpath('data').'/plugged')
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 
 Plug 'nvim-lua/plenary.nvim'                                   " lua utils
+Plug 'stevearc/dressing.nvim'                                  " ui enhencement
 Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
 Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'kyazdani42/nvim-web-devicons'                            " for file icons
@@ -144,6 +145,7 @@ lua require('treesittercfg')
 lua require('telescopecfg')
 lua require('toggletermcfg')
 lua require('formattercfg')
+lua require('dresscfg')
 lua require('bufferlinecfg')
 lua require("catppuccincfg")
 lua require('nvimdapcfg')
