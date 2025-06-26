@@ -48,7 +48,7 @@ end
 
 return {
     cmd = { 'clangd' },
-    filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
+    filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto', 'hip' },
     root_markers = {
         '.clangd',
         '.clang-tidy',

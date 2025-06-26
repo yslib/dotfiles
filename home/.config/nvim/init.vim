@@ -122,7 +122,7 @@ nmap ga <Plug>(EasyAlign)
 nnoremap <silent> <leader>g :LazyGit<CR>
 
 " ------------------------------  nvim-tree
-noremap <silent><F3> :<C-U>NvimTreeToggle<CR>
+noremap <silent><F3> :<C-U>NvimTreeFindFileToggle<CR>
 
 " ------------------------------  neovide
 let g:neovide_refresh_rate=144

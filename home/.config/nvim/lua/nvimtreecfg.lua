@@ -75,9 +75,6 @@ require("nvim-tree").setup({
 	git = {
 		enable = false -- performace issuse
 	},
-	view = {
-		adaptive_size = true,
-	},
 	renderer = {
 		group_empty = false,
 	},
