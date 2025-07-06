@@ -68,3 +68,13 @@ if [ -d "$FNM_PATH" ]; then
   export PATH="/home/slyang/.local/share/fnm:$PATH"
   eval "`fnm env`"
 fi
+
+
+# for yazi change working directory when exit by using `y` command
+function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+    yazi "$@" --cwd-file="$tmp"
+    IFS= read -r -d '' cwd < "$tmp"
+    [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
+    rm -f -- "$tmp"
+}
