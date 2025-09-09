@@ -42,6 +42,7 @@ Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'hood/popui.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'rcarriga/nvim-notify'
+Plug 'stevearc/aerial.nvim'
 Plug 'kdheepak/lazygit.nvim'
 Plug 'catppuccin/nvim', {'as': 'catppuccin'}                   " color theme 
 Plug 'xiyaowong/transparent.nvim'                              " transparent background
@@ -154,5 +155,6 @@ lua require('transparentcfg')
 lua require('copilotcfg')
 lua require('copilotchatcfg')
 lua require('spectrecfg')
+lua require('aerialcfg')
 
 lua require'colorizer'.setup()
