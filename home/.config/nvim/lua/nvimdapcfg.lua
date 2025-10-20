@@ -115,6 +115,15 @@ vim.keymap.set('n', '<Leader>dd', function()
     M.reload_dap_config()
 end)
 
+function copy_to_clipboard(text)
+    vim.fn.setreg('+', text)
+    if os.getenv("TMUX") ~= nil then
+        -- running inside tmux, use tmux to set clipboard
+        local cmd = string.format("echo -n %s | tmux load-buffer -", text)
+        vim.fn.system(cmd)
+    end
+end
+
 -- dap keybinds
 vim.keymap.set('n', '<F6>', function() require('dap').continue() end)
 vim.keymap.set('n', '<Leader>dx', function() require('dap').close() end)
@@ -123,7 +132,8 @@ vim.keymap.set('n', '<F11>', function() require('dap').step_into() end)
 vim.keymap.set('n', '<F12>', function() require('dap').step_out() end)
 vim.keymap.set('n', '<F9>', function()
     require('dap').toggle_breakpoint()
-    vim.cmd [[let @+=printf("%s:%d", expand('%:p'), line('.'))]]
+    copy_to_clipboard(
+        string.format("%s:%d", vim.fn.expand('%:p'), vim.fn.line('.')))
 end)
 vim.keymap.set('n', '<Leader>B', function() require('dap').set_breakpoint(); end)
 vim.keymap.set('n', '<Leader>lp',

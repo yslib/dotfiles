@@ -11,4 +11,4 @@ require("aerial").setup({
     end,
 })
 -- You probably also want to set a keymap to toggle aerial
-vim.keymap.set("n", "<F3>", "<cmd>AerialToggle!<CR>")
+vim.keymap.set("n", "<F4>", "<cmd>AerialToggle!<CR>")
