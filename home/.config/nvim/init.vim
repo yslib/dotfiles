@@ -37,8 +37,8 @@ Plug 'windwp/nvim-autopairs'                                   " auto pairs
 Plug 'mhartington/formatter.nvim'
 Plug 'akinsho/toggleterm.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}    " syntax based hightlighting
-Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-Plug 'nvim-treesitter/nvim-treesitter-context'
+" Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+" Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'hood/popui.nvim'
 Plug 'nvim-lua/popup.nvim'
 Plug 'rcarriga/nvim-notify'

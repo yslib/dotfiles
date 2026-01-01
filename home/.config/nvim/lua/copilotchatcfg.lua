@@ -1,3 +1,3 @@
-require 'CopilotChat'.setup({
-	debug = true
-})
+-- require 'CopilotChat'.setup({
+-- 	debug = true
+-- })
