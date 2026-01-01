@@ -66,6 +66,10 @@ Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-pack/nvim-spectre'
 Plug 'kevinhwang91/nvim-bqf'
 
+" Avante
+Plug 'MeanderingProgrammer/render-markdown.nvim'
+Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }
+
 " vim plug
 Plug 'tpope/vim-surround'                                      " vim-surround
 Plug 'tpope/vim-fugitive'
@@ -156,5 +160,6 @@ lua require('copilotcfg')
 lua require('copilotchatcfg')
 lua require('spectrecfg')
 lua require('aerialcfg')
+lua require('avantecfg')
 
 lua require'colorizer'.setup()
