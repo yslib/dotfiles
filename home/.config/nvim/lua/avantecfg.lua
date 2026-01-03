@@ -1,23 +1,22 @@
 require 'avante'.setup {
     ---@alias Provider "claude" | "openai" | "azure" | "gemini" | "cohere" | "copilot" | string
     ---@type Provider
-    provider = "claude", -- The provider used in Aider mode or in the planning phase of Cursor Planning Mode
+    provider = "copilot", -- The provider used in Aider mode or in the planning phase of Cursor Planning Mode
     ---@alias Mode "agentic" | "legacy"
     ---@type Mode
     mode = "agentic", -- The default mode for interaction. "agentic" uses tools to automatically generate code, "legacy" uses the old planning method to generate code.
     -- WARNING: Since auto-suggestions are a high-frequency operation and therefore expensive,
     -- currently designating it as `copilot` provider is dangerous because: https://github.com/yetone/avante.nvim/issues/1048
     -- Of course, you can reduce the request frequency by increasing `suggestion.debounce`.
-    auto_suggestions_provider = "claude",
+    auto_suggestions_provider = "copilot",
     providers = {
-        claude = {
-            endpoint = "https://api.anthropic.com",
-            model = "claude-3-5-sonnet-20241022",
+        copilot = {
+            model = "gpt-4o",
             extra_request_body = {
-                temperature = 0.75,
-                max_tokens = 4096,
+                temperature = 0.2,
+                max_tokens = 16384,
             },
-        },
+        }
     },
     ---Specify the special dual_boost mode
     ---1. enabled: Whether to enable dual_boost mode. Default to false.
@@ -41,9 +40,9 @@ require 'avante'.setup {
         auto_set_keymaps = true,
         auto_apply_diff_after_generation = false,
         support_paste_from_clipboard = false,
-        minimize_diff = true,             -- Whether to remove unchanged lines when applying a code block
-        enable_token_counting = true,     -- Whether to enable token counting. Default to true.
-        auto_add_current_file = true,     -- Whether to automatically add the current file when opening a new chat. Default to true.
+        minimize_diff = true,                 -- Whether to remove unchanged lines when applying a code block
+        enable_token_counting = true,         -- Whether to enable token counting. Default to true.
+        auto_add_current_file = true,         -- Whether to automatically add the current file when opening a new chat. Default to true.
         auto_approve_tool_permissions = true, -- Default: auto-approve all tools (no prompts)
         -- Examples:
         -- auto_approve_tool_permissions = false,                -- Show permission prompts for all tools
@@ -54,12 +53,12 @@ require 'avante'.setup {
         ---@type boolean
         acp_follow_agent_locations = true,
     },
-    prompt_logger = {                                       -- logs prompts to disk (timestamped, for replay/debugging)
-        enabled = true,                                     -- toggle logging entirely
+    prompt_logger = {                                           -- logs prompts to disk (timestamped, for replay/debugging)
+        enabled = true,                                         -- toggle logging entirely
         log_dir = vim.fn.stdpath("cache") .. "/avante_prompts", -- directory where logs are saved
-        fortune_cookie_on_success = false,                  -- shows a random fortune after each logged prompt (requires `fortune` installed)
+        fortune_cookie_on_success = false,                      -- shows a random fortune after each logged prompt (requires `fortune` installed)
         next_prompt = {
-            normal = "<C-n>",                               -- load the next (newer) prompt log in normal mode
+            normal = "<C-n>",                                   -- load the next (newer) prompt log in normal mode
             insert = "<C-n>",
         },
         prev_prompt = {
@@ -115,11 +114,11 @@ require 'avante'.setup {
     },
     windows = {
         ---@type "right" | "left" | "top" | "bottom"
-        position = "right", -- the position of the sidebar
-        wrap = true,    -- similar to vim.o.wrap
-        width = 30,     -- default % based on available width
+        position = "right",   -- the position of the sidebar
+        wrap = true,          -- similar to vim.o.wrap
+        width = 30,           -- default % based on available width
         sidebar_header = {
-            enabled = true, -- true, false to enable/disable the header
+            enabled = true,   -- true, false to enable/disable the header
             align = "center", -- left, center, right for title
             rounded = true,
         },
@@ -137,7 +136,7 @@ require 'avante'.setup {
             start_insert = true, -- Start insert mode when opening the edit window
         },
         ask = {
-            floating = false, -- Open the 'AvanteAsk' prompt in a floating window
+            floating = false,    -- Open the 'AvanteAsk' prompt in a floating window
             start_insert = true, -- Start insert mode when opening the ask window
             border = "rounded",
             ---@type "ours" | "theirs"

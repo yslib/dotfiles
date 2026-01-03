@@ -60,7 +60,6 @@ Plug 'hrsh7th//cmp-nvim-lsp-document-symbol'
 
 Plug 'norcalli/nvim-colorizer.lua' " copilot
 Plug 'zbirenbaum/copilot.lua'
-Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'main' }
 
 Plug 'MunifTanjim/nui.nvim'
 Plug 'nvim-pack/nvim-spectre'
