@@ -23,6 +23,6 @@ end
 ---@type vim.lsp.Config
 return {
   cmd = get_command(),
-  filetypes = { 'tablegen' },
+  filetypes = { "tablegen" },
   root_markers = { 'tablegen_compile_commands.yml', '.git' },
 }
