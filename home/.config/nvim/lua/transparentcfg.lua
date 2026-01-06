@@ -3,7 +3,7 @@ require("transparent").setup({
         'Normal', 'NormalFloat', 'NormalNC', 'Comment', 'Constant', 'Special', 'Identifier',
         'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
         'Conditional', 'Repeat', 'Operator', 'Structure', 'LineNr', 'NonText',
-        'SignColumn', 'CursorLineNr', 'EndOfBuffer',
+        'SignColumn', 'CursorLineNr', 'EndOfBuffer', 'FloatBorder', 'FloatTitle'
     },
     extra_groups = {
     },                   -- table: additional groups that should be cleared

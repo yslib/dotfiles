@@ -26,7 +26,9 @@ require("nvim-dap-virtual-text").setup {
     -- e.g. 80 to position at column 80, see `:h nvim_buf_set_extmark()`
 }
 
-local dap, dapui = require("dap"), require("dapui")
+local dap = require("dap");
+
+local dapui = require("dapui")
 
 -- let add dap-ui to listeners of dap
 dap.listeners.after.event_initialized["dapui_config"] = function()
@@ -41,79 +43,6 @@ dap.listeners.after.event_exited["dapui_config"] = function()
     dapui.close()
 end
 
-
--- config lldb
--- install lldbcode:
---
--- Install codelldb:
--- Download the VS Code extension.
--- Unpack it. .vsix is a zip file and you can use unzip to extract the contents.
---
-dap.adapters.codelldb = {
-    type = 'server',
-    port = "13000",
-    executable = {
-        -- CHANGE THIS to your path!
-        command = 'codelldb',
-        args = { "--port", "13000" },
-        -- On windows you may have to uncomment this:
-        -- detached = false,
-    }
-}
-
-dap.configurations.cpp = {
-    {
-        name = "Launch file",
-        type = "codelldb",
-        request = "launch",
-        program = function()
-            return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/')
-        end,
-        cwd = '${workspaceFolder}',
-        stopOnEntry = false,
-    },
-}
-
-dap.configurations.c = dap.configurations.cpp
-dap.configurations.rust = dap.configurations.cpp
-
-
-
-
-M = {}
-
--- search per-project nvim-dap config
-M.reload_dap_config = function()
-    local config_paths = { "./.nvim-dap/nvim-dap.lua", "./.nvim-dap.lua", "./.nvim/nvim-dap.lua" }
-    if not pcall(require, "dap") then
-        vim.notify("[nvim-dap] Could not find nvim-dap, make sure you have installed it.",
-            vim.log.levels.ERROR, nil)
-        return
-    end
-
-    local project_config = ""
-    for _, p in ipairs(config_paths) do
-        local f = io.open(p)
-        if f ~= nil then
-            f:close()
-            project_config = p
-            break
-        end
-    end
-    if project_config == "" then
-        return
-    end
-
-    vim.notify("[nvim-dap] Found nvim-dap configuration at." .. project_config, vim.log.levels.INFO, nil)
-    require('dap').adapters = (function() return {} end)()
-    require('dap').configurations = (function() return {} end)()
-    vim.cmd(":luafile " .. project_config)
-end
-
--- refresh local dap config
-vim.keymap.set('n', '<Leader>dd', function()
-    M.reload_dap_config()
-end)
 
 function copy_to_clipboard(text)
     vim.fn.setreg('+', text)

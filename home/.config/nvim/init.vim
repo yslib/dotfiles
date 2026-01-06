@@ -57,6 +57,7 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 Plug 'hrsh7th//cmp-nvim-lsp-document-symbol'
 
+Plug 'mrcjkb/rustaceanvim'                                 " rust tools
 
 Plug 'norcalli/nvim-colorizer.lua' " copilot
 Plug 'zbirenbaum/copilot.lua'
@@ -159,5 +160,4 @@ lua require('copilotcfg')
 lua require('spectrecfg')
 lua require('aerialcfg')
 lua require('avantecfg')
-
 lua require'colorizer'.setup()
