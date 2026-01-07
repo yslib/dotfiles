@@ -13,40 +13,32 @@
 call plug#begin(stdpath('data').'/plugged')
 
 " Make sure you use single quotes
-
 " Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
 
+" Utils
 Plug 'nvim-lua/plenary.nvim'                                   " lua utils
-Plug 'stevearc/dressing.nvim'                                  " ui enhencement
-Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
-Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'kyazdani42/nvim-web-devicons'                            " for file icons
-Plug 'kyazdani42/nvim-tree.lua'                                " file explorer
-Plug 'nvim-telescope/telescope.nvim'                           " picker framework
-Plug 'nvim-telescope/telescope-ui-select.nvim'
-Plug 'nvim-telescope/telescope-live-grep-args.nvim'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
-Plug 'mfussenegger/nvim-dap'
-Plug 'rcarriga/nvim-dap-ui'
-Plug 'nvim-neotest/nvim-nio'
-Plug 'theHamsta/nvim-dap-virtual-text'
+Plug 'norcalli/nvim-colorizer.lua'
+
+" Themes
+Plug 'catppuccin/nvim', {'as': 'catppuccin'}                   " color theme 
+Plug 'xiyaowong/transparent.nvim'                              " transparent background
+
+" UI enhancements
 Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
 Plug 'nvim-lualine/lualine.nvim'                               " status line
-Plug 'numToStr/Comment.nvim'                                   " code comment/uncomment
-Plug 'windwp/nvim-autopairs'                                   " auto pairs
-Plug 'mhartington/formatter.nvim'
-Plug 'akinsho/toggleterm.nvim'
+Plug 'MunifTanjim/nui.nvim'
+Plug 'hood/popui.nvim'
+Plug 'stevearc/dressing.nvim'                                  " ui enhencement
+Plug 'rcarriga/nvim-notify'
+Plug 'kevinhwang91/nvim-bqf'                                   " better quickfix window
+
+" Treesitter
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}    " syntax based hightlighting
 " Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 " Plug 'nvim-treesitter/nvim-treesitter-context'
-Plug 'hood/popui.nvim'
-" Plug 'nvim-lua/popup.nvim'
-Plug 'rcarriga/nvim-notify'
-Plug 'stevearc/aerial.nvim'
-Plug 'kdheepak/lazygit.nvim'
-Plug 'catppuccin/nvim', {'as': 'catppuccin'}                   " color theme 
-Plug 'xiyaowong/transparent.nvim'                              " transparent background
-Plug 'sindrets/diffview.nvim'                                  " diff view
+
+" Autocompletion
 Plug 'hrsh7th/cmp-nvim-lsp'                                    " the following plugins  related to completion
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
@@ -57,16 +49,41 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
 Plug 'hrsh7th//cmp-nvim-lsp-document-symbol'
 
-Plug 'mrcjkb/rustaceanvim'                                 " rust tools
+" DAP 
+Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
+Plug 'theHamsta/nvim-dap-virtual-text'
 
-Plug 'norcalli/nvim-colorizer.lua' " copilot
-Plug 'zbirenbaum/copilot.lua'
+" LSP
+Plug 'mrcjkb/rustaceanvim'                                 " for rust
 
-Plug 'MunifTanjim/nui.nvim'
+" Mason
+Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
+Plug 'williamboman/mason-lspconfig.nvim'
+
+" Picker
+Plug 'nvim-telescope/telescope.nvim'                           " picker framework
+Plug 'nvim-telescope/telescope-ui-select.nvim'
+Plug 'nvim-telescope/telescope-live-grep-args.nvim'
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+
+" Terminals
+Plug 'akinsho/toggleterm.nvim'
+
+" File Explorer
+Plug 'kyazdani42/nvim-tree.lua'                                " file explorer
+
+" Tools integrations
+Plug 'kdheepak/lazygit.nvim'
+Plug 'sindrets/diffview.nvim'                                  " diff view
 Plug 'nvim-pack/nvim-spectre'
-Plug 'kevinhwang91/nvim-bqf'
+Plug 'numToStr/Comment.nvim'                                   " code comment/uncomment
+Plug 'windwp/nvim-autopairs'                                   " auto pairs
+Plug 'mhartington/formatter.nvim'
+Plug 'nvim-neotest/nvim-nio'
 
-" Avante
+" AI Tools
+Plug 'zbirenbaum/copilot.lua'
 Plug 'MeanderingProgrammer/render-markdown.nvim'
 Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }
 
@@ -77,6 +94,7 @@ Plug 'mbbill/undotree'
 Plug 'junegunn/gv.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'easymotion/vim-easymotion'
+
 " Initialize plugin system
 call plug#end()
 
@@ -158,7 +176,6 @@ lua require('masonlspcfg')
 lua require('transparentcfg')
 lua require('copilotcfg')
 lua require('spectrecfg')
-lua require('aerialcfg')
 lua require('avantecfg')
 lua require('nvimbqfcfg')
 lua require'colorizer'.setup()
