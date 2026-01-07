@@ -40,7 +40,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}    " syntax based hi
 " Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 " Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'hood/popui.nvim'
-Plug 'nvim-lua/popup.nvim'
+" Plug 'nvim-lua/popup.nvim'
 Plug 'rcarriga/nvim-notify'
 Plug 'stevearc/aerial.nvim'
 Plug 'kdheepak/lazygit.nvim'
@@ -160,5 +160,6 @@ lua require('copilotcfg')
 lua require('spectrecfg')
 lua require('aerialcfg')
 lua require('avantecfg')
+lua require('nvimbqfcfg')
 lua require'colorizer'.setup()
 lua require('rustaceanvimcfg')

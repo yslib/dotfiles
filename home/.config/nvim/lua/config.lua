@@ -4,18 +4,6 @@ local keymap = vim.keymap.set
 
 
 -- telescope keybinds
-keymap('n', '<leader>ff', function() require('telescope.builtin').find_files() end, { desc = 'Find files' })
-keymap('n', '<leader>fg', function() require('telescope.builtin').live_grep() end, { desc = 'Live grep' })
-keymap('n', '<leader>fc', function() require('telescope.builtin').grep_string() end, { desc = 'Grep string' })
-keymap('n', '<leader>fh', function() require('telescope.builtin').help_tags() end, { desc = 'Help tags' })
-keymap('n', '<leader>fb', function() require('telescope.builtin').buffers() end, { desc = 'Buffers' })
-keymap('n', '<leader>fs', function() require('telescope.builtin').lsp_document_symbols() end,
-    { desc = 'LSP Document Symbols' })
-
-keymap('n', '<leader>r', function() require('telescope.builtin').reloader() end, { desc = 'Reload' })
-keymap('n', '<leader>dh', function() require('dap.ui.variables').hover() end, { desc = 'DAP Hover Variables' })
-keymap('n', '<leader>dr', function() require('nvimdapcfg').reload_dap_config() end, { desc = 'Reload DAP Config' })
-
 
 -- bufferline.nvim
 
