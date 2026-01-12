@@ -74,6 +74,7 @@ Plug 'akinsho/toggleterm.nvim'
 Plug 'kyazdani42/nvim-tree.lua'                                " file explorer
 
 " Tools integrations
+Plug 'MeanderingProgrammer/render-markdown.nvim'
 Plug 'kdheepak/lazygit.nvim'
 Plug 'sindrets/diffview.nvim'                                  " diff view
 Plug 'nvim-pack/nvim-spectre'
@@ -84,8 +85,7 @@ Plug 'nvim-neotest/nvim-nio'
 
 " AI Tools
 Plug 'zbirenbaum/copilot.lua'
-Plug 'MeanderingProgrammer/render-markdown.nvim'
-Plug 'yetone/avante.nvim', { 'branch': 'main', 'do': 'make' }
+Plug 'NickvanDyke/opencode.nvim'
 
 " vim plug
 Plug 'tpope/vim-surround'                                      " vim-surround
@@ -98,7 +98,7 @@ Plug 'easymotion/vim-easymotion'
 " Initialize plugin system
 call plug#end()
 
-lua vim.o.exrc=true
+lua vim.o.exrc=true " auto load local .nvim.lua or .nvim.vim files
 
 "tab as 4 spaces
 set tabstop=4       " The width of a TAB is set to 4.
@@ -178,7 +178,7 @@ lua require('masonlspcfg')
 lua require('transparentcfg')
 lua require('copilotcfg')
 lua require('spectrecfg')
-lua require('avantecfg')
 lua require('nvimbqfcfg')
 lua require'colorizer'.setup()
 lua require('rustaceanvimcfg')
+lua require('opencodecfg')
