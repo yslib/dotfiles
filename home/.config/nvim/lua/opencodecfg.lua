@@ -23,7 +23,7 @@ vim.api.nvim_create_autocmd("User", {
         ---@type number
         local port = args.data.port
 
-        vim.notify(vim.inspect(event))
+        -- vim.notify(vim.inspect(event))
         if event.type == "session.idle" then
             vim.notify("`opencode` finished responding")
         end
