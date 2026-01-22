@@ -98,7 +98,7 @@ Plug 'easymotion/vim-easymotion'
 " Initialize plugin system
 call plug#end()
 
-lua vim.o.exrc=true " auto load local .nvim.lua or .nvim.vim files
+lua vim.o.exrc=true
 
 "tab as 4 spaces
 set tabstop=4       " The width of a TAB is set to 4.
