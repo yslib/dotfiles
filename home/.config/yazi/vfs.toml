@@ -4,3 +4,10 @@ host = "192.168.100.201"
 user = "slyang"
 port = 22
 key_file = "~/.ssh/id_ed25519"
+
+[services.ubuntu]
+type = "sftp"
+host = "192.168.0.81"
+user = "slyang"
+port = 22
+key_file = "~/.ssh/id_ed25519"

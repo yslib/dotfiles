@@ -10,3 +10,8 @@ on   = "!"
 for  = "windows"
 run  = 'shell "powershell.exe" --block'
 desc = "Open PowerShell here"
+
+[[mgr.append_keymap]]
+on  = ["g","s"]
+run = "plugin sftp"
+desc = "Connect to SFTP"
