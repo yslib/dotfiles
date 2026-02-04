@@ -1,5 +1,8 @@
 require('blink.cmp').setup({
-    keymap = { preset = 'default' },
+    keymap = {
+        preset = 'super-tab',
+        ["<CR>"] = { 'accept', 'fallback' }
+    },
     appearance = {
         nerd_font_variant = 'mono'
     },
