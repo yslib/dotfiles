@@ -39,15 +39,19 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}    " syntax based hi
 " Plug 'nvim-treesitter/nvim-treesitter-context'
 
 " Autocompletion
-Plug 'hrsh7th/cmp-nvim-lsp'                                    " the following plugins  related to completion
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
-Plug 'hrsh7th//cmp-nvim-lsp-document-symbol'
+" Plug 'hrsh7th/cmp-nvim-lsp'                                    " the following plugins  related to completion
+" Plug 'hrsh7th/cmp-buffer'
+" Plug 'hrsh7th/cmp-path'
+" Plug 'hrsh7th/cmp-cmdline'
+" Plug 'hrsh7th/cmp-vsnip'
+" Plug 'hrsh7th/vim-vsnip'
+" Plug 'hrsh7th/nvim-cmp'
+" Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+" Plug 'hrsh7th//cmp-nvim-lsp-document-symbol'
+
+Plug 'saghen/blink.cmp', { 'tag': 'v1.*' }
+" optional: provides snippets for the snippet source
+Plug 'rafamadriz/friendly-snippets'
 
 " DAP 
 Plug 'mfussenegger/nvim-dap'
@@ -158,7 +162,8 @@ set guifont=Hack\ Nerd\ Font:h16
 lua require('config')       -- global configuration
 lua require("utils")
 lua require('lspconfigcfg')
-lua require('nvimcmpcfg')
+" lua require('nvimcmpcfg')
+lua require('blinkcmpcfg')
 lua require('masoncfg')
 lua require('nvimtreecfg')
 lua require('commentcfg')
