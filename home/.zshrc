@@ -61,15 +61,6 @@ source $ZSH_CUSTOM/themes/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-source ./scripts/fzf-git
-
-# fnm
-FNM_PATH="/home/slyang/.local/share/fnm"
-if [ -d "$FNM_PATH" ]; then
-  export PATH="/home/slyang/.local/share/fnm:$PATH"
-  eval "`fnm env`"
-fi
-
 
 # for yazi change working directory when exit by using `y` command
 function y() {
@@ -79,3 +70,6 @@ function y() {
     [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
     rm -f -- "$tmp"
 }
+
+# for mise
+eval "$(mise activate zsh)"

@@ -1,0 +1,23 @@
+[tools]
+"github:tmux/tmux" = "latest"
+# "github:neovim/neovim" = "latest"
+"github:BurntSushi/ripgrep" = "latest"
+"github:sharkdp/fd" = "latest"
+"github:junegunn/fzf" = "latest"
+"github:jesseduffield/lazygit" = "latest"
+"github:sxyazi/yazi" = "latest"
+"github:ajeetdsouza/zoxide" = "latest"
+
+[tasks.install_zsh]
+description = "Install Zsh"
+outputs = ["~/.local/bin/zsh"]
+run = """
+#!/bin/bash
+INSTALL_DIR="$HOME/.local"
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh-bin/master/install)" "" \
+    -d "$INSTALL_DIR" \
+    -e no
+
+echo "✅ Zsh is installed as $INSTALL_DIR/bin/zsh"
+"""

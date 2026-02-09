@@ -1,0 +1,5 @@
+brew "ripgrep"
+brew "neovim"
+brew "fzf"
+brew "lazygit"
+brew "stow"
