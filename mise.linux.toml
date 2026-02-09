@@ -1,6 +1,6 @@
 [tools]
 "github:tmux/tmux" = "latest"
-# "github:neovim/neovim" = "latest"
+"github:neovim/neovim" = "latest"
 "github:BurntSushi/ripgrep" = "latest"
 "github:sharkdp/fd" = "latest"
 "github:junegunn/fzf" = "latest"
@@ -12,12 +12,5 @@
 description = "Install Zsh"
 outputs = ["~/.local/bin/zsh"]
 run = """
-#!/bin/bash
-INSTALL_DIR="$HOME/.local"
-
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/romkatv/zsh-bin/master/install)" "" \
-    -d "$INSTALL_DIR" \
-    -e no
-
-echo "✅ Zsh is installed as $INSTALL_DIR/bin/zsh"
+{{config_root}}/scripts/install_zsh.sh
 """

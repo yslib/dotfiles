@@ -4,7 +4,7 @@ MY_UID=$(id -u)
 MY_GID=$(id -g)
 
 # 2. 启动容器，创建指定 UID 的用户
-docker run --rm -it \
+sudo docker run --rm -it \
   -v "$(pwd):/test" \
   -e http_proxy="http://192.168.0.147:7897" \
   -e https_proxy="http://192.168.0.147:7897" \

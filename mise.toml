@@ -8,42 +8,14 @@ run = "mise install"
 description = "Install Tmux Plugin Manager"
 depends = ["install_tools"]
 run = """
-#!/bin/bash
-TPM_DIR="$HOME/.tmux/plugins/tpm"
-
-if [ -d "$TPM_DIR" ]; then
-    echo "✅ TPM already exists, skip..."
-else
-    echo "⬇️ Cloning TPM..."
-    git clone https://github.com/tmux-plugins/tpm "$TPM_DIR"
-    "$TPM_DIR/bin/install_plugins"
-fi
+{{config_root}}/scripts/install_tpm.sh
 """
 
 [tasks.install_oh_my_zsh]
 description = "Install Oh My Zsh"
-depends = ["install_zsh"]
 outputs = ["~/.oh-my-zsh/oh-my-zsh.sh"]
 run = """
-#!/bin/bash
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-fi
-
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-"""
-
-[tasks.change_shell]
-description = "change default shell to zsh"
-depends = ["install_oh_my_zsh"]
-run = """
-#!/bin/bash
-if [ "$SHELL" != "$(which zsh)" ]; then
-    echo "🔄 正在切换 Shell 到 Zsh (需要密码)..."
-    chsh -s "$(which zsh)"
-fi
+{{config_root}}/scripts/install_oh_my_zsh.sh
 """
 
 [tasks.update_tpm]
@@ -56,19 +28,14 @@ cd "$HOME/.tmux/plugins/tpm" && git pull
 [tasks.nvim_plugins]
 description = "Install Vim Plug"
 depends = ["install_tools"]
+outputs = ["~/.local/share/nvim/site/autoload/plug.vim"]
 run = """
-#!/bin/bash
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-
-
-nvim --headless +PlugInstall +qall
-
+{{config_root}}/scripts/setup_nvim_plugin.sh
 """
 
 [tasks.setup]
 description = "Install tools and link dotfiles"
-depends = ["install_tools", "install_oh_my_zsh", "change_shell"]
+depends = ["install_tools","nvim_plugins", "install_oh_my_zsh"]
 run = """
 #!/bin/bash
 
@@ -80,6 +47,6 @@ elif [[ "$OS" == "Windows_NT" ]]; then
 else
     echo "🐧 On Linux"
 fi
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-$SCRIPT_DIR/scripts/link.sh
+
+{{config_root}}/scripts/link.sh
 """

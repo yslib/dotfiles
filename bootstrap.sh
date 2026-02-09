@@ -16,6 +16,4 @@ eval "$(mise activate bash)"
 
 echo "🔧 Bootstrap complete. MISE is installed and activated."
 
-mise install
-
 mise run setup
