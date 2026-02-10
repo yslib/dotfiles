@@ -1,16 +1,1 @@
 [tools]
-"github:tmux/tmux" = "latest"
-"github:neovim/neovim" = "latest"
-"github:BurntSushi/ripgrep" = "latest"
-"github:sharkdp/fd" = "latest"
-"github:junegunn/fzf" = "latest"
-"github:jesseduffield/lazygit" = "latest"
-"github:sxyazi/yazi" = "latest"
-"github:ajeetdsouza/zoxide" = "latest"
-
-[tasks.install_zsh]
-description = "Install Zsh"
-outputs = ["~/.local/bin/zsh"]
-run = """
-{{config_root}}/scripts/install_zsh.sh
-"""

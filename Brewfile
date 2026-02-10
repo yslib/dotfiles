@@ -1,5 +1,29 @@
-brew "ripgrep"
-brew "neovim"
-brew "fzf"
+brew "zsh"
+brew "tmux"
 brew "lazygit"
-brew "stow"
+brew "node"
+brew "git"
+brew "cmake"
+brew "lazygit"
+brew "neovim"
+brew "zoxide"
+brew "ripgrep"
+brew "fd"
+brew "fzf"
+brew "yazi"
+brew "just"
+brew "dust"
+
+if OS.mac?
+  cask "iterm2"
+  cask "docker"
+  cask "raycast"
+  cask "sy-symbols"
+  tap "homebrew/cask-fonts"
+  cask "font-hack-nerd-font"
+end
+
+
+if OS.linux?
+  brew "xclip"
+end

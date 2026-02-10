@@ -9,6 +9,7 @@ export TERM="xterm-256color"
 
 export PATH=$HOME/scripts:$HOME/.local/bin:$PATH
 
+
 eval "$(mise activate zsh)"
 
 # If you come from bash you might have to change your $PATH.
@@ -25,7 +26,40 @@ export ZSH=$HOME/.oh-my-zsh
 # ZSH_THEME="agnoster"
 ZSH_THEME="powerlevel10k/powerlevel10k" # git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 eval "$(zoxide init zsh)"
+
+function omz-install() {
+    if [ -z "$1" ]; then
+        echo "Usage : omz-install <author/plugin_name> (e.g: omz-install zsh-users/zsh-autosuggestions)"
+        return 1
+    fi
+
+    local plugin_repo=$1
+    local plugin_name=${1##*/}
+    local plugin_dir="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/$plugin_name"
+
+    # 1. clone
+    if [ -d "$plugin_dir" ]; then
+        echo "$plugin_name already exists $plugin_dir"
+    else
+        echo "Downlowding $plugin_name..."
+        git clone --depth=1 "https://github.com/$plugin_repo.git" "$plugin_dir"
+    fi
+
+    # 正则逻辑：定位到 plugins=(...) 并在括号内插入新插件名
+    if grep -q "plugins=(.*$plugin_name.*)" ~/.zshrc; then
+        echo " $plugin_name already exists in plugin list of .zshrc"
+    else
+        echo "Adding $plugin_name to .zshrc..."
+        if [[ "$OSTYPE" == "darwin"* ]]; then
+            sed -i '' "s/plugins=(\([^)]*\))/plugins=(\1 $plugin_name)/" ~/.zshrc
+        else
+            sed -i "s/plugins=(\([^)]*\))/plugins=(\1 $plugin_name)/" ~/.zshrc
+        fi
+        echo "Success！Please 'source ~/.zshrc' or restart terminal to apply the plugin."
+    fi
+}
 
 plugins=(git
 	zsh-syntax-highlighting # git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
@@ -73,5 +107,7 @@ function y() {
     rm -f -- "$tmp"
 }
 
-# for mise
-eval "$(mise activate zsh)"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+

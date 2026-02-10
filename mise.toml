@@ -7,6 +7,7 @@ run = "mise install"
 [tasks.install_tpm]
 description = "Install Tmux Plugin Manager"
 depends = ["install_tools"]
+outputs = ["~/.tmux/plugins/tpm/tpm"]
 run = """
 {{config_root}}/scripts/install_tpm.sh
 """
@@ -18,13 +19,6 @@ run = """
 {{config_root}}/scripts/install_oh_my_zsh.sh
 """
 
-[tasks.update_tpm]
-description = "Update TPM"
-run = """
-#!/bin/bash
-cd "$HOME/.tmux/plugins/tpm" && git pull
-"""
-
 [tasks.nvim_plugins]
 description = "Install Vim Plug"
 depends = ["install_tools"]
@@ -33,20 +27,18 @@ run = """
 {{config_root}}/scripts/setup_nvim_plugin.sh
 """
 
-[tasks.setup]
-description = "Install tools and link dotfiles"
-depends = ["install_tools","nvim_plugins", "install_oh_my_zsh"]
+[tasks.link_config]
+description = "Link dotfiles"
+depends = ["install_tools"]
 run = """
 #!/bin/bash
+{{config_root}}/scripts/link_config.sh
+"""
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    echo "🍎 On macOS, Running Homebrew..."
-    brew bundle --file=$(pwd)/Brewfile
-elif [[ "$OS" == "Windows_NT" ]]; then
-    echo "🪟 On Windows，choco install.." 
-else
-    echo "🐧 On Linux"
-fi
-
-{{config_root}}/scripts/link.sh
+[tasks.setup]
+description = "Install tools and link dotfiles"
+depends = ["install_tools", "link_config", "nvim_plugins", "install_tpm", "install_oh_my_zsh"]
+run = """
+#!/bin/bash
+echo "Setup complete! Please restart your terminal to apply changes. \n(Manually change your shell to zsh if you haven't already. Run 'chsh -s $(which zsh)')"
 """

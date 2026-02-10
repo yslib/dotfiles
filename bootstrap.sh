@@ -1,19 +1,28 @@
 #!/bin/bash
 set -e
-
-export MISE_INSTALL_PATH="$HOME/.local/bin/mise"
-
-if [ ! -f "$MISE_INSTALL_PATH" ]; then
-    curl https://mise.jdx.dev/mise-latest-linux-x64-musl > "$MISE_INSTALL_PATH"
-    chmod +x "$MISE_INSTALL_PATH"
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    echo "🍎 On macOS, Installing Homebrew..."
+else
+    echo "🐧 On Linux, Installing Homebrew..."
 fi
 
-export PATH="$HOME/.local/bin:$PATH"
+mkdir -p "$HOME/.local/bin"
+mkdir -p "$HOME/.config"
 
-export MISE_ENV=linux
+if [ -f "/home/linuxbrew/.linuxbrew/bin/brew" ]; then
+    echo "✅ Homebrew already exists, skip installation."
+else 
+    echo "Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
 
-eval "$(mise activate bash)"
+echo "🍺 Installing packages with Homebrew..."
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+brew bundle --file=./Brewfile --verbose
 
-echo "🔧 Bootstrap complete. MISE is installed and activated."
+echo "Installing Mise..."
+curl https://mise.run | sh
 
+echo "Running Mise setup..."
+eval "$(~/.local/bin/mise activate bash)"
 mise run setup
