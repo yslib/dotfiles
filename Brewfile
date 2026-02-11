@@ -24,4 +24,5 @@ end
 
 if OS.linux?
   brew "xclip"
+  brew "lazydocker"
 end
