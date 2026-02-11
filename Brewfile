@@ -13,16 +13,13 @@ brew "fzf"
 brew "yazi"
 brew "just"
 brew "dust"
+brew "git-delta"
 
 if OS.mac?
-  cask "iterm2"
-  cask "docker"
-  cask "raycast"
   cask "sy-symbols"
   tap "homebrew/cask-fonts"
   cask "font-hack-nerd-font"
 end
-
 
 if OS.linux?
   brew "xclip"

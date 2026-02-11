@@ -1,7 +1,7 @@
 #!/bin/bash
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 CONFIG_HOME="$SCRIPT_DIR/../home"
-echo $CONFIG_HOME
+
 ln -sf "$CONFIG_HOME/.config/nvim" "$HOME/.config/nvim"
 ln -sf "$CONFIG_HOME/.config/yazin" "$HOME/.config/yazi"
 ln -sf "$CONFIG_HOME/.config/lazygit" "$HOME/.config/lazygit"
