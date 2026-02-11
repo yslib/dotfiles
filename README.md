@@ -20,18 +20,21 @@ git clone https://github.com/yslib/dotfiles.git && cd dotfiles && ./bootstrap.sh
 No prerequisites needed. Run in PowerShell:
 
 ```powershell
-git clone https://github.com/yslib/dotfiles.git; cd dotfiles; powershell -ExecutionPolicy Bypass -File .\bootstrap.ps1
+irm https://raw.githubusercontent.com/yslib/dotfiles/master/bootstrap.ps1 | iex
 ```
 
-`bootstrap.ps1` installs Scoop + Git for Windows, then hands off to `bootstrap.sh` running in Git Bash.
-The same bash scripts handle everything — only the config paths differ on Windows.
+This single command will:
 
-### What happens
+1. Install **Scoop** (package manager)
+2. Install **Git for Windows** via Scoop (provides bash)
+3. Clone this repo to `~/dotfiles`
+4. Hand off to `bootstrap.sh` running in Git Bash — the same bash scripts handle the rest
 
-1. **Scoop + Git** are installed by `bootstrap.ps1`
-2. **Packages** from `Scoopfile.json` are installed via `scoop import` (neovim, lazygit, ripgrep, fzf, yazi, delta, etc.)
-3. **Symlinks** are created by `link_config.sh` using `mklink` (Windows-native symlinks that native apps can follow)
-4. **Neovim plugins** are bootstrapped by `setup_nvim_plugin.sh` (vim-plug + PlugInstall)
+From there `bootstrap.sh` detects Windows (MSYS/MINGW) and:
+
+1. Installs packages from `Scoopfile.json` via `scoop import`
+2. Creates **native NTFS symlinks** (`mklink`) for config files
+3. Bootstraps Neovim plugins (vim-plug + PlugInstall)
 
 ### Windows config path mapping
 
