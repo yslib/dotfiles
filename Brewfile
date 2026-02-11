@@ -17,8 +17,7 @@ brew "python"
 brew "node"
 
 if OS.mac?
-  cask "sy-symbols"
-  tap "homebrew/cask-fonts"
+  cask "sf-symbols"
   cask "font-hack-nerd-font"
 end
 
