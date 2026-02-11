@@ -1,7 +1,6 @@
 brew "zsh"
 brew "tmux"
 brew "lazygit"
-brew "node"
 brew "git"
 brew "cmake"
 brew "lazygit"
@@ -14,6 +13,8 @@ brew "yazi"
 brew "just"
 brew "dust"
 brew "git-delta"
+brew "python"
+brew "node"
 
 if OS.mac?
   cask "sy-symbols"

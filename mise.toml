@@ -4,13 +4,6 @@
 description = "mise install"
 run = "mise install"
 
-[tasks.install_tpm]
-description = "Install Tmux Plugin Manager"
-depends = ["install_tools"]
-outputs = ["~/.tmux/plugins/tpm/tpm"]
-run = """
-{{config_root}}/scripts/install_tpm.sh
-"""
 
 [tasks.install_oh_my_zsh]
 description = "Install Oh My Zsh"
@@ -37,7 +30,7 @@ run = """
 
 [tasks.setup]
 description = "Install tools and link dotfiles"
-depends = ["install_tools", "link_config", "nvim_plugins", "install_tpm", "install_oh_my_zsh"]
+depends = ["install_tools", "nvim_plugins", "install_oh_my_zsh"]
 run = """
 #!/bin/bash
 echo "Setup complete! Please restart your terminal to apply changes. \n(Manually change your shell to zsh if you haven't already. Run 'chsh -s $(which zsh)')"

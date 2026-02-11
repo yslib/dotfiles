@@ -4,9 +4,9 @@ My development enviroment configruations on Windows, Linux and macOS.
 
 The following software must be installed on your system before bootstrapping the environment for Linux/macOS:
 
-- Git
+- git
 - curl
-- Bash
+- bash
 - unzip
 - tar
 - make
@@ -14,6 +14,5 @@ The following software must be installed on your system before bootstrapping the
 
 
 ```sh
-
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/yslib/dotfiles/main/bootstrap.sh)"
+git clone https://github.com/yslib/dotfiles.git && cd dotfiles && ./bootstrap.sh
 ```

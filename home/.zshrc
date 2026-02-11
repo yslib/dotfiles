@@ -47,7 +47,6 @@ function omz-install() {
         git clone --depth=1 "https://github.com/$plugin_repo.git" "$plugin_dir"
     fi
 
-    # 正则逻辑：定位到 plugins=(...) 并在括号内插入新插件名
     if grep -q "plugins=(.*$plugin_name.*)" ~/.zshrc; then
         echo " $plugin_name already exists in plugin list of .zshrc"
     else
