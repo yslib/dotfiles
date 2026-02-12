@@ -144,6 +144,22 @@ $DocsDir = [Environment]::GetFolderPath('MyDocuments')
 New-DotfilesLink -Source (Join-Path $ConfigHome ".config\powershell\profile.ps1") `
                  -Target (Join-Path $DocsDir "PowerShell\profile.ps1")
 
+# windows-terminal: detect all installed versions and link settings.json
+$WTSource = Join-Path $ConfigHome ".config\windows-terminal\settings.json"
+$WTTargets = @{
+    "Stable (Scoop/zip)"  = Join-Path $env:LOCALAPPDATA "Microsoft\Windows Terminal\settings.json"
+    "Stable (Store)"      = Join-Path $env:LOCALAPPDATA "Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+    "Preview (Store)"     = Join-Path $env:LOCALAPPDATA "Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json"
+    "Canary (Store)"      = Join-Path $env:LOCALAPPDATA "Packages\Microsoft.WindowsTerminalCanary_8wekyb3d8bbwe\LocalState\settings.json"
+}
+foreach ($entry in $WTTargets.GetEnumerator()) {
+    $parentDir = Split-Path -Parent $entry.Value
+    if (Test-Path $parentDir) {
+        Write-Host "   [WT] Found $($entry.Key) at $parentDir" -ForegroundColor Cyan
+        New-DotfilesLink -Source $WTSource -Target $entry.Value
+    }
+}
+
 # ── Done ─────────────────────────────────────────────────────────
 Write-Host "`n========================================" -ForegroundColor Green
 Write-Host "  Bootstrap complete!" -ForegroundColor Green

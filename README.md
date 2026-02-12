@@ -47,3 +47,4 @@ This single command will:
 | alacritty | `~/.config/alacritty` | `%APPDATA%\alacritty` |
 | gitconfig | `~/.gitconfig` | `%USERPROFILE%\.gitconfig` |
 | PowerShell profile | — | `<Documents>\PowerShell\profile.ps1` |
+| Windows Terminal | — | Auto-detected (Stable/Preview/Canary, Store or Scoop) |

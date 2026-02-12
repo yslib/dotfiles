@@ -1,6 +1,11 @@
 # ── Dotfiles PowerShell profile ──────────────────────────────────
 # Windows equivalent of .zshrc — managed by dotfiles repo.
 
+# ── Starship prompt ─────────────────────────────────────────────
+if (Get-Command starship -ErrorAction SilentlyContinue) {
+    Invoke-Expression (&starship init powershell)
+}
+
 # ── Editor ──────────────────────────────────────────────────────
 $env:EDITOR = "nvim"
 
