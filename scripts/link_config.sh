@@ -7,8 +7,15 @@ is_windows() {
 }
 
 # On Windows, cmd-style symlinks are needed for native apps (nvim, lazygit, etc.)
-# Git Bash's `ln -s` creates copies or MSYS-internal symlinks that native
-# Windows programs cannot follow. We use cmd.exe /c mklink instead.
+# Git Bash's `ln -s` creates MSYS-internal symlinks that native Windows programs
+# cannot follow. We use cmd.exe /c mklink instead.
+#
+# mklink requires ONE of:
+#   - Administrator privileges, OR
+#   - Developer Mode enabled (Win10 1703+)
+#
+# If neither is available, we fall back to directory junctions (/J) for dirs
+# and hard links for files, which don't require elevation.
 win_symlink() {
     local source="$1"
     local target="$2"
@@ -18,18 +25,44 @@ win_symlink() {
     win_source=$(cygpath -w "$source")
     win_target=$(cygpath -w "$target")
 
-    # Remove existing target
+    # Remove existing target — must use cmd.exe for NTFS symlinks/junctions
     if [ -e "$target" ] || [ -L "$target" ]; then
-        rm -rf "$target"
+        if [ -d "$target" ]; then
+            cmd.exe //c "rmdir \"$win_target\"" > /dev/null 2>&1 || rm -rf "$target"
+        else
+            cmd.exe //c "del /F /Q \"$win_target\"" > /dev/null 2>&1 || rm -f "$target"
+        fi
     fi
 
-    # Determine if source is a directory or file
+    local ok=false
+
     if [ -d "$source" ]; then
-        cmd.exe //c "mklink /D \"$win_target\" \"$win_source\"" > /dev/null 2>&1
+        # Try symbolic link first (needs admin or dev mode)
+        if cmd.exe //c "mklink /D \"$win_target\" \"$win_source\"" > /dev/null 2>&1; then
+            ok=true
+        # Fall back to junction (no elevation needed, works for local dirs)
+        elif cmd.exe //c "mklink /J \"$win_target\" \"$win_source\"" > /dev/null 2>&1; then
+            echo "  (junction) $target -> $source"
+            return 0
+        fi
     else
-        cmd.exe //c "mklink \"$win_target\" \"$win_source\"" > /dev/null 2>&1
+        # Try symbolic link first
+        if cmd.exe //c "mklink \"$win_target\" \"$win_source\"" > /dev/null 2>&1; then
+            ok=true
+        # Fall back to hard link (no elevation needed, same volume only)
+        elif cmd.exe //c "mklink /H \"$win_target\" \"$win_source\"" > /dev/null 2>&1; then
+            echo "  (hardlink) $target -> $source"
+            return 0
+        fi
     fi
-    echo "  $target -> $source"
+
+    if $ok; then
+        echo "  $target -> $source"
+    else
+        echo "  [FAIL] Could not link: $target -> $source" >&2
+        echo "         Run as Administrator, or enable Developer Mode in Windows Settings." >&2
+        return 1
+    fi
 }
 
 make_link() {
@@ -58,7 +91,7 @@ if is_windows; then
     # Windows native app config paths
     APPDATA_LOCAL="$(cygpath "$LOCALAPPDATA")"
     APPDATA_ROAMING="$(cygpath "$APPDATA")"
-    USERPROFILE="$(cygpath "$USERPROFILE")"
+    WIN_USERPROFILE="$(cygpath "$USERPROFILE")"
 
     # nvim: %LOCALAPPDATA%\nvim
     make_link "$CONFIG_HOME/.config/nvim"      "$APPDATA_LOCAL/nvim"
@@ -73,7 +106,7 @@ if is_windows; then
     make_link "$CONFIG_HOME/.config/alacritty" "$APPDATA_ROAMING/alacritty"
 
     # gitconfig: ~\.gitconfig
-    make_link "$CONFIG_HOME/.gitconfig"        "$USERPROFILE/.gitconfig"
+    make_link "$CONFIG_HOME/.gitconfig"        "$WIN_USERPROFILE/.gitconfig"
 else
     # Linux / macOS (XDG paths)
     make_link "$CONFIG_HOME/.config/nvim"      "$HOME/.config/nvim"
