@@ -1,7 +1,7 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
-    "defaultProfile": "{00000000-0000-0000-ba54-000000000002}",
+    "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
     "copyOnSelect": false,
     "copyFormatting": "none",
     "initialCols": 120,
@@ -16,7 +16,7 @@
             "colorScheme": "Nord",
             "cursorShape": "underscore",
             "opacity": 90,
-            "useAcrylic": false,
+            "useAcrylic": true,
             "padding": "5"
         },
         "list": [
