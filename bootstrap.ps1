@@ -11,7 +11,6 @@
 $ErrorActionPreference = "Stop"
 
 $DotfilesRepo = "https://github.com/yslib/dotfiles.git"
-$DotfilesDir  = Join-Path (Get-Location) "dotfiles"
 
 # ── 0. Self-elevate if not admin ────────────────────────────────────
 $isAdmin = ([Security.Principal.WindowsPrincipal] `
@@ -50,13 +49,20 @@ if (-not (Get-Command git -ErrorAction SilentlyContinue)) {
     Write-Host ">> Git already installed." -ForegroundColor Green
 }
 
-# ── 3. Clone dotfiles repo ───────────────────────────────────────
-if (Test-Path (Join-Path $DotfilesDir ".git")) {
-    Write-Host ">> Dotfiles repo already exists at $DotfilesDir, pulling latest..." -ForegroundColor Green
-    git -C $DotfilesDir pull --rebase
+# ── 3. Clone dotfiles repo (or detect we're already inside one) ──
+if (Test-Path (Join-Path (Get-Location) "Scoopfile.json")) {
+    # Already inside the dotfiles repo (e.g. user ran .\bootstrap.ps1)
+    $DotfilesDir = (Get-Location).Path
+    Write-Host ">> Running from existing repo at $DotfilesDir" -ForegroundColor Green
 } else {
-    Write-Host ">> Cloning dotfiles repo to $DotfilesDir..." -ForegroundColor Cyan
-    git clone $DotfilesRepo $DotfilesDir
+    $DotfilesDir = Join-Path (Get-Location) "dotfiles"
+    if (Test-Path (Join-Path $DotfilesDir ".git")) {
+        Write-Host ">> Dotfiles repo already exists at $DotfilesDir, pulling latest..." -ForegroundColor Green
+        git -C $DotfilesDir pull --rebase
+    } else {
+        Write-Host ">> Cloning dotfiles repo to $DotfilesDir..." -ForegroundColor Cyan
+        git clone $DotfilesRepo $DotfilesDir
+    }
 }
 
 # ── 4. Locate bash and run bootstrap.sh ──────────────────────────
