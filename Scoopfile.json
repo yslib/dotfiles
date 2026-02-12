@@ -24,6 +24,7 @@
         { "Name": "lazydocker", "Source": "main" },
         { "Name": "vscode",     "Source": "extras" },
         { "Name": "everything", "Source": "extras" },
+        { "Name": "pwsh",       "Source": "main" },
         { "Name": "Hack-NF",    "Source": "nerd-fonts" }
     ]
 }

@@ -46,3 +46,4 @@ This single command will:
 | lazygit | `~/.config/lazygit` | `%LOCALAPPDATA%\lazygit` |
 | alacritty | `~/.config/alacritty` | `%APPDATA%\alacritty` |
 | gitconfig | `~/.gitconfig` | `%USERPROFILE%\.gitconfig` |
+| PowerShell profile | — | `%USERPROFILE%\Documents\PowerShell\Microsoft.PowerShell_profile.ps1` |

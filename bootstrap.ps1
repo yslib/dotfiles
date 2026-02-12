@@ -133,6 +133,10 @@ New-DotfilesLink -Source (Join-Path $ConfigHome ".config\alacritty") `
 New-DotfilesLink -Source (Join-Path $ConfigHome ".gitconfig") `
                  -Target (Join-Path $env:USERPROFILE ".gitconfig")
 
+# powershell profile: ~\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
+New-DotfilesLink -Source (Join-Path $ConfigHome ".config\powershell\Microsoft.PowerShell_profile.ps1") `
+                 -Target (Join-Path $env:USERPROFILE "Documents\PowerShell\Microsoft.PowerShell_profile.ps1")
+
 # ── Done ─────────────────────────────────────────────────────────
 Write-Host "`n========================================" -ForegroundColor Green
 Write-Host "  Bootstrap complete!" -ForegroundColor Green
