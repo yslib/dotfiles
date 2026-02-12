@@ -1,82 +1,130 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
-    "$schema": "https://aka.ms/terminal-profiles-schema",
-    "defaultProfile": "{00000000-0000-0000-ba54-000000000002}",
-    "copyOnSelect": false,
+    "$schema": "https://raw.githubusercontent.com/microsoft/terminal/main/doc/cascadia/profiles.schema.json",
+    "actions": [],
     "copyFormatting": "none",
+    "copyOnSelect": false,
+    "defaultInputScope": "alphanumericHalfWidth",
+    "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
     "initialCols": 120,
     "initialRows": 30,
-    "theme": "system",
-    "profiles": {
-        "defaults": {
-            "font": {
-                "face": "Hack Nerd Font",
-                "size": 12
-            },
+    "keybindings":
+    [
+        {
+            "id": "Terminal.CopyToClipboard",
+            "keys": "ctrl+shift+c"
+        },
+        {
+            "id": "Terminal.PasteFromClipboard",
+            "keys": "ctrl+shift+v"
+        },
+        {
+            "id": "Terminal.MoveFocusRight",
+            "keys": "alt+right"
+        },
+        {
+            "id": "Terminal.ClosePane",
+            "keys": "ctrl+shift+w"
+        },
+        {
+            "id": "Terminal.FindText",
+            "keys": "ctrl+shift+f"
+        },
+        {
+            "id": "Terminal.DuplicatePaneAuto",
+            "keys": "alt+shift+d"
+        },
+        {
+            "id": "Terminal.OpenNewTab",
+            "keys": "ctrl+shift+t"
+        },
+        {
+            "id": "Terminal.MoveFocusDown",
+            "keys": "alt+down"
+        },
+        {
+            "id": "Terminal.MoveFocusLeft",
+            "keys": "alt+left"
+        },
+        {
+            "id": "Terminal.MoveFocusUp",
+            "keys": "alt+up"
+        },
+        {
+            "id": "Terminal.ToggleFocusMode",
+            "keys": "f12"
+        }
+    ],
+    "launchMode": "default",
+    "newTabMenu":
+    [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
+    "profiles":
+    {
+        "defaults":
+        {
+            "antialiasingMode": "grayscale",
             "colorScheme": "Nord",
             "cursorShape": "underscore",
-            "opacity": 90,
-            "useAcrylic": true,
-            "padding": "5"
+            "experimental.retroTerminalEffect": false,
+            "font":
+            {
+                "face": "Hack Nerd Font",
+                "size": 14,
+                "weight": "bold"
+            },
+            "opacity": 47,
+            "padding": "5",
+            "scrollbarState": "hidden",
+            "useAcrylic": true
         },
-        "list": [
+        "list":
+        [
             {
-                "name": "Git Bash",
-                "guid": "{00000000-0000-0000-ba54-000000000002}",
                 "commandline": "\"%USERPROFILE%\\scoop\\apps\\git\\current\\bin\\bash.exe\" --login -i",
+                "guid": "{00000000-0000-0000-ba54-000000000002}",
                 "icon": "%USERPROFILE%\\scoop\\apps\\git\\current\\mingw64\\share\\git\\git-for-windows.ico",
+                "name": "Git Bash",
                 "startingDirectory": "%USERPROFILE%"
             },
             {
-                "name": "Windows PowerShell",
-                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "commandline": "powershell.exe -NoLogo",
+                "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
+                "name": "Windows PowerShell",
                 "startingDirectory": "%USERPROFILE%"
             },
             {
-                "name": "Command Prompt",
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
-                "commandline": "cmd.exe",
-                "hidden": true
+                "hidden": false,
+                "name": "Command Prompt"
+            },
+            {
+                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+                "hidden": false,
+                "name": "PowerShell",
+                "source": "Windows.Terminal.PowershellCore"
+            },
+            {
+                "guid": "{a5ce0ac8-6a09-5d3d-acad-7ec9fe363ffa}",
+                "hidden": false,
+                "name": "Developer Command Prompt for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{ecb13813-04aa-5b4b-9930-b6369d600a3a}",
+                "hidden": false,
+                "name": "Developer PowerShell for VS 2022",
+                "source": "Windows.Terminal.VisualStudio"
             }
         ]
     },
-    "schemes": [
-        {
-            "name": "Nord",
-            "foreground": "#D8DEE9",
-            "background": "#2E3440",
-            "cursorColor": "#D8DEE9",
-            "selectionBackground": "#4C566A",
-            "black": "#3B4252",
-            "red": "#BF616A",
-            "green": "#A3BE8C",
-            "yellow": "#EBCB8B",
-            "blue": "#81A1C1",
-            "purple": "#B48EAD",
-            "cyan": "#88C0D0",
-            "white": "#E5E9F0",
-            "brightBlack": "#4C566A",
-            "brightRed": "#BF616A",
-            "brightGreen": "#A3BE8C",
-            "brightYellow": "#EBCB8B",
-            "brightBlue": "#81A1C1",
-            "brightPurple": "#B48EAD",
-            "brightCyan": "#8FBCBB",
-            "brightWhite": "#ECEFF4"
-        }
-    ],
-    "actions": [
-        { "command": { "action": "copy", "singleLine": false }, "keys": "ctrl+shift+c" },
-        { "command": "paste", "keys": "ctrl+shift+v" },
-        { "command": "find", "keys": "ctrl+shift+f" },
-        { "command": { "action": "splitPane", "split": "auto", "splitMode": "duplicate" }, "keys": "alt+shift+d" },
-        { "command": { "action": "newTab" }, "keys": "ctrl+shift+t" },
-        { "command": "closePane", "keys": "ctrl+shift+w" },
-        { "command": { "action": "moveFocus", "direction": "left" }, "keys": "alt+left" },
-        { "command": { "action": "moveFocus", "direction": "right" }, "keys": "alt+right" },
-        { "command": { "action": "moveFocus", "direction": "up" }, "keys": "alt+up" },
-        { "command": { "action": "moveFocus", "direction": "down" }, "keys": "alt+down" }
-    ]
+    "schemes": [],
+    "showTabsFullscreen": false,
+    "theme": "system",
+    "themes": [],
+    "useAcrylicInTabRow": true
 }
