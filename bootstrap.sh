@@ -54,15 +54,13 @@ else
 fi
 
 if is_windows; then
-    # On Windows, skip mise/zsh — directly run setup scripts
-    echo "🔗 Linking configuration files..."
-    "$SCRIPT_DIR/scripts/link_config.sh"
-
+    # On Windows, skip mise/zsh — run nvim setup only
+    # Symlinks are handled by bootstrap.ps1 (needs admin token)
     echo "🔌 Setting up Neovim plugins..."
     "$SCRIPT_DIR/scripts/setup_nvim_plugin.sh"
 
     echo ""
-    echo "✅ Bootstrap complete! Please restart your terminal."
+    echo "✅ Package installation complete!"
 else
     echo "Installing Mise..."
     if [ -f "$HOME/.local/bin/mise" ]; then
