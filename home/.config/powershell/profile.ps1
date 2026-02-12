@@ -5,7 +5,6 @@
 $env:EDITOR = "nvim"
 
 # ── Aliases ─────────────────────────────────────────────────────
-Set-Alias -Name nv  -Value nvim
 Set-Alias -Name lg  -Value lazygit
 
 # ── Zoxide (cd replacement) ─────────────────────────────────────
