@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+DOTFILES_REPO="https://github.com/yslib/dotfiles.git"
+DOTFILES_DIR="$(pwd)/dotfiles"
 
 is_windows() {
     [[ "$OSTYPE" == "msys" || "$OSTYPE" == "mingw"* || "$OSTYPE" == "cygwin" ]]
@@ -9,19 +10,35 @@ is_windows() {
 
 echo "🚀 Starting Bootstrap..."
 
+# ── 0. Clone repo if not already inside one ─────────────────────
+# If run via `curl | bash`, we're not in the repo yet — clone it.
+# If run via `./bootstrap.sh` from the repo, skip cloning.
+if [ -f "$(dirname "${BASH_SOURCE[0]}")/Brewfile" ]; then
+    SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+    echo "📂 Running from existing repo at $SCRIPT_DIR"
+else
+    if [ -d "$DOTFILES_DIR/.git" ]; then
+        echo "📂 Dotfiles repo already exists at $DOTFILES_DIR, pulling latest..."
+        git -C "$DOTFILES_DIR" pull --rebase
+    else
+        echo "📥 Cloning dotfiles repo to $DOTFILES_DIR..."
+        git clone "$DOTFILES_REPO" "$DOTFILES_DIR"
+    fi
+    SCRIPT_DIR="$DOTFILES_DIR"
+fi
+
 mkdir -p "$HOME/.local/bin"
 mkdir -p "$HOME/.config"
 
+# ── 1. Install packages ─────────────────────────────────────────
 if is_windows; then
     echo "🪟 On Windows (Git Bash), using Scoop..."
 
-    # Scoop should already be installed by bootstrap.ps1, but verify
     if ! command -v scoop &>/dev/null; then
         echo "⚠️  Scoop not found. Please run bootstrap.ps1 first, or install scoop manually."
         exit 1
     fi
 
-    # Add required buckets (idempotent — scoop ignores duplicates)
     scoop bucket add extras 2>/dev/null || true
     scoop bucket add nerd-fonts 2>/dev/null || true
 
@@ -53,8 +70,8 @@ else
     brew bundle --file="$SCRIPT_DIR/Brewfile" --verbose
 fi
 
+# ── 2. Setup tools and link configs ─────────────────────────────
 if is_windows; then
-    # On Windows, skip mise/zsh — run nvim setup only
     # Symlinks are handled by bootstrap.ps1 (needs admin token)
     echo "🔌 Setting up Neovim plugins..."
     "$SCRIPT_DIR/scripts/setup_nvim_plugin.sh"

@@ -1,6 +1,7 @@
 brew "zsh"
 brew "tmux"
 brew "lazygit"
+brew "cloc"
 brew "git"
 brew "cmake"
 brew "lazygit"

@@ -10,6 +10,12 @@ My development environment configurations on Windows, Linux and macOS.
 ### Usage
 
 ```sh
+curl -fsSL https://raw.githubusercontent.com/yslib/dotfiles/master/bootstrap.sh | bash
+```
+
+Or clone manually:
+
+```sh
 git clone https://github.com/yslib/dotfiles.git && cd dotfiles && ./bootstrap.sh
 ```
 
@@ -27,14 +33,9 @@ This single command will:
 
 1. Install **Scoop** (package manager)
 2. Install **Git for Windows** via Scoop (provides bash)
-3. Clone this repo to `~/dotfiles`
-4. Hand off to `bootstrap.sh` running in Git Bash — the same bash scripts handle the rest
-
-From there `bootstrap.sh` detects Windows (MSYS/MINGW) and:
-
-1. Installs packages from `Scoopfile.json` via `scoop import`
-2. Creates **native NTFS symlinks** (`mklink`) for config files
-3. Bootstraps Neovim plugins (vim-plug + PlugInstall)
+3. Clone this repo to `./dotfiles` (current directory)
+4. Hand off to `bootstrap.sh` running in Git Bash for package installation
+5. Create **native NTFS symlinks** for config files (PowerShell, with admin token)
 
 ### Windows config path mapping
 

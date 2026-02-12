@@ -11,7 +11,7 @@
 $ErrorActionPreference = "Stop"
 
 $DotfilesRepo = "https://github.com/yslib/dotfiles.git"
-$DotfilesDir  = Join-Path $env:USERPROFILE "dotfiles"
+$DotfilesDir  = Join-Path (Get-Location) "dotfiles"
 
 # ── 0. Self-elevate if not admin ────────────────────────────────────
 $isAdmin = ([Security.Principal.WindowsPrincipal] `
@@ -21,9 +21,10 @@ $isAdmin = ([Security.Principal.WindowsPrincipal] `
 if (-not $isAdmin) {
     Write-Host ">> Requesting administrator privileges (needed for symlinks)..." -ForegroundColor Yellow
     $psExe = if ($PSVersionTable.PSVersion.Major -ge 7) { (Get-Process -Id $PID).Path } else { "powershell.exe" }
+    $cwd = (Get-Location).Path
     Start-Process $psExe -Verb RunAs -ArgumentList @(
         "-ExecutionPolicy", "Bypass",
-        "-Command", "irm https://raw.githubusercontent.com/yslib/dotfiles/master/bootstrap.ps1 | iex"
+        "-Command", "Set-Location '$cwd'; irm https://raw.githubusercontent.com/yslib/dotfiles/master/bootstrap.ps1 | iex"
     )
     exit
 }
