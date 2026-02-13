@@ -88,77 +88,12 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 # ── 5. Create symlinks (PowerShell has admin token) ──────────────
-Write-Host "`n>> Linking configuration files..." -ForegroundColor Cyan
-
-$ConfigHome = Join-Path $DotfilesDir "home"
-
-function New-DotfilesLink {
-    param(
-        [string]$Source,
-        [string]$Target
-    )
-    if (-not (Test-Path $Source)) {
-        Write-Host "   [WARN] Source not found, skipping: $Source" -ForegroundColor Yellow
-        return
-    }
-    # Ensure parent dir exists
-    $parent = Split-Path -Parent $Target
-    if (-not (Test-Path $parent)) { New-Item -ItemType Directory -Path $parent -Force | Out-Null }
-
-    # Remove existing target
-    if (Test-Path $Target) {
-        $item = Get-Item $Target -Force
-        if ($item.Attributes -band [IO.FileAttributes]::ReparsePoint) {
-            $item.Delete()
-        } else {
-            Remove-Item $Target -Recurse -Force
-        }
-    }
-
-    New-Item -ItemType SymbolicLink -Path $Target -Target $Source -Force | Out-Null
-    Write-Host "   [LINK] $Target -> $Source" -ForegroundColor Green
+$linkScript = Join-Path $DotfilesDir "scripts/link_config.ps1"
+if (-not (Test-Path $linkScript)) {
+    Write-Error "link_config.ps1 not found: $linkScript"
 }
 
-# nvim: %LOCALAPPDATA%\nvim
-New-DotfilesLink -Source (Join-Path $ConfigHome ".config\nvim") `
-                 -Target (Join-Path $env:LOCALAPPDATA "nvim")
-
-# yazi: %APPDATA%\yazi\config
-New-DotfilesLink -Source (Join-Path $ConfigHome ".config\yazi") `
-                 -Target (Join-Path $env:APPDATA "yazi\config")
-
-# lazygit: %LOCALAPPDATA%\lazygit
-New-DotfilesLink -Source (Join-Path $ConfigHome ".config\lazygit") `
-                 -Target (Join-Path $env:LOCALAPPDATA "lazygit")
-
-# alacritty: %APPDATA%\alacritty
-New-DotfilesLink -Source (Join-Path $ConfigHome ".config\alacritty") `
-                 -Target (Join-Path $env:APPDATA "alacritty")
-
-# gitconfig: ~\.gitconfig
-New-DotfilesLink -Source (Join-Path $ConfigHome ".gitconfig") `
-                 -Target (Join-Path $env:USERPROFILE ".gitconfig")
-
-# powershell profile: <Documents>\PowerShell\profile.ps1
-$DocsDir = [Environment]::GetFolderPath('MyDocuments')
-New-DotfilesLink -Source (Join-Path $ConfigHome ".config\powershell\profile.ps1") `
-                 -Target (Join-Path $DocsDir "PowerShell\profile.ps1")
-
-# windows-terminal: detect all installed versions and link settings.json
-$WTSource = Join-Path $ConfigHome ".config\windows-terminal\settings.json"
-$WTTargets = @{
-    "Stable (Scoop/zip)"  = Join-Path $env:LOCALAPPDATA "Microsoft\Windows Terminal\settings.json"
-    "Stable (Store)"      = Join-Path $env:LOCALAPPDATA "Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
-    "Preview (Store)"     = Join-Path $env:LOCALAPPDATA "Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json"
-    "Canary (Store)"      = Join-Path $env:LOCALAPPDATA "Packages\Microsoft.WindowsTerminalCanary_8wekyb3d8bbwe\LocalState\settings.json"
-}
-foreach ($entry in $WTTargets.GetEnumerator()) {
-    $parentDir = Split-Path -Parent $entry.Value
-    if (Test-Path $parentDir) {
-        Write-Host "   [WT] Found $($entry.Key) at $parentDir" -ForegroundColor Cyan
-        New-DotfilesLink -Source $WTSource -Target $entry.Value
-    }
-}
+& $linkScript -DotfilesDir $DotfilesDir
 
 # ── Done ─────────────────────────────────────────────────────────
 Write-Host "`n========================================" -ForegroundColor Green
