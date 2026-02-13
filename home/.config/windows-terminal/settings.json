@@ -19,28 +19,28 @@
             "keys": "ctrl+shift+v"
         },
         {
-            "id": "Terminal.MoveFocusRight",
-            "keys": "alt+right"
+            "id": "Terminal.FindText",
+            "keys": "ctrl+shift+f"
         },
         {
             "id": "Terminal.ClosePane",
             "keys": "ctrl+shift+w"
         },
         {
-            "id": "Terminal.FindText",
-            "keys": "ctrl+shift+f"
+            "id": "Terminal.MoveFocusRight",
+            "keys": "alt+right"
         },
         {
             "id": "Terminal.DuplicatePaneAuto",
             "keys": "alt+shift+d"
         },
         {
-            "id": "Terminal.OpenNewTab",
-            "keys": "ctrl+shift+t"
-        },
-        {
             "id": "Terminal.MoveFocusDown",
             "keys": "alt+down"
+        },
+        {
+            "id": "Terminal.OpenNewTab",
+            "keys": "ctrl+shift+t"
         },
         {
             "id": "Terminal.MoveFocusLeft",
@@ -77,7 +77,7 @@
                 "weight": "bold"
             },
             "opacity": 47,
-            "padding": "5",
+            "padding": "5,5,5,10",
             "scrollbarState": "hidden",
             "useAcrylic": true
         },
