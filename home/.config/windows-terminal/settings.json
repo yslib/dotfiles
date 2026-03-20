@@ -35,12 +35,12 @@
             "keys": "alt+shift+d"
         },
         {
-            "id": "Terminal.MoveFocusDown",
-            "keys": "alt+down"
-        },
-        {
             "id": "Terminal.OpenNewTab",
             "keys": "ctrl+shift+t"
+        },
+        {
+            "id": "Terminal.MoveFocusDown",
+            "keys": "alt+down"
         },
         {
             "id": "Terminal.MoveFocusLeft",
@@ -67,7 +67,7 @@
         "defaults":
         {
             "antialiasingMode": "grayscale",
-            "colorScheme": "Nord",
+            "colorScheme": "One Half Dark",
             "cursorShape": "underscore",
             "experimental.retroTerminalEffect": false,
             "font":
@@ -91,11 +91,9 @@
                 "startingDirectory": "%USERPROFILE%"
             },
             {
-                "commandline": "powershell.exe -NoLogo",
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
-                "name": "Windows PowerShell",
-                "startingDirectory": "%USERPROFILE%"
+                "name": "Windows PowerShell"
             },
             {
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
@@ -107,18 +105,6 @@
                 "hidden": false,
                 "name": "PowerShell",
                 "source": "Windows.Terminal.PowershellCore"
-            },
-            {
-                "guid": "{a5ce0ac8-6a09-5d3d-acad-7ec9fe363ffa}",
-                "hidden": false,
-                "name": "Developer Command Prompt for VS 2022",
-                "source": "Windows.Terminal.VisualStudio"
-            },
-            {
-                "guid": "{ecb13813-04aa-5b4b-9930-b6369d600a3a}",
-                "hidden": false,
-                "name": "Developer PowerShell for VS 2022",
-                "source": "Windows.Terminal.VisualStudio"
             }
         ]
     },
