@@ -1,0 +1,13 @@
+syntax enable
+set number
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+set updatetime=300
+
+augroup relative_numbser
+ autocmd!
+ autocmd InsertEnter * :set norelativenumber
+ autocmd InsertLeave * :set relativenumber
+augroup END

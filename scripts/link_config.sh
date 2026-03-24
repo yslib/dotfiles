@@ -4,7 +4,10 @@ CONFIG_HOME="$SCRIPT_DIR/../home"
 
 echo "🔗 Linking configuration files from $CONFIG_HOME to $HOME"
 
+mkdir -p "$HOME/.config/vim"
 ln -sf "$CONFIG_HOME/.config/nvim" "$HOME/.config/nvim"
+ln -sf "$CONFIG_HOME/.config/vim/vimrc" "$HOME/.config/vim/vimrc"
+ln -sf "$HOME/.config/vim/vimrc" "$HOME/.vimrc"
 ln -sf "$CONFIG_HOME/.config/yazi" "$HOME/.config/yazi"
 ln -sf "$CONFIG_HOME/.config/lazygit" "$HOME/.config/lazygit"
 ln -sf "$CONFIG_HOME/.gitconfig" "$HOME/.gitconfig"

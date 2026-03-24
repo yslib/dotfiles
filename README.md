@@ -13,6 +13,14 @@ My development environment configurations on Windows, Linux and macOS.
 curl -fsSL https://raw.githubusercontent.com/yslib/dotfiles/master/bootstrap.sh | bash
 ```
 
+### Minimal Vim only
+
+For low-end servers, install only the plugin-free Vim config:
+
+```sh
+mkdir -p ~/.config/vim && curl -fsSL https://raw.githubusercontent.com/yslib/dotfiles/master/home/.config/vim/vimrc -o ~/.config/vim/vimrc && ln -sf ~/.config/vim/vimrc ~/.vimrc
+```
+
 Or clone manually:
 
 ```sh
@@ -42,6 +50,7 @@ This single command will:
 | Config | Linux/macOS | Windows |
 |--------|-------------|---------|
 | nvim | `~/.config/nvim` | `%LOCALAPPDATA%\nvim` |
+| vim | `~/.config/vim/vimrc` + `~/.vimrc` | `%USERPROFILE%\_vimrc` |
 | yazi | `~/.config/yazi` | `%APPDATA%\yazi\config` |
 | lazygit | `~/.config/lazygit` | `%LOCALAPPDATA%\lazygit` |
 | alacritty | `~/.config/alacritty` | `%APPDATA%\alacritty` |

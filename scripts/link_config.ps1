@@ -31,6 +31,14 @@ $Links = @(
         EnsureParent = "Create"
     }
 
+    # vim: %USERPROFILE%\_vimrc
+    [pscustomobject]@{
+        Source = Join-Path $ConfigHome ".config\vim\vimrc"
+        Target = Join-Path $env:USERPROFILE "_vimrc"
+        Type = "File"
+        EnsureParent = "Create"
+    }
+
     # yazi: %APPDATA%\yazi\config
     [pscustomobject]@{
         Source = Join-Path $ConfigHome ".config\yazi"
