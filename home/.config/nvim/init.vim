@@ -76,7 +76,6 @@ Plug 'nvim-neotest/nvim-nio'
 
 " AI Tools
 Plug 'zbirenbaum/copilot.lua'
-Plug 'NickvanDyke/opencode.nvim'
 
 " vim plug
 Plug 'tpope/vim-surround'                                      " vim-surround
