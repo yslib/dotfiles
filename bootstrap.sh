@@ -123,25 +123,15 @@ else
     brew bundle --file="$SCRIPT_DIR/Brewfile" --verbose
 fi
 
+echo "🔌 Setting up Neovim plugins..."
+"$SCRIPT_DIR/scripts/setup_nvim_plugin.sh"
+
 # ── 2. Setup tools and link configs ─────────────────────────────
 if is_windows; then
     # Symlinks are handled by bootstrap.ps1 (needs admin token)
-    echo "🔌 Setting up Neovim plugins..."
-    "$SCRIPT_DIR/scripts/setup_nvim_plugin.sh"
-
-    echo ""
     echo "✅ Package installation complete!"
 else
-    echo "Installing Mise..."
-    if [ -f "$HOME/.local/bin/mise" ]; then
-        echo "✅ Mise already exists, skip installation."
-    else
-        curl https://mise.run | MISE_INSTALL_PATH=$HOME/.local/bin/mise sh
-    fi
-
-    echo "Running Mise setup..."
-    eval "$(~/.local/bin/mise activate bash)"
-    mise trust
-    mise run setup
-    mise run link_config
+    "$SCRIPT_DIR/scripts/install_oh_my_zsh.sh"
+    "$SCRIPT_DIR/scripts/link_config.sh"
+    echo "Setup complete! Please restart your terminal to apply changes. \n(Manually change your shell to zsh if you haven't already. Run 'chsh -s $(which zsh)')"
 fi

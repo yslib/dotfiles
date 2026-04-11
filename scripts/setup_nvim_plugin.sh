@@ -28,8 +28,7 @@ if command -v tree-sitter &>/dev/null; then
     echo "✅ tree-sitter-cli already available."
 else
     echo "⬇️ Installing tree-sitter-cli via npm..."
-    npm install -g tree-sitter-cli@0.24     #0.24 is the compatible version for glibc 2.35 which is for ubuntu 22.04 LTS
-    # another way is to build from source by cargo
+    sudo npm install -g tree-sitter-cli
 fi
 
 # 3. Run PlugInstall headlessly
