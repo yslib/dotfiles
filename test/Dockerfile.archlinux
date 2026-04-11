@@ -1,0 +1,2 @@
+FROM docker.m.daocloud.io/library/archlinux:latest
+RUN pacman -Syu --noconfirm && pacman -S --noconfirm curl git sudo base-devel

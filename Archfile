@@ -1,0 +1,29 @@
+# Archfile — packages for Arch Linux
+# Lines starting with # are ignored.
+# [pacman] section: installed via pacman
+# [aur]    section: installed via paru (AUR helper)
+
+[pacman]
+base-devel
+zsh
+tmux
+lazygit
+cloc
+git
+cmake
+neovim
+zoxide
+ripgrep
+fd
+fzf
+yazi
+just
+dust
+git-delta
+python
+nodejs
+npm
+xclip
+
+[aur]
+lazydocker

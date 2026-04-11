@@ -8,6 +8,42 @@ is_windows() {
     [[ "$OSTYPE" == "msys" || "$OSTYPE" == "mingw"* || "$OSTYPE" == "cygwin" ]]
 }
 
+is_arch_linux() {
+    [ -f /etc/arch-release ]
+}
+
+# Parse Archfile and install packages with pacman/paru
+install_arch_packages() {
+    local archfile="$1"
+    local section=""
+    local pacman_pkgs=()
+    local aur_pkgs=()
+
+    while IFS= read -r line || [[ -n "$line" ]]; do
+        # skip empty lines and comments
+        [[ -z "$line" || "$line" == \#* ]] && continue
+        if [[ "$line" == "[pacman]" ]]; then
+            section="pacman"
+        elif [[ "$line" == "[aur]" ]]; then
+            section="aur"
+        elif [[ "$section" == "pacman" ]]; then
+            pacman_pkgs+=("$line")
+        elif [[ "$section" == "aur" ]]; then
+            aur_pkgs+=("$line")
+        fi
+    done < "$archfile"
+
+    if [ ${#pacman_pkgs[@]} -gt 0 ]; then
+        echo "📦 Installing pacman packages..."
+        sudo pacman -S --needed --noconfirm "${pacman_pkgs[@]}"
+    fi
+
+    if [ ${#aur_pkgs[@]} -gt 0 ]; then
+        echo "📦 Installing AUR packages via paru..."
+        paru -S --needed --noconfirm "${aur_pkgs[@]}"
+    fi
+}
+
 echo "🚀 Starting Bootstrap..."
 
 # ── 0. Clone repo if not already inside one ─────────────────────
@@ -56,6 +92,23 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
     eval "$(brew shellenv)"
     echo "🍺 Installing packages with Homebrew..."
     brew bundle --file="$SCRIPT_DIR/Brewfile" --verbose
+
+elif is_arch_linux; then
+    echo "🐧 On Arch Linux, using pacman + paru..."
+
+    # Install paru (AUR helper) if not present
+    if ! command -v paru &>/dev/null; then
+        echo "📥 Installing paru..."
+        sudo pacman -S --needed --noconfirm base-devel git
+        PARU_TMPDIR=$(mktemp -d)
+        git clone https://aur.archlinux.org/paru.git "$PARU_TMPDIR/paru"
+        (cd "$PARU_TMPDIR/paru" && makepkg -si --noconfirm)
+        rm -rf "$PARU_TMPDIR"
+    else
+        echo "✅ paru already installed, skip."
+    fi
+
+    install_arch_packages "$SCRIPT_DIR/Archfile"
 
 else
     echo "🐧 On Linux, Installing Homebrew..."
