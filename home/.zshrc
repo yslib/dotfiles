@@ -7,10 +7,9 @@ fi
 
 export TERM="xterm-256color"
 
-export PATH=$HOME/scripts:$HOME/.local/bin:$PATH
-
-
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 eval "$(mise activate zsh)"
+eval "$(zoxide init zsh)"
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -26,8 +25,6 @@ export ZSH=$HOME/.oh-my-zsh
 # ZSH_THEME="agnoster"
 ZSH_THEME="powerlevel10k/powerlevel10k" # git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
-eval "$(zoxide init zsh)"
 
 function omz-install() {
     if [ -z "$1" ]; then
