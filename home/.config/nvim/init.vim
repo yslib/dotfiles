@@ -18,7 +18,7 @@ call plug#begin(stdpath('data').'/plugged')
 " Utils
 Plug 'nvim-lua/plenary.nvim'                                   " lua utils
 Plug 'kyazdani42/nvim-web-devicons'                            " for file icons
-Plug 'norcalli/nvim-colorizer.lua'
+Plug 'catgoose/nvim-colorizer.lua'
 
 " Themes
 Plug 'catppuccin/nvim', {'as': 'catppuccin'}                   " color theme 
