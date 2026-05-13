@@ -27,8 +27,8 @@ fi
 if command -v tree-sitter &>/dev/null; then
     echo "✅ tree-sitter-cli already available."
 else
-    echo "⬇️ Installing tree-sitter-cli via npm..."
-    sudo npm install -g tree-sitter-cli
+    echo "⬇️ Installing tree-sitter-cli via cargo..."
+    cargo install tree-sitter-cli
 fi
 
 # 3. Run PlugInstall headlessly

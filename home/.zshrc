@@ -7,6 +7,8 @@ fi
 
 export TERM="xterm-256color"
 
+export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
 eval "$(mise activate zsh)"
 eval "$(zoxide init zsh)"
