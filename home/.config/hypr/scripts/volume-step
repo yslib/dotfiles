@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+    echo "usage: volume-step up|down|toggle|mic-toggle|get [step-percent]" >&2
+    exit 2
+}
+
+command -v wpctl >/dev/null 2>&1 || {
+    echo "volume-step: wpctl not found" >&2
+    exit 1
+}
+
+target="${VOLUME_TARGET:-@DEFAULT_AUDIO_SINK@}"
+source_target="${MIC_TARGET:-@DEFAULT_AUDIO_SOURCE@}"
+step="${2:-5}"
+step="${step%\%}"
+[[ "$step" =~ ^[0-9]+$ ]] || usage
+
+case "${1:-}" in
+    get)
+        wpctl get-volume "$target"
+        ;;
+    up | increase | + | +*)
+        wpctl set-mute "$target" 0
+        wpctl set-volume -l 1.0 "$target" "${step}%+"
+        ;;
+    down | decrease | - | -*)
+        wpctl set-mute "$target" 0
+        wpctl set-volume -l 1.0 "$target" "${step}%-"
+        ;;
+    toggle)
+        wpctl set-mute "$target" toggle
+        ;;
+    mic-toggle)
+        wpctl set-mute "$source_target" toggle
+        ;;
+    *)
+        usage
+        ;;
+esac

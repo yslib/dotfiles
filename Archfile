@@ -27,7 +27,6 @@ xclip
 keyd
 btop
 waybar
-rofi
 fcitx5-im
 fcitx5-chinese-addons
 fcitx5-pinyin-zhwiki
@@ -38,3 +37,4 @@ noto-fonts-emoji
 lazydocker
 google-chrome
 debtap
+hyprshell-bin

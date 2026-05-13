@@ -1,0 +1,118 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+    echo "usage: backlight-step up|down|get [step-percent]" >&2
+    exit 2
+}
+
+device="${BACKLIGHT_DEVICE:-}"
+if [[ -z "$device" ]]; then
+    for candidate in /sys/class/backlight/*; do
+        [[ -e "$candidate/brightness" ]] || continue
+        device="${candidate##*/}"
+        break
+    done
+fi
+
+[[ -n "$device" ]] || {
+    echo "backlight-step: no backlight device found" >&2
+    exit 1
+}
+
+backlight_path="/sys/class/backlight/$device"
+current=$(<"$backlight_path/brightness")
+max=$(<"$backlight_path/max_brightness")
+
+[[ "$current" =~ ^[0-9]+$ && "$max" =~ ^[0-9]+$ && "$max" -gt 0 ]] || {
+    echo "backlight-step: invalid backlight values" >&2
+    exit 1
+}
+
+case "${1:-}" in
+    get)
+        echo $((current * 100 / max))
+        exit 0
+        ;;
+    up | increase | + | +*)
+        direction=1
+        ;;
+    down | decrease | - | -*)
+        direction=-1
+        ;;
+    *)
+        usage
+        ;;
+esac
+
+step="${2:-5}"
+step="${step%\%}"
+[[ "$step" =~ ^[0-9]+$ ]] || usage
+
+delta=$(((max * step + 99) / 100))
+next=$((current + direction * delta))
+
+if ((next < 1)); then
+    next=1
+elif ((next > max)); then
+    next=$max
+fi
+
+find_session_id() {
+    if [[ -n "${XDG_SESSION_ID:-}" ]]; then
+        echo "$XDG_SESSION_ID"
+        return 0
+    fi
+
+    command -v loginctl >/dev/null 2>&1 || return 1
+
+    while read -r session_id _ session_user _; do
+        [[ "$session_user" == "${USER:-}" ]] || continue
+        if [[ "$(loginctl show-session "$session_id" -p Active --value 2>/dev/null)" == "yes" ]]; then
+            echo "$session_id"
+            return 0
+        fi
+    done < <(loginctl list-sessions --no-legend 2>/dev/null)
+
+    return 1
+}
+
+set_with_logind() {
+    command -v busctl >/dev/null 2>&1 || return 1
+
+    local session_id session_path
+    session_id=$(find_session_id) || return 1
+    session_path=$(busctl --system call \
+        org.freedesktop.login1 \
+        /org/freedesktop/login1 \
+        org.freedesktop.login1.Manager \
+        GetSession s "$session_id" | awk -F'"' '{print $2}') || return 1
+
+    [[ -n "$session_path" ]] || return 1
+
+    busctl --system call \
+        org.freedesktop.login1 \
+        "$session_path" \
+        org.freedesktop.login1.Session \
+        SetBrightness ssu backlight "$device" "$next" >/dev/null
+}
+
+set_with_sysfs() {
+    [[ -w "$backlight_path/brightness" ]] || return 1
+    printf '%s\n' "$next" >"$backlight_path/brightness"
+}
+
+set_with_brightnessctl() {
+    command -v brightnessctl >/dev/null 2>&1 || return 1
+
+    if ((direction > 0)); then
+        brightnessctl -d "$device" set "${step}%+" -q
+    else
+        brightnessctl -d "$device" set "${step}%-" -q
+    fi
+}
+
+set_with_logind || set_with_sysfs || set_with_brightnessctl || {
+    echo "backlight-step: failed to set brightness" >&2
+    exit 1
+}

@@ -2,8 +2,8 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 34,
-  "spacing": 8,
+  "height": 38,
+  "spacing": 10,
   "reload_style_on_change": true,
 
   "modules-left": [
@@ -14,14 +14,23 @@
     "hyprland/window"
   ],
   "modules-right": [
-    "tray",
-    "network",
-    "pulseaudio",
-    "backlight",
-    "battery",
+    "group/system-center",
     "clock",
     "custom/power"
   ],
+
+  "group/system-center": {
+    "orientation": "horizontal",
+    "modules": [
+      "tray",
+      "network",
+      "bluetooth",
+      "pulseaudio",
+      "backlight",
+      "battery",
+      "power-profiles-daemon"
+    ]
+  },
 
   "hyprland/workspaces": {
     "all-outputs": true,
@@ -39,38 +48,74 @@
   },
 
   "hyprland/window": {
-    "format": "{class}: {title}",
-    "format-empty": "Hyprland",
-    "max-length": 90,
+    "format": "{title}",
+    "format-empty": "Desktop",
+    "max-length": 78,
     "separate-outputs": true
   },
 
   "tray": {
-    "icon-size": 16,
-    "spacing": 8
+    "icon-size": 15,
+    "spacing": 7
   },
 
   "network": {
-    "format-wifi": "NET {essid} {signalStrength}%",
-    "format-ethernet": "NET {ipaddr}/{cidr}",
-    "format-linked": "NET {ifname}",
-    "format-disconnected": "NET offline",
-    "format-alt": "NET {ifname}: {ipaddr}/{cidr}",
-    "tooltip-format": "{ifname} via {gwaddr}"
+    "format-wifi": "{icon} {signalStrength}%",
+    "format-ethernet": "󰈀",
+    "format-linked": "󰈂",
+    "format-disconnected": "󰖪",
+    "format-alt": "{ifname} {ipaddr}/{cidr}",
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "tooltip-format-wifi": "{essid}\n{ifname} {ipaddr}/{cidr}\nSignal {signalStrength}%",
+    "tooltip-format-ethernet": "{ifname} {ipaddr}/{cidr}",
+    "tooltip-format-disconnected": "Network offline",
+    "on-click": "nm-connection-editor"
+  },
+
+  "bluetooth": {
+    "format": "󰂯",
+    "format-disabled": "󰂲",
+    "format-off": "󰂲",
+    "format-on": "󰂯",
+    "format-connected": "󰂱 {num_connections}",
+    "format-no-controller": "󰂲",
+    "tooltip-format": "{controller_alias} {status}",
+    "tooltip-format-connected": "{controller_alias}\n{num_connections} connected\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}",
+    "on-click": "bluetoothctl power on",
+    "on-click-right": "bluetoothctl power off"
   },
 
   "pulseaudio": {
     "scroll-step": 5,
-    "format": "VOL {volume}%",
-    "format-muted": "VOL muted",
-    "format-source": "MIC {volume}%",
-    "format-source-muted": "MIC muted",
-    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+    "max-volume": 100,
+    "format": "{icon} {volume}%",
+    "format-bluetooth": "󰂰 {volume}%",
+    "format-muted": "󰝟",
+    "format-source": "󰍬 {volume}%",
+    "format-source-muted": "󰍭",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "󰋎",
+      "headset": "󰋎",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""]
+    },
+    "on-click": "$HOME/.config/hypr/scripts/volume-step toggle",
+    "on-click-right": "$HOME/.config/hypr/scripts/volume-step mic-toggle",
+    "on-scroll-up": "$HOME/.config/hypr/scripts/volume-step up",
+    "on-scroll-down": "$HOME/.config/hypr/scripts/volume-step down",
+    "tooltip-format": "{desc}\nVolume {volume}%"
   },
 
   "backlight": {
-    "format": "BRT {percent}%",
+    "scroll-step": 5,
+    "min-brightness": 1,
+    "format": "󰃠 {percent}%",
+    "on-scroll-up": "$HOME/.config/hypr/scripts/backlight-step up",
+    "on-scroll-down": "$HOME/.config/hypr/scripts/backlight-step down",
     "tooltip": false
   },
 
@@ -79,22 +124,34 @@
       "warning": 30,
       "critical": 15
     },
-    "format": "BAT {capacity}%",
-    "format-charging": "BAT {capacity}%+",
-    "format-plugged": "BAT {capacity}% AC",
-    "format-full": "BAT full",
-    "format-alt": "BAT {time}",
+    "format": "{icon} {capacity}%",
+    "format-charging": "󰂄 {capacity}%",
+    "format-plugged": "󰚥 {capacity}%",
+    "format-full": "󰁹",
+    "format-alt": "{time}",
+    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
     "tooltip-format": "{capacity}% - {timeTo}"
   },
 
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
+    "format-icons": {
+      "default": "󰾅",
+      "performance": "󰓅",
+      "balanced": "󰾅",
+      "power-saver": "󰌪"
+    }
+  },
+
   "clock": {
-    "format": "{:%Y-%m-%d %H:%M}",
-    "format-alt": "{:%A %H:%M}",
+    "format": "{:%a %H:%M}",
+    "format-alt": "{:%Y-%m-%d %H:%M}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
   },
 
   "custom/power": {
-    "format": "PWR",
+    "format": "⏻",
     "tooltip": false,
     "on-click": "sh -c 'command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl notify 1 2500 rgb(ebcb8b) \"hyprshutdown not found\"'"
   }
