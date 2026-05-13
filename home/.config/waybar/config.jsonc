@@ -1,0 +1,101 @@
+// -*- mode: jsonc -*-
+{
+  "layer": "top",
+  "position": "top",
+  "height": 34,
+  "spacing": 8,
+  "reload_style_on_change": true,
+
+  "modules-left": [
+    "hyprland/workspaces",
+    "hyprland/submap"
+  ],
+  "modules-center": [
+    "hyprland/window"
+  ],
+  "modules-right": [
+    "tray",
+    "network",
+    "pulseaudio",
+    "backlight",
+    "battery",
+    "clock",
+    "custom/power"
+  ],
+
+  "hyprland/workspaces": {
+    "all-outputs": true,
+    "format": "{name}",
+    "on-click": "activate",
+    "persistent-workspaces": {
+      "*": 8
+    }
+  },
+
+  "hyprland/submap": {
+    "format": "MODE {}",
+    "max-length": 24,
+    "tooltip": false
+  },
+
+  "hyprland/window": {
+    "format": "{class}: {title}",
+    "format-empty": "Hyprland",
+    "max-length": 90,
+    "separate-outputs": true
+  },
+
+  "tray": {
+    "icon-size": 16,
+    "spacing": 8
+  },
+
+  "network": {
+    "format-wifi": "NET {essid} {signalStrength}%",
+    "format-ethernet": "NET {ipaddr}/{cidr}",
+    "format-linked": "NET {ifname}",
+    "format-disconnected": "NET offline",
+    "format-alt": "NET {ifname}: {ipaddr}/{cidr}",
+    "tooltip-format": "{ifname} via {gwaddr}"
+  },
+
+  "pulseaudio": {
+    "scroll-step": 5,
+    "format": "VOL {volume}%",
+    "format-muted": "VOL muted",
+    "format-source": "MIC {volume}%",
+    "format-source-muted": "MIC muted",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+  },
+
+  "backlight": {
+    "format": "BRT {percent}%",
+    "tooltip": false
+  },
+
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "BAT {capacity}%",
+    "format-charging": "BAT {capacity}%+",
+    "format-plugged": "BAT {capacity}% AC",
+    "format-full": "BAT full",
+    "format-alt": "BAT {time}",
+    "tooltip-format": "{capacity}% - {timeTo}"
+  },
+
+  "clock": {
+    "format": "{:%Y-%m-%d %H:%M}",
+    "format-alt": "{:%A %H:%M}",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+  },
+
+  "custom/power": {
+    "format": "PWR",
+    "tooltip": false,
+    "on-click": "sh -c 'command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl notify 1 2500 rgb(ebcb8b) \"hyprshutdown not found\"'"
+  }
+}
