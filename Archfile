@@ -25,6 +25,12 @@ nodejs
 npm
 xclip
 keyd
+btop
+fcitx5-im
+fcitx5-chinese-addons
+fcitx5-pinyin-zhwiki
+noto-fonts-cjk
+noto-fonts-emoji
 
 [aur]
 lazydocker

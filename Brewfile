@@ -16,6 +16,7 @@ brew "dust"
 brew "git-delta"
 brew "python"
 brew "node"
+brew "btop"
 
 if OS.mac?
   cask "sf-symbols"
