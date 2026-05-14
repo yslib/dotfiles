@@ -4,6 +4,7 @@
 # [aur]    section: installed via paru (AUR helper)
 
 [pacman]
+# dev tools
 base-devel
 zsh
 tmux
@@ -24,17 +25,23 @@ python
 nodejs
 npm
 xclip
-keyd
 btop
-waybar
+# needed by desktop env
+keyd
 fcitx5-im
 fcitx5-chinese-addons
 fcitx5-pinyin-zhwiki
 noto-fonts-cjk
 noto-fonts-emoji
+waybar
+nm-connection-editor
+network-manager-applet
+modemmanager
+
 
 [aur]
 lazydocker
-google-chrome
 debtap
+# needed by desktop env
 hyprshell-bin
+google-chrome
