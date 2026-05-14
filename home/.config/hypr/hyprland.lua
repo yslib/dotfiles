@@ -52,6 +52,47 @@ hl.config({
     },
 })
 
+-- Workspaces are assigned on reload only. One monitor gets 1-8; two monitors
+-- split 1-4 / 5-8 by current screen position, without hardcoded output names.
+local function ordered_monitors()
+    local monitors = hl.get_monitors()
+
+    table.sort(monitors, function(left, right)
+        if left.x == right.x then
+            return left.y < right.y
+        end
+
+        return left.x < right.x
+    end)
+
+    return monitors
+end
+
+local monitors = ordered_monitors()
+if monitors[1] ~= nil then
+    local firstMonitor = monitors[1].name
+    local secondMonitor = monitors[2] and monitors[2].name or nil
+
+    for workspace = 1, 8 do
+        local monitor = firstMonitor
+        if secondMonitor ~= nil and workspace > 4 then
+            monitor = secondMonitor
+        end
+
+        local isDefaultWorkspace = workspace == 1
+        if secondMonitor ~= nil then
+            isDefaultWorkspace = workspace == 1 or workspace == 5
+        end
+
+        hl.workspace_rule({
+            workspace = tostring(workspace),
+            monitor = monitor,
+            persistent = true,
+            default = isDefaultWorkspace,
+        })
+    end
+end
+
 for _, namespace in ipairs({
     "waybar",
     "hyprshell_launcher",
@@ -83,9 +124,9 @@ hl.bind("SHIFT + SHIFT_l", hl.dsp.exec_cmd(hyprshell .. [[ socat '{"CloseSwitch"
 hl.bind("SHIFT + SHIFT_r", hl.dsp.exec_cmd(hyprshell .. [[ socat '{"CloseSwitch":{"switch":true}}']]), { release = true, transparent = true, non_consuming = true })
 
 -- WM/session bindings
-hl.bind(mainMod .. " + CTRL + R", hl.dsp.exec_cmd("hyprctl reload"))
-hl.bind(mainMod .. " + CTRL + Q", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit"))
-hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit"))
+hl.bind(mainMod .. " + CTRL + R", hl.dsp.exec_cmd("sh -c 'hyprctl reload; pkill -x waybar 2>/dev/null || true; waybar >/tmp/waybar.log 2>&1 &'"))
+hl.bind(mainMod .. " + CTRL + Q", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
+hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 
 -- Client bindings
 hl.bind(mainMod .. " + Q", hl.dsp.window.close())

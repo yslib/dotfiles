@@ -34,12 +34,9 @@
   },
 
   "hyprland/workspaces": {
-    "all-outputs": true,
+    "all-outputs": false,
     "format": "{name}",
-    "on-click": "activate",
-    "persistent-workspaces": {
-      "*": 8
-    }
+    "on-click": "activate"
   },
 
   "hyprland/submap": {
