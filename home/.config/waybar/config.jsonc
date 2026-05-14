@@ -28,7 +28,7 @@
       "pulseaudio",
       "backlight",
       "battery",
-      "power-profiles-daemon"
+      "custom/tlp"
     ]
   },
 
@@ -133,15 +133,16 @@
     "tooltip-format": "{capacity}% - {timeTo}"
   },
 
-  "power-profiles-daemon": {
-    "format": "{icon}",
-    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-    "format-icons": {
-      "default": "󰾅",
-      "performance": "󰓅",
-      "balanced": "󰾅",
-      "power-saver": "󰌪"
-    }
+  "custom/tlp": {
+    "exec": "$HOME/.config/waybar/scripts/tlp-status",
+    "return-type": "json",
+    "interval": 30,
+    "signal": 8,
+    "on-click": "$HOME/.config/waybar/scripts/tlp-status cycle",
+    "on-click-right": "$HOME/.config/waybar/scripts/tlp-status balanced",
+    "on-scroll-up": "$HOME/.config/waybar/scripts/tlp-status next",
+    "on-scroll-down": "$HOME/.config/waybar/scripts/tlp-status prev",
+    "tooltip": true
   },
 
   "clock": {

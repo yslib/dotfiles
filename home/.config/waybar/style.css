@@ -45,7 +45,7 @@ button:hover,
 #pulseaudio:hover,
 #backlight:hover,
 #battery:hover,
-#power-profiles-daemon:hover,
+#custom-tlp:hover,
 #clock:hover,
 #custom-power:hover {
   background: rgba(255, 255, 255, 0.10);
@@ -113,7 +113,7 @@ button:hover,
 #pulseaudio,
 #backlight,
 #battery,
-#power-profiles-daemon {
+#custom-tlp {
   background: transparent;
   border-radius: 10px;
   margin: 3px 1px;
@@ -143,8 +143,17 @@ button:hover,
 
 #battery.charging,
 #battery.plugged,
-#bluetooth.connected {
+#bluetooth.connected,
+#custom-tlp.performance {
   color: @good;
+}
+
+#custom-tlp.power-saver {
+  color: @warn;
+}
+
+#custom-tlp.missing {
+  color: @muted;
 }
 
 #clock,

@@ -26,6 +26,11 @@ nodejs
 npm
 xclip
 btop
+tlpui
+tlp
+# sudo systemctl enable --now tlp.service  | /etc/tlp.conf
+tlp-pd
+# sudo systemctl enable --now tlp-pd.service
 # needed by desktop env
 keyd
 fcitx5-im

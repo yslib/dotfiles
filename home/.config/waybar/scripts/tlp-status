@@ -1,0 +1,164 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+profiles=(power-saver balanced performance)
+
+json_escape() {
+    local value="${1:-}"
+    value=${value//\\/\\\\}
+    value=${value//\"/\\\"}
+    value=${value//$'\n'/\\n}
+    printf '%s' "$value"
+}
+
+current_profile() {
+    local status profile_full profile
+    status=$(tlp-stat -s 2>/dev/null || true)
+    profile_full=$(awk -F'= ' '/^TLP profile[[:space:]]*=/{print $2; exit}' <<<"$status")
+    profile="${profile_full%%/*}"
+
+    if [[ -n "$profile" && "$profile" != "$profile_full" ]]; then
+        printf '%s' "$profile"
+        return 0
+    fi
+
+    if command -v gdbus >/dev/null 2>&1; then
+        gdbus call --system \
+            --dest org.freedesktop.UPower.PowerProfiles \
+            --object-path /org/freedesktop/UPower/PowerProfiles \
+            --method org.freedesktop.DBus.Properties.Get \
+            org.freedesktop.UPower.PowerProfiles ActiveProfile 2>/dev/null |
+            sed -n "s/.*'\\([^']*\\)'.*/\\1/p"
+    fi
+}
+
+set_profile() {
+    local profile="$1"
+    case "$profile" in
+        power-saver | balanced | performance) ;;
+        *)
+            echo "tlp-status: invalid profile: $profile" >&2
+            exit 2
+            ;;
+    esac
+
+    if command -v gdbus >/dev/null 2>&1 &&
+        gdbus call --system \
+            --dest org.freedesktop.UPower.PowerProfiles \
+            --object-path /org/freedesktop/UPower/PowerProfiles \
+            --method org.freedesktop.DBus.Properties.Set \
+            org.freedesktop.UPower.PowerProfiles ActiveProfile "<'$profile'>" >/dev/null 2>&1; then
+        refresh_waybar
+        return 0
+    fi
+
+    if [[ "$(id -u)" -eq 0 ]]; then
+        tlp "$profile"
+    elif command -v pkexec >/dev/null 2>&1; then
+        pkexec tlp "$profile"
+    else
+        echo "tlp-status: need gdbus or pkexec to change profile" >&2
+        exit 1
+    fi
+
+    refresh_waybar
+}
+
+cycle_profile() {
+    local direction="${1:-next}"
+    local current next index
+
+    current="$(current_profile)"
+    next="balanced"
+
+    for index in "${!profiles[@]}"; do
+        [[ "${profiles[$index]}" == "$current" ]] || continue
+        if [[ "$direction" == "prev" ]]; then
+            next="${profiles[$(((index + ${#profiles[@]} - 1) % ${#profiles[@]}))]}"
+        else
+            next="${profiles[$(((index + 1) % ${#profiles[@]}))]}"
+        fi
+        break
+    done
+
+    set_profile "$next"
+}
+
+refresh_waybar() {
+    pkill -RTMIN+8 waybar 2>/dev/null || true
+}
+
+case "${1:-status}" in
+    status)
+        ;;
+    cycle | next)
+        cycle_profile next
+        exit 0
+        ;;
+    prev | previous)
+        cycle_profile prev
+        exit 0
+        ;;
+    set)
+        set_profile "${2:-}"
+        exit 0
+        ;;
+    power-saver | balanced | performance)
+        set_profile "$1"
+        exit 0
+        ;;
+    *)
+        echo "usage: tlp-status [status|cycle|next|prev|set PROFILE|PROFILE]" >&2
+        exit 2
+        ;;
+esac
+
+if ! command -v tlp-stat >/dev/null 2>&1; then
+    printf '{"text":"󰾅 --","tooltip":"TLP is not installed","class":"missing"}\n'
+    exit 0
+fi
+
+status=$(tlp-stat -s 2>/dev/null || true)
+
+tlp_state=$(awk -F'= ' '/^tlp[[:space:]]*=/{print $2; exit}' <<<"$status")
+profile_full=$(awk -F'= ' '/^TLP profile[[:space:]]*=/{print $2; exit}' <<<"$status")
+power_source=$(awk -F'= ' '/^Power source[[:space:]]*=/{print $2; exit}' <<<"$status")
+
+profile="${profile_full%%/*}"
+
+case "$profile" in
+    performance)
+        icon="󰓅"
+        label="PERF"
+        css_class="performance"
+        ;;
+    power-saver)
+        icon="󰌪"
+        label="SAVE"
+        css_class="power-saver"
+        ;;
+    balanced | "")
+        icon="󰾅"
+        label="BAL"
+        css_class="balanced"
+        ;;
+    *)
+        icon="󰾅"
+        label="${profile^^}"
+        css_class="unknown"
+        ;;
+esac
+
+text="$icon $label"
+tooltip="TLP: ${tlp_state:-unknown}
+Profile: ${profile_full:-unknown}
+Power source: ${power_source:-unknown}
+
+Click: next profile
+Scroll: switch profile"
+
+printf '{"text":"%s","tooltip":"%s","class":"%s","alt":"%s"}\n' \
+    "$(json_escape "$text")" \
+    "$(json_escape "$tooltip")" \
+    "$(json_escape "$css_class")" \
+    "$(json_escape "$label")"
