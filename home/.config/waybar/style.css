@@ -40,6 +40,7 @@ button {
 }
 
 button:hover,
+#custom-notification:hover,
 #network:hover,
 #bluetooth:hover,
 #pulseaudio:hover,
@@ -108,6 +109,7 @@ button:hover,
 }
 
 #tray,
+#custom-notification,
 #network,
 #bluetooth,
 #pulseaudio,
@@ -126,6 +128,10 @@ button:hover,
 }
 
 #network.disconnected,
+#custom-notification.none,
+#custom-notification.dnd-none,
+#custom-notification.inhibited-none,
+#custom-notification.dnd-inhibited-none,
 #bluetooth.off,
 #bluetooth.disabled,
 #bluetooth.no-controller,
@@ -154,6 +160,13 @@ button:hover,
 
 #custom-tlp.missing {
   color: @muted;
+}
+
+#custom-notification.notification,
+#custom-notification.dnd-notification,
+#custom-notification.inhibited-notification,
+#custom-notification.dnd-inhibited-notification {
+  color: @accent;
 }
 
 #clock,

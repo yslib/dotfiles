@@ -7,6 +7,7 @@ local backlightStep = (os.getenv("HOME") or "~") .. "/.config/hypr/scripts/backl
 local volumeStep = (os.getenv("HOME") or "~") .. "/.config/hypr/scripts/volume-step"
 
 hl.on("hyprland.start", function()
+    hl.exec_cmd("sh -c 'systemctl --user stop dunst.service 2>/dev/null || true; pgrep -x swaync >/dev/null || swaync'")
     hl.exec_cmd("waybar")
     hl.exec_cmd("/usr/bin/hyprshell run")
 end)
@@ -56,6 +57,8 @@ for _, namespace in ipairs({
     "hyprshell_launcher",
     "hyprshell_overview",
     "hyprshell_switch",
+    "swaync-control-center",
+    "swaync-notification-window",
 }) do
     hl.layer_rule({
         match = { namespace = namespace },
@@ -90,6 +93,7 @@ hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "fullscreen", actio
 hl.bind(mainMod .. " + space", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
 hl.bind(mainMod .. " + N", hl.dsp.window.move({ workspace = "special:minimized", follow = false }))
 hl.bind(mainMod .. " + CTRL + N", hl.dsp.workspace.toggle_special("minimized"))
+hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd("swaync-client --toggle-panel --skip-wait"))
 hl.bind(mainMod .. " + P", hl.dsp.window.pin())
 hl.bind(mainMod .. " + C", hl.dsp.window.center())
 

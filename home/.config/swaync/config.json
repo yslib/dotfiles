@@ -1,0 +1,105 @@
+{
+  "$schema": "/etc/xdg/swaync/configSchema.json",
+  "ignore-gtk-theme": true,
+  "positionX": "right",
+  "positionY": "top",
+  "layer": "overlay",
+  "control-center-layer": "overlay",
+  "layer-shell": true,
+  "layer-shell-cover-screen": true,
+  "control-center-exclusive-zone": false,
+  "cssPriority": "user",
+  "control-center-margin-top": 48,
+  "control-center-margin-bottom": 10,
+  "control-center-margin-right": 10,
+  "control-center-margin-left": 10,
+  "notification-2fa-action": true,
+  "notification-inline-replies": false,
+  "notification-body-image-height": 120,
+  "notification-body-image-width": 240,
+  "timeout": 8,
+  "timeout-low": 4,
+  "timeout-critical": 0,
+  "fit-to-screen": false,
+  "relative-timestamps": true,
+  "control-center-width": 420,
+  "control-center-height": 760,
+  "notification-window-width": 420,
+  "keyboard-shortcuts": true,
+  "notification-grouping": true,
+  "image-visibility": "when-available",
+  "transition-time": 180,
+  "hide-on-clear": false,
+  "hide-on-action": true,
+  "text-empty": "No notifications",
+  "script-fail-notify": true,
+  "widgets": [
+    "title",
+    "dnd",
+    "buttons-grid",
+    "mpris",
+    "volume",
+    "slider#brightness",
+    "notifications"
+  ],
+  "widget-config": {
+    "title": {
+      "text": "Notifications",
+      "clear-all-button": true,
+      "button-text": "Clear"
+    },
+    "dnd": {
+      "text": "Focus"
+    },
+    "buttons-grid": {
+      "buttons-per-row": 4,
+      "actions": [
+        {
+          "label": "󰖩",
+          "type": "toggle",
+          "command": "/home/ysl/.config/swaync/scripts/quick-toggle wifi toggle",
+          "update-command": "/home/ysl/.config/swaync/scripts/quick-toggle wifi state"
+        },
+        {
+          "label": "󰂯",
+          "type": "toggle",
+          "command": "/home/ysl/.config/swaync/scripts/quick-toggle bluetooth toggle",
+          "update-command": "/home/ysl/.config/swaync/scripts/quick-toggle bluetooth state"
+        },
+        {
+          "label": "󰾅",
+          "type": "normal",
+          "command": "/home/ysl/.config/waybar/scripts/tlp-status cycle"
+        },
+        {
+          "label": "󰅖",
+          "type": "normal",
+          "command": "swaync-client --close-all"
+        }
+      ]
+    },
+    "mpris": {
+      "blacklist": [],
+      "autohide": true,
+      "show-album-art": "when-available",
+      "loop-carousel": false
+    },
+    "volume": {
+      "label": "󰕾",
+      "show-per-app": false
+    },
+    "slider#brightness": {
+      "label": "󰃠",
+      "cmd_getter": "/home/ysl/.config/hypr/scripts/backlight-step get",
+      "cmd_setter": "/home/ysl/.config/hypr/scripts/backlight-step set $value",
+      "min": 0,
+      "max": 100,
+      "min_limit": 1,
+      "max_limit": 100,
+      "value_scale": 0
+    },
+    "notifications": {
+      "vexpand": true
+    }
+  }
+}

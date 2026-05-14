@@ -2,7 +2,7 @@
 set -euo pipefail
 
 usage() {
-    echo "usage: backlight-step up|down|get [step-percent]" >&2
+    echo "usage: backlight-step up|down|get|set VALUE [step-percent]" >&2
     exit 2
 }
 
@@ -34,6 +34,19 @@ case "${1:-}" in
         echo $((current * 100 / max))
         exit 0
         ;;
+    set)
+        value="${2:-}"
+        value="${value%\%}"
+        [[ "$value" =~ ^[0-9]+$ ]] || usage
+        if ((value < 1)); then
+            value=1
+        elif ((value > 100)); then
+            value=100
+        fi
+        direction=0
+        step="$value"
+        next=$(((max * value + 99) / 100))
+        ;;
     up | increase | + | +*)
         direction=1
         ;;
@@ -45,12 +58,14 @@ case "${1:-}" in
         ;;
 esac
 
-step="${2:-5}"
-step="${step%\%}"
-[[ "$step" =~ ^[0-9]+$ ]] || usage
+if ((direction != 0)); then
+    step="${2:-5}"
+    step="${step%\%}"
+    [[ "$step" =~ ^[0-9]+$ ]] || usage
 
-delta=$(((max * step + 99) / 100))
-next=$((current + direction * delta))
+    delta=$(((max * step + 99) / 100))
+    next=$((current + direction * delta))
+fi
 
 if ((next < 1)); then
     next=1
@@ -105,7 +120,9 @@ set_with_sysfs() {
 set_with_brightnessctl() {
     command -v brightnessctl >/dev/null 2>&1 || return 1
 
-    if ((direction > 0)); then
+    if ((direction == 0)); then
+        brightnessctl -d "$device" set "${step}%" -q
+    elif ((direction > 0)); then
         brightnessctl -d "$device" set "${step}%+" -q
     else
         brightnessctl -d "$device" set "${step}%-" -q

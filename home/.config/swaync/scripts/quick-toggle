@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+usage() {
+    echo "usage: quick-toggle wifi|bluetooth state|toggle" >&2
+    exit 2
+}
+
+target="${1:-}"
+action="${2:-}"
+
+case "$target:$action" in
+    wifi:state)
+        [[ "$(nmcli radio wifi 2>/dev/null)" == "enabled" ]] && echo true || echo false
+        ;;
+    wifi:toggle)
+        if [[ "$(nmcli radio wifi 2>/dev/null)" == "enabled" ]]; then
+            nmcli radio wifi off
+        else
+            nmcli radio wifi on
+        fi
+        ;;
+    bluetooth:state)
+        bluetoothctl show 2>/dev/null | grep -q "Powered: yes" && echo true || echo false
+        ;;
+    bluetooth:toggle)
+        if bluetoothctl show 2>/dev/null | grep -q "Powered: yes"; then
+            bluetoothctl power off
+        else
+            bluetoothctl power on
+        fi
+        ;;
+    *)
+        usage
+        ;;
+esac
