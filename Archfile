@@ -1,11 +1,10 @@
 # Archfile — packages for Arch Linux
-# Lines starting with # are ignored.
+# Lines starting with # and inline comments after # are ignored.
 # [pacman] section: installed via pacman
 # [aur]    section: installed via paru (AUR helper)
 
 [pacman]
-# dev tools
-base-devel
+base-devel # dev tools
 zsh
 tmux
 lazygit
@@ -27,12 +26,9 @@ npm
 xclip
 btop
 tlpui
-tlp
-# sudo systemctl enable --now tlp.service  | /etc/tlp.conf
-tlp-pd
-# sudo systemctl enable --now tlp-pd.service
-# needed by desktop env
-keyd
+tlp # sudo systemctl enable --now tlp.service | /etc/tlp.conf
+tlp-pd # sudo systemctl enable --now tlp-pd.service
+keyd # needed by desktop env
 fcitx5-im
 fcitx5-chinese-addons
 fcitx5-pinyin-zhwiki
@@ -50,7 +46,6 @@ modemmanager
 lazydocker
 debtap
 appimagelauncher
-# needed by desktop env
-hyprshell-bin
+hyprshell-bin # needed by desktop env
 google-chrome
 waypaper

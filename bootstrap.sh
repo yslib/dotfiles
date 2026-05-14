@@ -20,8 +20,10 @@ install_arch_packages() {
     local aur_pkgs=()
 
     while IFS= read -r line || [[ -n "$line" ]]; do
-        # skip empty lines and comments
-        [[ -z "$line" || "$line" == \#* ]] && continue
+        line="${line%%#*}"
+        line="${line#"${line%%[![:space:]]*}"}"
+        line="${line%"${line##*[![:space:]]}"}"
+        [[ -z "$line" ]] && continue
         if [[ "$line" == "[pacman]" ]]; then
             section="pacman"
         elif [[ "$line" == "[aur]" ]]; then
