@@ -16,19 +16,36 @@
     box-shadow: 0 14px 38px rgba(17, 24, 39, 0.42);
 }
 
+.launcher {
+    margin-top: 148px;
+}
+
 .launcher-input {
     font-size: 1.15rem;
     padding: 8px 10px;
 }
 
+.launcher-item,
+.launcher-plugin {
+    background: rgba(30, 38, 52, 0.22);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
 .launcher-item-inner,
-.launcher-plugin-inner,
+.launcher-plugin-inner {
+    background: transparent;
+}
+
 .client {
     background: rgba(59, 66, 82, 0.62);
 }
 
-.launcher-item-inner:hover,
-.launcher-plugin-inner:hover,
+.launcher-item:hover,
+.launcher-plugin:hover {
+    background: rgba(125, 211, 252, 0.14);
+    border-color: rgba(125, 211, 252, 0.28);
+}
+
 .client:hover {
     background: rgba(67, 76, 94, 0.82);
 }
