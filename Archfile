@@ -42,6 +42,7 @@ modemmanager
 [aur]
 lazydocker
 debtap
+appimagelauncher
 # needed by desktop env
 hyprshell-bin
 google-chrome
