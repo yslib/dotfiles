@@ -40,6 +40,7 @@ noto-fonts-cjk
 noto-fonts-emoji
 swaync
 waybar
+hyprpaper
 nm-connection-editor
 network-manager-applet
 modemmanager
@@ -52,3 +53,4 @@ appimagelauncher
 # needed by desktop env
 hyprshell-bin
 google-chrome
+waypaper
