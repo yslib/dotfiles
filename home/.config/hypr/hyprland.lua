@@ -5,11 +5,13 @@ local browser = "google-chrome-stable"
 local hyprshell = "/usr/bin/hyprshell"
 local backlightStep = (os.getenv("HOME") or "~") .. "/.config/hypr/scripts/backlight-step"
 local volumeStep = (os.getenv("HOME") or "~") .. "/.config/hypr/scripts/volume-step"
+local ensureHyprshell = [[systemctl --user is-active --quiet hyprshell.service || { rm -f "$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/hyprshell.sock"; systemctl --user start hyprshell.service; }]]
+local restartWaybar = [[pkill -x waybar 2>/dev/null || true; waybar >/tmp/waybar.log 2>&1 &]]
 
 hl.on("hyprland.start", function()
     hl.exec_cmd("sh -c 'systemctl --user stop dunst.service 2>/dev/null || true; pgrep -x swaync >/dev/null || swaync'")
     hl.exec_cmd("waybar")
-    hl.exec_cmd("/usr/bin/hyprshell run")
+    hl.exec_cmd("sh -c '" .. ensureHyprshell .. "'")
 end)
 
 hl.env("XMODIFIERS", "@im=fcitx")
@@ -125,7 +127,7 @@ hl.bind("SHIFT + SHIFT_l", hl.dsp.exec_cmd(hyprshell .. [[ socat '{"CloseSwitch"
 hl.bind("SHIFT + SHIFT_r", hl.dsp.exec_cmd(hyprshell .. [[ socat '{"CloseSwitch":{"switch":true}}']]), { release = true, transparent = true, non_consuming = true })
 
 -- WM/session bindings
-hl.bind(mainMod .. " + CTRL + R", hl.dsp.exec_cmd("sh -c 'hyprctl reload; pkill -x waybar 2>/dev/null || true; waybar >/tmp/waybar.log 2>&1 &'"))
+hl.bind(mainMod .. " + CTRL + R", hl.dsp.exec_cmd("sh -c 'hyprctl reload; " .. restartWaybar .. " " .. ensureHyprshell .. "'"))
 hl.bind(mainMod .. " + CTRL + Q", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 
