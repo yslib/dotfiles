@@ -55,8 +55,10 @@ hl.config({
     },
 })
 
--- Workspaces are assigned on reload only. One monitor gets 1-8; two monitors
--- split 1-4 / 5-8 by current screen position, without hardcoded output names.
+-- Workspaces are assigned on reload only. One active monitor gets 1-8; two
+-- active monitors split 1-4 / 5-8 by current screen position, without
+-- hardcoded external output names. When the laptop lid is closed, the built-in
+-- panel is ignored if any external monitor is present.
 local function ordered_monitors()
     local monitors = hl.get_monitors()
 
@@ -71,7 +73,48 @@ local function ordered_monitors()
     return monitors
 end
 
-local monitors = ordered_monitors()
+local function is_laptop_panel(monitor)
+    local name = monitor.name or ""
+
+    return name:match("^eDP%-") ~= nil
+        or name:match("^LVDS%-") ~= nil
+        or name:match("^DSI%-") ~= nil
+end
+
+local function lid_is_closed()
+    local handle = io.popen("cat /proc/acpi/button/lid/*/state 2>/dev/null | head -n 1")
+    if handle == nil then
+        return false
+    end
+
+    local state = handle:read("*l") or ""
+    handle:close()
+
+    return state:find("closed", 1, true) ~= nil
+end
+
+local function active_monitors()
+    local monitors = ordered_monitors()
+
+    if not lid_is_closed() then
+        return monitors
+    end
+
+    local externalMonitors = {}
+    for _, monitor in ipairs(monitors) do
+        if not is_laptop_panel(monitor) then
+            table.insert(externalMonitors, monitor)
+        end
+    end
+
+    if #externalMonitors > 0 then
+        return externalMonitors
+    end
+
+    return monitors
+end
+
+local monitors = active_monitors()
 if monitors[1] ~= nil then
     local firstMonitor = monitors[1].name
     local secondMonitor = monitors[2] and monitors[2].name or nil
