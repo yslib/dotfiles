@@ -25,6 +25,40 @@ local function load_notes()
   return notes
 end
 
+local function append_multiline(lines, text)
+  if not text or text == "" then
+    return
+  end
+
+  local parts = vim.split(text, "\n", {
+    plain = true,
+    trimempty = false,
+  })
+
+  for _, line in ipairs(parts) do
+    table.insert(lines, line)
+  end
+end
+
+local function normalize_lines(lines)
+  local result = {}
+
+  for _, item in ipairs(lines) do
+    item = tostring(item or "")
+
+    local parts = vim.split(item, "\n", {
+      plain = true,
+      trimempty = false,
+    })
+
+    for _, line in ipairs(parts) do
+      table.insert(result, line)
+    end
+  end
+
+  return result
+end
+
 local function note_to_lines(note)
   local lines = {}
 
@@ -36,7 +70,7 @@ local function note_to_lines(note)
 
   if note.desc and note.desc ~= "" then
     table.insert(lines, "")
-    table.insert(lines, note.desc)
+    append_multiline(lines, note.desc)
   end
 
   if note.tags and #note.tags > 0 then
@@ -76,6 +110,7 @@ local function all_notes_to_lines(notes)
 end
 
 function M.show_float(lines)
+  lines = normalize_lines(lines)
   local buf = vim.api.nvim_create_buf(false, true)
 
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, lines)
