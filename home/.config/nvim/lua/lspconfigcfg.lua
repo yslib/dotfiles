@@ -100,7 +100,18 @@ local lsp_keymapping = function(client, bufnr)
 
     keymap("n", "<space>D", vim.lsp.buf.type_definition, opt("Go to type definition"))
     keymap("n", "<space>rn", vim.lsp.buf.rename, opt("Rename symbol"))
-    keymap("n", "<space>f", function() vim.lsp.buf.format({ async = true }) end, opt("Format buffer"))
+    keymap("n", "<space>f", function()
+        vim.lsp.buf.format({
+            async = true,
+            filter = function(client)
+                local ft = vim.bo.filetype
+                if ft == "python" then
+                    return client.name == "ruff"
+                end
+                return true
+            end
+        })
+    end, opt("Format buffer"))
 
     -- Diagnostics
 end
@@ -120,15 +131,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 local init_lsp = function(lsp_name, config)
     local ok, mod = pcall(require, 'lsp.' .. lsp_name)
+    vim.lsp.enable(lsp_name)
     if ok then
-        vim.lsp.enable(lsp_name)
         vim.lsp.config(lsp_name, mod)
     else
-        vim.notify("LSP " .. lsp_name .. " not found")
+        vim.notify("LSP config for [" .. lsp_name .. "] not found")
     end
 end
 
-local servers = { "clangd", "lua_ls", "cmake", "pyright", "mlir_lsp_server", "tblgen_lsp_server" }
+local servers = { "clangd", "lua_ls", "cmake", "pyright", "ruff", "mlir_lsp_server", "tblgen_lsp_server" }
 for _, server in pairs(servers) do
     init_lsp(server)
 end
