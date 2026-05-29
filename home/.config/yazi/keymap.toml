@@ -11,7 +11,36 @@ for  = "windows"
 run  = 'shell "powershell.exe" --block'
 desc = "Open PowerShell here"
 
+# g* keymaps: goto/cd
+
 [[mgr.append_keymap]]
 on  = ["g","s"]
 run = "plugin sftp"
 desc = "Connect to SFTP"
+
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "c" ]
+for = "unix"
+run  = "cd ~/.config"
+desc = "Cd to config"
+
+[[mgr.prepend_keymap]]
+on   = [ "g", "c" ]
+for = "windows"
+run  = "cd %APPDATA%"
+desc = "Cd to config"
+
+
+[[mgr.prepend_keymap]]
+on  = [ "g", "r" ]
+run = 'shell -- ya emit cd "$(git rev-parse --show-toplevel)"'
+desc = "Cd to Git root"
+
+
+
+# o* keymaps: open with 
+[[mgr.prepend_keymap]]
+on   = [ "o", "v" ]
+run  = 'shell -- nvim %h --block'
+desc = "Open hovered in nvim"
