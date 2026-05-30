@@ -25,21 +25,24 @@ nodejs
 npm
 xclip
 btop
-tlpui
-tlp # sudo systemctl enable --now tlp.service | /etc/tlp.conf
-tlp-pd # sudo systemctl enable --now tlp-pd.service
-keyd # needed by desktop env
+# chinese input method and fonts
 fcitx5-im
 fcitx5-chinese-addons
 fcitx5-pinyin-zhwiki
 noto-fonts-cjk
 noto-fonts-emoji
+# power management
+tlpui
+tlp # sudo systemctl enable --now tlp.service | /etc/tlp.conf
+tlp-pd # sudo systemctl enable --now tlp-pd.service
+keyd # needed by desktop env
 swaync
 waybar
 hyprpaper
 nm-connection-editor
 network-manager-applet
 modemmanager
+nwg-displays
 
 
 [aur]
