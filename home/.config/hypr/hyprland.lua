@@ -7,6 +7,7 @@ local backlightStep = (os.getenv("HOME") or "~") .. "/.config/hypr/scripts/backl
 local volumeStep = (os.getenv("HOME") or "~") .. "/.config/hypr/scripts/volume-step"
 local ensureHyprshell = [[systemctl --user is-active --quiet hyprshell.service || { rm -f "$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/hyprshell.sock"; systemctl --user start hyprshell.service; }]]
 local restartWaybar = [[pkill -x waybar 2>/dev/null || true; waybar >/tmp/waybar.log 2>&1 &]]
+local toggleWaybar = [[pkill -SIGUSR1 -x waybar]]
 local configHome = os.getenv("XDG_CONFIG_HOME") or ((os.getenv("HOME") or "~") .. "/.config")
 local hyprConfigDir = configHome .. "/hypr"
 local hyprPackagePath = hyprConfigDir .. "/?.lua"
@@ -119,6 +120,7 @@ hl.bind("SHIFT + SHIFT_l", hl.dsp.exec_cmd(hyprshell .. [[ socat '{"CloseSwitch"
 hl.bind("SHIFT + SHIFT_r", hl.dsp.exec_cmd(hyprshell .. [[ socat '{"CloseSwitch":{"switch":true}}']]), { release = true, transparent = true, non_consuming = true })
 
 -- WM/session bindings
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(toggleWaybar))
 hl.bind(mainMod .. " + CTRL + R", hl.dsp.exec_cmd("sh -c 'hyprctl reload; " .. restartWaybar .. " " .. ensureHyprshell .. "'"))
 hl.bind(mainMod .. " + CTRL + Q", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
 hl.bind(mainMod .. " + Escape", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'"))
