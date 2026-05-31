@@ -9,7 +9,10 @@ export TERM="xterm-256color"
 
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+# check linuxbrew excutable exists
+if command -v /home/linuxbrew/.linuxbrew/bin/brew &> /dev/null; then
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
+fi
 eval "$(zoxide init zsh)"
 
 # If you come from bash you might have to change your $PATH.
