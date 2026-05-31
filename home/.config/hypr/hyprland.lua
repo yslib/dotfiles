@@ -6,7 +6,8 @@ local hyprshell = "/usr/bin/hyprshell"
 local backlightStep = (os.getenv("HOME") or "~") .. "/.config/hypr/scripts/backlight-step"
 local volumeStep = (os.getenv("HOME") or "~") .. "/.config/hypr/scripts/volume-step"
 local ensureHyprshell = [[systemctl --user is-active --quiet hyprshell.service || { rm -f "$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/hyprshell.sock"; systemctl --user start hyprshell.service; }]]
-local restartWaybar = [[pkill -x waybar 2>/dev/null || true; waybar >/tmp/waybar.log 2>&1 &]]
+local restartWaybar = [[pkill -x waybar 2>/dev/null || true; nohup waybar >/tmp/waybar.log 2>&1 &]]
+local startWaybar = [[pgrep -x waybar >/dev/null || exec waybar >/tmp/waybar.log 2>&1]]
 local toggleWaybar = [[pkill -SIGUSR1 -x waybar]]
 local configHome = os.getenv("XDG_CONFIG_HOME") or ((os.getenv("HOME") or "~") .. "/.config")
 local hyprConfigDir = configHome .. "/hypr"
@@ -33,18 +34,18 @@ local function load_config_module(name)
     return require(name)
 end
 
+hl.on("hyprland.start", function()
+    hl.exec_cmd("sh -c 'systemctl --user stop dunst.service 2>/dev/null || true; pgrep -x swaync >/dev/null || swaync'")
+    hl.exec_cmd("sh -c '" .. startWaybar .. "'")
+    hl.exec_cmd("sh -c '" .. ensureHyprshell .. "'")
+end)
+
 -- nwg-displays writes monitors.lua alongside monitors.conf for Lua configs.
 if is_nwg_displays_config(hyprConfigDir .. "/monitors.lua") then
     load_config_module("monitors")
 else
     load_config_module("monitor-defaults")
 end
-
-hl.on("hyprland.start", function()
-    hl.exec_cmd("sh -c 'systemctl --user stop dunst.service 2>/dev/null || true; pgrep -x swaync >/dev/null || swaync'")
-    hl.exec_cmd("waybar")
-    hl.exec_cmd("sh -c '" .. ensureHyprshell .. "'")
-end)
 
 hl.env("XMODIFIERS", "@im=fcitx")
 hl.env("QT_IM_MODULES", "wayland;fcitx;ibus")
