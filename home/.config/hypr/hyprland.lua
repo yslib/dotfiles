@@ -106,6 +106,8 @@ for _, namespace in ipairs({
     })
 end
 
+load_config_module("window-rules")
+
 load_config_module("keymap").setup({
     main_mod = mainMod,
     terminal = terminal,
