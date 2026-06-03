@@ -86,6 +86,11 @@ hl.config({
             input_methods_ignorealpha = 0.35,
         },
     },
+
+    misc = {
+        force_default_wallpaper = 0,
+        disable_hyprland_logo = false,
+    },
 })
 
 load_config_module("workspace-layout")

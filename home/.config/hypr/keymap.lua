@@ -99,6 +99,16 @@ function M.setup(opts)
     hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"))
     hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"))
     hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"))
+
+    -- screenshot to clipboard: select region
+    hl.bind("Print", hl.dsp.exec_cmd(
+      'grim -g "$(slurp)" - | wl-copy -t image/png'
+    ))
+
+    -- full screen screenshot to clipboard
+    hl.bind("SHIFT + Print", hl.dsp.exec_cmd(
+      'grim - | wl-copy -t image/png'
+    ))
 end
 
 return M

@@ -43,6 +43,10 @@ nm-connection-editor
 network-manager-applet
 modemmanager
 nwg-displays
+# screenshot tools
+grim
+slurp
+wl-clipboard
 
 
 [aur]
