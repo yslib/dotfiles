@@ -139,7 +139,7 @@ local init_lsp = function(lsp_name, config)
     end
 end
 
-local servers = { "clangd", "lua_ls", "cmake", "pyright", "ruff", "mlir_lsp_server", "tblgen_lsp_server" }
+local servers = { "clangd", "lua_ls", "cmake", "pyright", "ruff", "mlir_lsp_server", "tblgen_lsp_server", "cl_lsp" }
 for _, server in pairs(servers) do
     init_lsp(server)
 end

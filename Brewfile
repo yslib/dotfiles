@@ -17,6 +17,8 @@ brew "git-delta"
 brew "python"
 brew "node"
 brew "btop"
+brew "sbcl"
+brew "roswell"
 
 if OS.mac?
   cask "sf-symbols"

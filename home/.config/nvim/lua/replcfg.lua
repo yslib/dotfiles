@@ -36,5 +36,9 @@ require("plugins.repl").setup({
             filetypes = { "sh", "bash", "zsh" },
             cmd = "bash",
         },
+        lisp = {
+            filetypes = { "lisp" },
+            cmd = "sbcl",
+        },
     },
 })

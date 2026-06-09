@@ -77,6 +77,9 @@ Plug 'nvim-neotest/nvim-nio'
 " AI Tools
 Plug 'zbirenbaum/copilot.lua'
 
+" Lisp
+Plug 'eraserhd/parinfer-rust', { 'do': 'cargo build --release' }
+
 " vim plug
 Plug 'tpope/vim-surround'                                      " vim-surround
 Plug 'tpope/vim-fugitive'
