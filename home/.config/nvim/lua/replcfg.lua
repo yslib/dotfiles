@@ -40,5 +40,9 @@ require("plugins.repl").setup({
             filetypes = { "lisp" },
             cmd = "sbcl",
         },
+        racket = {
+            filetypes = { "racket", "scheme" },
+            cmd = "racket",
+        },
     },
 })
