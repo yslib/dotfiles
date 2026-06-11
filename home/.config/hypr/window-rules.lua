@@ -11,3 +11,12 @@ hl.window_rule({
     center = true,
     size = "900 650",
 })
+
+ hl.window_rule({
+     name = "style-chrome",
+     match = { class = "^(Google-chrome|google-chrome)$" },
+     opacity = "1.00 0.96 1.00",
+     rounding = 10,
+     border_size = 1,
+ })
+

@@ -5,11 +5,17 @@ CONFIG_HOME="$SCRIPT_DIR/../home"
 echo "🔗 Linking configuration files from $CONFIG_HOME to $HOME"
 
 mkdir -p "$HOME/.config/vim"
+mkdir -p "$HOME/.local/share/applications"
 ln -sf "$CONFIG_HOME/.config/nvim" "$HOME/.config/nvim"
 ln -sfn "$CONFIG_HOME/.config/hypr" "$HOME/.config/hypr"
 ln -sfn "$CONFIG_HOME/.config/waybar" "$HOME/.config/waybar"
 ln -sfn "$CONFIG_HOME/.config/hyprshell" "$HOME/.config/hyprshell"
 ln -sfn "$CONFIG_HOME/.config/swaync" "$HOME/.config/swaync"
+ln -sf "$CONFIG_HOME/.config/chrome-flags.conf" "$HOME/.config/chrome-flags.conf"
+for desktop_file in "$CONFIG_HOME/.local/share/applications/"*.desktop; do
+    [ -e "$desktop_file" ] || continue
+    ln -sf "$desktop_file" "$HOME/.local/share/applications/$(basename "$desktop_file")"
+done
 ln -sf "$CONFIG_HOME/.config/vim/vimrc" "$HOME/.config/vim/vimrc"
 ln -sf "$HOME/.config/vim/vimrc" "$HOME/.vimrc"
 ln -sf "$CONFIG_HOME/.config/yazi" "$HOME/.config/yazi"
