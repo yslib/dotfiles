@@ -36,6 +36,7 @@ tlpui
 tlp # sudo systemctl enable --now tlp.service | /etc/tlp.conf
 tlp-pd # sudo systemctl enable --now tlp-pd.service
 keyd # needed by desktop env
+polkit-kde-agent # graphical pkexec prompts for Hyprland widgets
 swaync
 waybar
 hyprpaper

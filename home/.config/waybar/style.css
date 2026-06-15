@@ -45,7 +45,7 @@ button:hover,
 #bluetooth:hover,
 #pulseaudio:hover,
 #backlight:hover,
-#battery:hover,
+#custom-battery-limit:hover,
 #custom-tlp:hover,
 #clock:hover,
 #custom-power:hover {
@@ -127,7 +127,7 @@ button:hover,
 #bluetooth,
 #pulseaudio,
 #backlight,
-#battery,
+#custom-battery-limit,
 #custom-tlp {
   background: transparent;
   border-radius: 10px;
@@ -152,19 +152,28 @@ button:hover,
   color: @muted;
 }
 
-#battery.warning:not(.charging) {
+#bluetooth.connected,
+#custom-battery-limit.charging,
+#custom-battery-limit.full,
+#custom-tlp.performance {
+  color: @good;
+}
+
+#custom-battery-limit.warning {
   color: @warn;
 }
 
-#battery.critical:not(.charging) {
+#custom-battery-limit.critical {
   color: @bad;
 }
 
-#battery.charging,
-#battery.plugged,
-#bluetooth.connected,
-#custom-tlp.performance {
-  color: @good;
+#custom-battery-limit.protected,
+#custom-battery-limit.custom {
+  color: @accent;
+}
+
+#custom-battery-limit.missing {
+  color: @muted;
 }
 
 #custom-tlp.power-saver {

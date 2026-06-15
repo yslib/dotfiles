@@ -6,6 +6,7 @@ local hyprshell = "/usr/bin/hyprshell"
 local backlightStep = (os.getenv("HOME") or "~") .. "/.config/hypr/scripts/backlight-step"
 local volumeStep = (os.getenv("HOME") or "~") .. "/.config/hypr/scripts/volume-step"
 local ensureHyprshell = [[systemctl --user is-active --quiet hyprshell.service || { rm -f "$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/hyprshell.sock"; systemctl --user start hyprshell.service; }]]
+local startPolkitAgent = [[pgrep -f '[p]olkit.*authentication-agent|[p]olkit-kde-authentication-agent' >/dev/null || { [ -x /usr/lib/polkit-kde-authentication-agent-1 ] && /usr/lib/polkit-kde-authentication-agent-1 & }]]
 local restartWaybar = [[pkill -x waybar 2>/dev/null || true; nohup waybar >/tmp/waybar.log 2>&1 &]]
 local startWaybar = [[pgrep -x waybar >/dev/null || exec waybar >/tmp/waybar.log 2>&1]]
 local toggleWaybar = [[pkill -SIGUSR1 -x waybar]]
@@ -35,6 +36,7 @@ local function load_config_module(name)
 end
 
 hl.on("hyprland.start", function()
+    hl.exec_cmd("sh -c '" .. startPolkitAgent .. "'")
     hl.exec_cmd("sh -c 'systemctl --user stop dunst.service 2>/dev/null || true; pgrep -x swaync >/dev/null || swaync'")
     hl.exec_cmd("sh -c '" .. startWaybar .. "'")
     hl.exec_cmd("sh -c '" .. ensureHyprshell .. "'")

@@ -28,7 +28,7 @@
       "bluetooth",
       "pulseaudio",
       "backlight",
-      "battery",
+      "custom/battery-limit",
       "custom/tlp"
     ]
   },
@@ -138,20 +138,6 @@
     "tooltip": false
   },
 
-  "battery": {
-    "states": {
-      "warning": 30,
-      "critical": 15
-    },
-    "format": "{icon} {capacity}%",
-    "format-charging": "󰂄 {capacity}%",
-    "format-plugged": "󰚥 {capacity}%",
-    "format-full": "󰁹",
-    "format-alt": "{time}",
-    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-    "tooltip-format": "{capacity}% - {timeTo}"
-  },
-
   "custom/tlp": {
     "exec": "$HOME/.config/waybar/scripts/tlp-status",
     "return-type": "json",
@@ -161,6 +147,18 @@
     "on-click-right": "$HOME/.config/waybar/scripts/tlp-status balanced",
     "on-scroll-up": "$HOME/.config/waybar/scripts/tlp-status next",
     "on-scroll-down": "$HOME/.config/waybar/scripts/tlp-status prev",
+    "tooltip": true
+  },
+
+  "custom/battery-limit": {
+    "exec": "$HOME/.config/waybar/scripts/battery-limit status",
+    "return-type": "json",
+    "interval": 30,
+    "signal": 9,
+    "on-click": "$HOME/.config/waybar/scripts/battery-limit toggle",
+    "on-click-right": "$HOME/.config/waybar/scripts/battery-limit set 100",
+    "on-scroll-up": "$HOME/.config/waybar/scripts/battery-limit set 100",
+    "on-scroll-down": "$HOME/.config/waybar/scripts/battery-limit set 80",
     "tooltip": true
   },
 

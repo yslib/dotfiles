@@ -1,0 +1,443 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PROTECT_LIMIT="${BATTERY_LIMIT_PROTECT:-80}"
+FULL_LIMIT="${BATTERY_LIMIT_FULL:-100}"
+START_GAP="${BATTERY_LIMIT_START_GAP:-5}"
+TLP_DROPIN="${BATTERY_LIMIT_TLP_DROPIN:-/etc/tlp.d/90-battery-limit.conf}"
+WAYBAR_SIGNAL="${BATTERY_LIMIT_WAYBAR_SIGNAL:-9}"
+
+json_escape() {
+    local value="${1:-}"
+    value=${value//\\/\\\\}
+    value=${value//\"/\\\"}
+    value=${value//$'\n'/\\n}
+    printf '%s' "$value"
+}
+
+usage() {
+    echo "usage: battery-limit [status|state|toggle|set LIMIT|80|100]" >&2
+    exit 2
+}
+
+is_number() {
+    [[ "${1:-}" =~ ^[0-9]+$ ]]
+}
+
+validate_limit() {
+    local limit="${1:-}"
+    if ! is_number "$limit" || ((limit < 50 || limit > 100)); then
+        echo "battery-limit: LIMIT must be an integer between 50 and 100" >&2
+        exit 2
+    fi
+}
+
+start_for_limit() {
+    local limit="$1"
+    local start=$((limit - START_GAP))
+    ((start < 1)) && start=1
+    ((start >= limit)) && start=$((limit - 1))
+    printf '%s\n' "$start"
+}
+
+battery_dirs() {
+    local dir type
+
+    for dir in /sys/class/power_supply/BAT*; do
+        [[ -d "$dir" ]] || continue
+        type=""
+        [[ -r "$dir/type" ]] && type="$(<"$dir/type")"
+        [[ -z "$type" || "$type" == "Battery" ]] || continue
+        printf '%s\n' "$dir"
+    done
+}
+
+read_first_number() {
+    local file value
+
+    for file in "$@"; do
+        [[ -r "$file" ]] || continue
+        value="$(<"$file")"
+        value="${value//$'\n'/}"
+        if is_number "$value"; then
+            printf '%s\n' "$value"
+            return 0
+        fi
+    done
+
+    return 1
+}
+
+stop_files() {
+    local dir="$1"
+    printf '%s\n' \
+        "$dir/charge_control_end_threshold" \
+        "$dir/charge_stop_threshold"
+}
+
+start_files() {
+    local dir="$1"
+    printf '%s\n' \
+        "$dir/charge_control_start_threshold" \
+        "$dir/charge_start_threshold"
+}
+
+config_limit() {
+    local file value found=""
+    local files=(
+        /usr/share/tlp/defaults.conf
+        /etc/tlp.conf
+        /etc/tlp.d/*.conf
+    )
+
+    for file in "${files[@]}"; do
+        [[ -r "$file" ]] || continue
+        while IFS= read -r value; do
+            found="$value"
+        done < <(sed -nE 's/^[[:space:]]*STOP_CHARGE_THRESH_BAT[0-9]+[[:space:]]*=[[:space:]]*"?([0-9]+)"?.*$/\1/p' "$file")
+    done
+
+    [[ -n "$found" ]] || return 1
+    printf '%s\n' "$found"
+}
+
+config_start() {
+    local file value found=""
+    local files=(
+        /usr/share/tlp/defaults.conf
+        /etc/tlp.conf
+        /etc/tlp.d/*.conf
+    )
+
+    for file in "${files[@]}"; do
+        [[ -r "$file" ]] || continue
+        while IFS= read -r value; do
+            found="$value"
+        done < <(sed -nE 's/^[[:space:]]*START_CHARGE_THRESH_BAT[0-9]+[[:space:]]*=[[:space:]]*"?([0-9]+)"?.*$/\1/p' "$file")
+    done
+
+    [[ -n "$found" ]] || return 1
+    printf '%s\n' "$found"
+}
+
+current_limit() {
+    local dir value
+
+    while IFS= read -r dir; do
+        value="$(read_first_number "$dir/charge_control_end_threshold" "$dir/charge_stop_threshold" 2>/dev/null || true)"
+        if [[ -n "$value" ]]; then
+            printf '%s\n' "$value"
+            return 0
+        fi
+    done < <(battery_dirs)
+
+    config_limit
+}
+
+current_start() {
+    local dir value
+
+    while IFS= read -r dir; do
+        value="$(read_first_number "$dir/charge_control_start_threshold" "$dir/charge_start_threshold" 2>/dev/null || true)"
+        if [[ -n "$value" ]]; then
+            printf '%s\n' "$value"
+            return 0
+        fi
+    done < <(battery_dirs)
+
+    config_start
+}
+
+current_capacity() {
+    local dir value
+
+    while IFS= read -r dir; do
+        value="$(read_first_number "$dir/capacity" 2>/dev/null || true)"
+        if [[ -n "$value" ]]; then
+            printf '%s\n' "$value"
+            return 0
+        fi
+    done < <(battery_dirs)
+
+    return 1
+}
+
+current_status() {
+    local dir status
+
+    while IFS= read -r dir; do
+        [[ -r "$dir/status" ]] || continue
+        status="$(<"$dir/status")"
+        status="${status//$'\n'/}"
+        [[ -n "$status" ]] || continue
+        printf '%s\n' "$status"
+        return 0
+    done < <(battery_dirs)
+
+    return 1
+}
+
+battery_names() {
+    local dir
+    local found=0
+
+    while IFS= read -r dir; do
+        basename "$dir"
+        found=1
+    done < <(battery_dirs)
+
+    ((found == 1)) || printf 'BAT0\n'
+}
+
+write_value() {
+    local value="$1"
+    local file="$2"
+
+    [[ -e "$file" ]] || return 0
+    printf '%s\n' "$value" >"$file"
+}
+
+write_sysfs_thresholds() {
+    local dir="$1"
+    local start="$2"
+    local stop="$3"
+    local current_stop
+    local file
+
+    current_stop="$(read_first_number "$dir/charge_control_end_threshold" "$dir/charge_stop_threshold" 2>/dev/null || true)"
+
+    if [[ -n "$current_stop" && "$stop" -gt "$current_stop" ]]; then
+        while IFS= read -r file; do write_value "$stop" "$file"; done < <(stop_files "$dir")
+        while IFS= read -r file; do write_value "$start" "$file"; done < <(start_files "$dir")
+    else
+        while IFS= read -r file; do write_value "$start" "$file"; done < <(start_files "$dir")
+        while IFS= read -r file; do write_value "$stop" "$file"; done < <(stop_files "$dir")
+    fi
+}
+
+write_tlp_dropin() {
+    local start="$1"
+    local stop="$2"
+    local name
+    local tmp
+
+    mkdir -p "$(dirname "$TLP_DROPIN")"
+    tmp="$(mktemp)"
+    {
+        echo "# Managed by ~/.config/waybar/scripts/battery-limit"
+        echo "# Click the SwayNC/Waybar battery-limit control or run:"
+        echo "#   battery-limit set 80"
+        echo "#   battery-limit set 100"
+        while IFS= read -r name; do
+            echo "START_CHARGE_THRESH_${name}=\"$start\""
+            echo "STOP_CHARGE_THRESH_${name}=\"$stop\""
+        done < <(battery_names)
+    } >"$tmp"
+    install -m 0644 "$tmp" "$TLP_DROPIN"
+    rm -f "$tmp"
+}
+
+apply_tlp_runtime() {
+    local start="$1"
+    local stop="$2"
+    local name
+
+    command -v tlp >/dev/null 2>&1 || return 1
+
+    while IFS= read -r name; do
+        tlp setcharge "$start" "$stop" "$name" >/dev/null 2>&1 || return 1
+    done < <(battery_names)
+}
+
+root_set_limit() {
+    local limit="$1"
+    local start
+    local dir
+    local wrote_sysfs=0
+
+    validate_limit "$limit"
+    start="$(start_for_limit "$limit")"
+
+    write_tlp_dropin "$start" "$limit"
+    apply_tlp_runtime "$start" "$limit" || true
+
+    while IFS= read -r dir; do
+        write_sysfs_thresholds "$dir" "$start" "$limit"
+        wrote_sysfs=1
+    done < <(battery_dirs)
+
+    if ((wrote_sysfs == 0)) && ! command -v tlp >/dev/null 2>&1; then
+        echo "battery-limit: no supported battery threshold interface found" >&2
+        exit 1
+    fi
+}
+
+refresh_waybar() {
+    pkill -RTMIN+"$WAYBAR_SIGNAL" waybar 2>/dev/null || true
+}
+
+polkit_agent_running() {
+    pgrep -f '[p]olkit.*authentication-agent|[p]olkit-kde-authentication-agent' >/dev/null 2>&1
+}
+
+start_polkit_agent() {
+    local agent
+    local agents=(
+        /usr/lib/polkit-kde-authentication-agent-1
+        /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+        /usr/libexec/polkit-gnome-authentication-agent-1
+        /usr/lib/lxqt-policykit-agent
+        /usr/lib/xfce-polkit/xfce-polkit
+    )
+
+    polkit_agent_running && return 0
+
+    for agent in "${agents[@]}"; do
+        [[ -x "$agent" ]] || continue
+        if command -v setsid >/dev/null 2>&1; then
+            setsid -f "$agent" >/tmp/polkit-auth-agent.log 2>&1 || true
+        else
+            "$agent" >/tmp/polkit-auth-agent.log 2>&1 &
+        fi
+        sleep 0.5
+        return 0
+    done
+
+    return 1
+}
+
+notify_change() {
+    local limit="$1"
+
+    command -v notify-send >/dev/null 2>&1 || return 0
+    notify-send -a "Battery Limit" "Battery charge limit" "Set to ${limit}%" >/dev/null 2>&1 || true
+}
+
+notify_error() {
+    local message="$1"
+
+    command -v notify-send >/dev/null 2>&1 || return 0
+    notify-send -u critical -a "Battery Limit" "Battery charge limit" "$message" >/dev/null 2>&1 || true
+}
+
+set_limit() {
+    local limit="$1"
+    local script
+
+    validate_limit "$limit"
+
+    if [[ "$(id -u)" -eq 0 ]]; then
+        root_set_limit "$limit"
+    else
+        script="$(realpath "$0" 2>/dev/null || printf '%s' "$0")"
+        if command -v pkexec >/dev/null 2>&1; then
+            start_polkit_agent || true
+            if ! pkexec "$script" _set-root "$limit"; then
+                notify_error "Authorization failed. Make sure a polkit agent is running."
+                exit 1
+            fi
+        else
+            echo "battery-limit: pkexec is required to change charge thresholds" >&2
+            exit 1
+        fi
+    fi
+
+    refresh_waybar
+    notify_change "$limit"
+}
+
+status_json() {
+    local limit start capacity battery_status icon label css_class tooltip
+
+    limit="$(current_limit 2>/dev/null || true)"
+    start="$(current_start 2>/dev/null || true)"
+    capacity="$(current_capacity 2>/dev/null || true)"
+    battery_status="$(current_status 2>/dev/null || true)"
+
+    if [[ -z "$limit" ]]; then
+        printf '{"text":"󰂑 --","tooltip":"Battery charge limit is unavailable","class":"missing","alt":"missing"}\n'
+        return 0
+    fi
+
+    if [[ "$battery_status" == "Charging" ]]; then
+        icon="󰂄"
+    elif [[ "$battery_status" == "Full" ]]; then
+        icon="󰁹"
+    elif ((limit <= PROTECT_LIMIT)); then
+        icon="󰁹"
+    elif ((limit >= FULL_LIMIT)); then
+        icon="󰂄"
+    else
+        icon="󰂃"
+    fi
+
+    if [[ -n "$capacity" ]]; then
+        label="${capacity}%/${limit}%"
+    else
+        label="--/${limit}%"
+    fi
+
+    if [[ -n "$capacity" && "$capacity" -le 15 ]]; then
+        css_class="critical"
+    elif [[ -n "$capacity" && "$capacity" -le 30 ]]; then
+        css_class="warning"
+    elif [[ "$battery_status" == "Charging" || "$battery_status" == "Full" ]]; then
+        css_class="charging"
+    elif ((limit <= PROTECT_LIMIT)); then
+        css_class="protected"
+    elif ((limit >= FULL_LIMIT)); then
+        css_class="full"
+    else
+        css_class="custom"
+    fi
+
+    tooltip="Charge limit: ${limit}%"
+    [[ -n "$start" ]] && tooltip+=$'\n'"Start threshold: ${start}%"
+    [[ -n "$capacity" ]] && tooltip+=$'\n'"Battery: ${capacity}%"
+    [[ -n "$battery_status" ]] && tooltip+=" ${battery_status}"
+    tooltip+=$'\n\n'"Click: toggle ${PROTECT_LIMIT}%/${FULL_LIMIT}%"
+    tooltip+=$'\n'"Right click / scroll up: ${FULL_LIMIT}%"
+    tooltip+=$'\n'"Scroll down: ${PROTECT_LIMIT}%"
+
+    printf '{"text":"%s","tooltip":"%s","class":"%s","alt":"%s"}\n' \
+        "$(json_escape "$icon $label")" \
+        "$(json_escape "$tooltip")" \
+        "$(json_escape "$css_class")" \
+        "$(json_escape "$label")"
+}
+
+toggle_limit() {
+    local limit
+
+    limit="$(current_limit 2>/dev/null || true)"
+    if [[ -n "$limit" && "$limit" -le "$PROTECT_LIMIT" ]]; then
+        set_limit "$FULL_LIMIT"
+    else
+        set_limit "$PROTECT_LIMIT"
+    fi
+}
+
+case "${1:-status}" in
+    status)
+        status_json
+        ;;
+    state)
+        limit="$(current_limit 2>/dev/null || true)"
+        [[ -n "$limit" && "$limit" -le "$PROTECT_LIMIT" ]] && echo true || echo false
+        ;;
+    toggle)
+        toggle_limit
+        ;;
+    set)
+        set_limit "${2:-}"
+        ;;
+    "$PROTECT_LIMIT" | "$FULL_LIMIT")
+        set_limit "$1"
+        ;;
+    _set-root)
+        root_set_limit "${2:-}"
+        ;;
+    *)
+        usage
+        ;;
+esac

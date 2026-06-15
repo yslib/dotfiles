@@ -52,7 +52,7 @@
       "text": "Focus"
     },
     "buttons-grid": {
-      "buttons-per-row": 4,
+      "buttons-per-row": 5,
       "actions": [
         {
           "label": "󰖩",
@@ -70,6 +70,12 @@
           "label": "󰾅",
           "type": "normal",
           "command": "/home/ysl/.config/waybar/scripts/tlp-status cycle"
+        },
+        {
+          "label": "󰁹",
+          "type": "toggle",
+          "command": "/home/ysl/.config/waybar/scripts/battery-limit toggle",
+          "update-command": "/home/ysl/.config/waybar/scripts/battery-limit state"
         },
         {
           "label": "󰅖",
