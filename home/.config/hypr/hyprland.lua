@@ -35,6 +35,8 @@ local function load_config_module(name)
     return require(name)
 end
 
+local monitorDetect = load_config_module("monitor-detect")
+
 hl.on("hyprland.start", function()
     hl.exec_cmd("sh -c '" .. startPolkitAgent .. "'")
     hl.exec_cmd("sh -c 'systemctl --user stop dunst.service 2>/dev/null || true; pgrep -x swaync >/dev/null || swaync'")
@@ -43,7 +45,8 @@ hl.on("hyprland.start", function()
 end)
 
 -- nwg-displays writes monitors.lua alongside monitors.conf for Lua configs.
-if is_nwg_displays_config(hyprConfigDir .. "/monitors.lua") then
+-- Only use its fixed multi-monitor layout when an external monitor is present.
+if is_nwg_displays_config(hyprConfigDir .. "/monitors.lua") and monitorDetect.external_connected() then
     load_config_module("monitors")
 else
     load_config_module("monitor-defaults")
