@@ -47,6 +47,7 @@ Plug 'theHamsta/nvim-dap-virtual-text'
 
 " LSP
 Plug 'mrcjkb/rustaceanvim'                                 " for rust
+Plug 'stevearc/aerial.nvim'                                " outline
 
 " Mason
 Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
@@ -179,6 +180,7 @@ lua require('spectrecfg')
 lua require('nvimbqfcfg')
 lua require'colorizer'.setup()
 lua require('rustaceanvimcfg')
+lua require('aerialcfg')
 lua require('replcfg')
 lua require('plugins.repl')
 lua require('plugins.memo').setup()
