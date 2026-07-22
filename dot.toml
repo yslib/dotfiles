@@ -198,7 +198,8 @@ starship   = { provider = "scoop" }
 activate = { path_prepend = ["${env:USERPROFILE}/scoop/shims"] }
 probe = { program = "powershell.exe", args = ["-NoProfile", "-Command", "if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) { exit 1 }; $root = if ($env:SCOOP) { $env:SCOOP } else { Join-Path $env:USERPROFILE 'scoop' }; if ((Test-Path (Join-Path $root 'buckets\\extras')) -and (Test-Path (Join-Path $root 'buckets\\nerd-fonts'))) { exit 0 }; exit 1"] }
 ensure = { program = "powershell.exe", args = ["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", "if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) { Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force; Invoke-RestMethod get.scoop.sh | Invoke-Expression }; $root = if ($env:SCOOP) { $env:SCOOP } else { Join-Path $env:USERPROFILE 'scoop' }; if (-not (Test-Path (Join-Path $root 'buckets\\extras'))) { scoop bucket add extras }; if (-not (Test-Path (Join-Path $root 'buckets\\nerd-fonts'))) { scoop bucket add nerd-fonts }"] }
-install = { program = "scoop", args = ["install", "${package:names}"] }
+
+install = { program = "powershell.exe", args = ["-NoProfile", "-File", "${env:USERPROFILE}/scoop/apps/scoop/current/bin/scoop.ps1", "install", "${package:names}"] }
 
 [targets.windows.links]
 nvim               = { source = "home/.config/nvim", target = "${env:LOCALAPPDATA}/nvim" }
@@ -214,4 +215,4 @@ powershell-profile = { source = "home/.config/powershell/profile.ps1", target = 
 terminal-local   = { source = "home/.config/windows-terminal/settings.json", target = "${env:LOCALAPPDATA}/Microsoft/Windows Terminal/settings.json", on_missing_parent = "skip" }
 terminal-stable  = { source = "home/.config/windows-terminal/settings.json", target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
 terminal-preview = { source = "home/.config/windows-terminal/settings.json", target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
-terminal-canary  = { source = "home/.config/windows-terminal/settings.json", target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminalCanary_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
+# terminal-canary  = { source = "home/.config/windows-terminal/settings.json", target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminalCanary_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
