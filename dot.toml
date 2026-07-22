@@ -10,34 +10,18 @@ platform = { os = "linux", distro = "arch" }
 
 [targets.arch-personal.packages]
 
-# Command-line environment via pacman
-zsh       = { provider = "pacman" }
-tmux      = { provider = "pacman" }
-lazygit   = { provider = "pacman" }
-cloc      = { provider = "pacman" }
-git       = { provider = "pacman" }
-cmake     = { provider = "pacman" }
-neovim    = { provider = "pacman" }
-zoxide    = { provider = "pacman" }
-ripgrep   = { provider = "pacman" }
-fd        = { provider = "pacman" }
-fzf       = { provider = "pacman" }
-yazi      = { provider = "pacman" }
-just      = { provider = "pacman" }
-dust      = { provider = "pacman" }
-git-delta = { provider = "pacman" }
-python    = { provider = "pacman" }
-nodejs    = { provider = "pacman" }
-btop      = { provider = "pacman" }
+# Pacman packages by purpose
+terminal-tools        = { provider = "pacman", names = ["zsh", "tmux", "zoxide", "fzf"] }
+version-control-tools = { provider = "pacman", names = ["git", "lazygit", "git-delta"] }
+file-search-tools     = { provider = "pacman", names = ["ripgrep", "fd", "yazi", "dust"] }
+development-tools     = { provider = "pacman", names = ["cloc", "cmake", "just", "base-devel"] }
+editors               = { provider = "pacman", names = ["neovim"] }
+language-runtimes     = { provider = "pacman", names = ["python", "nodejs", "npm"] }
+system-tools          = { provider = "pacman", names = ["btop", "xclip"] }
 
-# Arch build and clipboard tools via pacman
-base-devel = { provider = "pacman" }
-npm          = { provider = "pacman" }
-xclip        = { provider = "pacman" }
-
-# AUR packages via paru
-lazydocker = { provider = "paru" }
-debtap     = { provider = "paru" }
+# Paru packages by purpose
+container-tools       = { provider = "paru", names = ["lazydocker"] }
+arch-packaging-tools  = { provider = "paru", names = ["debtap"] }
 
 [targets.arch-personal.providers.pacman]
 probe   = { program = "pacman", args = ["--version"] }
@@ -70,30 +54,16 @@ exec = { program = "bash", args = ["${dot:config_dir}/scripts/install_oh_my_zsh.
 # Selecting `arch-personal/desktop` inherits the command-line environment above.
 [targets.arch-personal.profiles.desktop.packages]
 
-# Desktop input, fonts, networking, and Wayland via pacman
-fcitx5-im              = { provider = "pacman" }
-fcitx5-chinese-addons  = { provider = "pacman" }
-fcitx5-pinyin-zhwiki   = { provider = "pacman" }
-noto-fonts-cjk         = { provider = "pacman" }
-noto-fonts-emoji       = { provider = "pacman" }
-keyd                   = { provider = "pacman" }
-polkit-kde-agent       = { provider = "pacman" }
-swaync                 = { provider = "pacman" }
-waybar                 = { provider = "pacman" }
-hyprpaper              = { provider = "pacman" }
-nm-connection-editor   = { provider = "pacman" }
-network-manager-applet = { provider = "pacman" }
-modemmanager           = { provider = "pacman" }
-nwg-displays           = { provider = "pacman" }
-grim                   = { provider = "pacman" }
-slurp                  = { provider = "pacman" }
-wl-clipboard           = { provider = "pacman" }
+# Desktop pacman packages by purpose
+input-tools   = { provider = "pacman", names = ["fcitx5-im", "fcitx5-chinese-addons", "fcitx5-pinyin-zhwiki", "keyd"] }
+desktop-fonts = { provider = "pacman", names = ["noto-fonts-cjk", "noto-fonts-emoji"] }
+desktop-shell = { provider = "pacman", names = ["polkit-kde-agent", "swaync", "waybar", "hyprpaper", "nwg-displays"] }
+network-tools = { provider = "pacman", names = ["nm-connection-editor", "network-manager-applet", "modemmanager"] }
+wayland-tools = { provider = "pacman", names = ["grim", "slurp", "wl-clipboard"] }
 
-# Desktop AUR packages via paru
-appimagelauncher = { provider = "paru" }
-hyprshell-bin    = { provider = "paru" }
-google-chrome    = { provider = "paru" }
-waypaper         = { provider = "paru" }
+# Desktop paru packages by purpose
+desktop-apps   = { provider = "paru", names = ["appimagelauncher", "google-chrome"] }
+hyprland-tools = { provider = "paru", names = ["hyprshell-bin", "waypaper"] }
 
 [targets.arch-personal.profiles.desktop.links]
 hypr            = { source = "home/.config/hypr", target = "${env:HOME}/.config/hypr" }
@@ -105,10 +75,8 @@ chatgpt-desktop = { source = "home/.local/share/applications/chatgpt.desktop", t
 
 [targets.arch-personal.profiles.desktop.profiles.laptop.packages]
 
-# Laptop / ThinkPad power management via pacman
-tlpui  = { provider = "pacman" }
-tlp    = { provider = "pacman" }
-tlp-pd = { provider = "pacman" }
+# Laptop pacman packages by purpose
+power-management-tools = { provider = "pacman", names = ["tlpui", "tlp", "tlp-pd"] }
 
 
 # macOS workstation -----------------------------------------------------------
@@ -118,31 +86,18 @@ platform = { os = "macos" }
 
 [targets.macos.packages]
 
-# Formulae via brew
-zsh       = { provider = "brew" }
-tmux      = { provider = "brew" }
-lazygit   = { provider = "brew" }
-cloc      = { provider = "brew" }
-git       = { provider = "brew" }
-cmake     = { provider = "brew" }
-neovim    = { provider = "brew" }
-zoxide    = { provider = "brew" }
-ripgrep   = { provider = "brew" }
-fd        = { provider = "brew" }
-fzf       = { provider = "brew" }
-yazi      = { provider = "brew" }
-just      = { provider = "brew" }
-dust      = { provider = "brew" }
-git-delta = { provider = "brew" }
-python    = { provider = "brew" }
-node      = { provider = "brew" }
-btop      = { provider = "brew" }
-sbcl      = { provider = "brew" }
-roswell   = { provider = "brew" }
+# Brew formulae by purpose
+terminal-tools        = { provider = "brew", names = ["zsh", "tmux", "zoxide", "fzf"] }
+version-control-tools = { provider = "brew", names = ["git", "lazygit", "git-delta"] }
+file-search-tools     = { provider = "brew", names = ["ripgrep", "fd", "yazi", "dust"] }
+development-tools     = { provider = "brew", names = ["cloc", "cmake", "just"] }
+editors               = { provider = "brew", names = ["neovim"] }
+language-runtimes     = { provider = "brew", names = ["python", "node"] }
+system-tools          = { provider = "brew", names = ["btop"] }
+lisp-tools            = { provider = "brew", names = ["sbcl", "roswell"] }
 
-# Casks are a separate brew argument batch, not a separate provider.
-sf-symbols          = { provider = "brew", provider_args = ["--cask"] }
-font-hack-nerd-font = { provider = "brew", provider_args = ["--cask"] }
+# Brew casks by purpose
+desktop-assets = { provider = "brew", names = ["sf-symbols", "font-hack-nerd-font"], provider_args = ["--cask"] }
 
 [targets.macos.providers.brew]
 activate = { path_prepend = ["/opt/homebrew/bin", "/usr/local/bin"] }
@@ -171,28 +126,16 @@ exec = { program = "bash", args = ["${dot:config_dir}/scripts/install_oh_my_zsh.
 platform = { os = "windows" }
 
 [targets.windows.packages]
-lazygit    = { provider = "scoop" }
-cloc       = { provider = "scoop" }
-git        = { provider = "scoop" }
-cmake      = { provider = "scoop" }
-neovim     = { provider = "scoop" }
-zoxide     = { provider = "scoop" }
-ripgrep    = { provider = "scoop" }
-fd         = { provider = "scoop" }
-fzf        = { provider = "scoop" }
-yazi       = { provider = "scoop" }
-just       = { provider = "scoop" }
-dust       = { provider = "scoop" }
-delta      = { provider = "scoop" }
-python     = { provider = "scoop" }
-nodejs     = { provider = "scoop" }
-lazydocker = { provider = "scoop" }
-Hack-NF    = { provider = "scoop" }
-bat        = { provider = "scoop" }
-vscode     = { provider = "scoop" }
-everything = { provider = "scoop" }
-pwsh       = { provider = "scoop" }
-starship   = { provider = "scoop" }
+
+# Scoop packages by purpose
+terminal-tools        = { provider = "scoop", names = ["pwsh", "starship", "zoxide", "fzf"] }
+version-control-tools = { provider = "scoop", names = ["git", "lazygit", "delta"] }
+file-search-tools     = { provider = "scoop", names = ["ripgrep", "fd", "yazi", "dust", "bat", "everything"] }
+development-tools     = { provider = "scoop", names = ["cloc", "cmake", "just"] }
+editors               = { provider = "scoop", names = ["neovim", "vscode"] }
+language-runtimes     = { provider = "scoop", names = ["python", "nodejs"] }
+container-tools       = { provider = "scoop", names = ["lazydocker"] }
+fonts                 = { provider = "scoop", names = ["Hack-NF"] }
 
 [targets.windows.providers.scoop]
 activate = { path_prepend = ["${env:USERPROFILE}/scoop/shims"] }
