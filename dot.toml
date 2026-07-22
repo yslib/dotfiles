@@ -1,0 +1,217 @@
+# Personal development environments managed by dot.
+# Each target is a complete environment declaration. Arch workstation profiles
+# form one explicit base -> desktop -> laptop inheritance path.
+
+
+# Arch Linux personal workstation ---------------------------------------------
+
+[targets.arch-personal]
+platform = { os = "linux", distro = "arch" }
+
+[targets.arch-personal.packages]
+
+# Command-line environment via pacman
+zsh       = { provider = "pacman" }
+tmux      = { provider = "pacman" }
+lazygit   = { provider = "pacman" }
+cloc      = { provider = "pacman" }
+git       = { provider = "pacman" }
+cmake     = { provider = "pacman" }
+neovim    = { provider = "pacman" }
+zoxide    = { provider = "pacman" }
+ripgrep   = { provider = "pacman" }
+fd        = { provider = "pacman" }
+fzf       = { provider = "pacman" }
+yazi      = { provider = "pacman" }
+just      = { provider = "pacman" }
+dust      = { provider = "pacman" }
+git-delta = { provider = "pacman" }
+python    = { provider = "pacman" }
+nodejs    = { provider = "pacman" }
+btop      = { provider = "pacman" }
+
+# Arch build and clipboard tools via pacman
+base-devel = { provider = "pacman" }
+npm          = { provider = "pacman" }
+xclip        = { provider = "pacman" }
+
+# AUR packages via paru
+lazydocker = { provider = "paru" }
+debtap     = { provider = "paru" }
+
+[targets.arch-personal.providers.pacman]
+probe   = { program = "pacman", args = ["--version"] }
+install = { program = "sudo", args = ["pacman", "-S", "--needed", "--noconfirm", "${package:names}"] }
+
+[targets.arch-personal.providers.paru]
+probe = { program = "paru", args = ["--version"] }
+ensure = [
+  { program = "sudo", args = ["pacman", "-S", "--needed", "--noconfirm", "base-devel", "git"] },
+  { program = "rm", args = ["-rf", "/tmp/dot-paru"] },
+  { program = "git", args = ["clone", "https://aur.archlinux.org/paru.git", "/tmp/dot-paru"] },
+  { program = "makepkg", args = ["-si", "--noconfirm"], cwd = "/tmp/dot-paru" },
+]
+install = { program = "paru", args = ["-S", "--needed", "--noconfirm", "${package:names}"] }
+
+[targets.arch-personal.links]
+nvim            = { source = "home/.config/nvim", target = "${env:HOME}/.config/nvim" }
+vim-config      = { source = "home/.config/vim/vimrc", target = "${env:HOME}/.config/vim/vimrc" }
+vimrc           = { source = "home/.config/vim/vimrc", target = "${env:HOME}/.vimrc" }
+yazi            = { source = "home/.config/yazi", target = "${env:HOME}/.config/yazi" }
+lazygit         = { source = "home/.config/lazygit", target = "${env:HOME}/.config/lazygit" }
+gitconfig       = { source = "home/.gitconfig", target = "${env:HOME}/.gitconfig" }
+zshrc           = { source = "home/.zshrc", target = "${env:HOME}/.zshrc" }
+tmux            = { source = "home/.tmux.conf", target = "${env:HOME}/.tmux.conf" }
+tmux-local      = { source = "home/.tmux.conf.local", target = "${env:HOME}/.tmux.conf.local" }
+
+[targets.arch-personal.actions.setup-oh-my-zsh]
+exec = { program = "bash", args = ["${dot:config_dir}/scripts/install_oh_my_zsh.sh"], cwd = "${dot:config_dir}" }
+
+# Selecting `arch-personal/desktop` inherits the command-line environment above.
+[targets.arch-personal.profiles.desktop.packages]
+
+# Desktop input, fonts, networking, and Wayland via pacman
+fcitx5-im              = { provider = "pacman" }
+fcitx5-chinese-addons  = { provider = "pacman" }
+fcitx5-pinyin-zhwiki   = { provider = "pacman" }
+noto-fonts-cjk         = { provider = "pacman" }
+noto-fonts-emoji       = { provider = "pacman" }
+keyd                   = { provider = "pacman" }
+polkit-kde-agent       = { provider = "pacman" }
+swaync                 = { provider = "pacman" }
+waybar                 = { provider = "pacman" }
+hyprpaper              = { provider = "pacman" }
+nm-connection-editor   = { provider = "pacman" }
+network-manager-applet = { provider = "pacman" }
+modemmanager           = { provider = "pacman" }
+nwg-displays           = { provider = "pacman" }
+grim                   = { provider = "pacman" }
+slurp                  = { provider = "pacman" }
+wl-clipboard           = { provider = "pacman" }
+
+# Desktop AUR packages via paru
+appimagelauncher = { provider = "paru" }
+hyprshell-bin    = { provider = "paru" }
+google-chrome    = { provider = "paru" }
+waypaper         = { provider = "paru" }
+
+[targets.arch-personal.profiles.desktop.links]
+hypr            = { source = "home/.config/hypr", target = "${env:HOME}/.config/hypr" }
+waybar          = { source = "home/.config/waybar", target = "${env:HOME}/.config/waybar" }
+hyprshell       = { source = "home/.config/hyprshell", target = "${env:HOME}/.config/hyprshell" }
+swaync          = { source = "home/.config/swaync", target = "${env:HOME}/.config/swaync" }
+chrome-flags    = { source = "home/.config/chrome-flags.conf", target = "${env:HOME}/.config/chrome-flags.conf" }
+chatgpt-desktop = { source = "home/.local/share/applications/chatgpt.desktop", target = "${env:HOME}/.local/share/applications/chatgpt.desktop" }
+
+[targets.arch-personal.profiles.desktop.profiles.laptop.packages]
+
+# Laptop / ThinkPad power management via pacman
+tlpui  = { provider = "pacman" }
+tlp    = { provider = "pacman" }
+tlp-pd = { provider = "pacman" }
+
+
+# macOS workstation -----------------------------------------------------------
+
+[targets.macos]
+platform = { os = "macos" }
+
+[targets.macos.packages]
+
+# Formulae via brew
+zsh       = { provider = "brew" }
+tmux      = { provider = "brew" }
+lazygit   = { provider = "brew" }
+cloc      = { provider = "brew" }
+git       = { provider = "brew" }
+cmake     = { provider = "brew" }
+neovim    = { provider = "brew" }
+zoxide    = { provider = "brew" }
+ripgrep   = { provider = "brew" }
+fd        = { provider = "brew" }
+fzf       = { provider = "brew" }
+yazi      = { provider = "brew" }
+just      = { provider = "brew" }
+dust      = { provider = "brew" }
+git-delta = { provider = "brew" }
+python    = { provider = "brew" }
+node      = { provider = "brew" }
+btop      = { provider = "brew" }
+sbcl      = { provider = "brew" }
+roswell   = { provider = "brew" }
+
+# Casks are a separate brew argument batch, not a separate provider.
+sf-symbols          = { provider = "brew", provider_args = ["--cask"] }
+font-hack-nerd-font = { provider = "brew", provider_args = ["--cask"] }
+
+[targets.macos.providers.brew]
+activate = { path_prepend = ["/opt/homebrew/bin", "/usr/local/bin"] }
+probe    = { program = "brew", args = ["--version"] }
+ensure   = { program = "/bin/bash", args = ["-c", 'NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'] }
+install  = { program = "brew", args = ["install", "${package:provider_args}", "${package:names}"] }
+
+[targets.macos.links]
+nvim       = { source = "home/.config/nvim", target = "${env:HOME}/.config/nvim" }
+vim-config = { source = "home/.config/vim/vimrc", target = "${env:HOME}/.config/vim/vimrc" }
+vimrc      = { source = "home/.config/vim/vimrc", target = "${env:HOME}/.vimrc" }
+yazi       = { source = "home/.config/yazi", target = "${env:HOME}/.config/yazi" }
+lazygit    = { source = "home/.config/lazygit", target = "${env:HOME}/.config/lazygit" }
+gitconfig  = { source = "home/.gitconfig", target = "${env:HOME}/.gitconfig" }
+zshrc      = { source = "home/.zshrc", target = "${env:HOME}/.zshrc" }
+tmux       = { source = "home/.tmux.conf", target = "${env:HOME}/.tmux.conf" }
+tmux-local = { source = "home/.tmux.conf.local", target = "${env:HOME}/.tmux.conf.local" }
+
+[targets.macos.actions.setup-oh-my-zsh]
+exec = { program = "bash", args = ["${dot:config_dir}/scripts/install_oh_my_zsh.sh"], cwd = "${dot:config_dir}" }
+
+
+# Windows workstation ---------------------------------------------------------
+
+[targets.windows]
+platform = { os = "windows" }
+
+[targets.windows.packages]
+lazygit    = { provider = "scoop" }
+cloc       = { provider = "scoop" }
+git        = { provider = "scoop" }
+cmake      = { provider = "scoop" }
+neovim     = { provider = "scoop" }
+zoxide     = { provider = "scoop" }
+ripgrep    = { provider = "scoop" }
+fd         = { provider = "scoop" }
+fzf        = { provider = "scoop" }
+yazi       = { provider = "scoop" }
+just       = { provider = "scoop" }
+dust       = { provider = "scoop" }
+delta      = { provider = "scoop" }
+python     = { provider = "scoop" }
+nodejs     = { provider = "scoop" }
+lazydocker = { provider = "scoop" }
+Hack-NF    = { provider = "scoop" }
+bat        = { provider = "scoop" }
+vscode     = { provider = "scoop" }
+everything = { provider = "scoop" }
+pwsh       = { provider = "scoop" }
+starship   = { provider = "scoop" }
+
+[targets.windows.providers.scoop]
+activate = { path_prepend = ["${env:USERPROFILE}/scoop/shims"] }
+probe = { program = "powershell.exe", args = ["-NoProfile", "-Command", "if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) { exit 1 }; $root = if ($env:SCOOP) { $env:SCOOP } else { Join-Path $env:USERPROFILE 'scoop' }; if ((Test-Path (Join-Path $root 'buckets\\extras')) -and (Test-Path (Join-Path $root 'buckets\\nerd-fonts'))) { exit 0 }; exit 1"] }
+ensure = { program = "powershell.exe", args = ["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", "if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) { Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force; Invoke-RestMethod get.scoop.sh | Invoke-Expression }; $root = if ($env:SCOOP) { $env:SCOOP } else { Join-Path $env:USERPROFILE 'scoop' }; if (-not (Test-Path (Join-Path $root 'buckets\\extras'))) { scoop bucket add extras }; if (-not (Test-Path (Join-Path $root 'buckets\\nerd-fonts'))) { scoop bucket add nerd-fonts }"] }
+install = { program = "scoop", args = ["install", "${package:names}"] }
+
+[targets.windows.links]
+nvim               = { source = "home/.config/nvim", target = "${env:LOCALAPPDATA}/nvim" }
+vimrc              = { source = "home/.config/vim/vimrc", target = "${env:USERPROFILE}/_vimrc" }
+yazi               = { source = "home/.config/yazi", target = "${env:APPDATA}/yazi/config" }
+lazygit            = { source = "home/.config/lazygit", target = "${env:LOCALAPPDATA}/lazygit" }
+alacritty          = { source = "home/.config/alacritty", target = "${env:APPDATA}/alacritty" }
+gitconfig          = { source = "home/.gitconfig", target = "${env:USERPROFILE}/.gitconfig" }
+starship           = { source = "home/.config/starship.toml", target = "${env:USERPROFILE}/.config/starship.toml" }
+powershell-profile = { source = "home/.config/powershell/profile.ps1", target = "${xdg:documents}/PowerShell/profile.ps1" }
+
+# Only reconcile variants whose application-owned parent exists.
+terminal-local   = { source = "home/.config/windows-terminal/settings.json", target = "${env:LOCALAPPDATA}/Microsoft/Windows Terminal/settings.json", on_missing_parent = "skip" }
+terminal-stable  = { source = "home/.config/windows-terminal/settings.json", target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
+terminal-preview = { source = "home/.config/windows-terminal/settings.json", target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
+terminal-canary  = { source = "home/.config/windows-terminal/settings.json", target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminalCanary_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
