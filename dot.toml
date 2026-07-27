@@ -128,11 +128,11 @@ platform = { os = "windows" }
 [targets.windows.packages]
 
 # Scoop packages by purpose
-terminal-tools        = { provider = "scoop", names = ["pwsh", "starship", "zoxide", "fzf"] }
+terminal-tools        = { provider = "scoop", names = ["pwsh", "starship", "zoxide", "fzf", "zellij"] }
 version-control-tools = { provider = "scoop", names = ["git", "lazygit", "delta"] }
 file-search-tools     = { provider = "scoop", names = ["ripgrep", "fd", "yazi", "dust", "bat", "everything"] }
 development-tools     = { provider = "scoop", names = ["cloc", "cmake", "just"] }
-editors               = { provider = "scoop", names = ["neovim", "vscode"] }
+editors               = { provider = "scoop", names = ["neovim", "vscode", "vim"] }
 language-runtimes     = { provider = "scoop", names = ["python", "nodejs"] }
 container-tools       = { provider = "scoop", names = ["lazydocker"] }
 fonts                 = { provider = "scoop", names = ["Hack-NF"] }
