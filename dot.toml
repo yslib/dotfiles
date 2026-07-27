@@ -47,6 +47,7 @@ gitconfig       = { source = "home/.gitconfig", target = "${env:HOME}/.gitconfig
 zshrc           = { source = "home/.zshrc", target = "${env:HOME}/.zshrc" }
 tmux            = { source = "home/.tmux.conf", target = "${env:HOME}/.tmux.conf" }
 tmux-local      = { source = "home/.tmux.conf.local", target = "${env:HOME}/.tmux.conf.local" }
+alacritty       = { source = "home/.config/alacritty", target = "${env:HOME}/.config/alacritty" }
 
 [targets.arch-personal.actions.setup-oh-my-zsh]
 exec = { program = "bash", args = ["${dot:config_dir}/scripts/install_oh_my_zsh.sh"], cwd = "${dot:config_dir}" }
@@ -115,6 +116,7 @@ gitconfig  = { source = "home/.gitconfig", target = "${env:HOME}/.gitconfig" }
 zshrc      = { source = "home/.zshrc", target = "${env:HOME}/.zshrc" }
 tmux       = { source = "home/.tmux.conf", target = "${env:HOME}/.tmux.conf" }
 tmux-local = { source = "home/.tmux.conf.local", target = "${env:HOME}/.tmux.conf.local" }
+alacritty  = { source = "home/.config/alacritty", target = "${env:HOME}/.config/alacritty" }
 
 [targets.macos.actions.setup-oh-my-zsh]
 exec = { program = "bash", args = ["${dot:config_dir}/scripts/install_oh_my_zsh.sh"], cwd = "${dot:config_dir}" }
