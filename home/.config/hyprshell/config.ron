@@ -15,6 +15,58 @@
                 width: 720,
                 max_items: 8,
                 show_when_empty: true,
+                plugins: (
+                    applications: (
+                        run_cache_weeks: 8,
+                        show_execs: true,
+                        show_actions_submenu: true,
+                    ),
+                    terminal: (),
+                    websearch: (
+                        engines: [
+                            (
+                                url: "https://www.google.com/search?q={}",
+                                name: "Google",
+                                key: 'g',
+                            ),
+                            (
+                                url: "https://en.wikipedia.org/wiki/Special:Search?search={}",
+                                name: "Wikipedia",
+                                key: 'w',
+                            ),
+                        ],
+                    ),
+                    calc: (),
+                    path: (),
+                    actions: (
+                        actions: [
+                            lock_screen,
+                            hibernate,
+                            logout,
+                            reboot,
+                            shutdown,
+                            suspend,
+                            custom(
+                                names: ["Kill", "Stop"],
+                                details: "Kill or stop a process by name",
+                                command: "pkill \"{}\" && notify-send hyprshell \"stopped {}\"",
+                                icon: "remove",
+                            ),
+                            custom(
+                                names: ["Reload Hyprshell"],
+                                details: "Reload Hyprshell",
+                                command: "sleep 1; hyprshell socat '\"Restart\"'",
+                                icon: "system-restart",
+                            ),
+                            custom(
+                                names: ["webapp", "App", "Chrome App"],
+                                details: "Open a URL in a Chrome app window",
+                                command: "/home/ysl/.config/hyprshell/scripts/chrome-app-url \"{}\"",
+                                icon: "google-chrome",
+                            ),
+                        ],
+                    ),
+                ),
             ),
         ),
         switch: (

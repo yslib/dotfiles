@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+notify() {
+    if command -v notify-send >/dev/null 2>&1; then
+        notify-send hyprshell "$1"
+    else
+        printf '%s\n' "$1" >&2
+    fi
+}
+
+input="${*:-}"
+input="${input#"${input%%[![:space:]]*}"}"
+input="${input%"${input##*[![:space:]]}"}"
+
+if [[ -z "$input" ]]; then
+    notify "Usage: webapp example.com"
+    exit 2
+fi
+
+case "$input" in
+    http://* | https://*)
+        url="$input"
+        ;;
+    *://*)
+        notify "Only http(s) URLs are supported for Chrome app mode"
+        exit 2
+        ;;
+    *)
+        url="https://$input"
+        ;;
+esac
+
+browser="${CHROME_APP_BROWSER:-google-chrome-stable}"
+
+if [[ "${CHROME_APP_URL_DRY_RUN:-}" == "1" ]]; then
+    printf '%s --app=%s\n' "$browser" "$url"
+    exit 0
+fi
+
+exec "$browser" --app="$url"
