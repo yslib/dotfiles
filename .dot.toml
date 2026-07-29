@@ -38,19 +38,19 @@ ensure = [
 install = { program = "paru", args = ["-S", "--needed", "--noconfirm", "${package:names}"] }
 
 [targets.arch-personal.links]
-nvim            = { source = "home/.config/nvim", target = "${env:HOME}/.config/nvim" }
-vim-config      = { source = "home/.config/vim/vimrc", target = "${env:HOME}/.config/vim/vimrc" }
-vimrc           = { source = "home/.config/vim/vimrc", target = "${env:HOME}/.vimrc" }
-yazi            = { source = "home/.config/yazi", target = "${env:HOME}/.config/yazi" }
-lazygit         = { source = "home/.config/lazygit", target = "${env:HOME}/.config/lazygit" }
-gitconfig       = { source = "home/.gitconfig", target = "${env:HOME}/.gitconfig" }
-zshrc           = { source = "home/.zshrc", target = "${env:HOME}/.zshrc" }
-tmux            = { source = "home/.tmux.conf", target = "${env:HOME}/.tmux.conf" }
-tmux-local      = { source = "home/.tmux.conf.local", target = "${env:HOME}/.tmux.conf.local" }
-alacritty       = { source = "home/.config/alacritty", target = "${env:HOME}/.config/alacritty" }
+nvim            = { source = "${dot:real_config_dir}/home/.config/nvim", target = "${env:HOME}/.config/nvim" }
+vim-config      = { source = "${dot:real_config_dir}/home/.config/vim/vimrc", target = "${env:HOME}/.config/vim/vimrc" }
+vimrc           = { source = "${dot:real_config_dir}/home/.config/vim/vimrc", target = "${env:HOME}/.vimrc" }
+yazi            = { source = "${dot:real_config_dir}/home/.config/yazi", target = "${env:HOME}/.config/yazi" }
+lazygit         = { source = "${dot:real_config_dir}/home/.config/lazygit", target = "${env:HOME}/.config/lazygit" }
+gitconfig       = { source = "${dot:real_config_dir}/home/.gitconfig", target = "${env:HOME}/.gitconfig" }
+zshrc           = { source = "${dot:real_config_dir}/home/.zshrc", target = "${env:HOME}/.zshrc" }
+tmux            = { source = "${dot:real_config_dir}/home/.tmux.conf", target = "${env:HOME}/.tmux.conf" }
+tmux-local      = { source = "${dot:real_config_dir}/home/.tmux.conf.local", target = "${env:HOME}/.tmux.conf.local" }
+alacritty       = { source = "${dot:real_config_dir}/home/.config/alacritty", target = "${env:HOME}/.config/alacritty" }
 
 [targets.arch-personal.actions.setup-oh-my-zsh]
-exec = { program = "bash", args = ["${dot:config_dir}/scripts/install_oh_my_zsh.sh"], cwd = "${dot:config_dir}" }
+exec = { program = "bash", args = ["${dot:real_config_dir}/scripts/install_oh_my_zsh.sh"], cwd = "${dot:real_config_dir}" }
 
 # Selecting `arch-personal/desktop` inherits the command-line environment above.
 [targets.arch-personal.profiles.desktop.packages]
@@ -67,12 +67,12 @@ desktop-apps   = { provider = "paru", names = ["appimagelauncher", "google-chrom
 hyprland-tools = { provider = "paru", names = ["hyprshell-bin", "waypaper"] }
 
 [targets.arch-personal.profiles.desktop.links]
-hypr            = { source = "home/.config/hypr", target = "${env:HOME}/.config/hypr" }
-waybar          = { source = "home/.config/waybar", target = "${env:HOME}/.config/waybar" }
-hyprshell       = { source = "home/.config/hyprshell", target = "${env:HOME}/.config/hyprshell" }
-swaync          = { source = "home/.config/swaync", target = "${env:HOME}/.config/swaync" }
-chrome-flags    = { source = "home/.config/chrome-flags.conf", target = "${env:HOME}/.config/chrome-flags.conf" }
-chatgpt-desktop = { source = "home/.local/share/applications/chatgpt.desktop", target = "${env:HOME}/.local/share/applications/chatgpt.desktop" }
+hypr            = { source = "${dot:real_config_dir}/home/.config/hypr", target = "${env:HOME}/.config/hypr" }
+waybar          = { source = "${dot:real_config_dir}/home/.config/waybar", target = "${env:HOME}/.config/waybar" }
+hyprshell       = { source = "${dot:real_config_dir}/home/.config/hyprshell", target = "${env:HOME}/.config/hyprshell" }
+swaync          = { source = "${dot:real_config_dir}/home/.config/swaync", target = "${env:HOME}/.config/swaync" }
+chrome-flags    = { source = "${dot:real_config_dir}/home/.config/chrome-flags.conf", target = "${env:HOME}/.config/chrome-flags.conf" }
+chatgpt-desktop = { source = "${dot:real_config_dir}/home/.local/share/applications/chatgpt.desktop", target = "${env:HOME}/.local/share/applications/chatgpt.desktop" }
 
 [targets.arch-personal.profiles.desktop.profiles.laptop.packages]
 
@@ -107,19 +107,19 @@ ensure   = { program = "/bin/bash", args = ["-c", 'NONINTERACTIVE=1 /bin/bash -c
 install  = { program = "brew", args = ["install", "${package:provider_args}", "${package:names}"] }
 
 [targets.macos.links]
-nvim       = { source = "home/.config/nvim", target = "${env:HOME}/.config/nvim" }
-vim-config = { source = "home/.config/vim/vimrc", target = "${env:HOME}/.config/vim/vimrc" }
-vimrc      = { source = "home/.config/vim/vimrc", target = "${env:HOME}/.vimrc" }
-yazi       = { source = "home/.config/yazi", target = "${env:HOME}/.config/yazi" }
-lazygit    = { source = "home/.config/lazygit", target = "${env:HOME}/.config/lazygit" }
-gitconfig  = { source = "home/.gitconfig", target = "${env:HOME}/.gitconfig" }
-zshrc      = { source = "home/.zshrc", target = "${env:HOME}/.zshrc" }
-tmux       = { source = "home/.tmux.conf", target = "${env:HOME}/.tmux.conf" }
-tmux-local = { source = "home/.tmux.conf.local", target = "${env:HOME}/.tmux.conf.local" }
-alacritty  = { source = "home/.config/alacritty", target = "${env:HOME}/.config/alacritty" }
+nvim       = { source = "${dot:real_config_dir}/home/.config/nvim", target = "${env:HOME}/.config/nvim" }
+vim-config = { source = "${dot:real_config_dir}/home/.config/vim/vimrc", target = "${env:HOME}/.config/vim/vimrc" }
+vimrc      = { source = "${dot:real_config_dir}/home/.config/vim/vimrc", target = "${env:HOME}/.vimrc" }
+yazi       = { source = "${dot:real_config_dir}/home/.config/yazi", target = "${env:HOME}/.config/yazi" }
+lazygit    = { source = "${dot:real_config_dir}/home/.config/lazygit", target = "${env:HOME}/.config/lazygit" }
+gitconfig  = { source = "${dot:real_config_dir}/home/.gitconfig", target = "${env:HOME}/.gitconfig" }
+zshrc      = { source = "${dot:real_config_dir}/home/.zshrc", target = "${env:HOME}/.zshrc" }
+tmux       = { source = "${dot:real_config_dir}/home/.tmux.conf", target = "${env:HOME}/.tmux.conf" }
+tmux-local = { source = "${dot:real_config_dir}/home/.tmux.conf.local", target = "${env:HOME}/.tmux.conf.local" }
+alacritty  = { source = "${dot:real_config_dir}/home/.config/alacritty", target = "${env:HOME}/.config/alacritty" }
 
 [targets.macos.actions.setup-oh-my-zsh]
-exec = { program = "bash", args = ["${dot:config_dir}/scripts/install_oh_my_zsh.sh"], cwd = "${dot:config_dir}" }
+exec = { program = "bash", args = ["${dot:real_config_dir}/scripts/install_oh_my_zsh.sh"], cwd = "${dot:real_config_dir}" }
 
 
 # Windows workstation ---------------------------------------------------------
@@ -147,17 +147,17 @@ ensure = { program = "powershell.exe", args = ["-NoProfile", "-ExecutionPolicy",
 install = { program = "powershell.exe", args = ["-NoProfile", "-File", "${env:USERPROFILE}/scoop/apps/scoop/current/bin/scoop.ps1", "install", "${package:names}"] }
 
 [targets.windows.links]
-nvim               = { source = "home/.config/nvim", target = "${env:LOCALAPPDATA}/nvim" }
-vimrc              = { source = "home/.config/vim/vimrc", target = "${env:USERPROFILE}/_vimrc" }
-yazi               = { source = "home/.config/yazi", target = "${env:APPDATA}/yazi/config" }
-lazygit            = { source = "home/.config/lazygit", target = "${env:LOCALAPPDATA}/lazygit" }
-alacritty          = { source = "home/.config/alacritty", target = "${env:APPDATA}/alacritty" }
-gitconfig          = { source = "home/.gitconfig", target = "${env:USERPROFILE}/.gitconfig" }
-starship           = { source = "home/.config/starship.toml", target = "${env:USERPROFILE}/.config/starship.toml" }
-powershell-profile = { source = "home/.config/powershell/profile.ps1", target = "${xdg:documents}/PowerShell/profile.ps1" }
+nvim               = { source = '${dot:real_config_dir}\home\.config\nvim', target = "${env:LOCALAPPDATA}/nvim" }
+vimrc              = { source = '${dot:real_config_dir}\home\.config\vim\vimrc', target = "${env:USERPROFILE}/_vimrc" }
+yazi               = { source = '${dot:real_config_dir}\home\.config\yazi', target = "${env:APPDATA}/yazi/config" }
+lazygit            = { source = '${dot:real_config_dir}\home\.config\lazygit', target = "${env:LOCALAPPDATA}/lazygit" }
+alacritty          = { source = '${dot:real_config_dir}\home\.config\alacritty', target = "${env:APPDATA}/alacritty" }
+gitconfig          = { source = '${dot:real_config_dir}\home\.gitconfig', target = "${env:USERPROFILE}/.gitconfig" }
+starship           = { source = '${dot:real_config_dir}\home\.config\starship.toml', target = "${env:USERPROFILE}/.config/starship.toml" }
+powershell-profile = { source = '${dot:real_config_dir}\home\.config\powershell\profile.ps1', target = "${xdg:documents}/PowerShell/profile.ps1" }
 
 # Only reconcile variants whose application-owned parent exists.
-terminal-local   = { source = "home/.config/windows-terminal/settings.json", target = "${env:LOCALAPPDATA}/Microsoft/Windows Terminal/settings.json", on_missing_parent = "skip" }
-terminal-stable  = { source = "home/.config/windows-terminal/settings.json", target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
-terminal-preview = { source = "home/.config/windows-terminal/settings.json", target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
-# terminal-canary  = { source = "home/.config/windows-terminal/settings.json", target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminalCanary_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
+terminal-local   = { source = '${dot:real_config_dir}\home\.config\windows-terminal\settings.json', target = "${env:LOCALAPPDATA}/Microsoft/Windows Terminal/settings.json", on_missing_parent = "skip" }
+terminal-stable  = { source = '${dot:real_config_dir}\home\.config\windows-terminal\settings.json', target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
+terminal-preview = { source = '${dot:real_config_dir}\home\.config\windows-terminal\settings.json', target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
+# terminal-canary  = { source = '${dot:real_config_dir}\home\.config\windows-terminal\settings.json', target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminalCanary_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
