@@ -1,6 +1,13 @@
 # ── Dotfiles PowerShell profile ──────────────────────────────────
 # Windows equivalent of .zshrc — managed by dotfiles repo.
 
+# ── User-local executables ───────────────────────────────────────
+$localBin = Join-Path $HOME ".local\bin"
+$pathEntries = $env:PATH -split [IO.Path]::PathSeparator
+if ($pathEntries -notcontains $localBin) {
+    $env:PATH = "$localBin$([IO.Path]::PathSeparator)$env:PATH"
+}
+
 # ── Starship prompt ─────────────────────────────────────────────
 if (Get-Command starship -ErrorAction SilentlyContinue) {
     Invoke-Expression (&starship init powershell)
