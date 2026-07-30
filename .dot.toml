@@ -48,6 +48,7 @@ zshrc           = { source = "${dot:real_config_dir}/home/.zshrc", target = "${e
 tmux            = { source = "${dot:real_config_dir}/home/.tmux.conf", target = "${env:HOME}/.tmux.conf" }
 tmux-local      = { source = "${dot:real_config_dir}/home/.tmux.conf.local", target = "${env:HOME}/.tmux.conf.local" }
 alacritty       = { source = "${dot:real_config_dir}/home/.config/alacritty", target = "${env:HOME}/.config/alacritty" }
+scripts         = { source = "${dot:real_config_dir}/home/.scripts", target = "${env:HOME}/.scripts" }
 
 [targets.arch-linux.actions.setup-oh-my-zsh]
 exec = { program = "bash", args = ["${dot:real_config_dir}/scripts/install_oh_my_zsh.sh"], cwd = "${dot:real_config_dir}" }
@@ -117,6 +118,7 @@ zshrc      = { source = "${dot:real_config_dir}/home/.zshrc", target = "${env:HO
 tmux       = { source = "${dot:real_config_dir}/home/.tmux.conf", target = "${env:HOME}/.tmux.conf" }
 tmux-local = { source = "${dot:real_config_dir}/home/.tmux.conf.local", target = "${env:HOME}/.tmux.conf.local" }
 alacritty  = { source = "${dot:real_config_dir}/home/.config/alacritty", target = "${env:HOME}/.config/alacritty" }
+scripts    = { source = "${dot:real_config_dir}/home/.scripts", target = "${env:HOME}/.scripts" }
 
 [targets.macos.actions.setup-oh-my-zsh]
 exec = { program = "bash", args = ["${dot:real_config_dir}/scripts/install_oh_my_zsh.sh"], cwd = "${dot:real_config_dir}" }

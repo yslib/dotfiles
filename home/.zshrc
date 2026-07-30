@@ -9,6 +9,7 @@ export TERM="xterm-256color"
 
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.scripts:$PATH"
 # check linuxbrew excutable exists
 if command -v /home/linuxbrew/.linuxbrew/bin/brew &> /dev/null; then
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
@@ -68,6 +69,14 @@ plugins=(git
 	)
 
 source $ZSH/oh-my-zsh.sh
+
+for _dotfiles_script in \
+  "$HOME/.scripts/fzf-git" \
+  "$HOME/.scripts/dot-fzf.zsh"
+do
+  [[ -r $_dotfiles_script ]] && source "$_dotfiles_script"
+done
+unset _dotfiles_script
 
 # User configuration
 
