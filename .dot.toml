@@ -49,6 +49,7 @@ tmux            = { source = "${dot:real_config_dir}/home/.tmux.conf", target = 
 tmux-local      = { source = "${dot:real_config_dir}/home/.tmux.conf.local", target = "${env:HOME}/.tmux.conf.local" }
 alacritty       = { source = "${dot:real_config_dir}/home/.config/alacritty", target = "${env:HOME}/.config/alacritty" }
 scripts         = { source = "${dot:real_config_dir}/home/.scripts", target = "${env:HOME}/.scripts" }
+dot_config      = { source = "${dot:real_config_dir}/.dot.toml", target = "${env:HOME}/.config/dot/.dot.toml" }
 
 [targets.arch-linux.actions.setup-oh-my-zsh]
 exec = { program = "bash", args = ["${dot:real_config_dir}/scripts/install_oh_my_zsh.sh"], cwd = "${dot:real_config_dir}" }
@@ -119,6 +120,7 @@ tmux       = { source = "${dot:real_config_dir}/home/.tmux.conf", target = "${en
 tmux-local = { source = "${dot:real_config_dir}/home/.tmux.conf.local", target = "${env:HOME}/.tmux.conf.local" }
 alacritty  = { source = "${dot:real_config_dir}/home/.config/alacritty", target = "${env:HOME}/.config/alacritty" }
 scripts    = { source = "${dot:real_config_dir}/home/.scripts", target = "${env:HOME}/.scripts" }
+dot_config = { source = "${dot:real_config_dir}/.dot.toml", target = "${env:HOME}/.config/dot/.dot.toml" }
 
 [targets.macos.actions.setup-oh-my-zsh]
 exec = { program = "bash", args = ["${dot:real_config_dir}/scripts/install_oh_my_zsh.sh"], cwd = "${dot:real_config_dir}" }
@@ -157,6 +159,7 @@ alacritty          = { source = '${dot:real_config_dir}\home\.config\alacritty',
 gitconfig          = { source = '${dot:real_config_dir}\home\.gitconfig', target = "${env:USERPROFILE}/.gitconfig" }
 starship           = { source = '${dot:real_config_dir}\home\.config\starship.toml', target = "${env:USERPROFILE}/.config/starship.toml" }
 powershell-profile = { source = '${dot:real_config_dir}\home\.config\powershell\profile.ps1', target = "${xdg:documents}/PowerShell/profile.ps1" }
+dot_config         = { source = "${dot:real_config_dir}/.dot.toml", target = "${env:APPDATA}/dot/.dot.toml" }
 
 # Only reconcile variants whose application-owned parent exists.
 terminal-local   = { source = '${dot:real_config_dir}\home\.config\windows-terminal\settings.json', target = "${env:LOCALAPPDATA}/Microsoft/Windows Terminal/settings.json", on_missing_parent = "skip" }
