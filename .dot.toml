@@ -158,11 +158,11 @@ lazygit            = { source = '${dot:real_config_dir}\home\.config\lazygit', t
 alacritty          = { source = '${dot:real_config_dir}\home\.config\alacritty', target = "${env:APPDATA}/alacritty" }
 gitconfig          = { source = '${dot:real_config_dir}\home\.gitconfig', target = "${env:USERPROFILE}/.gitconfig" }
 starship           = { source = '${dot:real_config_dir}\home\.config\starship.toml', target = "${env:USERPROFILE}/.config/starship.toml" }
-powershell-profile = { source = '${dot:real_config_dir}\home\.config\powershell\profile.ps1', target = "${xdg:documents}/PowerShell/profile.ps1" }
+powershell         = { source = '${dot:real_config_dir}\windows\PowerShell', target = "${xdg:documents}/PowerShell" }
 dot_config         = { source = "${dot:real_config_dir}/.dot.toml", target = "${env:APPDATA}/dot/.dot.toml" }
 
 # Only reconcile variants whose application-owned parent exists.
-terminal-local   = { source = '${dot:real_config_dir}\home\.config\windows-terminal\settings.json', target = "${env:LOCALAPPDATA}/Microsoft/Windows Terminal/settings.json", on_missing_parent = "skip" }
-terminal-stable  = { source = '${dot:real_config_dir}\home\.config\windows-terminal\settings.json', target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
-terminal-preview = { source = '${dot:real_config_dir}\home\.config\windows-terminal\settings.json', target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
-# terminal-canary  = { source = '${dot:real_config_dir}\home\.config\windows-terminal\settings.json', target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminalCanary_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
+terminal-local   = { source = '${dot:real_config_dir}\windows\WindowsTerminal\settings.json', target = "${env:LOCALAPPDATA}/Microsoft/Windows Terminal/settings.json", on_missing_parent = "skip" }
+terminal-stable  = { source = '${dot:real_config_dir}\windows\WindowsTerminal\settings.json', target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
+terminal-preview = { source = '${dot:real_config_dir}\windows\WindowsTerminal\settings.json', target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
+# terminal-canary  = { source = '${dot:real_config_dir}\windows\WindowsTerminal\settings.json', target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminalCanary_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }

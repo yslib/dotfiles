@@ -31,6 +31,12 @@ if (Get-Module -ListAvailable -Name PSFzf) {
                     -PSReadlineChordReverseHistory 'Ctrl+r'
 }
 
+# ── Dot + fzf integration ──────────────────────────────────────
+$dotFzfScript = Join-Path $PSScriptRoot "dot-fzf.ps1"
+if (Test-Path $dotFzfScript) {
+    . $dotFzfScript
+}
+
 # ── Yazi: change working directory on exit (like the zsh `y` function) ──
 function y {
     $tmp = [System.IO.Path]::GetTempFileName()
