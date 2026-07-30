@@ -159,7 +159,7 @@ alacritty          = { source = '${dot:real_config_dir}\home\.config\alacritty',
 gitconfig          = { source = '${dot:real_config_dir}\home\.gitconfig', target = "${env:USERPROFILE}/.gitconfig" }
 starship           = { source = '${dot:real_config_dir}\home\.config\starship.toml', target = "${env:USERPROFILE}/.config/starship.toml" }
 powershell         = { source = '${dot:real_config_dir}\windows\PowerShell', target = "${xdg:documents}/PowerShell" }
-dot_config         = { source = "${dot:real_config_dir}/.dot.toml", target = "${env:APPDATA}/dot/.dot.toml" }
+dot_config         = { source = '${dot:real_config_dir}\.dot.toml', target = "${env:APPDATA}/dot/.dot.toml" }
 
 # Only reconcile variants whose application-owned parent exists.
 terminal-local   = { source = '${dot:real_config_dir}\windows\WindowsTerminal\settings.json', target = "${env:LOCALAPPDATA}/Microsoft/Windows Terminal/settings.json", on_missing_parent = "skip" }
