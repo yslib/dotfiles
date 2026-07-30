@@ -1,96 +1,89 @@
 "
 " =================  Lucida's Neovim configuration  ================
-" Minimum Neovim Version: 0.8
-" You need to download vim-plug from https://github.com/junegunn/vim-plug to
-" boostrap for the first time, and then you need to run :PlugInstall in Neovim 
-" to install the following plugins. Some plugins has their own dependencies 
-" which could be install by provided commands, or binarys that should be 
-" install manually.
+" Minimum Neovim Version: 0.12
 "
-" Specify a directory for plugins
-" - For Neovim: stdpath('data') . '/plugged'
-" - Avoid using standard Vim directory names like 'plugin'
-call plug#begin(stdpath('data').'/plugged')
+" Plugin installation is managed by Neovim's built-in vim.pack.
+lua require('plugin')
 
-" Make sure you use single quotes
-" Shorthand notation; fetches https://github.com/junegunn/vim-easy-align
+" Legacy vim-plug declarations are retained temporarily for comparison.
+" call plug#begin(stdpath('data').'/plugged')
 
 " Utils
-Plug 'nvim-lua/plenary.nvim'                                   " lua utils
-Plug 'kyazdani42/nvim-web-devicons'                            " for file icons
-Plug 'catgoose/nvim-colorizer.lua'
+" Plug 'nvim-lua/plenary.nvim'                                   " lua utils
+" Plug 'kyazdani42/nvim-web-devicons'                            " for file icons
+" Plug 'catgoose/nvim-colorizer.lua'
 
 " Themes
-Plug 'catppuccin/nvim', {'as': 'catppuccin'}                   " color theme 
-Plug 'xiyaowong/transparent.nvim'                              " transparent background
+" Plug 'catppuccin/nvim', {'as': 'catppuccin'}                   " color theme
+" Plug 'xiyaowong/transparent.nvim'                              " transparent background
 
 " UI enhancements
-Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
-Plug 'nvim-lualine/lualine.nvim'                               " status line
-Plug 'MunifTanjim/nui.nvim'
-Plug 'hood/popui.nvim'
-Plug 'stevearc/dressing.nvim'                                  " ui enhencement
-Plug 'rcarriga/nvim-notify'
-Plug 'kevinhwang91/nvim-bqf'                                   " better quickfix window
+" Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
+" Plug 'nvim-lualine/lualine.nvim'                               " status line
+" Plug 'MunifTanjim/nui.nvim'
+" Plug 'hood/popui.nvim'
+" Plug 'stevearc/dressing.nvim'                                  " ui enhencement
+" Plug 'rcarriga/nvim-notify'
+" Plug 'kevinhwang91/nvim-bqf'                                   " better quickfix window
 
 " Treesitter
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}    " syntax based hightlighting
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}    " syntax based hightlighting
 
-Plug 'saghen/blink.cmp', { 'tag': 'v1.*' }
+" Plug 'saghen/blink.cmp', { 'tag': 'v1.*' }
 " optional: provides snippets for the snippet source
-Plug 'rafamadriz/friendly-snippets'
+" Plug 'rafamadriz/friendly-snippets'
 
-" DAP 
-Plug 'mfussenegger/nvim-dap'
-Plug 'rcarriga/nvim-dap-ui'
-Plug 'theHamsta/nvim-dap-virtual-text'
+" DAP
+" Plug 'mfussenegger/nvim-dap'
+" Plug 'rcarriga/nvim-dap-ui'
+" Plug 'theHamsta/nvim-dap-virtual-text'
 
 " LSP
-Plug 'mrcjkb/rustaceanvim'                                 " for rust
-Plug 'stevearc/aerial.nvim'                                " outline
+" Plug 'mrcjkb/rustaceanvim'                                 " for rust
+" Plug 'stevearc/aerial.nvim'                                " outline
 
 " Mason
-Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
-Plug 'williamboman/mason-lspconfig.nvim'
+" Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
+" Plug 'williamboman/mason-lspconfig.nvim'
 
 " Picker
-Plug 'nvim-telescope/telescope.nvim'                           " picker framework
-Plug 'nvim-telescope/telescope-ui-select.nvim'
-Plug 'nvim-telescope/telescope-live-grep-args.nvim'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
+" Plug 'nvim-telescope/telescope.nvim'                           " picker framework
+" Plug 'nvim-telescope/telescope-ui-select.nvim'
+" Plug 'nvim-telescope/telescope-live-grep-args.nvim'
+" Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 
 " Terminals
-Plug 'akinsho/toggleterm.nvim'
+" Plug 'akinsho/toggleterm.nvim'
 
 " File Explorer
-Plug 'kyazdani42/nvim-tree.lua'                                " file explorer
+" Plug 'kyazdani42/nvim-tree.lua'                                " file explorer
 
 " Tools integrations
-Plug 'MeanderingProgrammer/render-markdown.nvim'
-Plug 'kdheepak/lazygit.nvim'
-Plug 'sindrets/diffview.nvim'                                  " diff view
-Plug 'nvim-pack/nvim-spectre'
-Plug 'numToStr/Comment.nvim'                                   " code comment/uncomment
-Plug 'windwp/nvim-autopairs'                                   " auto pairs
-Plug 'mhartington/formatter.nvim'
-Plug 'nvim-neotest/nvim-nio'
+" Plug 'MeanderingProgrammer/render-markdown.nvim'
+" Plug 'kdheepak/lazygit.nvim'
+" Plug 'sindrets/diffview.nvim'                                  " diff view
+" Plug 'nvim-pack/nvim-spectre'
+" Plug 'numToStr/Comment.nvim'                                   " code comment/uncomment
+" Plug 'windwp/nvim-autopairs'                                   " auto pairs
+" Plug 'mhartington/formatter.nvim'
+" Plug 'nvim-neotest/nvim-nio'
 
 " AI Tools
-Plug 'zbirenbaum/copilot.lua'
+" Plug 'zbirenbaum/copilot.lua'
 
 " Lisp
-Plug 'eraserhd/parinfer-rust', { 'do': 'cargo build --release' }
+" Plug 'eraserhd/parinfer-rust', { 'do': 'cargo build --release' }
 
 " vim plug
-Plug 'tpope/vim-surround'                                      " vim-surround
-Plug 'tpope/vim-fugitive'
-Plug 'mbbill/undotree'
-Plug 'junegunn/gv.vim'
-Plug 'junegunn/vim-easy-align'
-Plug 'easymotion/vim-easymotion'
+" Plug 'tpope/vim-surround'                                      " vim-surround
+" Plug 'tpope/vim-fugitive'
+" Plug 'mbbill/undotree'
+" Plug 'junegunn/gv.vim'
+" Plug 'junegunn/vim-easy-align'
+" Plug 'easymotion/vim-easymotion'
 
 " Initialize plugin system
-call plug#end()
+" call plug#end()
 
 lua vim.o.exrc=true
 
