@@ -40,7 +40,7 @@ if ($LASTEXITCODE -ne 0) {
     throw "dot bootstrap: failed to clone $dotfilesRepo"
 }
 
-& $dotExe --config (Join-Path $dotfilesDir "dot.toml")
+& $dotExe --config (Join-Path $dotfilesDir ".dot.toml")
 if ($LASTEXITCODE -ne 0) {
     throw "dot bootstrap: dot exited with code $LASTEXITCODE"
 }

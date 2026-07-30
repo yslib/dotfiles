@@ -1,6 +1,6 @@
 # dotfiles
 
-My cross-platform development environment, declared in [`dot.toml`](dot.toml)
+My cross-platform development environment, declared in [`.dot.toml`](.dot.toml)
 and applied by [`dot`](https://github.com/yslib/dot).
 
 This repository is primarily my personal environment configuration. It is also
@@ -91,13 +91,13 @@ irm https://raw.githubusercontent.com/yslib/dotfiles/master/bootstrap.ps1 | iex
 
 The script downloads `dot.exe` to `$HOME\.local\bin`, adds that directory to
 the user `PATH`, clones this repository to `$HOME\.dotfiles`, and applies
-`dot.toml`. On the first apply, the Scoop provider's `ensure` action adds the
+`.dot.toml`. On the first apply, the Scoop provider's `ensure` action adds the
 `extras` and `nerd-fonts` buckets before the declared packages are installed.
 
 ## Daily use
 
 Once the repository has been cloned, run `dot` from its root so it finds
-`./dot.toml` automatically:
+`./.dot.toml` automatically:
 
 ```sh
 cd ~/.dotfiles
@@ -143,4 +143,4 @@ arch-personal
 
 The macOS and Windows targets are complete declarations without profiles. All
 package providers, external actions, and native configuration links are defined
-in `dot.toml`.
+in `.dot.toml`.
