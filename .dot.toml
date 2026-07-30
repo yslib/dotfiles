@@ -1,14 +1,14 @@
 # Personal development environments managed by dot.
 # Each target is a complete environment declaration. Arch workstation profiles
-# form one explicit base -> desktop -> laptop inheritance path.
+# form one explicit base -> hyprland -> laptop inheritance path.
 
 
 # Arch Linux personal workstation ---------------------------------------------
 
-[targets.arch-personal]
+[targets.arch-linux]
 platform = { os = "linux", distro = "arch" }
 
-[targets.arch-personal.packages]
+[targets.arch-linux.packages]
 
 # Pacman packages by purpose
 terminal-tools        = { provider = "pacman", names = ["zsh", "tmux", "zoxide", "fzf"] }
@@ -23,11 +23,11 @@ system-tools          = { provider = "pacman", names = ["btop", "xclip"] }
 container-tools       = { provider = "paru", names = ["lazydocker"] }
 arch-packaging-tools  = { provider = "paru", names = ["debtap"] }
 
-[targets.arch-personal.providers.pacman]
+[targets.arch-linux.providers.pacman]
 probe   = { program = "pacman", args = ["--version"] }
 install = { program = "sudo", args = ["pacman", "-S", "--needed", "--noconfirm", "${package:names}"] }
 
-[targets.arch-personal.providers.paru]
+[targets.arch-linux.providers.paru]
 probe = { program = "paru", args = ["--version"] }
 ensure = [
   { program = "sudo", args = ["pacman", "-S", "--needed", "--noconfirm", "base-devel", "git"] },
@@ -37,7 +37,7 @@ ensure = [
 ]
 install = { program = "paru", args = ["-S", "--needed", "--noconfirm", "${package:names}"] }
 
-[targets.arch-personal.links]
+[targets.arch-linux.links]
 nvim            = { source = "${dot:real_config_dir}/home/.config/nvim", target = "${env:HOME}/.config/nvim" }
 vim-config      = { source = "${dot:real_config_dir}/home/.config/vim/vimrc", target = "${env:HOME}/.config/vim/vimrc" }
 vimrc           = { source = "${dot:real_config_dir}/home/.config/vim/vimrc", target = "${env:HOME}/.vimrc" }
@@ -49,24 +49,24 @@ tmux            = { source = "${dot:real_config_dir}/home/.tmux.conf", target = 
 tmux-local      = { source = "${dot:real_config_dir}/home/.tmux.conf.local", target = "${env:HOME}/.tmux.conf.local" }
 alacritty       = { source = "${dot:real_config_dir}/home/.config/alacritty", target = "${env:HOME}/.config/alacritty" }
 
-[targets.arch-personal.actions.setup-oh-my-zsh]
+[targets.arch-linux.actions.setup-oh-my-zsh]
 exec = { program = "bash", args = ["${dot:real_config_dir}/scripts/install_oh_my_zsh.sh"], cwd = "${dot:real_config_dir}" }
 
-# Selecting `arch-personal/desktop` inherits the command-line environment above.
-[targets.arch-personal.profiles.desktop.packages]
+# Selecting `arch-linux/hyprland` inherits the command-line environment above.
+[targets.arch-linux.profiles.hyprland.packages]
 
-# Desktop pacman packages by purpose
+# Hyprland pacman packages by purpose
 input-tools   = { provider = "pacman", names = ["fcitx5-im", "fcitx5-chinese-addons", "fcitx5-pinyin-zhwiki", "keyd"] }
 desktop-fonts = { provider = "pacman", names = ["noto-fonts-cjk", "noto-fonts-emoji"] }
 desktop-shell = { provider = "pacman", names = ["polkit-kde-agent", "swaync", "waybar", "hyprpaper", "nwg-displays"] }
 network-tools = { provider = "pacman", names = ["nm-connection-editor", "network-manager-applet", "modemmanager"] }
 wayland-tools = { provider = "pacman", names = ["grim", "slurp", "wl-clipboard"] }
 
-# Desktop paru packages by purpose
+# Hyprland paru packages by purpose
 desktop-apps   = { provider = "paru", names = ["appimagelauncher", "google-chrome"] }
 hyprland-tools = { provider = "paru", names = ["hyprshell-bin", "waypaper"] }
 
-[targets.arch-personal.profiles.desktop.links]
+[targets.arch-linux.profiles.hyprland.links]
 hypr            = { source = "${dot:real_config_dir}/home/.config/hypr", target = "${env:HOME}/.config/hypr" }
 waybar          = { source = "${dot:real_config_dir}/home/.config/waybar", target = "${env:HOME}/.config/waybar" }
 hyprshell       = { source = "${dot:real_config_dir}/home/.config/hyprshell", target = "${env:HOME}/.config/hyprshell" }
@@ -74,7 +74,7 @@ swaync          = { source = "${dot:real_config_dir}/home/.config/swaync", targe
 chrome-flags    = { source = "${dot:real_config_dir}/home/.config/chrome-flags.conf", target = "${env:HOME}/.config/chrome-flags.conf" }
 chatgpt-desktop = { source = "${dot:real_config_dir}/home/.local/share/applications/chatgpt.desktop", target = "${env:HOME}/.local/share/applications/chatgpt.desktop" }
 
-[targets.arch-personal.profiles.desktop.profiles.laptop.packages]
+[targets.arch-linux.profiles.hyprland.profiles.laptop.packages]
 
 # Laptop pacman packages by purpose
 power-management-tools = { provider = "pacman", names = ["tlpui", "tlp", "tlp-pd"] }

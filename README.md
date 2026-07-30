@@ -12,7 +12,7 @@ configuration links.
 
 | Environment | Binary architecture | Manifest selection |
 | --- | --- | --- |
-| Arch Linux | x86-64 | `arch-personal` |
+| Arch Linux | x86-64 | `arch-linux` |
 | macOS | Apple Silicon | `macos` |
 | Windows | x86-64 | `windows` |
 
@@ -33,19 +33,31 @@ Minimum requirements:
 Base command-line environment:
 
 ```sh
-mkdir -p ~/.local/bin && curl -fL https://github.com/yslib/dot/releases/latest/download/dot-linux-x86_64 -o ~/.local/bin/dot && chmod +x ~/.local/bin/dot && git clone https://github.com/yslib/dotfiles.git ~/.dotfiles && ~/.local/bin/dot --config ~/.dotfiles/dot.toml
+mkdir -p ~/.local/bin
+curl -fL https://github.com/yslib/dot/releases/latest/download/dot-linux-x86_64 -o ~/.local/bin/dot
+chmod +x ~/.local/bin/dot
+git clone https://github.com/yslib/dotfiles.git ~/.dotfiles
+~/.local/bin/dot --config ~/.dotfiles/.dot.toml apply
 ```
 
-Desktop environment:
+Hyprland environment:
 
 ```sh
-mkdir -p ~/.local/bin && curl -fL https://github.com/yslib/dot/releases/latest/download/dot-linux-x86_64 -o ~/.local/bin/dot && chmod +x ~/.local/bin/dot && git clone https://github.com/yslib/dotfiles.git ~/.dotfiles && ~/.local/bin/dot --config ~/.dotfiles/dot.toml --profile desktop
+mkdir -p ~/.local/bin
+curl -fL https://github.com/yslib/dot/releases/latest/download/dot-linux-x86_64 -o ~/.local/bin/dot
+chmod +x ~/.local/bin/dot
+git clone https://github.com/yslib/dotfiles.git ~/.dotfiles
+~/.local/bin/dot --config ~/.dotfiles/.dot.toml apply --profile hyprland
 ```
 
-Laptop environment, inheriting the desktop profile:
+Laptop environment, inheriting the Hyprland profile:
 
 ```sh
-mkdir -p ~/.local/bin && curl -fL https://github.com/yslib/dot/releases/latest/download/dot-linux-x86_64 -o ~/.local/bin/dot && chmod +x ~/.local/bin/dot && git clone https://github.com/yslib/dotfiles.git ~/.dotfiles && ~/.local/bin/dot --config ~/.dotfiles/dot.toml --profile laptop
+mkdir -p ~/.local/bin
+curl -fL https://github.com/yslib/dot/releases/latest/download/dot-linux-x86_64 -o ~/.local/bin/dot
+chmod +x ~/.local/bin/dot
+git clone https://github.com/yslib/dotfiles.git ~/.dotfiles
+~/.local/bin/dot --config ~/.dotfiles/.dot.toml apply --profile laptop
 ```
 
 ### macOS Apple Silicon
@@ -57,7 +69,11 @@ Minimum requirements:
   repository.
 
 ```sh
-mkdir -p ~/.local/bin && curl -fL https://github.com/yslib/dot/releases/latest/download/dot-macos-aarch64 -o ~/.local/bin/dot && chmod +x ~/.local/bin/dot && git clone https://github.com/yslib/dotfiles.git ~/.dotfiles && ~/.local/bin/dot --config ~/.dotfiles/dot.toml
+mkdir -p ~/.local/bin
+curl -fL https://github.com/yslib/dot/releases/latest/download/dot-macos-aarch64 -o ~/.local/bin/dot
+chmod +x ~/.local/bin/dot
+git clone https://github.com/yslib/dotfiles.git ~/.dotfiles
+~/.local/bin/dot --config ~/.dotfiles/.dot.toml apply
 ```
 
 ### Windows x86-64
@@ -101,30 +117,30 @@ Once the repository has been cloned, run `dot` from its root so it finds
 
 ```sh
 cd ~/.dotfiles
-dot
+dot apply
 ```
 
 Select an Arch profile explicitly:
 
 ```sh
-dot --profile desktop
-dot --profile laptop
+dot apply --profile hyprland
+dot apply --profile laptop
 ```
 
 Inspect the resolved plan without executing it:
 
 ```sh
-dot --profile laptop --dry-run
+dot dry-run --profile laptop
 ```
 
 Check the selected providers without ensuring or installing them:
 
 ```sh
-dot --profile laptop check providers
+dot check providers --profile laptop
 ```
 
-Profiles are never inferred. Running `dot` without `--profile` applies only the
-selected target root.
+Profiles are never inferred. Running `dot apply` without `--profile` applies
+only the selected target root.
 
 ## Environment model
 
@@ -132,13 +148,13 @@ The Arch Linux configuration is intentionally structured as one inheritance
 path:
 
 ```text
-arch-personal
-└── desktop
+arch-linux
+└── hyprland
     └── laptop
 ```
 
-- `arch-personal` contains the shared command-line environment.
-- `desktop` adds graphical workstation packages and desktop configuration.
+- `arch-linux` contains the shared command-line environment.
+- `hyprland` adds graphical workstation packages and Hyprland configuration.
 - `laptop` inherits both levels and adds laptop power-management packages.
 
 The macOS and Windows targets are complete declarations without profiles. All
