@@ -5,86 +5,6 @@
 " Plugin installation is managed by Neovim's built-in vim.pack.
 lua require('plugin')
 
-" Legacy vim-plug declarations are retained temporarily for comparison.
-" call plug#begin(stdpath('data').'/plugged')
-
-" Utils
-" Plug 'nvim-lua/plenary.nvim'                                   " lua utils
-" Plug 'kyazdani42/nvim-web-devicons'                            " for file icons
-" Plug 'catgoose/nvim-colorizer.lua'
-
-" Themes
-" Plug 'catppuccin/nvim', {'as': 'catppuccin'}                   " color theme
-" Plug 'xiyaowong/transparent.nvim'                              " transparent background
-
-" UI enhancements
-" Plug 'akinsho/bufferline.nvim', { 'tag': '*' }
-" Plug 'nvim-lualine/lualine.nvim'                               " status line
-" Plug 'MunifTanjim/nui.nvim'
-" Plug 'hood/popui.nvim'
-" Plug 'stevearc/dressing.nvim'                                  " ui enhencement
-" Plug 'rcarriga/nvim-notify'
-" Plug 'kevinhwang91/nvim-bqf'                                   " better quickfix window
-
-" Treesitter
-" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}    " syntax based hightlighting
-
-" Plug 'saghen/blink.cmp', { 'tag': 'v1.*' }
-" optional: provides snippets for the snippet source
-" Plug 'rafamadriz/friendly-snippets'
-
-" DAP
-" Plug 'mfussenegger/nvim-dap'
-" Plug 'rcarriga/nvim-dap-ui'
-" Plug 'theHamsta/nvim-dap-virtual-text'
-
-" LSP
-" Plug 'mrcjkb/rustaceanvim'                                 " for rust
-" Plug 'stevearc/aerial.nvim'                                " outline
-
-" Mason
-" Plug 'williamboman/mason.nvim', { 'do': ':MasonUpdate' }
-" Plug 'williamboman/mason-lspconfig.nvim'
-
-" Picker
-" Plug 'nvim-telescope/telescope.nvim'                           " picker framework
-" Plug 'nvim-telescope/telescope-ui-select.nvim'
-" Plug 'nvim-telescope/telescope-live-grep-args.nvim'
-" Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
-
-" Terminals
-" Plug 'akinsho/toggleterm.nvim'
-
-" File Explorer
-" Plug 'kyazdani42/nvim-tree.lua'                                " file explorer
-
-" Tools integrations
-" Plug 'MeanderingProgrammer/render-markdown.nvim'
-" Plug 'kdheepak/lazygit.nvim'
-" Plug 'sindrets/diffview.nvim'                                  " diff view
-" Plug 'nvim-pack/nvim-spectre'
-" Plug 'numToStr/Comment.nvim'                                   " code comment/uncomment
-" Plug 'windwp/nvim-autopairs'                                   " auto pairs
-" Plug 'mhartington/formatter.nvim'
-" Plug 'nvim-neotest/nvim-nio'
-
-" AI Tools
-" Plug 'zbirenbaum/copilot.lua'
-
-" Lisp
-" Plug 'eraserhd/parinfer-rust', { 'do': 'cargo build --release' }
-
-" vim plug
-" Plug 'tpope/vim-surround'                                      " vim-surround
-" Plug 'tpope/vim-fugitive'
-" Plug 'mbbill/undotree'
-" Plug 'junegunn/gv.vim'
-" Plug 'junegunn/vim-easy-align'
-" Plug 'easymotion/vim-easymotion'
-
-" Initialize plugin system
-" call plug#end()
-
 lua vim.o.exrc=true
 
 "tab as 4 spaces
@@ -140,10 +60,6 @@ noremap <silent><F3> :<C-U>NvimTreeFindFileToggle<CR>
 let g:neovide_refresh_rate=144
 let g:neovide_transparency=0.9
 set guifont=Hack\ Nerd\ Font:h16
-
-if $NVIM_BOOTSTRAP == "1"
-    finish
-endif
 
 " LOADING CONFIGURATION WRITTEN IN LUA "
 lua require('config')       -- global configuration
