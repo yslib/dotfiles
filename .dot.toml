@@ -16,7 +16,7 @@ version-control-tools = { provider = "pacman", names = ["git", "lazygit", "git-d
 file-search-tools     = { provider = "pacman", names = ["ripgrep", "fd", "yazi", "dust"] }
 development-tools     = { provider = "pacman", names = ["cloc", "cmake", "just", "base-devel"] }
 editors               = { provider = "pacman", names = ["neovim"] }
-language-runtimes     = { provider = "pacman", names = ["python", "nodejs", "npm"] }
+language-runtimes     = { provider = "pacman", names = ["python", "nodejs", "npm", "rust"] }
 system-tools          = { provider = "pacman", names = ["btop", "xclip"] }
 
 # Paru packages by purpose
@@ -53,6 +53,10 @@ dot_config      = { source = "${dot:real_config_dir}/.dot.toml", target = "${env
 
 [targets.arch-linux.actions.setup-oh-my-zsh]
 exec = { program = "bash", args = ["${dot:real_config_dir}/scripts/install_oh_my_zsh.sh"], cwd = "${dot:real_config_dir}" }
+
+[targets.arch-linux.actions.install-tree-sitter-cli]
+check = { program = "/bin/sh", args = ["-c", "command -v tree-sitter >/dev/null 2>&1"], env = { path_prepend = ["${env:HOME}/.cargo/bin"] } }
+exec  = { program = "cargo", args = ["install", "--locked", "tree-sitter-cli"], env = { path_prepend = ["${env:HOME}/.cargo/bin"] } }
 
 # Selecting `arch-linux/hyprland` inherits the command-line environment above.
 [targets.arch-linux.profiles.hyprland.packages]
@@ -95,7 +99,7 @@ version-control-tools = { provider = "brew", names = ["git", "lazygit", "git-del
 file-search-tools     = { provider = "brew", names = ["ripgrep", "fd", "yazi", "dust"] }
 development-tools     = { provider = "brew", names = ["cloc", "cmake", "just"] }
 editors               = { provider = "brew", names = ["neovim"] }
-language-runtimes     = { provider = "brew", names = ["python", "node"] }
+language-runtimes     = { provider = "brew", names = ["python", "node", "rust"] }
 system-tools          = { provider = "brew", names = ["btop"] }
 lisp-tools            = { provider = "brew", names = ["sbcl", "roswell"] }
 
@@ -125,6 +129,10 @@ dot_config = { source = "${dot:real_config_dir}/.dot.toml", target = "${env:HOME
 [targets.macos.actions.setup-oh-my-zsh]
 exec = { program = "bash", args = ["${dot:real_config_dir}/scripts/install_oh_my_zsh.sh"], cwd = "${dot:real_config_dir}" }
 
+[targets.macos.actions.install-tree-sitter-cli]
+check = { program = "/bin/sh", args = ["-c", "command -v tree-sitter >/dev/null 2>&1"], env = { path_prepend = ["${env:HOME}/.cargo/bin", "/opt/homebrew/bin", "/usr/local/bin"] } }
+exec  = { program = "cargo", args = ["install", "--locked", "tree-sitter-cli"], env = { path_prepend = ["${env:HOME}/.cargo/bin", "/opt/homebrew/bin", "/usr/local/bin"] } }
+
 
 # Windows workstation ---------------------------------------------------------
 
@@ -139,7 +147,7 @@ version-control-tools = { provider = "scoop", names = ["git", "lazygit", "delta"
 file-search-tools     = { provider = "scoop", names = ["ripgrep", "fd", "yazi", "dust", "bat", "everything"] }
 development-tools     = { provider = "scoop", names = ["cloc", "cmake", "just"] }
 editors               = { provider = "scoop", names = ["neovim", "vscode", "vim"] }
-language-runtimes     = { provider = "scoop", names = ["python", "nodejs"] }
+language-runtimes     = { provider = "scoop", names = ["python", "nodejs", "rust"] }
 container-tools       = { provider = "scoop", names = ["lazydocker"] }
 fonts                 = { provider = "scoop", names = ["Hack-NF"] }
 
@@ -166,3 +174,7 @@ terminal-local   = { source = '${dot:real_config_dir}\windows\WindowsTerminal\se
 terminal-stable  = { source = '${dot:real_config_dir}\windows\WindowsTerminal\settings.json', target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
 terminal-preview = { source = '${dot:real_config_dir}\windows\WindowsTerminal\settings.json', target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
 # terminal-canary  = { source = '${dot:real_config_dir}\windows\WindowsTerminal\settings.json', target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminalCanary_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
+
+[targets.windows.actions.install-tree-sitter-cli]
+check = { program = "powershell.exe", args = ["-NoProfile", "-Command", "if (Get-Command tree-sitter -ErrorAction SilentlyContinue) { exit 0 }; exit 1"], env = { path_prepend = ["${env:USERPROFILE}/.cargo/bin", "${env:USERPROFILE}/scoop/shims"] } }
+exec  = { program = "cargo", args = ["install", "--locked", "tree-sitter-cli"], env = { path_prepend = ["${env:USERPROFILE}/.cargo/bin", "${env:USERPROFILE}/scoop/shims"] } }
