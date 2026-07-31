@@ -148,7 +148,8 @@ activate = { path_prepend = ["${env:USERPROFILE}/scoop/shims"] }
 probe = { program = "powershell.exe", args = ["-NoProfile", "-Command", "if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) { exit 1 }; $root = if ($env:SCOOP) { $env:SCOOP } else { Join-Path $env:USERPROFILE 'scoop' }; if ((Test-Path (Join-Path $root 'buckets\\extras')) -and (Test-Path (Join-Path $root 'buckets\\nerd-fonts'))) { exit 0 }; exit 1"] }
 ensure = { program = "powershell.exe", args = ["-NoProfile", "-ExecutionPolicy", "Bypass", "-Command", "if (-not (Get-Command scoop -ErrorAction SilentlyContinue)) { Set-ExecutionPolicy RemoteSigned -Scope CurrentUser -Force; Invoke-RestMethod get.scoop.sh | Invoke-Expression }; $root = if ($env:SCOOP) { $env:SCOOP } else { Join-Path $env:USERPROFILE 'scoop' }; if (-not (Test-Path (Join-Path $root 'buckets\\extras'))) { scoop bucket add extras }; if (-not (Test-Path (Join-Path $root 'buckets\\nerd-fonts'))) { scoop bucket add nerd-fonts }"] }
 
-install = { program = "powershell.exe", args = ["-NoProfile", "-File", "${env:USERPROFILE}/scoop/apps/scoop/current/bin/scoop.ps1", "install", "${package:names}"] }
+# install = { program = "powershell.exe", args = ["-NoProfile", "-File", "${env:USERPROFILE}/scoop/apps/scoop/current/bin/scoop.ps1", "install", "${package:names}"] }
+install = { program = "cmd.exe", args = ["/D", "/C", "scoop.cmd", "install", "${package:names}"] }
 
 [targets.windows.links]
 nvim               = { source = '${dot:real_config_dir}\home\.config\nvim', target = "${env:LOCALAPPDATA}/nvim" }
