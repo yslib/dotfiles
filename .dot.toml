@@ -44,7 +44,8 @@ vimrc           = { source = "${dot:real_config_dir}/home/.config/vim/vimrc", ta
 yazi            = { source = "${dot:real_config_dir}/home/.config/yazi", target = "${env:HOME}/.config/yazi" }
 lazygit         = { source = "${dot:real_config_dir}/home/.config/lazygit", target = "${env:HOME}/.config/lazygit" }
 gitconfig       = { source = "${dot:real_config_dir}/home/.gitconfig", target = "${env:HOME}/.gitconfig" }
-zshrc           = { source = "${dot:real_config_dir}/home/.zshrc", target = "${env:HOME}/.zshrc" }
+zsh             = { source = "${dot:real_config_dir}/home/.config/zsh", target = "${env:HOME}/.config/zsh" }
+zshenv          = { source = "${dot:real_config_dir}/home/.config/zsh/.zshenv", target = "${env:HOME}/.zshenv" }
 tmux            = { source = "${dot:real_config_dir}/home/.tmux.conf", target = "${env:HOME}/.tmux.conf" }
 tmux-local      = { source = "${dot:real_config_dir}/home/.tmux.conf.local", target = "${env:HOME}/.tmux.conf.local" }
 alacritty       = { source = "${dot:real_config_dir}/home/.config/alacritty", target = "${env:HOME}/.config/alacritty" }
@@ -115,7 +116,8 @@ vimrc      = { source = "${dot:real_config_dir}/home/.config/vim/vimrc", target 
 yazi       = { source = "${dot:real_config_dir}/home/.config/yazi", target = "${env:HOME}/.config/yazi" }
 lazygit    = { source = "${dot:real_config_dir}/home/.config/lazygit", target = "${env:HOME}/.config/lazygit" }
 gitconfig  = { source = "${dot:real_config_dir}/home/.gitconfig", target = "${env:HOME}/.gitconfig" }
-zshrc      = { source = "${dot:real_config_dir}/home/.zshrc", target = "${env:HOME}/.zshrc" }
+zsh        = { source = "${dot:real_config_dir}/home/.config/zsh", target = "${env:HOME}/.config/zsh" }
+zshenv     = { source = "${dot:real_config_dir}/home/.config/zsh/.zshenv", target = "${env:HOME}/.zshenv" }
 tmux       = { source = "${dot:real_config_dir}/home/.tmux.conf", target = "${env:HOME}/.tmux.conf" }
 tmux-local = { source = "${dot:real_config_dir}/home/.tmux.conf.local", target = "${env:HOME}/.tmux.conf.local" }
 alacritty  = { source = "${dot:real_config_dir}/home/.config/alacritty", target = "${env:HOME}/.config/alacritty" }
