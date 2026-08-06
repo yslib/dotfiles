@@ -11,7 +11,7 @@ platform = { os = "linux", distro = "arch" }
 [targets.arch-linux.packages]
 
 # Pacman packages by purpose
-terminal-tools        = { provider = "pacman", names = ["zsh", "tmux", "zoxide", "fzf"] }
+terminal-tools        = { provider = "pacman", names = ["zsh", "tmux", "zoxide", "fzf", "fastfetch", "figlet"] }
 version-control-tools = { provider = "pacman", names = ["git", "lazygit", "git-delta"] }
 file-search-tools     = { provider = "pacman", names = ["ripgrep", "fd", "yazi", "dust"] }
 development-tools     = { provider = "pacman", names = ["cloc", "cmake", "just", "base-devel", "tree-sitter-cli"] }
@@ -91,7 +91,7 @@ platform = { os = "macos" }
 [targets.macos.packages]
 
 # Brew formulae by purpose
-terminal-tools        = { provider = "brew", names = ["zsh", "tmux", "zoxide", "fzf"] }
+terminal-tools        = { provider = "brew", names = ["zsh", "tmux", "zoxide", "fzf", "fastfetch", "figlet"] }
 version-control-tools = { provider = "brew", names = ["git", "lazygit", "git-delta"] }
 file-search-tools     = { provider = "brew", names = ["ripgrep", "fd", "yazi", "dust"] }
 development-tools     = { provider = "brew", names = ["cloc", "cmake", "just", "tree-sitter-cli"] }
