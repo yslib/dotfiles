@@ -8,107 +8,11 @@ a concrete example of using `dot` with explicit platform targets, a small
 profile inheritance tree, external package providers, actions, and native
 configuration links.
 
-## Environments
 
-| Environment | Binary architecture | Manifest selection |
-| --- | --- | --- |
-| Arch Linux | x86-64 | `arch-linux` |
-| macOS | Apple Silicon | `macos` |
-| Windows | x86-64 | `windows` |
+## Command Generator
 
-## Bootstrap a fresh environment
-
-These commands intentionally target a new environment. They install the latest
-`dot` binary into the user executable directory, clone this repository to
-`~/.dotfiles`, and immediately apply its manifest.
-
-### Arch Linux x86-64
-
-Minimum requirements:
-
-- `curl` for downloading `dot`;
-- `git` for cloning this repository;
-- `pacman` and `sudo` for the declared providers.
-
-Base command-line environment:
-
-```sh
-mkdir -p ~/.local/bin
-curl -fL https://github.com/yslib/dot/releases/latest/download/dot-linux-x86_64 -o ~/.local/bin/dot
-chmod +x ~/.local/bin/dot
-git clone https://github.com/yslib/dotfiles.git ~/.dotfiles
-~/.local/bin/dot --config ~/.dotfiles/.dot.toml apply
-```
-
-Hyprland environment:
-
-```sh
-mkdir -p ~/.local/bin
-curl -fL https://github.com/yslib/dot/releases/latest/download/dot-linux-x86_64 -o ~/.local/bin/dot
-chmod +x ~/.local/bin/dot
-git clone https://github.com/yslib/dotfiles.git ~/.dotfiles
-~/.local/bin/dot --config ~/.dotfiles/.dot.toml apply --profile hyprland
-```
-
-Laptop environment, inheriting the Hyprland profile:
-
-```sh
-mkdir -p ~/.local/bin
-curl -fL https://github.com/yslib/dot/releases/latest/download/dot-linux-x86_64 -o ~/.local/bin/dot
-chmod +x ~/.local/bin/dot
-git clone https://github.com/yslib/dotfiles.git ~/.dotfiles
-~/.local/bin/dot --config ~/.dotfiles/.dot.toml apply --profile laptop
-```
-
-### macOS Apple Silicon
-
-Minimum requirements:
-
-- `curl` for downloading `dot`;
-- `git`, normally provided by the Xcode Command Line Tools, for cloning this
-  repository.
-
-```sh
-mkdir -p ~/.local/bin
-curl -fL https://github.com/yslib/dot/releases/latest/download/dot-macos-aarch64 -o ~/.local/bin/dot
-chmod +x ~/.local/bin/dot
-git clone https://github.com/yslib/dotfiles.git ~/.dotfiles
-~/.local/bin/dot --config ~/.dotfiles/.dot.toml apply
-```
-
-### Windows x86-64
-
-Prepare the platform prerequisites before running `dot`. Scoop's
-[official installer](https://github.com/ScoopInstaller/Install#installation)
-supports Windows PowerShell 5.1 and PowerShell 7 and should normally be run from
-a non-admin PowerShell.
-
-First, allow locally installed PowerShell scripts and install Scoop:
-
-```powershell
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
-```
-
-Install Git from Scoop's default `main` bucket:
-
-```powershell
-scoop install git
-```
-
-Windows Developer Mode or an elevated shell is also required when `dot` creates
-symbolic links.
-
-With Scoop and Git ready, run the Windows bootstrap:
-
-```powershell
-irm https://raw.githubusercontent.com/yslib/dotfiles/master/bootstrap.ps1 | iex
-```
-
-The script downloads `dot.exe` to `$HOME\.local\bin`, adds that directory to
-the user `PATH`, clones this repository to `$HOME\.dotfiles`, and applies
-`.dot.toml`. On the first apply, the Scoop provider's `ensure` action adds the
-`extras` and `nerd-fonts` buckets before the declared packages are installed.
+Please see the [Web interface](https://yslib.github.io/dot-web) for a command generator that helps you select a platform and profile, and generates the
+commands to apply your configuration
 
 ## Daily use
 
