@@ -1,0 +1,8 @@
+[targets.arch-linux]
+platform = { os = "linux", distro = "arch" }
+
+[targets.macos]
+platform = { os = "macos" }
+
+[targets.windows]
+platform = { os = "windows" }
