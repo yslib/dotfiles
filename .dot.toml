@@ -169,3 +169,49 @@ terminal-local   = { source = '${dot:real_config_dir}\windows\WindowsTerminal\se
 terminal-stable  = { source = '${dot:real_config_dir}\windows\WindowsTerminal\settings.json', target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
 terminal-preview = { source = '${dot:real_config_dir}\windows\WindowsTerminal\settings.json', target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
 terminal-canary  = { source = '${dot:real_config_dir}\windows\WindowsTerminal\settings.json', target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminalCanary_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
+
+
+
+# Ubuntu-base workstation: only for 26.04
+[targets.ubuntu-base]
+platform = { os = "linux", distro = "ubuntu" }
+
+[targets.ubuntu-base.packages]
+file-search-tools     = { provider = "apt", names = ["ripgrep", "fd-find"] }
+version-control-tools = { provider = "apt", names = ["git", "lazygit", "git-delta"] }
+terminal-tools        = { provider = "apt", names = ["zsh", "tmux", "zoxide", "fzf", "fastfetch", "figlet"] }
+development-tools     = { provider = "apt", names = ["cloc", "cmake", "just", "tree-sitter-cli"] }
+editors               = { provider = "apt", names = ["neovim"] }
+language-runtimes     = { provider = "apt", names = ["nodejs", "npm"] }        # python mananged by apt
+system-tools          = { provider = "apt", names = ["btop", "xclip"] }
+
+[targets.ubuntu-base.providers.apt]
+probe   = { program = "apt", args = ["--version"] }
+ensure  = { program = "sudo", args = ["apt", "update"] }
+install = { program = "sudo", args = ["apt", "install", "-y","${package:names}"] }
+
+[targets.ubuntu-base.links]
+nvim            = { source = "${dot:real_config_dir}/home/.config/nvim", target = "${env:HOME}/.config/nvim" }
+vim-config      = { source = "${dot:real_config_dir}/home/.config/vim/vimrc", target = "${env:HOME}/.config/vim/vimrc" }
+vimrc           = { source = "${dot:real_config_dir}/home/.config/vim/vimrc", target = "${env:HOME}/.vimrc" }
+yazi            = { source = "${dot:real_config_dir}/home/.config/yazi", target = "${env:HOME}/.config/yazi" }
+lazygit         = { source = "${dot:real_config_dir}/home/.config/lazygit", target = "${env:HOME}/.config/lazygit" }
+gitconfig       = { source = "${dot:real_config_dir}/home/.gitconfig", target = "${env:HOME}/.gitconfig" }
+zsh             = { source = "${dot:real_config_dir}/home/.config/zsh", target = "${env:HOME}/.config/zsh" }
+zshenv          = { source = "${dot:real_config_dir}/home/.config/zsh/.zshenv", target = "${env:HOME}/.zshenv" }
+tmux            = { source = "${dot:real_config_dir}/home/.tmux.conf", target = "${env:HOME}/.tmux.conf" }
+tmux-local      = { source = "${dot:real_config_dir}/home/.tmux.conf.local", target = "${env:HOME}/.tmux.conf.local" }
+alacritty       = { source = "${dot:real_config_dir}/home/.config/alacritty", target = "${env:HOME}/.config/alacritty" }
+scripts         = { source = "${dot:real_config_dir}/home/.scripts", target = "${env:HOME}/.scripts" }
+dot_config      = { source = "${dot:real_config_dir}/.dot.toml", target = "${env:HOME}/.config/dot/.dot.toml" }
+
+
+[targets.ubuntu-base.profiles.brew.providers.brew]
+activate = { path_prepend = ["/home/linuxbrew/.linuxbrew/bin"] }
+probe   = { program = "brew", args = ["--version"] }
+ensure   = { program = "/bin/bash", args = ["-c", 'NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'] }
+install = { program = "brew", args = ["install", "${package:provider_args}", "${package:names}"] }
+
+[targets.ubuntu-base.profiles.brew.packages]
+file-search-tools     = { provider = "brew", names = ["yazi", "dust"] }
+editors               = { provider = "apt", names = ["neovim"] }
