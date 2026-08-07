@@ -28,7 +28,6 @@ unset dotfiles_script
 alias nv="nvim ."
 alias lg="lazygit"
 
-
 # Let yazi change the current directory when it exits.
 y() {
   local tmp="$(mktemp -t 'yazi-cwd.XXXXXX')" cwd
@@ -37,3 +36,18 @@ y() {
   [[ -n $cwd && $cwd != $PWD ]] && builtin cd -- "$cwd"
   rm -f -- "$tmp"
 }
+
+
+# Print a welcome message when logging in via SSH.
+
+if [[ -n ${SSH_CONNECTION-} ]]; then
+  print
+  if (( $+commands[figlet] )); then
+    figlet "Hello, $USER"
+  else
+    print -P "%F{cyan}Welcome back, %B%n%b@%m%f"
+  fi
+  print -P "%F{245}%D{%Y-%m-%d %H:%M} · ${SSH_CONNECTION:+SSH · }${TERM:-unknown}%f\n"
+
+  (( $+commands[fastfetch] )) && env -u NO_COLOR fastfetch
+fi
