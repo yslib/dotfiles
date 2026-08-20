@@ -40,6 +40,7 @@ end, { desc = 'Live grep with args' })
 keymap('n', '<leader>fc', function() require('telescope.builtin').grep_string() end, { desc = 'Telescope Cursor Grep' })
 keymap('n', '<leader>fh', function() require('telescope.builtin').help_tags() end, { desc = 'Telescope Help tags' })
 keymap('n', '<leader>fb', function() require('telescope.builtin').buffers() end, { desc = 'Telescope Buffers' })
+keymap('n', '<leader>ft', '<Cmd>TermSelect<CR>', { desc = 'Telescope Terminals' })
 keymap('n', '<leader>fd', function() require('telescope').extensions.aerial.aerial() end,
     { desc = 'LSP Document Symbols' })
 

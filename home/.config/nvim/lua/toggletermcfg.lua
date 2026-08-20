@@ -36,6 +36,12 @@ u.map_key('n', "<Leader>tv", ":ToggleTerm direction=vertical<CR>", { silent = tr
 u.map_key('n', "<Leader>th", ":ToggleTerm direction=horizontal<CR>",
     { silent = true, desc = "Open a horizontal terminal" })
 
+for id = 1, 9 do
+    u.map_key('n', string.format("<Leader>t%d", id),
+        string.format(":%dToggleTerm direction=tab<CR>", id),
+        { silent = true, desc = string.format("Toggle terminal %d in a tab", id) })
+end
+
 -- if you only want these mappings for toggle term use term://*toggleterm#* instead
 vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 
