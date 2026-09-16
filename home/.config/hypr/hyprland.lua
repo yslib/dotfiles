@@ -38,6 +38,7 @@ end
 local monitorDetect = load_config_module("monitor-detect")
 
 hl.on("hyprland.start", function()
+    hl.exec_cmd("waypaper --restore")
     hl.exec_cmd("sh -c '" .. startPolkitAgent .. "'")
     hl.exec_cmd("sh -c 'systemctl --user stop dunst.service 2>/dev/null || true; pgrep -x swaync >/dev/null || swaync'")
     hl.exec_cmd("sh -c '" .. startWaybar .. "'")
