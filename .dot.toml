@@ -55,6 +55,9 @@ dot_config      = { source = "${dot:real_config_dir}/.dot.toml", target = "${env
 [targets.arch-linux.actions.setup-oh-my-zsh]
 exec = { program = "bash", args = ["${dot:real_config_dir}/scripts/install_oh_my_zsh.sh"], cwd = "${dot:real_config_dir}" }
 
+[targets.arch-linux.actions.apply-private]
+exec = { program = "dot", args = ["apply", "--config", "${dot:real_config_dir}/dotfile-priv/.dot.toml", "--target", "arch-linux", "--profile", "@root"] }
+
 # Selecting `arch-linux/hyprland` inherits the command-line environment above.
 [targets.arch-linux.profiles.hyprland.packages]
 
@@ -77,10 +80,16 @@ swaync          = { source = "${dot:real_config_dir}/home/.config/swaync", targe
 chrome-flags    = { source = "${dot:real_config_dir}/home/.config/chrome-flags.conf", target = "${env:HOME}/.config/chrome-flags.conf" }
 chatgpt-desktop = { source = "${dot:real_config_dir}/home/.local/share/applications/chatgpt.desktop", target = "${env:HOME}/.local/share/applications/chatgpt.desktop" }
 
+[targets.arch-linux.profiles.hyprland.actions.apply-private]
+exec = { program = "dot", args = ["apply", "--config", "${dot:real_config_dir}/dotfile-priv/.dot.toml", "--target", "arch-linux", "--profile", "hyprland"] }
+
 [targets.arch-linux.profiles.hyprland.profiles.laptop.packages]
 
 # Laptop pacman packages by purpose
 power-management-tools = { provider = "pacman", names = ["tlpui", "tlp", "tlp-pd"] }
+
+[targets.arch-linux.profiles.hyprland.profiles.laptop.actions.apply-private]
+exec = { program = "dot", args = ["apply", "--config", "${dot:real_config_dir}/dotfile-priv/.dot.toml", "--target", "arch-linux", "--profile", "laptop"] }
 
 
 # macOS workstation -----------------------------------------------------------
@@ -127,6 +136,9 @@ dot_config = { source = "${dot:real_config_dir}/.dot.toml", target = "${env:HOME
 [targets.macos.actions.setup-oh-my-zsh]
 exec = { program = "bash", args = ["${dot:real_config_dir}/scripts/install_oh_my_zsh.sh"], cwd = "${dot:real_config_dir}" }
 
+[targets.macos.actions.apply-private]
+exec = { program = "dot", args = ["apply", "--config", "${dot:real_config_dir}/dotfile-priv/.dot.toml", "--target", "macos", "--profile", "@root"] }
+
 
 # Windows workstation ---------------------------------------------------------
 
@@ -170,6 +182,9 @@ terminal-stable  = { source = '${dot:real_config_dir}\windows\WindowsTerminal\se
 terminal-preview = { source = '${dot:real_config_dir}\windows\WindowsTerminal\settings.json', target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
 terminal-canary  = { source = '${dot:real_config_dir}\windows\WindowsTerminal\settings.json', target = "${env:LOCALAPPDATA}/Packages/Microsoft.WindowsTerminalCanary_8wekyb3d8bbwe/LocalState/settings.json", on_missing_parent = "skip" }
 
+[targets.windows.actions.apply-private]
+exec = { program = "dot", args = ["apply", "--config", '${dot:real_config_dir}\dotfile-priv\.dot.toml', "--target", "windows", "--profile", "@root"] }
+
 
 
 # Ubuntu-base workstation: only for 26.04
@@ -205,6 +220,9 @@ alacritty       = { source = "${dot:real_config_dir}/home/.config/alacritty", ta
 scripts         = { source = "${dot:real_config_dir}/home/.scripts", target = "${env:HOME}/.scripts" }
 dot_config      = { source = "${dot:real_config_dir}/.dot.toml", target = "${env:HOME}/.config/dot/.dot.toml" }
 
+[targets.ubuntu-base.actions.apply-private]
+exec = { program = "dot", args = ["apply", "--config", "${dot:real_config_dir}/dotfile-priv/.dot.toml", "--target", "ubuntu-base", "--profile", "@root"] }
+
 
 [targets.ubuntu-base.profiles.brew.providers.brew]
 activate = { path_prepend = ["/home/linuxbrew/.linuxbrew/bin"] }
@@ -215,3 +233,6 @@ install = { program = "brew", args = ["install", "${package:provider_args}", "${
 [targets.ubuntu-base.profiles.brew.packages]
 file-search-tools     = { provider = "brew", names = ["yazi", "dust"] }
 editors               = { provider = "apt", names = ["neovim"] }
+
+[targets.ubuntu-base.profiles.brew.actions.apply-private]
+exec = { program = "dot", args = ["apply", "--config", "${dot:real_config_dir}/dotfile-priv/.dot.toml", "--target", "ubuntu-base", "--profile", "brew"] }
