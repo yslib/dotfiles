@@ -1,0 +1,3 @@
+[submodule "dotfile-priv"]
+	path = dotfile-priv
+	url = git@github.com:yslib/dotfile-priv.git
