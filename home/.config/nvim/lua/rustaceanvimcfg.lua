@@ -19,7 +19,7 @@ vim.g.rustaceanvim = {
             vim.keymap.set('n', '<F5>', function() vim.cmd.RustLsp({ 'runnables' }) end,
                 opt("Rust Runnables"))
 
-            vim.keymap.set('n', '<F4>', function() vim.cmd.RustLsp({ 'testables' }) end,
+            vim.keymap.set('n', '<F6>', function() vim.cmd.RustLsp({ 'testables' }) end,
                 opt("Rust Testables"))
         end,
     }
