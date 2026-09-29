@@ -1,6 +1,15 @@
 # ── Dotfiles PowerShell profile ──────────────────────────────────
 # Windows equivalent of .zshrc — managed by dotfiles repo.
 
+Import-Module posh-git
+Import-Module Terminal-Icons
+
+oh-my-posh init pwsh --config "jandedobbeleer" | Invoke-Expression
+
+Set-PSReadLineOption -PredictionSource History
+Set-PSReadLineOption -PredictionViewStyle ListView
+Set-PSReadLineOption -EditMode Emacs
+
 # ── User-local executables ───────────────────────────────────────
 $localBin = Join-Path $HOME ".local\bin"
 $pathEntries = $env:PATH -split [IO.Path]::PathSeparator

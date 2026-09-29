@@ -156,6 +156,7 @@ editors               = { provider = "scoop", names = ["neovim", "vscode", "vim"
 language-runtimes     = { provider = "scoop", names = ["python", "nodejs", "rust"] }
 container-tools       = { provider = "scoop", names = ["lazydocker"] }
 fonts                 = { provider = "scoop", names = ["Hack-NF"] }
+ohmyposh              = { provider = "winget", names = ["JanDeDobbeleer.OhMyPosh"], provider_args=["--source winget"] }
 
 [targets.windows.providers.scoop]
 activate = { path_prepend = ["${env:USERPROFILE}/scoop/shims"] }
@@ -165,6 +166,11 @@ ensure = { program = "powershell.exe", args = ["-NoProfile", "-ExecutionPolicy",
 # install = { program = "powershell.exe", args = ["-NoProfile", "-File", "${env:USERPROFILE}/scoop/apps/scoop/current/bin/scoop.ps1", "install", "${package:names}"] }
 install = { program = "cmd.exe", args = ["/D", "/C", "scoop.cmd", "install", "${package:names}"] }
 
+[targets.windows.providers.winget]
+probe = { program = "winget" }
+install = { program = "cmd.exe", args = ["/D", "/C", "winget", "install", "${package:names}", "${package:provider_args}"] }
+
+
 [targets.windows.links]
 nvim               = { source = '${dot:real_config_dir}\home\.config\nvim', target = "${env:LOCALAPPDATA}/nvim" }
 vimrc              = { source = '${dot:real_config_dir}\home\.config\vim\vimrc', target = "${env:USERPROFILE}/_vimrc" }
@@ -173,7 +179,8 @@ lazygit            = { source = '${dot:real_config_dir}\home\.config\lazygit', t
 alacritty          = { source = '${dot:real_config_dir}\home\.config\alacritty', target = "${env:APPDATA}/alacritty" }
 gitconfig          = { source = '${dot:real_config_dir}\home\.gitconfig', target = "${env:USERPROFILE}/.gitconfig" }
 starship           = { source = '${dot:real_config_dir}\home\.config\starship.toml', target = "${env:USERPROFILE}/.config/starship.toml" }
-powershell         = { source = '${dot:real_config_dir}\windows\PowerShell', target = "${xdg:documents}/PowerShell" }
+pwsh-profile         = { source = '${dot:real_config_dir}\windows\PowerShell\Profile.ps1', target = "${xdg:documents}/PowerShell/Profile.ps1" }
+pwsh-utility         = { source = '${dot:real_config_dir}\windows\PowerShell\dot-fzf.ps1', target = "${xdg:documents}/PowerShell/dot-fzf.ps1" }
 dot_config         = { source = '${dot:real_config_dir}\.dot.toml', target = "${env:APPDATA}/dot/.dot.toml" }
 
 # Only reconcile variants whose application-owned parent exists.
@@ -184,6 +191,9 @@ terminal-canary  = { source = '${dot:real_config_dir}\windows\WindowsTerminal\se
 
 [targets.windows.actions.apply-private]
 exec = { program = "dot", args = ["apply", "--config", '${dot:real_config_dir}\dotfile-priv\.dot.toml', "--target", "windows", "--profile", "@root"] }
+
+[targets.windows.actions.pwsh-module]
+exec = { program = "pwsh.exe", args = ["-NoProfile", "-Command", "Install-Module PSReadLine -Scope CurrentUser && Install-Module Terminal-Icons -Scope CurrentUser && Install-Module posh-git -Scope CurrentUser"] }
 
 
 
