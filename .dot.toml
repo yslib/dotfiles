@@ -156,7 +156,7 @@ editors               = { provider = "scoop", names = ["neovim", "vscode", "vim"
 language-runtimes     = { provider = "scoop", names = ["python", "nodejs", "rust"] }
 container-tools       = { provider = "scoop", names = ["lazydocker"] }
 fonts                 = { provider = "scoop", names = ["Hack-NF"] }
-ohmyposh              = { provider = "winget", names = ["JanDeDobbeleer.OhMyPosh"], provider_args=["--source winget"] }
+ohmyposh              = { provider = "winget", names = ["JanDeDobbeleer.OhMyPosh"]}
 
 [targets.windows.providers.scoop]
 activate = { path_prepend = ["${env:USERPROFILE}/scoop/shims"] }
