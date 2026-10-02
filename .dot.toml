@@ -233,6 +233,9 @@ dot_config      = { source = "${dot:real_config_dir}/.dot.toml", target = "${env
 [targets.ubuntu-base.actions.apply-private]
 exec = { program = "dot", args = ["apply", "--config", "${dot:real_config_dir}/dotfile-priv/.dot.toml", "--target", "ubuntu-base", "--profile", "@root"] }
 
+[targets.ubuntu-base.actions.setup-oh-my-zsh]
+exec = { program = "bash", args = ["${dot:real_config_dir}/scripts/install_oh_my_zsh.sh"], cwd = "${dot:real_config_dir}" }
+
 
 [targets.ubuntu-base.profiles.brew.providers.brew]
 activate = { path_prepend = ["/home/linuxbrew/.linuxbrew/bin"] }
