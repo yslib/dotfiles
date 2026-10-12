@@ -67,6 +67,9 @@ local plugins = {
     -- Lisp
     github("eraserhd/parinfer-rust"),
 
+    -- leetcode
+    github("kawre/leetcode.nvim"),
+
     -- Vim plugins
     github("tpope/vim-surround"),
     github("tpope/vim-fugitive"),
@@ -74,6 +77,7 @@ local plugins = {
     github("junegunn/gv.vim"),
     github("junegunn/vim-easy-align"),
     github("easymotion/vim-easymotion"),
+
 }
 
 local function run(command, cwd)
