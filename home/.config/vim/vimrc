@@ -1,4 +1,55 @@
+" ============================
+" Bootstrap plugins
+" ============================
+
+let s:packdir = expand('~/.vim/pack/minimal/start')
+
+let s:plugins = {
+  \ 'fzf': 'https://github.com/junegunn/fzf.git',
+  \ 'fzf.vim': 'https://github.com/junegunn/fzf.vim.git',
+  \ 'vim-fugitive': 'https://github.com/tpope/vim-fugitive.git',
+  \ }
+
+let s:installed = 0
+
+for [s:name, s:url] in items(s:plugins)
+  let s:path = s:packdir . '/' . s:name
+
+  if !isdirectory(s:path)
+    call mkdir(s:packdir, 'p')
+    call system('git clone --depth 1 ' . shellescape(s:url) . ' ' . shellescape(s:path))
+    let s:installed = 1
+  endif
+endfor
+
+if s:installed
+  packloadall!
+endif
+
+" ============================
+" FZF
+" ============================
+
+let g:fzf_layout = {'down': '40%'}
+
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>fg :Rg<CR>
+
+" ============================
+" Fugitive
+" ============================
+
+nnoremap <leader>gs :Git<CR>
+nnoremap <leader>gd :Gdiffsplit<CR>
+nnoremap <leader>gb :Git blame<CR>
+
 syntax enable
+filetype plugin indent on
+set termguicolors
+" set background=dark
+colorscheme habamax
+
 set number
 set tabstop=4
 set shiftwidth=4
@@ -11,3 +62,11 @@ augroup relative_numbser
  autocmd InsertEnter * :set norelativenumber
  autocmd InsertLeave * :set relativenumber
 augroup END
+
+" Search
+set hlsearch      " 
+set incsearch     " 
+set ignorecase    " 
+set smartcase     "
+
+nnoremap <Esc> :nohlsearch<CR>
