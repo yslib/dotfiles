@@ -1,6 +1,0 @@
-[services.macos]
-type = "sftp"
-host = "192.168.27.50"
-user = "ysl"
-port = 22
-key_file = "~/.ssh/id_ed25519"

@@ -71,7 +71,7 @@
       "src": "https://github.com/MunifTanjim/nui.nvim"
     },
     "nvim-autopairs": {
-      "rev": "430522f95fe4fb7c511ec64f8c1a90cc6a66c05c",
+      "rev": "3172f40c16563db871a58f20d205c710ad782311",
       "src": "https://github.com/windwp/nvim-autopairs"
     },
     "nvim-bqf": {
@@ -111,11 +111,11 @@
       "src": "https://github.com/kyazdani42/nvim-tree.lua"
     },
     "nvim-treesitter": {
-      "rev": "f603a2f4da48728f80257fb5fbb90145fd1dc173",
+      "rev": "1a4f47b03dfe92d28de7d5654c67327ef008c9e6",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter"
     },
     "nvim-web-devicons": {
-      "rev": "58447c1fca354bbf184425e4a8d01deecbd6f3c4",
+      "rev": "ec309a0eaff6ea967e58c275996155ab5c16938d",
       "src": "https://github.com/kyazdani42/nvim-web-devicons"
     },
     "parinfer-rust": {
@@ -131,7 +131,7 @@
       "src": "https://github.com/hood/popui.nvim"
     },
     "render-markdown.nvim": {
-      "rev": "640a3ec6d538bad17c328be373c7cad0293d9589",
+      "rev": "8e8795368391036643b622875a6da6a51bcd33f4",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "rustaceanvim": {
@@ -159,7 +159,7 @@
       "src": "https://github.com/akinsho/toggleterm.nvim"
     },
     "transparent.nvim": {
-      "rev": "e00ca1cf09caef575edf8da7e5a8b9193893b4c7",
+      "rev": "792b1d6caff49ba0c166921d78495273d25a7edd",
       "src": "https://github.com/xiyaowong/transparent.nvim"
     },
     "undotree": {
