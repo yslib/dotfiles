@@ -35,6 +35,7 @@
 
   "hyprland/workspaces": {
     "all-outputs": false,
+    "show-special": true,
     "format": "{name}",
     "on-click": "activate"
   },
